@@ -1009,6 +1009,9 @@ export namespace Prisma {
     password: string | null
     bio: string | null
     avatar: string | null
+    birthday: Date | null
+    gender: string | null
+    interest: string | null
     createdAt: Date | null
   }
 
@@ -1019,6 +1022,9 @@ export namespace Prisma {
     password: string | null
     bio: string | null
     avatar: string | null
+    birthday: Date | null
+    gender: string | null
+    interest: string | null
     createdAt: Date | null
   }
 
@@ -1029,6 +1035,9 @@ export namespace Prisma {
     password: number
     bio: number
     avatar: number
+    birthday: number
+    gender: number
+    interest: number
     createdAt: number
     _all: number
   }
@@ -1041,6 +1050,9 @@ export namespace Prisma {
     password?: true
     bio?: true
     avatar?: true
+    birthday?: true
+    gender?: true
+    interest?: true
     createdAt?: true
   }
 
@@ -1051,6 +1063,9 @@ export namespace Prisma {
     password?: true
     bio?: true
     avatar?: true
+    birthday?: true
+    gender?: true
+    interest?: true
     createdAt?: true
   }
 
@@ -1061,6 +1076,9 @@ export namespace Prisma {
     password?: true
     bio?: true
     avatar?: true
+    birthday?: true
+    gender?: true
+    interest?: true
     createdAt?: true
     _all?: true
   }
@@ -1142,8 +1160,11 @@ export namespace Prisma {
     fullName: string
     email: string
     password: string
-    bio: string
+    bio: string | null
     avatar: string | null
+    birthday: Date | null
+    gender: string | null
+    interest: string | null
     createdAt: Date
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
@@ -1171,6 +1192,9 @@ export namespace Prisma {
     password?: boolean
     bio?: boolean
     avatar?: boolean
+    birthday?: boolean
+    gender?: boolean
+    interest?: boolean
     createdAt?: boolean
     sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
     recvMessages?: boolean | User$recvMessagesArgs<ExtArgs>
@@ -1184,6 +1208,9 @@ export namespace Prisma {
     password?: boolean
     bio?: boolean
     avatar?: boolean
+    birthday?: boolean
+    gender?: boolean
+    interest?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["user"]>
 
@@ -1194,6 +1221,9 @@ export namespace Prisma {
     password?: boolean
     bio?: boolean
     avatar?: boolean
+    birthday?: boolean
+    gender?: boolean
+    interest?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["user"]>
 
@@ -1204,10 +1234,13 @@ export namespace Prisma {
     password?: boolean
     bio?: boolean
     avatar?: boolean
+    birthday?: boolean
+    gender?: boolean
+    interest?: boolean
     createdAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "email" | "password" | "bio" | "avatar" | "createdAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "email" | "password" | "bio" | "avatar" | "birthday" | "gender" | "interest" | "createdAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
     recvMessages?: boolean | User$recvMessagesArgs<ExtArgs>
@@ -1227,8 +1260,11 @@ export namespace Prisma {
       fullName: string
       email: string
       password: string
-      bio: string
+      bio: string | null
       avatar: string | null
+      birthday: Date | null
+      gender: string | null
+      interest: string | null
       createdAt: Date
     }, ExtArgs["result"]["user"]>
     composites: {}
@@ -1661,6 +1697,9 @@ export namespace Prisma {
     readonly password: FieldRef<"User", 'String'>
     readonly bio: FieldRef<"User", 'String'>
     readonly avatar: FieldRef<"User", 'String'>
+    readonly birthday: FieldRef<"User", 'DateTime'>
+    readonly gender: FieldRef<"User", 'String'>
+    readonly interest: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
   }
     
@@ -2128,25 +2167,25 @@ export namespace Prisma {
 
   export type MessageMinAggregateOutputType = {
     id: string | null
-    content: string | null
     senderId: string | null
     receiverId: string | null
+    content: string | null
     createdAt: Date | null
   }
 
   export type MessageMaxAggregateOutputType = {
     id: string | null
-    content: string | null
     senderId: string | null
     receiverId: string | null
+    content: string | null
     createdAt: Date | null
   }
 
   export type MessageCountAggregateOutputType = {
     id: number
-    content: number
     senderId: number
     receiverId: number
+    content: number
     createdAt: number
     _all: number
   }
@@ -2154,25 +2193,25 @@ export namespace Prisma {
 
   export type MessageMinAggregateInputType = {
     id?: true
-    content?: true
     senderId?: true
     receiverId?: true
+    content?: true
     createdAt?: true
   }
 
   export type MessageMaxAggregateInputType = {
     id?: true
-    content?: true
     senderId?: true
     receiverId?: true
+    content?: true
     createdAt?: true
   }
 
   export type MessageCountAggregateInputType = {
     id?: true
-    content?: true
     senderId?: true
     receiverId?: true
+    content?: true
     createdAt?: true
     _all?: true
   }
@@ -2251,9 +2290,9 @@ export namespace Prisma {
 
   export type MessageGroupByOutputType = {
     id: string
-    content: string
     senderId: string
     receiverId: string
+    content: string
     createdAt: Date
     _count: MessageCountAggregateOutputType | null
     _min: MessageMinAggregateOutputType | null
@@ -2276,9 +2315,9 @@ export namespace Prisma {
 
   export type MessageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    content?: boolean
     senderId?: boolean
     receiverId?: boolean
+    content?: boolean
     createdAt?: boolean
     sender?: boolean | UserDefaultArgs<ExtArgs>
     receiver?: boolean | UserDefaultArgs<ExtArgs>
@@ -2286,9 +2325,9 @@ export namespace Prisma {
 
   export type MessageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    content?: boolean
     senderId?: boolean
     receiverId?: boolean
+    content?: boolean
     createdAt?: boolean
     sender?: boolean | UserDefaultArgs<ExtArgs>
     receiver?: boolean | UserDefaultArgs<ExtArgs>
@@ -2296,9 +2335,9 @@ export namespace Prisma {
 
   export type MessageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    content?: boolean
     senderId?: boolean
     receiverId?: boolean
+    content?: boolean
     createdAt?: boolean
     sender?: boolean | UserDefaultArgs<ExtArgs>
     receiver?: boolean | UserDefaultArgs<ExtArgs>
@@ -2306,13 +2345,13 @@ export namespace Prisma {
 
   export type MessageSelectScalar = {
     id?: boolean
-    content?: boolean
     senderId?: boolean
     receiverId?: boolean
+    content?: boolean
     createdAt?: boolean
   }
 
-  export type MessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "senderId" | "receiverId" | "createdAt", ExtArgs["result"]["message"]>
+  export type MessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "senderId" | "receiverId" | "content" | "createdAt", ExtArgs["result"]["message"]>
   export type MessageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sender?: boolean | UserDefaultArgs<ExtArgs>
     receiver?: boolean | UserDefaultArgs<ExtArgs>
@@ -2334,9 +2373,9 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      content: string
       senderId: string
       receiverId: string
+      content: string
       createdAt: Date
     }, ExtArgs["result"]["message"]>
     composites: {}
@@ -2764,9 +2803,9 @@ export namespace Prisma {
    */
   interface MessageFieldRefs {
     readonly id: FieldRef<"Message", 'String'>
-    readonly content: FieldRef<"Message", 'String'>
     readonly senderId: FieldRef<"Message", 'String'>
     readonly receiverId: FieldRef<"Message", 'String'>
+    readonly content: FieldRef<"Message", 'String'>
     readonly createdAt: FieldRef<"Message", 'DateTime'>
   }
     
@@ -3203,6 +3242,9 @@ export namespace Prisma {
     password: 'password',
     bio: 'bio',
     avatar: 'avatar',
+    birthday: 'birthday',
+    gender: 'gender',
+    interest: 'interest',
     createdAt: 'createdAt'
   };
 
@@ -3211,9 +3253,9 @@ export namespace Prisma {
 
   export const MessageScalarFieldEnum: {
     id: 'id',
-    content: 'content',
     senderId: 'senderId',
     receiverId: 'receiverId',
+    content: 'content',
     createdAt: 'createdAt'
   };
 
@@ -3302,8 +3344,11 @@ export namespace Prisma {
     fullName?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
-    bio?: StringFilter<"User"> | string
+    bio?: StringNullableFilter<"User"> | string | null
     avatar?: StringNullableFilter<"User"> | string | null
+    birthday?: DateTimeNullableFilter<"User"> | Date | string | null
+    gender?: StringNullableFilter<"User"> | string | null
+    interest?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     sentMessages?: MessageListRelationFilter
     recvMessages?: MessageListRelationFilter
@@ -3314,8 +3359,11 @@ export namespace Prisma {
     fullName?: SortOrder
     email?: SortOrder
     password?: SortOrder
-    bio?: SortOrder
+    bio?: SortOrderInput | SortOrder
     avatar?: SortOrderInput | SortOrder
+    birthday?: SortOrderInput | SortOrder
+    gender?: SortOrderInput | SortOrder
+    interest?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     sentMessages?: MessageOrderByRelationAggregateInput
     recvMessages?: MessageOrderByRelationAggregateInput
@@ -3329,8 +3377,11 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     fullName?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
-    bio?: StringFilter<"User"> | string
+    bio?: StringNullableFilter<"User"> | string | null
     avatar?: StringNullableFilter<"User"> | string | null
+    birthday?: DateTimeNullableFilter<"User"> | Date | string | null
+    gender?: StringNullableFilter<"User"> | string | null
+    interest?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     sentMessages?: MessageListRelationFilter
     recvMessages?: MessageListRelationFilter
@@ -3341,8 +3392,11 @@ export namespace Prisma {
     fullName?: SortOrder
     email?: SortOrder
     password?: SortOrder
-    bio?: SortOrder
+    bio?: SortOrderInput | SortOrder
     avatar?: SortOrderInput | SortOrder
+    birthday?: SortOrderInput | SortOrder
+    gender?: SortOrderInput | SortOrder
+    interest?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -3357,8 +3411,11 @@ export namespace Prisma {
     fullName?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
-    bio?: StringWithAggregatesFilter<"User"> | string
+    bio?: StringNullableWithAggregatesFilter<"User"> | string | null
     avatar?: StringNullableWithAggregatesFilter<"User"> | string | null
+    birthday?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    gender?: StringNullableWithAggregatesFilter<"User"> | string | null
+    interest?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
@@ -3367,9 +3424,9 @@ export namespace Prisma {
     OR?: MessageWhereInput[]
     NOT?: MessageWhereInput | MessageWhereInput[]
     id?: StringFilter<"Message"> | string
-    content?: StringFilter<"Message"> | string
     senderId?: StringFilter<"Message"> | string
     receiverId?: StringFilter<"Message"> | string
+    content?: StringFilter<"Message"> | string
     createdAt?: DateTimeFilter<"Message"> | Date | string
     sender?: XOR<UserScalarRelationFilter, UserWhereInput>
     receiver?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -3377,9 +3434,9 @@ export namespace Prisma {
 
   export type MessageOrderByWithRelationInput = {
     id?: SortOrder
-    content?: SortOrder
     senderId?: SortOrder
     receiverId?: SortOrder
+    content?: SortOrder
     createdAt?: SortOrder
     sender?: UserOrderByWithRelationInput
     receiver?: UserOrderByWithRelationInput
@@ -3390,9 +3447,9 @@ export namespace Prisma {
     AND?: MessageWhereInput | MessageWhereInput[]
     OR?: MessageWhereInput[]
     NOT?: MessageWhereInput | MessageWhereInput[]
-    content?: StringFilter<"Message"> | string
     senderId?: StringFilter<"Message"> | string
     receiverId?: StringFilter<"Message"> | string
+    content?: StringFilter<"Message"> | string
     createdAt?: DateTimeFilter<"Message"> | Date | string
     sender?: XOR<UserScalarRelationFilter, UserWhereInput>
     receiver?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -3400,9 +3457,9 @@ export namespace Prisma {
 
   export type MessageOrderByWithAggregationInput = {
     id?: SortOrder
-    content?: SortOrder
     senderId?: SortOrder
     receiverId?: SortOrder
+    content?: SortOrder
     createdAt?: SortOrder
     _count?: MessageCountOrderByAggregateInput
     _max?: MessageMaxOrderByAggregateInput
@@ -3414,9 +3471,9 @@ export namespace Prisma {
     OR?: MessageScalarWhereWithAggregatesInput[]
     NOT?: MessageScalarWhereWithAggregatesInput | MessageScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Message"> | string
-    content?: StringWithAggregatesFilter<"Message"> | string
     senderId?: StringWithAggregatesFilter<"Message"> | string
     receiverId?: StringWithAggregatesFilter<"Message"> | string
+    content?: StringWithAggregatesFilter<"Message"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Message"> | Date | string
   }
 
@@ -3425,8 +3482,11 @@ export namespace Prisma {
     fullName: string
     email: string
     password: string
-    bio: string
+    bio?: string | null
     avatar?: string | null
+    birthday?: Date | string | null
+    gender?: string | null
+    interest?: string | null
     createdAt?: Date | string
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
     recvMessages?: MessageCreateNestedManyWithoutReceiverInput
@@ -3437,8 +3497,11 @@ export namespace Prisma {
     fullName: string
     email: string
     password: string
-    bio: string
+    bio?: string | null
     avatar?: string | null
+    birthday?: Date | string | null
+    gender?: string | null
+    interest?: string | null
     createdAt?: Date | string
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     recvMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
@@ -3449,8 +3512,11 @@ export namespace Prisma {
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    bio?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
     recvMessages?: MessageUpdateManyWithoutReceiverNestedInput
@@ -3461,8 +3527,11 @@ export namespace Prisma {
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    bio?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     recvMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
@@ -3473,8 +3542,11 @@ export namespace Prisma {
     fullName: string
     email: string
     password: string
-    bio: string
+    bio?: string | null
     avatar?: string | null
+    birthday?: Date | string | null
+    gender?: string | null
+    interest?: string | null
     createdAt?: Date | string
   }
 
@@ -3483,8 +3555,11 @@ export namespace Prisma {
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    bio?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -3493,8 +3568,11 @@ export namespace Prisma {
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    bio?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -3508,9 +3586,9 @@ export namespace Prisma {
 
   export type MessageUncheckedCreateInput = {
     id?: string
-    content: string
     senderId: string
     receiverId: string
+    content: string
     createdAt?: Date | string
   }
 
@@ -3524,17 +3602,17 @@ export namespace Prisma {
 
   export type MessageUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
     senderId?: StringFieldUpdateOperationsInput | string
     receiverId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MessageCreateManyInput = {
     id?: string
-    content: string
     senderId: string
     receiverId: string
+    content: string
     createdAt?: Date | string
   }
 
@@ -3546,9 +3624,9 @@ export namespace Prisma {
 
   export type MessageUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
     senderId?: StringFieldUpdateOperationsInput | string
     receiverId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -3580,6 +3658,17 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -3615,6 +3704,9 @@ export namespace Prisma {
     password?: SortOrder
     bio?: SortOrder
     avatar?: SortOrder
+    birthday?: SortOrder
+    gender?: SortOrder
+    interest?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -3625,6 +3717,9 @@ export namespace Prisma {
     password?: SortOrder
     bio?: SortOrder
     avatar?: SortOrder
+    birthday?: SortOrder
+    gender?: SortOrder
+    interest?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -3635,6 +3730,9 @@ export namespace Prisma {
     password?: SortOrder
     bio?: SortOrder
     avatar?: SortOrder
+    birthday?: SortOrder
+    gender?: SortOrder
+    interest?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -3674,6 +3772,20 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -3695,25 +3807,25 @@ export namespace Prisma {
 
   export type MessageCountOrderByAggregateInput = {
     id?: SortOrder
-    content?: SortOrder
     senderId?: SortOrder
     receiverId?: SortOrder
+    content?: SortOrder
     createdAt?: SortOrder
   }
 
   export type MessageMaxOrderByAggregateInput = {
     id?: SortOrder
-    content?: SortOrder
     senderId?: SortOrder
     receiverId?: SortOrder
+    content?: SortOrder
     createdAt?: SortOrder
   }
 
   export type MessageMinOrderByAggregateInput = {
     id?: SortOrder
-    content?: SortOrder
     senderId?: SortOrder
     receiverId?: SortOrder
+    content?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -3751,6 +3863,10 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -3869,6 +3985,17 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -3936,6 +4063,20 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -3959,8 +4100,8 @@ export namespace Prisma {
 
   export type MessageUncheckedCreateWithoutSenderInput = {
     id?: string
-    content: string
     receiverId: string
+    content: string
     createdAt?: Date | string
   }
 
@@ -3983,8 +4124,8 @@ export namespace Prisma {
 
   export type MessageUncheckedCreateWithoutReceiverInput = {
     id?: string
-    content: string
     senderId: string
+    content: string
     createdAt?: Date | string
   }
 
@@ -4019,9 +4160,9 @@ export namespace Prisma {
     OR?: MessageScalarWhereInput[]
     NOT?: MessageScalarWhereInput | MessageScalarWhereInput[]
     id?: StringFilter<"Message"> | string
-    content?: StringFilter<"Message"> | string
     senderId?: StringFilter<"Message"> | string
     receiverId?: StringFilter<"Message"> | string
+    content?: StringFilter<"Message"> | string
     createdAt?: DateTimeFilter<"Message"> | Date | string
   }
 
@@ -4046,8 +4187,11 @@ export namespace Prisma {
     fullName: string
     email: string
     password: string
-    bio: string
+    bio?: string | null
     avatar?: string | null
+    birthday?: Date | string | null
+    gender?: string | null
+    interest?: string | null
     createdAt?: Date | string
     recvMessages?: MessageCreateNestedManyWithoutReceiverInput
   }
@@ -4057,8 +4201,11 @@ export namespace Prisma {
     fullName: string
     email: string
     password: string
-    bio: string
+    bio?: string | null
     avatar?: string | null
+    birthday?: Date | string | null
+    gender?: string | null
+    interest?: string | null
     createdAt?: Date | string
     recvMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
   }
@@ -4073,8 +4220,11 @@ export namespace Prisma {
     fullName: string
     email: string
     password: string
-    bio: string
+    bio?: string | null
     avatar?: string | null
+    birthday?: Date | string | null
+    gender?: string | null
+    interest?: string | null
     createdAt?: Date | string
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
   }
@@ -4084,8 +4234,11 @@ export namespace Prisma {
     fullName: string
     email: string
     password: string
-    bio: string
+    bio?: string | null
     avatar?: string | null
+    birthday?: Date | string | null
+    gender?: string | null
+    interest?: string | null
     createdAt?: Date | string
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
   }
@@ -4111,8 +4264,11 @@ export namespace Prisma {
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    bio?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recvMessages?: MessageUpdateManyWithoutReceiverNestedInput
   }
@@ -4122,8 +4278,11 @@ export namespace Prisma {
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    bio?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recvMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
   }
@@ -4144,8 +4303,11 @@ export namespace Prisma {
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    bio?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
   }
@@ -4155,23 +4317,26 @@ export namespace Prisma {
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    bio?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
   }
 
   export type MessageCreateManySenderInput = {
     id?: string
-    content: string
     receiverId: string
+    content: string
     createdAt?: Date | string
   }
 
   export type MessageCreateManyReceiverInput = {
     id?: string
-    content: string
     senderId: string
+    content: string
     createdAt?: Date | string
   }
 
@@ -4184,15 +4349,15 @@ export namespace Prisma {
 
   export type MessageUncheckedUpdateWithoutSenderInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
     receiverId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MessageUncheckedUpdateManyWithoutSenderInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
     receiverId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -4205,15 +4370,15 @@ export namespace Prisma {
 
   export type MessageUncheckedUpdateWithoutReceiverInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
     senderId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MessageUncheckedUpdateManyWithoutReceiverInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
     senderId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

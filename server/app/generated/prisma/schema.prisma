@@ -7,26 +7,30 @@ generator client {
   output   = "../app/generated/prisma"
 }
 
+// User model
 model User {
-  id        String   @id @default(uuid())
+  id        String    @id @default(uuid())
   fullName  String
-  email     String   @unique
+  email     String    @unique
   password  String
-  bio       String
+  bio       String?
   avatar    String?
-  createdAt DateTime @default(now())
+  birthday  DateTime?
+  gender    String?
+  interest  String? // could be enum later
+  createdAt DateTime  @default(now())
 
   sentMessages Message[] @relation("sent")
   recvMessages Message[] @relation("received")
 }
 
+// Messages between users
 model Message {
   id         String   @id @default(uuid())
-  content    String
+  sender     User     @relation("sent", fields: [senderId], references: [id])
   senderId   String
+  receiver   User     @relation("received", fields: [receiverId], references: [id])
   receiverId String
+  content    String
   createdAt  DateTime @default(now())
-
-  sender   User @relation("sent", fields: [senderId], references: [id])
-  receiver User @relation("received", fields: [receiverId], references: [id])
 }

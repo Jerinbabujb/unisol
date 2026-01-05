@@ -100,14 +100,17 @@ exports.Prisma.UserScalarFieldEnum = {
   password: 'password',
   bio: 'bio',
   avatar: 'avatar',
+  birthday: 'birthday',
+  gender: 'gender',
+  interest: 'interest',
   createdAt: 'createdAt'
 };
 
 exports.Prisma.MessageScalarFieldEnum = {
   id: 'id',
-  content: 'content',
   senderId: 'senderId',
   receiverId: 'receiverId',
+  content: 'content',
   createdAt: 'createdAt'
 };
 
@@ -139,10 +142,10 @@ const config = {
   "clientVersion": "7.2.0",
   "engineVersion": "0c8ef2ce45c83248ab3df073180d5eda9e8be7a3",
   "activeProvider": "postgresql",
-  "inlineSchema": "datasource db {\n  provider = \"postgresql\"\n}\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../app/generated/prisma\"\n}\n\nmodel User {\n  id        String   @id @default(uuid())\n  fullName  String\n  email     String   @unique\n  password  String\n  bio       String\n  avatar    String?\n  createdAt DateTime @default(now())\n\n  sentMessages Message[] @relation(\"sent\")\n  recvMessages Message[] @relation(\"received\")\n}\n\nmodel Message {\n  id         String   @id @default(uuid())\n  content    String\n  senderId   String\n  receiverId String\n  createdAt  DateTime @default(now())\n\n  sender   User @relation(\"sent\", fields: [senderId], references: [id])\n  receiver User @relation(\"received\", fields: [receiverId], references: [id])\n}\n"
+  "inlineSchema": "datasource db {\n  provider = \"postgresql\"\n}\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../app/generated/prisma\"\n}\n\n// User model\nmodel User {\n  id        String    @id @default(uuid())\n  fullName  String\n  email     String    @unique\n  password  String\n  bio       String?\n  avatar    String?\n  birthday  DateTime?\n  gender    String?\n  interest  String? // could be enum later\n  createdAt DateTime  @default(now())\n\n  sentMessages Message[] @relation(\"sent\")\n  recvMessages Message[] @relation(\"received\")\n}\n\n// Messages between users\nmodel Message {\n  id         String   @id @default(uuid())\n  sender     User     @relation(\"sent\", fields: [senderId], references: [id])\n  senderId   String\n  receiver   User     @relation(\"received\", fields: [receiverId], references: [id])\n  receiverId String\n  content    String\n  createdAt  DateTime @default(now())\n}\n"
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"fullName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"bio\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"avatar\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"sentMessages\",\"kind\":\"object\",\"type\":\"Message\",\"relationName\":\"sent\"},{\"name\":\"recvMessages\",\"kind\":\"object\",\"type\":\"Message\",\"relationName\":\"received\"}],\"dbName\":null},\"Message\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"senderId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"receiverId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"sender\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"sent\"},{\"name\":\"receiver\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"received\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"fullName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"bio\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"avatar\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"birthday\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"gender\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"interest\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"sentMessages\",\"kind\":\"object\",\"type\":\"Message\",\"relationName\":\"sent\"},{\"name\":\"recvMessages\",\"kind\":\"object\",\"type\":\"Message\",\"relationName\":\"received\"}],\"dbName\":null},\"Message\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"sender\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"sent\"},{\"name\":\"senderId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"receiver\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"received\"},{\"name\":\"receiverId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.compilerWasm = {
       getRuntime: async () => require('./query_compiler_bg.js'),

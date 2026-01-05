@@ -4,10 +4,10 @@ import bcrypt from 'bcryptjs';
 import prisma from "../config/prisma.js"; // Use the shared instance
 
 export const signup = async (req, res) => {
-    const { email, fullName, password, bio } = req.body;
+    const { email, fullName, password, bio,birthday, gender, interest  } = req.body;
 
     try {
-        if (!email || !fullName || !password || !bio) {
+        if (!email || !fullName || !password || !bio || !gender) {
             return res.json({ success: false, message: "missing details" });
         }
 
@@ -25,7 +25,8 @@ export const signup = async (req, res) => {
                 fullName, // Make sure this matches your schema.prisma field name!
                 email,
                 password: hashedPassword,
-                bio
+                bio,
+                gender,
             }
         });
 
