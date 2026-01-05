@@ -42,7 +42,7 @@ const LoginPage = () => {
       <div className='w-full max-w-5xl flex justify-between items-center mb-6 px-4'>
         <div className='flex items-center gap-2'>
            <img src={assets.logo} className='w-13' alt='logo'/>
-           <h1 className='text-xl font-bold text-gray-800'>Unisol</h1>
+           <h1 className='text-xl font-bold text-gray-800'>Unisoul</h1>
         </div>
         <div className='text-sm text-gray-600'>
           {currentState === 'Sign Up' ? (
