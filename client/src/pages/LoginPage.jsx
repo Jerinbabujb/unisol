@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import assets from '../assets';
-import { signInWithPopup } from 'firebase/auth';
+import {onAuthStateChanged, signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider } from '../../config/firebase';
 
 const LoginPage = () => {
@@ -13,7 +13,22 @@ const LoginPage = () => {
     googleId:""
   });
 
-
+useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log("Observer detected user:", user.email);
+        setFormData((prev) => ({
+          ...prev,
+          email: user.email,
+          fullName: user.displayName,
+          googleId: user.uid,
+          profilePic: user.photoURL
+        }));
+        setStep(2); // This will trigger even if the popup error happens!
+      }
+    });
+    return () => unsubscribe();
+  }, []);
   const { login } = useContext(AuthContext);
 
   const handleChange = (e) => {
@@ -37,28 +52,20 @@ const LoginPage = () => {
     }
   };
 
-  const handleGoogleSignIn= async() =>{
-    try{
-      const result= await signInWithPopup(auth, googleProvider);
-      const user=result.user;
-      setFormData((prev)=>({
-        ...prev,
-        email:user.email,
-        fullName:user.displayName,
-        googleId:user.uid,
-      }));
-      setStep(2);
-      console.log("logged in successfully", user.email);
-    }
-    catch (error) {
-      // Handle the case where user closes the popup
+  const handleGoogleSignIn = async () => {
+    try {
+      console.log("Opening Google Popup...");
+      // We don't need to save 'result' to a variable here 
+      // because the useEffect above handles the state update.
+      await signInWithPopup(auth, googleProvider);
+    } catch (error) {
       if (error.code === "auth/popup-closed-by-user") {
-        console.log("User closed the popup before finishing.");
+        alert("Login cancelled. Please try again.");
       } else {
-        console.error("Login Error:", error.message);
+        console.error("Firebase Login Error:", error.message);
       }
     }
-  }
+  };
 
   const prevStep = () => setStep(prev => prev - 1);
 
