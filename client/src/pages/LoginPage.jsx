@@ -1,14 +1,18 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import assets from '../assets';
+import { signInWithPopup } from 'firebase/auth';
+import { auth, googleProvider } from '../../config/firebase';
 
 const LoginPage = () => {
   const [currentState, setCurrentState] = useState('Sign Up');
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     fullName: '', email: '', password: '', confirmPassword: '',
-    birthday: '', gender: '', interest: '', bio: ''
+    birthday: '', gender: '', interest: '', bio: '',
+    googleId:""
   });
+
 
   const { login } = useContext(AuthContext);
 
@@ -32,6 +36,29 @@ const LoginPage = () => {
       login('login', { email: formData.email, password: formData.password });
     }
   };
+
+  const handleGoogleSignIn= async() =>{
+    try{
+      const result= await signInWithPopup(auth, googleProvider);
+      const user=result.user;
+      setFormData((prev)=>({
+        ...prev,
+        email:user.email,
+        fullName:user.displayName,
+        googleId:user.uid,
+      }));
+      setStep(2);
+      console.log("logged in successfully", user.email);
+    }
+    catch (error) {
+      // Handle the case where user closes the popup
+      if (error.code === "auth/popup-closed-by-user") {
+        console.log("User closed the popup before finishing.");
+      } else {
+        console.error("Login Error:", error.message);
+      }
+    }
+  }
 
   const prevStep = () => setStep(prev => prev - 1);
 
@@ -99,7 +126,7 @@ const LoginPage = () => {
             {(currentState === 'Login' || step === 1) && (
               <>
                 <div className='flex flex-col gap-3'>
-                    <button type="button" className='flex items-center justify-center gap-3 w-full py-2.5 border border-gray-200 rounded-xl font-semibold text-gray-700 hover:bg-gray-50 transition-all'>
+                    <button type="button" onClick={handleGoogleSignIn} className='flex items-center justify-center gap-3 w-full py-2.5 border border-gray-200 rounded-xl font-semibold text-gray-700 hover:bg-gray-50 transition-all'>
                         <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" className='w-5' alt=""/> Continue with Google
                     </button>
                     <button type="button" className='flex items-center justify-center gap-3 w-full py-2.5 bg-[#1877F2] text-white rounded-xl font-semibold hover:bg-blue-700 transition-all'>

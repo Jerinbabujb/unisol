@@ -4,36 +4,55 @@ import bcrypt from 'bcryptjs';
 import prisma from "../config/prisma.js"; // Use the shared instance
 
 export const signup = async (req, res) => {
-    const { email, fullName, password, bio,birthday, gender, interest  } = req.body;
+    const { email, fullName, password, bio, birthday, gender, interest, googleId, profilePic } = req.body;
 
     try {
-        if (!email || !fullName || !password || !bio || !gender) {
-            return res.json({ success: false, message: "missing details" });
+        // Validation: Google users don't require a password
+        if (!email || !fullName) {
+            return res.json({ success: false, message: "Email and Name are required" });
         }
 
-        const existingUser = await prisma.user.findUnique({ where: { email } });
-        if (existingUser) {
-            return res.json({ success: false, message: "Account already exists" });
+        // 1. Password Hashing (only if password exists)
+        let hashedPassword = null;
+        if (password) {
+            const salt = await bcrypt.genSalt(10);
+            hashedPassword = await bcrypt.hash(password, salt);
         }
 
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
-
-        // Create user in Prisma
-        const newUser = await prisma.user.create({
-            data: {
-                fullName, // Make sure this matches your schema.prisma field name!
+        // 2. Use UPSERT to handle both new and returning Google users
+        const user = await prisma.user.upsert({
+            where: { email: email },
+            update: {
+                // If they are logging in via Google, link their Google ID to existing email
+                googleId: googleId || undefined, 
+                bio: bio || undefined,
+                gender: gender || undefined,
+            },
+            create: {
                 email,
-                password: hashedPassword,
+                fullName,
+                password: hashedPassword, // Will be null for Google users
+                googleId,
                 bio,
                 gender,
+                birthday: birthday ? new Date(birthday) : null,
+                interest,
+                profilePic
             }
         });
 
-        const token = generateToken(newUser.id); // Prisma uses .id, not ._id
-        res.json({ success: true, userData: newUser, token, message: "account created successfully" });
+        // 3. Generate Token and Respond
+        const token = generateToken(user.id);
+        res.json({ 
+            success: true, 
+            userData: user, 
+            token, 
+            message: user.googleId ? "Google login successful" : "Account created successfully" 
+        });
+
     } catch (error) {
-        res.json({ success: false, error: error.message });
+        console.error("Signup Error:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
     }
 };
 
