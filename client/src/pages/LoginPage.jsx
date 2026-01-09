@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import assets from '../assets';
-import {onAuthStateChanged, signInWithPopup } from 'firebase/auth';
+import {getRedirectResult, onAuthStateChanged, signInWithRedirect } from 'firebase/auth';
 import { auth, googleProvider } from '../../config/firebase';
 
 const LoginPage = () => {
@@ -12,24 +12,43 @@ const LoginPage = () => {
     birthday: '', gender: '', interest: '', bio: '',
     googleId:""
   });
-
+const { login } = useContext(AuthContext);
 useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        console.log("Observer detected user:", user.email);
-        setFormData((prev) => ({
-          ...prev,
-          email: user.email,
-          fullName: user.displayName,
-          googleId: user.uid,
-          profilePic: user.photoURL
-        }));
-        setStep(2); // This will trigger even if the popup error happens!
+  // 1. Specifically catch the result from the redirect
+  getRedirectResult(auth)
+    .then((result) => {
+      if (result?.user) {
+        console.log("Redirect result caught:", result.user.email);
+        // The observer below will handle the logic, but this 
+        // ensures the redirect is processed.
       }
-    });
-    return () => unsubscribe();
-  }, []);
-  const { login } = useContext(AuthContext);
+    }).catch((error) => console.error("Redirect Error:", error));
+
+  // 2. The existing observer logic
+  const unsubscribe = onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      console.log("User detected via Google:", user.email);
+      
+      const googleData = {
+        email: user.email,
+        fullName: user.displayName,
+        googleId: user.uid,
+        profilePic: user.photoURL
+      };
+
+      setFormData((prev) => ({ ...prev, ...googleData }));
+
+      if (currentState === 'Sign Up') {
+        setStep(2);
+      } else {
+        console.log("Logging in returning user...");
+        login('login', { googleId: user.uid, email: user.email });
+      }
+    }
+  });
+  return () => unsubscribe();
+}, [currentState, login]);
+  
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -57,10 +76,11 @@ useEffect(() => {
       console.log("Opening Google Popup...");
       // We don't need to save 'result' to a variable here 
       // because the useEffect above handles the state update.
-      await signInWithPopup(auth, googleProvider);
+      await signInWithRedirect(auth, googleProvider);
     } catch (error) {
       if (error.code === "auth/popup-closed-by-user") {
         alert("Login cancelled. Please try again.");
+        console.log("error is: ",{error})
       } else {
         console.error("Firebase Login Error:", error.message);
       }

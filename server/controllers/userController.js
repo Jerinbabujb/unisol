@@ -37,7 +37,6 @@ export const signup = async (req, res) => {
                 gender,
                 birthday: birthday ? new Date(birthday) : null,
                 interest,
-                profilePic
             }
         });
 
@@ -58,21 +57,45 @@ export const signup = async (req, res) => {
 
 export const login = async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { email, password, googleId } = req.body;
+        let user = null; // 1. Initialize once
 
-        const user = await prisma.user.findUnique({ where: { email } });
-        if (!user) {
-            return res.json({ success: false, message: "account doesn't exist" });
+        if (!googleId) {
+            // Standard Email/Password Login
+            user = await prisma.user.findUnique({ where: { email } }); // 2. Assign (no 'const')
+            
+            if (!user) {
+                return res.json({ success: false, message: "account doesn't exist" });
+            }
+
+            const isPassword = await bcrypt.compare(password, user.password);
+            if (!isPassword) {
+                return res.json({ success: false, message: "password is not correct" });
+            }
+        } 
+        else {
+            // 3. Google Login logic - Assign to the outer 'user' variable
+            user = await prisma.user.findUnique({ where: { googleId } });
+            
+            if (!user) {
+                return res.json({ 
+                    success: false, 
+                    message: "No user found with this Google account. Please sign up first." 
+                });
+            }
         }
-
-        const isPassword = await bcrypt.compare(password, user.password);
-        if (!isPassword) {
-            return res.json({ success: false, message: "password is not correct" });
-        }
-
+        
+        // Now 'user' is accessible here!
         const token = generateToken(user.id);
-        res.json({ success: true, userData: user, token, message: "logged in successfully" });
+        res.json({ 
+            success: true, 
+            userData: user, 
+            token, 
+            message: "logged in successfully" 
+        });
+
     } catch (error) {
+        console.error("Login Controller Error:", error);
         res.json({ success: false, error: error.message });
     }
 };

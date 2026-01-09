@@ -1,20 +1,27 @@
-import React, { useContext, useState } from 'react'
-import ChatContainer from '../components/ChatContainer'
-import RightSideBar from '../components/RightSideBar'
-import SideBar from '../components/SideBar'
-import { ChatContext } from '../../context/ChatContext'
+import React from 'react';
+import SideBar from '../components/SideBar';
+import FeedContainer from '../components/FeedContainer'; // Renamed from ChatContainer for this view
+import RightSideBar from '../components/RightSideBar';
 
 const HomePage = () => {
-  const {selectedUser}=useContext(ChatContext);
   return (
-    <div className=' border w-full h-screen sm:px-[15%] sm:py-[5%]'>
-        <div className={`backdrop-blur-xl border-2 border-grey-600 rounded-2xl overflow-hidden h-[100%] grid grid-cols-1 relative ${selectedUser ? 'md:grid-cols-[1fr_1.5fr_1fr] xl:grid-cols-[1fr_2fr_1fr]' : 'md:grid-cols-2'}`}>
-      <SideBar />
-      <ChatContainer/>
-      <RightSideBar />
+    <div className="flex h-screen w-full bg-[#F9F9F9] font-sans text-slate-800">
+      {/* 1. Left Sidebar - Fixed width */}
+      <div className="w-64 flex-shrink-0 border-r border-gray-100 bg-white">
+        <SideBar />
+      </div>
+
+      {/* 2. Main Discovery Feed - Scrollable */}
+      <main className="flex-1 overflow-y-auto bg-white">
+        <FeedContainer />
+      </main>
+
+      {/* 3. Right Activity/Events Bar - Fixed width */}
+      <div className="w-80 flex-shrink-0 border-l border-gray-100 bg-white px-6 py-8">
+        <RightSideBar />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

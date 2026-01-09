@@ -3388,12 +3388,12 @@ export namespace Prisma {
   export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     email?: string
+    googleId?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     fullName?: StringFilter<"User"> | string
     password?: StringNullableFilter<"User"> | string | null
-    googleId?: StringNullableFilter<"User"> | string | null
     bio?: StringNullableFilter<"User"> | string | null
     avatar?: StringNullableFilter<"User"> | string | null
     birthday?: DateTimeNullableFilter<"User"> | Date | string | null
@@ -3402,7 +3402,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     sentMessages?: MessageListRelationFilter
     recvMessages?: MessageListRelationFilter
-  }, "id" | "email">
+  }, "id" | "email" | "googleId">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder

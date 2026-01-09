@@ -17,18 +17,31 @@ export const AuthProvider=({children})=>{
     const[onlineUsers,setOnlineUsers]=useState([]);
     const [socket,setSocket]=useState([]);
 
-    const checkAuth=async()=>{
-        try{
-            const {data }= await axios.get("/api/auth/check");
-            if(data.success){
-                setAuthUser(data.user);
-                connectSocket(data.user);
-            }
+    // Add this state at the top of your AuthContext
+const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+
+const checkAuth = async () => {
+    try {
+        // 1. Start checking
+        setIsCheckingAuth(true); 
+        const { data } = await axios.get("/api/auth/check");
+        
+        if (data.success) {
+            setAuthUser(data.user);
+            connectSocket(data.user);
+        } else {
+            setAuthUser(null);
         }
-        catch(error){
-            toast.error(error.message);
-        }
+    } catch (error) {
+        console.log("Error in checkAuth:", error);
+        setAuthUser(null);
+    } finally {
+        // 2. Finished checking (success or fail)
+        setIsCheckingAuth(false); 
     }
+};
+
+
 
 
     const login=async (state,credentials)=>{
@@ -103,6 +116,7 @@ export const AuthProvider=({children})=>{
         authUser,
         onlineUsers,
         socket,
+        isCheckingAuth,
         login,
         logout,
         updateProfile

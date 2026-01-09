@@ -1,43 +1,81 @@
-import React, { useContext, useEffect, useState } from 'react'
-import assets from '../assets'
-import { ChatContext } from '../../context/ChatContext'
+import React, { useContext } from 'react';
+import assets from '../assets';
 import { AuthContext } from '../../context/AuthContext';
 
 const RightSideBar = () => {
-  const {selectedUser, messages}= useContext(ChatContext);
-  const {logout, onlineUsers}=useContext(AuthContext);
-  const [msgImages,setMsgImges]=useState([]);
+  const { logout } = useContext(AuthContext);
 
-  useEffect(()=>{
-    setMsgImges(messages.filter(msg=>msg.image).map(msg=>msg.image))
-  },[messages])
+  // Mock data to match the UI design
+  const activities = [
+    { id: 1, name: 'Julia', action: 'liked your photo', time: '2 mins ago', icon: '❤️', color: 'bg-pink-500' },
+    { id: 2, name: 'Michael', action: 'sent you a message', time: '15 mins ago', icon: '💬', color: 'bg-blue-500' },
+    { id: 3, name: 'Sophia', action: 'New match with', time: '1 hour ago', icon: '🤝', color: 'bg-green-500' },
+  ];
 
+  const events = [
+    { id: 1, title: 'Speed Dating Night', time: 'TOMORROW • 7:00 PM', location: 'The Coffee House, Downtown' },
+    { id: 2, title: 'Singles Hiking Club', time: 'SATURDAY • 10:00 AM', location: 'Griffith Park Trailhead' },
+  ];
 
-  return selectedUser && (
-    <div className={`bg-[#8185B2]/10 text-white w-full relative overflow-y-scroll ${selectedUser ? "max-md:hidden" : ""}`}>
-      <div className='pt-6 flex flex-col items-center gap-2 text-xs font-light mx-auto'>
-        <img src={selectedUser?.profilePic ||assets.avatar_icon} alt='' className='w-20 aspect-[1/1] rounded-full'/>
-        <h1 className='px-10 text-xl font-medium mx-auto flex items-center gap-2'>
-          {onlineUsers.includes(selectedUser._id) && <p className='w-2 h-2 rounded-full bg-green-500'></p>} {selectedUser.fullName}</h1>
-          <p className='px-10 mx-auto'>{selectedUser.bio}</p>
-     
-      </div>
-           <hr className='border-[#ffffff50] my-4'/>
-          <div className='px-5 text-xs'>
-            <p>Media</p>
-            <div className='mt-2 max-h-[200px] overflow-y-scroll grid grid-cols-2 gap-4 opacity-80'>
-              {msgImages.map((url, index)=>(
-                <div key={index} onClick={()=>window.open(url)} className='cursor-pointer rounded'>
-                  <img src={url} alt='' className='h-full rounded-md'></img>
-                </div>
-              ))}
+  return (
+    <div className="flex h-full flex-col gap-8 bg-white px-6 py-8 text-slate-800">
+      
+      {/* --- Recent Activity Section --- */}
+      <section>
+        <h3 className="mb-4 text-lg font-bold">Recent Activity</h3>
+        <div className="flex flex-col gap-5">
+          {activities.map((item) => (
+            <div key={item.id} className="flex items-center gap-3">
+              <div className="relative">
+                <img src={assets.avatar_icon} alt="" className="h-10 w-10 rounded-full object-cover" />
+                <span className={`absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full text-[10px] text-white ${item.color}`}>
+                  {item.id === 1 ? '♥' : item.id === 2 ? '✉' : '✔'}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <p className="text-sm">
+                  <span className="font-bold">{item.name}</span> {item.action}
+                </p>
+                <span className="text-xs text-gray-400">{item.time}</span>
+              </div>
             </div>
-          </div>
-          <div className='flex justify-center items-center'>
-           <button onClick={()=>logout()} className='absolute flex items-center bottom-5  transform-translate-x-1/2 bg-gradient-to-r from-purple-400 to-violet-600 text-white border-none text-sm font-light py-2 px-20 rounded-full cursor-pointer'>logout</button>
-           </div>
-    </div>
-  )
-}
+          ))}
+        </div>
+      </section>
 
-export default RightSideBar
+      {/* --- Safety Tip Card --- */}
+      <div className="rounded-[2rem] bg-[#FFF0F7] p-6 text-center">
+        <h4 className="text-[10px] font-bold uppercase tracking-widest text-[#E91E63]">Safety Tip</h4>
+        <p className="mt-2 text-xs leading-relaxed text-[#D81B60]">
+          Always meet in public places and tell a friend where you are going. Stay safe!
+        </p>
+      </div>
+
+      {/* --- Local Events Section --- */}
+      <section>
+        <h3 className="mb-4 text-lg font-bold">Local Events</h3>
+        <div className="flex flex-col gap-3">
+          {events.map((event) => (
+            <div key={event.id} className="rounded-[1.5rem] bg-[#F3F4F6] p-4 transition-hover hover:bg-gray-200 cursor-pointer">
+              <span className="text-[10px] font-bold text-[#E91E63]">{event.time}</span>
+              <h4 className="text-sm font-bold">{event.title}</h4>
+              <p className="text-[11px] text-gray-500">{event.location}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* --- Logout at the bottom --- */}
+      <div className="mt-auto pt-4">
+        <button 
+          onClick={() => logout()} 
+          className="w-full rounded-full border border-gray-200 py-2 text-xs font-medium text-gray-400 hover:bg-gray-50 transition-colors"
+        >
+          Logout Session
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default RightSideBar;

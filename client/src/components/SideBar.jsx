@@ -1,59 +1,93 @@
-import  { useEffect, useState } from 'react'
-import assets from '../assets'
-import { useNavigate } from 'react-router-dom'
-import { useContext } from 'react'
-import { AuthContext } from '../../context/AuthContext'
-import { ChatContext } from '../../context/ChatContext'
+import React, { useContext } from 'react';
+import assets from '../assets';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
+import { ChatContext } from '../../context/ChatContext';
 
 const SideBar = () => {
-    const {getUsers,users,selectedUser,setSelectedUser, unseenMessages,setUnseenMessages}= useContext(ChatContext);
-    const {logout, onlineUsers}= useContext(AuthContext);
-    const [input,setInput]=useState(false);
-    const navigate=useNavigate();
+  const { unseenMessages } = useContext(ChatContext);
+  const { authUser } = useContext(AuthContext); // Assuming authUser contains current user data
+  const navigate = useNavigate();
+  const location = useLocation();
 
-    const filteredUsers= input ? users.filter((user)=>user.fullName.toLowerCase().includes(input.toLowerCase())) :users;
- useEffect(()=>{
-    getUsers();
- },[onlineUsers])
- 
-    return (
-    <div className={`bg-[#8185B2]/10 h-full p-5 rounded-r-xl overflow-y-scroll text-white ${selectedUser ? "mx-md:hidden":''}`}>
-        <div className='pb-5'>
-            <div className='flex justify-between items-center'>
-                <img src={assets.logo} alt='logo' className='max-w-40 w-20'></img>
-                <div className='relative py-2 group'>
-                    <img src={assets.menu_icon} alt='menu' className='max-h-5 cursor-pointer'></img>
-                    <div className='absolute top-full right-0 z-20 w-32 p-5 rounded-md bg-[#282142] border border-gray-600 text-gray-100 hidden group-hover:block'>
-                        <p onClick={()=>navigate('/profile')} className='cursor-pointer text-sm'>Edit profile</p>
-                        <hr className='my-2 border-t border-gray-500'/>
-                        <p onClick={()=>logout()} className='cursor-pointer text-sm'>Logout</p>
-                    </div>
-                </div>
-            </div>
-            <div className='bg-[#282142] rounded-full flex items-center gap-2 py-3 px-4 mt-5'>
-                <img src={assets.search_icon} alt='search' className='w-3'></img>
-                <input type='text' onChange={(e)=>setInput(e.target.value)}  className='bg-transparent border-none outline-none text-white text-xs placeholder-[#c8c8c8] flex-1' placeholder='search'></input> 
-            </div>
+  const menuItems = [
+    { name: 'Discovery', icon: '🧭', path: '/', badge: null },
+    { name: 'Messages', icon: '💬', path: '/messages', badge: Object.values(unseenMessages).reduce((a, b) => a + b, 0) || 3 },
+    { name: 'Likes', icon: '❤️', path: '/likes', badge: 12 },
+    { name: 'Profile', icon: '👤', path: '/profile', badge: null },
+    { name: 'Settings', icon: '⚙️', path: '/settings', badge: null },
+  ];
+
+  return (
+    <div className="flex h-full flex-col bg-white p-6 text-slate-600">
+      {/* 1. Logo */}
+      <div className="mb-10 flex items-center gap-2">
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#E91E63] text-white">
+          <span className="text-xl font-bold">♥</span>
         </div>
-        <div className='flex flex-col'>
-            {filteredUsers.map((user, index)=>(
-                <div onClick={()=>{setSelectedUser(user); setUnseenMessages(prev=>({...ProgressEvent,[user._id]:0}))}} key={index} className={`relative flex items-center gap-2 p-2 pl-4 rounded cursor-pointer max-sm:text-sm ${selectedUser?._id === user._id && 'bg-[#282142]/50'}`}>
-            <img src={user?.profilePic || assets.avatar_icon} className='w-[35px] aspect -[1/1] rounded-full' alt='profile pic'/>
-<div className='flex flex-col leading-5'>
-<p>{user.fullName}</p>
-{
-   onlineUsers.includes(user._id) ?<span className='text-green-400 text-xs'>Online</span> :<span className='text-neutral-400 text-xs'>Offline</span>
+        <h1 className="text-xl font-bold text-[#E91E63]">HeartBeat</h1>
+      </div>
 
-}
-    </div>
-    {unseenMessages[user._id]>0 && <p className='absolute top-4 right-4 text-xs h-5 w-5 flex justify-center items-center rounded-full bg-violet-500/50'>{unseenMessages[user._id]}</p>}
-                    </div>
-            ))}
-
-
+      {/* 2. User Profile Header */}
+      <div className="mb-10 flex items-center gap-3 px-2">
+        <img 
+          src={authUser?.profilePic || assets.avatar_icon} 
+          alt="User" 
+          className="h-12 w-12 rounded-full border-2 border-pink-100 object-cover"
+        />
+        <div className="flex flex-col">
+          <p className="text-sm font-bold text-slate-800">{authUser?.fullName || "Elena Gomez"}</p>
+          <p className="text-[10px] font-medium text-gray-400">Premium Member</p>
         </div>
-    </div>
-  )
-}
+      </div>
 
-export default SideBar
+      {/* 3. Navigation Menu */}
+      <nav className="flex flex-col gap-2">
+        {menuItems.map((item) => {
+          const isActive = location.pathname === item.path || (item.name === 'Discovery' && location.pathname === '/');
+          return (
+            <div
+              key={item.name}
+              onClick={() => navigate(item.path)}
+              className={`group relative flex cursor-pointer items-center justify-between rounded-full py-3 px-5 transition-all ${
+                isActive 
+                  ? 'bg-[#FFF0F7] text-[#E91E63]' 
+                  : 'hover:bg-gray-50 text-slate-500'
+              }`}
+            >
+              <div className="flex items-center gap-4">
+                <span className={`text-lg ${isActive ? 'opacity-100' : 'opacity-60 group-hover:opacity-100'}`}>
+                  {item.icon}
+                </span>
+                <span className={`text-sm font-semibold`}>{item.name}</span>
+              </div>
+              
+              {item.badge > 0 && (
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#E91E63] text-[10px] font-bold text-white">
+                  {item.badge}
+                </span>
+              )}
+              
+              {isActive && (
+                <div className="absolute left-0 h-6 w-1 rounded-r-full bg-[#E91E63]" />
+              )}
+            </div>
+          );
+        })}
+      </nav>
+
+      {/* 4. Upgrade Promo Card (Bottom) */}
+      <div className="mt-auto overflow-hidden rounded-3xl bg-gradient-to-br from-[#FF4E98] to-[#E91E63] p-5 text-white">
+        <h4 className="text-sm font-bold">Get more matches!</h4>
+        <p className="mt-1 text-[10px] leading-tight text-pink-100">
+          See who liked you with Gold
+        </p>
+        <button className="mt-4 w-full rounded-full bg-white py-2 text-[10px] font-bold text-[#E91E63] shadow-lg">
+          Upgrade to Gold
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default SideBar;
