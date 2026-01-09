@@ -3,8 +3,11 @@ import { AuthContext } from '../../context/AuthContext';
 import assets from '../assets';
 import {getRedirectResult, onAuthStateChanged, signInWithRedirect } from 'firebase/auth';
 import { auth, googleProvider } from '../../config/firebase';
+import { useRef } from 'react';
+
 
 const LoginPage = () => {
+  const googleLoginRef = useRef(false);
   const [currentState, setCurrentState] = useState('Sign Up');
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -27,6 +30,8 @@ useEffect(() => {
   // 2. The existing observer logic
   const unsubscribe = onAuthStateChanged(auth, async (user) => {
     if (user) {
+      if (!googleLoginRef.current) return;
+
       console.log("User detected via Google:", user.email);
       
       const googleData = {
@@ -44,6 +49,7 @@ useEffect(() => {
         console.log("Logging in returning user...");
         login('login', { googleId: user.uid, email: user.email });
       }
+      googleLoginRef.current = false; 
     }
   });
   return () => unsubscribe();
@@ -73,6 +79,7 @@ useEffect(() => {
 
   const handleGoogleSignIn = async () => {
     try {
+      googleLoginRef.current = true;
       console.log("Opening Google Popup...");
       // We don't need to save 'result' to a variable here 
       // because the useEffect above handles the state update.

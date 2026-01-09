@@ -37,6 +37,7 @@ const SideBar = () => {
         />
         <div className="flex flex-col">
           <p className="text-sm font-bold text-slate-800">{authUser?.fullName || "Elena Gomez"}</p>
+          <p className="text-sm font-bold text-slate-800">{authUser?.email || "Elena Gomez"}</p>
           <p className="text-[10px] font-medium text-gray-400">Premium Member</p>
         </div>
       </div>
