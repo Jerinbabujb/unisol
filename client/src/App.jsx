@@ -6,6 +6,7 @@ import ProfilePage from './pages/ProfilePage';
 import {Toaster} from 'react-hot-toast';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import ChatPage from './pages/ChatPage';
 const App = () => {
   const {authUser, isCheckingAuth}=useContext(AuthContext);
   if (isCheckingAuth && !authUser) {
@@ -23,6 +24,7 @@ const App = () => {
       <Route path='/' element={authUser? <HomePage/>: <Navigate to="/login"/>}/>
       <Route path='/login' element={!authUser?<LoginPage/> :<Navigate to="/"/>}/>
       <Route path='/profile' element={authUser?<ProfilePage/>: <Navigate to="/login"/> }/>
+      <Route path='/messages' element={authUser?<ChatPage/>:<Navigate to="/login"/>}/>
 
 
     </Routes>
