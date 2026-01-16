@@ -45,7 +45,7 @@ export const ChatProvider=({children})=>{
 
     const sendMessage=async(messageData)=>{
         try{
-            const {data}= await axios.post(`/api/messages/send/${selectedUser._id}`,messageData)
+            const {data}= await axios.post(`/api/messages/send/${selectedUser.id}`,messageData)
             if(data.success){
                 setMessages((prevMessages)=>[...prevMessages,data.newMessage])
 

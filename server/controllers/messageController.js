@@ -22,24 +22,24 @@ export const getUserForSidebar = async (req, res) => {
       }
     });
 
-    // 2. Count unseen messages per user
-    // const unseenMessages = {};
+    // Count unseen messages per user
+    const unseenMessages = {};
 
-    // await Promise.all(
-    //   users.map(async (user) => {
-    //     const count = await prisma.message.count({
-    //       where: {
-    //         senderId: user.id,
-    //         receiverId: userId,
-    //         seen: false
-    //       }
-    //     });
+    await Promise.all(
+      users.map(async (user) => {
+        const count = await prisma.message.count({
+          where: {
+            senderId: user.id,
+            receiverId: userId,
+            seen: false
+          }
+        });
 
-    //     if (count > 0) {
-    //       unseenMessages[user.id] = count;
-    //     }
-    //   })
-    // );
+        if (count > 0) {
+          unseenMessages[user.id] = count;
+        }
+      })
+    );
 
     res.json({
       success: true,

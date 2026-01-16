@@ -1,34 +1,72 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import { ChatContext } from "../../context/ChatContext";
 import assets from "../assets";
+import { AuthContext } from "../../context/AuthContext";
+import toast from "react-hot-toast";
 
 const ChatWindow = () => {
-  const { selectedUser, setSelectedUser } = useContext(ChatContext);
+  const { selectedUser, setSelectedUser, messages, getMessages, sendMessage } = useContext(ChatContext);
+  const { authUser } = useContext(AuthContext);
+  const [input, setInput] = useState('');
+  const scrollRef = useRef(null);
+
+  // Auto-scroll to bottom whenever messages change
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
+
+  useEffect(() => {
+    if (selectedUser) {
+      getMessages(selectedUser.id);
+    }
+  }, [selectedUser, getMessages]);
+
+  const handleSendMessage = async (e) => {
+    e.preventDefault();
+    if (input.trim() === "") return;
+    await sendMessage({ text: input.trim() });
+    setInput('');
+  };
+
+  const handleSendImage = async (e) => {
+    const file = e.target.files[0];
+    if (!file || !file.type.startsWith("image/")) {
+      toast.error("Please select an image file");
+      return;
+    }
+    const reader = new FileReader();
+    reader.onloadend = async () => {
+      await sendMessage({ image: reader.result });
+      e.target.value = "";
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const formatMessageTime = (date) => {
+    return new Date(date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  };
 
   if (!selectedUser) {
     return (
       <div className='hidden md:flex flex-col items-center justify-center h-full gap-2 text-gray-400 bg-gray-50/50'>
-        <img src={assets.logo} alt='' className='w-16 opacity-20 grayscale'/>
+        <img src={assets.logo} alt='' className='w-16 opacity-20 grayscale' />
         <p className='text-lg font-medium'>Select a match to start chatting</p>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col h-full overflow-hidden">
+    <div className="flex flex-col h-full bg-white overflow-hidden">
       {/* Header */}
-      <div className="bg-white px-4 py-3 md:px-6 md:py-4 flex justify-between items-center border-b border-gray-100 shrink-0">
+      <div className="px-4 py-3 md:px-6 md:py-4 flex justify-between items-center border-b border-gray-100 shrink-0">
         <div className="flex items-center gap-3">
-          {/* Back Button for Mobile */}
-          <button 
-            onClick={() => setSelectedUser(null)}
-            className="md:hidden p-2 -ml-2 text-gray-500 hover:bg-gray-100 rounded-full transition"
-          >
+          <button onClick={() => setSelectedUser(null)} className="md:hidden p-2 -ml-2 text-gray-500">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-          
           <img src={selectedUser.avatar || assets.logo} className="w-10 h-10 rounded-full object-cover" alt="" />
           <div>
             <h3 className="font-bold text-sm md:text-base">{selectedUser.fullName}</h3>
@@ -37,52 +75,65 @@ const ChatWindow = () => {
             </p>
           </div>
         </div>
-        
-        <div className="flex items-center gap-2">
-          <button className="p-2 bg-gray-50 rounded-full hover:bg-gray-100 text-lg">📞</button>
-          <button className="hidden sm:block px-4 py-1.5 text-xs font-bold text-pink-500 bg-pink-50 rounded-full">View Profile</button>
-        </div>
       </div>
 
-      {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4 md:p-8 flex flex-col gap-6 bg-[#F5F7FA]">
-        <div className="text-center text-[10px] text-gray-400 uppercase tracking-widest">Today</div>
-        
-        {/* Received */}
-        <div className="flex items-start gap-3 max-w-[90%] md:max-w-[70%]">
-          <img src={selectedUser.avatar || assets.logo} className="w-8 h-8 rounded-full mt-1 object-cover" alt="" />
-          <div>
-            <div className="bg-white p-3 md:p-4 rounded-2xl rounded-tl-none shadow-sm text-sm">
-              Hey! I saw you like hiking too. Have you been to the Peaks lately?
+      {/* Messages Area */}
+      <div className="flex-1 overflow-y-auto p-4 md:p-6 flex flex-col gap-4 bg-[#F8F9FB]">
+        {messages.map((msg, index) => {
+          const isMine = msg.senderId === authUser.id;
+          return (
+            <div 
+              key={index} 
+              className={`flex items-end gap-2 ${isMine ? 'flex-row-reverse self-end' : 'flex-row self-start'}`}
+            >
+              <img 
+                src={isMine ? (authUser.avatar || assets.avatar_icon) : (selectedUser.avatar || assets.avatar_icon)} 
+                className="w-7 h-7 rounded-full object-cover mb-1" 
+                alt="" 
+              />
+              
+              <div className={`flex flex-col ${isMine ? 'items-end' : 'items-start'}`}>
+                {msg.image ? (
+                  <img src={msg.image} alt='' className='max-w-[200px] md:max-w-xs rounded-2xl border border-gray-200 shadow-sm' />
+                ) : (
+                  <div className={`p-3 rounded-2xl text-sm shadow-sm max-w-[260px] md:max-w-md break-words ${
+                    isMine 
+                      ? 'bg-pink-500 text-white rounded-br-none' 
+                      : 'bg-white text-gray-800 border border-gray-100 rounded-bl-none'
+                  }`}>
+                    {msg.text}
+                  </div>
+                )}
+                <span className="text-[9px] text-gray-400 mt-1 px-1">
+                  {formatMessageTime(msg.createdAt)}
+                </span>
+              </div>
+              <div ref={scrollRef} />
             </div>
-            <span className="text-[10px] text-gray-400 ml-1 mt-1 block">10:42 AM</span>
-          </div>
-        </div>
-
-        {/* Sent */}
-        <div className="flex flex-col items-end gap-1 ml-auto max-w-[90%] md:max-w-[70%]">
-          <div className="bg-pink-500 text-white p-3 md:p-4 rounded-2xl rounded-tr-none shadow-md text-sm">
-            Yes! I went last Saturday. The weather was perfect. Do you go often?
-          </div>
-          <span className="text-[10px] text-gray-400 mr-1">10:45 AM ✓✓</span>
-        </div>
+          );
+        })}
       </div>
 
-      {/* Input */}
-      <div className="p-4 md:p-6 bg-white border-t border-gray-100 shrink-0">
-        <div className="flex items-center gap-3 bg-gray-100 rounded-full px-4 py-2 md:py-3">
-          <button className="text-gray-400 text-xl font-light hover:text-pink-500">+</button>
+      {/* Input Area */}
+      <div className="p-4 bg-white border-t border-gray-100">
+        <form onSubmit={handleSendMessage} className="flex items-center gap-2 md:gap-3 bg-gray-100 px-4 py-2 rounded-full">
           <input 
-            type="text" 
-            placeholder="Type a message..." 
-            className="flex-1 bg-transparent border-none outline-none text-sm placeholder:text-gray-400"
+            type='text' 
+            onChange={(e) => setInput(e.target.value)} 
+            value={input} 
+            placeholder='Type a message...' 
+            className='flex-1 bg-transparent border-none outline-none text-sm py-1.5 text-gray-700 placeholder-gray-400'
           />
-          <button className="bg-pink-500 text-white p-2 rounded-full hover:bg-pink-600 transition">
-            <svg className="w-4 h-4 transform rotate-90" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
-            </svg>
+          
+          <input type='file' id='image' onChange={handleSendImage} accept='image/*' hidden />
+          <label htmlFor='image' className="cursor-pointer hover:opacity-70 transition">
+            <img src={assets.gallery_icon} alt='gallery' className='w-5' />
+          </label>
+          
+          <button type="submit" className="hover:scale-110 transition active:scale-95">
+            <img src={assets.send_button} alt='send' className='w-8 h-8' />
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );

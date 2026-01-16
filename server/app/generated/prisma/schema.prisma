@@ -1,37 +1,35 @@
-datasource db {
-  provider = "postgresql"
-}
-
 generator client {
   provider = "prisma-client-js"
   output   = "../app/generated/prisma"
 }
 
-// User model
-model User {
-  id        String    @id @default(uuid())
-  fullName  String
-  email     String    @unique
-  password  String?
-  googleId  String?   @unique
-  bio       String?
-  avatar    String?
-  birthday  DateTime?
-  gender    String?
-  interest  String? // could be enum later
-  createdAt DateTime  @default(now())
-
-  sentMessages Message[] @relation("sent")
-  recvMessages Message[] @relation("received")
+datasource db {
+  provider = "postgresql"
 }
 
-// Messages between users
+model User {
+  id           String    @id @default(uuid())
+  fullName     String
+  email        String    @unique
+  password     String?
+  googleId     String?
+  bio          String?
+  avatar       String?
+  birthday     DateTime?
+  gender       String?
+  interest     String?
+  createdAt    DateTime  @default(now())
+  recvMessages Message[] @relation("received")
+  sentMessages Message[] @relation("sent")
+}
+
 model Message {
   id         String   @id @default(uuid())
-  sender     User     @relation("sent", fields: [senderId], references: [id])
   senderId   String
-  receiver   User     @relation("received", fields: [receiverId], references: [id])
   receiverId String
-  content    String
+  text       String
   createdAt  DateTime @default(now())
+  seen       Boolean?
+  receiver   User     @relation("received", fields: [receiverId], references: [id])
+  sender     User     @relation("sent", fields: [senderId], references: [id])
 }
