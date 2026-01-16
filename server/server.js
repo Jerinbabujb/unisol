@@ -13,58 +13,42 @@ export const io=new Server(server,{
     cors:{origin:"*"}
 })
 
-export const userSocketMap={};
+export const userSocketMap = {};
 
 io.on("connection", (socket) => {
-    const userId = socket.handshake.query.userId;
-    console.log("user connected", userId);
+  const userId = socket.handshake.auth?.userId;
 
-    if (userId) userSocketMap[userId] = socket.id;
-    io.emit("getOnlineUsers", Object.keys(userSocketMap));
+  console.log("🟢 USER CONNECTED:", userId, socket.id);
 
-    socket.on("disconnect", () => {
-        console.log("user disconnected", userId);
-        delete userSocketMap[userId]; // Important: remove user on disconnect
-        io.emit("getOnlineUsers", Object.keys(userSocketMap));
-    });
+  if (userId) {
+    userSocketMap[userId] = socket.id;
+  }
 
-    // 1. Call User
-    socket.on("call-user", ({ to, name, offer, type }) => {
-        const receiverSocketId = userSocketMap[to]; // Translate DB ID to Socket ID
-        if (receiverSocketId) {
-            io.to(receiverSocketId).emit("incoming-call", { 
-                from: userId, // Pass the DB ID of the caller
-                name, 
-                offer, 
-                type 
-            });
-        }
-    });
+  socket.on("disconnect", () => {
+    console.log("🔴 USER DISCONNECTED:", userId);
+    if (userId) delete userSocketMap[userId];
+  });
 
-    // 2. Answer Call
-    socket.on("answer-call", ({ to, answer }) => {
-        const callerSocketId = userSocketMap[to];
-        if (callerSocketId) {
-            io.to(callerSocketId).emit("call-accepted", { answer });
-        }
-    });
+  /* ---------------- CALL USER ---------------- */
+  socket.on("call-user", ({ to, name, offer, type }) => {
+    console.log("📞 CALL USER MAP:", userSocketMap);
+    console.log("📞 CALLING TO:", to);
 
-    // 3. ICE Candidates
-    socket.on("ice-candidate", ({ to, candidate }) => {
-        const targetSocketId = userSocketMap[to];
-        if (targetSocketId) {
-            io.to(targetSocketId).emit("ice-candidate", { candidate });
-        }
-    });
-    // Server side
-socket.on("end-call", ({ to }) => {
     const receiverSocketId = userSocketMap[to];
+
     if (receiverSocketId) {
-        // Use "call-ended" because that's what your useEffect listens for
-        io.to(receiverSocketId).emit("call-ended"); 
+      io.to(receiverSocketId).emit("incoming-call", {
+        from: userId,
+        name,
+        offer,
+        type,
+      });
+    } else {
+      console.log("❌ RECEIVER OFFLINE:", to);
     }
+  });
 });
-});
+
 
 app.use(express.json( {limit:"4mb"}));
 app.use(cors());
