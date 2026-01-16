@@ -8,8 +8,9 @@ const Navbar = () => {
   return authUser && (
     <nav className="h-16 border-b border-gray-100 bg-white px-4 md:px-8 flex items-center justify-between z-10">
       <div className="flex items-center gap-2">
-        <img src={assets.logo} alt="logo" className="w-7 h-7" />
-        <span className="font-bold text-lg md:text-xl tracking-tight">UNISOUL</span>
+       <a href="/"> <img src={assets.logo} alt="logo" className="w-7 h-7" /></a>
+        <a href="/"><span className="font-bold text-lg md:text-xl tracking-tight">UNISOUL</span></a>
+        
       </div>
 
       {/* Navigation Links - Hidden on Mobile */}

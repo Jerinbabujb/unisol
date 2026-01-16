@@ -3,7 +3,6 @@ import assets from '../assets';
 import { AuthContext } from '../../context/AuthContext';
 
 const RightSideBar = () => {
-  const { logout } = useContext(AuthContext);
 
   return (
     <div className="flex h-full w-full flex-col gap-8 bg-white px-6 py-8 text-slate-800 overflow-y-auto">
@@ -52,14 +51,7 @@ const RightSideBar = () => {
         </div>
       </section>
 
-      <div className="mt-auto">
-        <button 
-          onClick={() => logout()} 
-          className="w-full rounded-2xl bg-gray-50 py-3 text-xs font-bold text-gray-400 hover:bg-red-50 hover:text-red-500 transition-all active:scale-95"
-        >
-          Logout Session
-        </button>
-      </div>
+      
     </div>
   );
 };

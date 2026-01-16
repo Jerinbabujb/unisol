@@ -6,7 +6,8 @@ import { ChatContext } from '../../context/ChatContext';
 
 const SideBar = () => {
   const { unseenMessages } = useContext(ChatContext);
-  const { authUser } = useContext(AuthContext);
+  const { authUser, logout } = useContext(AuthContext);
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -66,6 +67,14 @@ const SideBar = () => {
             Upgrade Now
           </button>
         </div>
+      </div>
+      <div className="mt-auto">
+        <button 
+          onClick={() => logout()} 
+          className="w-full rounded-2xl bg-gray-50 py-3 text-xs font-bold text-gray-400 hover:bg-red-50 hover:text-red-500 transition-all active:scale-95"
+        >
+          Logout Session
+        </button>
       </div>
     </div>
   );
