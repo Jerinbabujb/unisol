@@ -18,7 +18,7 @@ const getUserId = () => {
     }
 };
 
-const socket = io("http://localhost:5000", {
+const socket = io("http://localhost:5000" || "https://unisol-885n.onrender.com/", {
     query: {
         userId: getUserId() || "",
     },
