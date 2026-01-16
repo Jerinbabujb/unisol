@@ -1,17 +1,19 @@
+import { useContext, useEffect } from "react";
+import { ChatContext } from "../../context/ChatContext";
+import assets from "../assets";
+
 const MessageList = () => {
-  const chats = [
-    { name: 'Emma', msg: 'Hey! How was your weekend?', time: '2m ago', active: true, img: 'https://i.pravatar.cc/150?u=emma' },
-    { name: 'Liam', msg: 'That sounds like an amazing trip!', time: '1h ago', img: 'https://i.pravatar.cc/150?u=liam' },
-    { name: 'Sophia', msg: 'Haha exactly! Same here.', time: '3h ago', img: 'https://i.pravatar.cc/150?u=sophia' },
-    { name: 'Noah', msg: 'Are you free for coffee on Friday?', time: 'Yesterday', img: 'https://i.pravatar.cc/150?u=noah' },
-    { name: 'Olivia', msg: 'See you then!', time: 'Tue', img: 'https://i.pravatar.cc/150?u=olivia' },
-  ];
+  const { users, getUsers, selectedUser, setSelectedUser } = useContext(ChatContext);
+
+  useEffect(() => {
+    getUsers();
+  }, [getUsers]);
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="p-6">
-        <h2 className="text-2xl font-bold mb-1">Messages</h2>
-        <p className="text-gray-400 text-sm mb-4">5 unread conversations</p>
+    <div className="flex flex-col h-full bg-white">
+      <div className="p-4 md:p-6">
+        <h2 className="text-xl md:text-2xl font-bold mb-1">Messages</h2>
+        <p className="text-gray-400 text-xs md:text-sm mb-4">Recent conversations</p>
         <div className="relative">
           <input 
             type="text" 
@@ -21,16 +23,29 @@ const MessageList = () => {
           <span className="absolute left-4 top-2 text-gray-400">🔍</span>
         </div>
       </div>
+
       <div className="flex-1 overflow-y-auto">
-        {chats.map((chat, i) => (
-          <div key={i} className={`flex items-center gap-4 p-4 cursor-pointer hover:bg-gray-50 ${chat.active ? 'bg-pink-50' : ''}`}>
-            <img src={chat.img} className="w-12 h-12 rounded-full object-cover" />
-            <div className="flex-1">
-              <div className="flex justify-between">
-                <span className="font-bold text-sm">{chat.name}</span>
-                <span className="text-[10px] text-gray-400">{chat.time}</span>
+        {users?.map((user) => (
+          <div
+            key={user.id}
+            className={`flex items-center gap-4 p-4 cursor-pointer transition-colors ${
+              selectedUser?.id === user.id ? 'bg-pink-50' : 'hover:bg-gray-50'
+            }`}
+            onClick={() => setSelectedUser(user)}
+          >
+            <img
+              src={user.avatar || assets.logo}
+              className="w-12 h-12 rounded-full object-cover border border-gray-100"
+              alt={user.fullName}
+            />
+            <div className="flex-1 min-w-0">
+              <div className="flex justify-between items-baseline">
+                <span className="font-bold text-sm truncate">{user.fullName}</span>
+                <span className="text-[10px] text-gray-400">10:45 AM</span>
               </div>
-              <p className={`text-xs truncate ${chat.active ? 'text-pink-500 font-medium' : 'text-gray-500'}`}>{chat.msg}</p>
+              <p className="text-xs truncate text-gray-500">
+                {user.bio || "Start a conversation"}
+              </p>
             </div>
           </div>
         ))}

@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import {AuthContext} from './AuthContext';
 import toast from "react-hot-toast";
 
@@ -14,19 +14,22 @@ export const ChatProvider=({children})=>{
 
     const {socket, axios}= useContext(AuthContext);
 
-    const getUsers=async()=>{
-        try{
-           const {data}= await axios.get("/api/messages/users");
-           if(data.success){
-            setUsers(data.users);
-            setUnseenMessages(data.unseenMessages);
+  const getUsers = useCallback(async () => {
+  if (!axios) {
+    console.log("axios not ready yet");
+    return;
+  }
 
-           }
-        }
-        catch(error){
-            toast.error(error.message);
-        }
+  try {
+    const { data } = await axios.get("/api/messages/users");
+
+    if (data.success) {
+      setUsers(data.users);
     }
+  } catch (error) {
+    toast.error(error.message);
+  }
+}, [axios]);
 
     const getMessages=async(userId)=>{
         try{

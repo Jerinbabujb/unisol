@@ -1,52 +1,146 @@
-import React, { useState } from 'react'
-import assets from '../assets'
-import {useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
+import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
+import assets from '../assets';
 
 const ProfilePage = () => {
-  const {authUser, updateProfile}= useContext(AuthContext);
-  const [selectedImg,setSelectedImg]=useState('');
-  const navigate=useNavigate();
-  const [name,setName]=useState(authUser.fullName);
-  const [bio,setBio]= useState(authUser.bio);
-  
-  const handleSubmit=async(e)=>{
+  const { authUser, updateProfile } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  // States
+  const [selectedImg, setSelectedImg] = useState(null);
+  const [name, setName] = useState(authUser?.fullName || "");
+  const [bio, setBio] = useState(authUser?.bio || "");
+  const [interests, setInterests] = useState(['Travel', 'Art', 'Coffee']);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!selectedImg){
-      await updateProfile({fullName:name,bio});
+    let profileData = { fullName: name, bio };
+
+    if (selectedImg) {
+      const reader = new FileReader();
+      reader.readAsDataURL(selectedImg);
+      reader.onload = async () => {
+        profileData.avatar = reader.result;
+        await updateProfile(profileData);
         navigate("/");
-        return;
-    }
-    const reader= new FileReader();
-    reader.readAsDataURL(selectedImg);
-    reader.onload= async()=>{
-      const bas64Image=reader.result;
-      await updateProfile({profilePic:bas64Image,fullName:name,bio});
+      };
+    } else {
+      await updateProfile(profileData);
       navigate("/");
     }
-  
-  
-  }
-  return (
-    <div className='min-h-screen bg-cover bg-no-repeat flex items-center justify-center'>
-      <div className='w-5/6 max-w-2xl backdrop-blur-2xl text-gray-300 border-2 border-gray-600 flex items-center justify-between max-sm:flex-col-reverse rounded-lg'>
-        <form className='flex flex-col gap-5 p-10 flex-1' onSubmit={handleSubmit}> 
-          <h3 className='text-lg '>Profile details</h3>
-          <label htmlFor='avatar' className='flex items-center gap-3 cursor-pointer'>
-          <input onChange={(e)=>setSelectedImg(e.target.files[0])} type='file' id='avatar' accept='.png, .jpeg, .jpg' hidden/>
-          <img src={selectedImg ? URL.createObjectURL(selectedImg):   assets.avatar_icon} className={`w-12 h-12 ${selectedImg && 'rounded-full'}`}/>
-          upload profile image
-          </label>
-          <input type='text'onChange={(e)=>setName(e.target.value)} value={name} placeholder='Your name' className='p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500' requied/>
-          <textarea placeholder='write profile bio' onChange={(e)=>setBio(e.target.value)} value={bio} className='p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500' rows={4} required/>
-          <button type='submit' className='bg-gradient-to-r from-purple-400 to-violet-600 text-white p-2 rounded-full text-lg cursor-pointer'> save</button>
-           </form>
-          <img src={authUser?.profilePic ||assets.logo} alt='' className={`max-w-44 aspect-square rounded-full mx-10 max-sm:mt-10 ${selectedImg && 'rounded-full'}`}/>
-       
-      </div>
-    </div>
-  )
-}
+  };
 
-export default ProfilePage
+  return (
+    <div className="min-h-screen bg-[#FDF8F9] flex flex-col items-center py-12 px-4 font-sans">
+      {/* Header */}
+      <div className="text-center mb-10">
+        <h1 className="text-4xl font-bold text-gray-800 mb-2">Edit Your Profile</h1>
+        <p className="text-gray-500 text-lg">Make your first impression count</p>
+      </div>
+
+      <form onSubmit={handleSubmit} className="w-full max-w-5xl flex flex-col md:flex-row gap-8">
+        
+        {/* LEFT COLUMN: Photos */}
+        <div className="flex-1 flex flex-col gap-6">
+          {/* Main Photo Card */}
+          <div className="bg-white p-8 rounded-[40px] shadow-sm border border-gray-100 flex flex-col items-center text-center">
+            <div className="relative mb-4">
+              <div className="w-40 h-40 rounded-full border-4 border-[#FFB800] p-1">
+                <img 
+                  src={selectedImg ? URL.createObjectURL(selectedImg) : (authUser?.avatar || assets.logo)} 
+                  className="w-full h-full rounded-full object-cover"
+                  alt="Profile"
+                />
+              </div>
+              <label htmlFor="avatar" className="absolute bottom-2 right-2 bg-[#ED719E] p-2 rounded-full cursor-pointer shadow-md border-2 border-white">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                </svg>
+                <input type="file" id="avatar" hidden onChange={(e) => setSelectedImg(e.target.files[0])} />
+              </label>
+            </div>
+            <h3 className="text-xl font-bold text-gray-800">Main Profile Photo</h3>
+            <p className="text-gray-400 text-sm mb-6">This is the first photo people will see</p>
+            <label htmlFor="avatar" className="w-full py-3 bg-[#F3F0F1] text-gray-700 rounded-2xl font-semibold cursor-pointer hover:bg-gray-200 transition-colors">
+              Change Photo
+            </label>
+          </div>
+
+          {/* Photo Gallery Card */}
+          <div className="bg-white p-8 rounded-[40px] shadow-sm border border-gray-100">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-xl font-bold text-gray-800">Photo Gallery</h3>
+              <span className="bg-[#FFE5EE] text-[#ED719E] px-3 py-1 rounded-full text-xs font-bold">4/6 Slots</span>
+            </div>
+            <div className="grid grid-cols-3 gap-4 mb-4">
+               {/* Placeholders for Gallery */}
+               <div className="aspect-square bg-gray-100 rounded-3xl overflow-hidden"><img src={assets.sample1} className="w-full h-full object-cover"/></div>
+               <div className="aspect-square bg-gray-100 rounded-3xl overflow-hidden"><img src={assets.sample2} className="w-full h-full object-cover"/></div>
+               <div className="aspect-square bg-gray-100 rounded-3xl overflow-hidden"><img src={assets.sample3} className="w-full h-full object-cover"/></div>
+               <div className="aspect-square border-2 border-dashed border-pink-200 flex flex-col items-center justify-center rounded-3xl cursor-pointer">
+                  <div className="text-[#ED719E] text-xs font-bold">ADD</div>
+               </div>
+            </div>
+            <p className="text-center text-gray-400 text-xs italic">Drag and drop to rearrange photos</p>
+          </div>
+        </div>
+
+        {/* RIGHT COLUMN: Personal Info */}
+        <div className="flex-[1.2] bg-white p-10 rounded-[40px] shadow-sm border border-gray-100 flex flex-col">
+          <h3 className="text-2xl font-bold text-gray-800 mb-8">Personal Information</h3>
+          
+          <div className="space-y-6">
+            <div>
+              <label className="block text-[#9D7183] text-sm font-bold mb-2 ml-1">Display Name</label>
+              <input 
+                type="text" 
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full bg-[#F9F7F8] p-4 rounded-2xl focus:outline-none border-none text-gray-700"
+              />
+            </div>
+
+            <div>
+              <div className="flex justify-between mb-2 ml-1">
+                <label className="text-[#9D7183] text-sm font-bold">About Me</label>
+                <span className="text-gray-400 text-xs">{bio.length}/500</span>
+              </div>
+              <textarea 
+                rows={6}
+                value={bio}
+                onChange={(e) => setBio(e.target.value)}
+                className="w-full bg-[#F9F7F8] p-4 rounded-2xl focus:outline-none border-none text-gray-700 resize-none"
+                placeholder="Write something about yourself..."
+              />
+            </div>
+
+            <div>
+              <label className="block text-[#9D7183] text-sm font-bold mb-4 ml-1">Interests</label>
+              <div className="flex flex-wrap gap-2">
+                {interests.map(item => (
+                  <div key={item} className="bg-[#FFE5EE] text-[#ED719E] px-4 py-2 rounded-full flex items-center gap-2 text-sm font-semibold">
+                    {item} <span className="cursor-pointer text-lg">×</span>
+                  </div>
+                ))}
+                <button type="button" className="border-2 border-dashed border-gray-300 text-gray-400 px-4 py-2 rounded-full text-sm font-semibold">
+                  + Add Interest
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-auto pt-10 flex justify-end items-center gap-6">
+            <button type="button" className="text-gray-500 font-bold hover:text-gray-700">Discard Changes</button>
+            <button type="submit" className="bg-[#ED719E] text-white px-10 py-4 rounded-full font-bold shadow-lg shadow-pink-200 hover:bg-[#d65a88] transition-all">
+              Save Profile
+            </button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  );
+};
+
+export default ProfilePage;

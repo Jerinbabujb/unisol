@@ -4,7 +4,7 @@ const assets = {
   help_icon: '/assets/help_icon.png',
   logo_big: '/assets/logo_big.svg',
   logo_icon: '/assets/logo_icon.svg',
-  logo: '/assets/logo.png',
+  logo: '/assets/logo.jpeg',
   search_icon: '/assets/search_icon.png',
   send_button: '/assets/send_button.svg',
   menu_icon: '/assets/menu_icon.png',

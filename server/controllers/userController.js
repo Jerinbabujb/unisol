@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs';
 import prisma from "../config/prisma.js"; // Use the shared instance
 
 export const signup = async (req, res) => {
-    const { email, fullName, password, bio, birthday, gender, interest, googleId, profilePic } = req.body;
+    const { email, fullName, password, bio, birthday, gender, interest, googleId, avatar } = req.body;
 
     try {
         // Validation: Google users don't require a password
@@ -108,12 +108,12 @@ export const checkAuth = (req, res) => {
 };
 export const updateProfile = async (req, res) => {
     try {
-        const { fullName, profilePic, bio } = req.body;
+        const { fullName, avatar, bio } = req.body;
         const userId = req.user.id; // Use .id instead of ._id
 
-        let profilePicUrl = profilePic;
-        if (profilePic && profilePic.startsWith('data:image')) {
-            const upload = await cloudinary.uploader.upload(profilePic);
+        let profilePicUrl = avatar;
+        if (avatar && avatar.startsWith('data:image')) {
+            const upload = await cloudinary.uploader.upload(avatar);
             profilePicUrl = upload.secure_url;
         }
 
@@ -123,7 +123,7 @@ export const updateProfile = async (req, res) => {
             data: { 
                 fullName, 
                 bio, 
-                profilePic: profilePicUrl 
+                avatar: profilePicUrl 
             },
         });
 

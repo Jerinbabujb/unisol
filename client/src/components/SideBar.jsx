@@ -23,15 +23,15 @@ const SideBar = () => {
       {/* 1. Logo */}
       <div className="mb-10 flex items-center gap-2">
         <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#E91E63] text-white">
-          <span className="text-xl font-bold">♥</span>
+          <img src={assets.logo} alt='logo'/>
         </div>
-        <h1 className="text-xl font-bold text-[#E91E63]">HeartBeat</h1>
+        <h1 className="text-xl font-bold text-[#E91E63]">UNISOUL</h1>
       </div>
 
       {/* 2. User Profile Header */}
       <div className="mb-10 flex items-center gap-3 px-2">
         <img 
-          src={authUser?.profilePic || assets.avatar_icon} 
+          src={authUser?.avatar || assets.avatar_icon} 
           alt="User" 
           className="h-12 w-12 rounded-full border-2 border-pink-100 object-cover"
         />

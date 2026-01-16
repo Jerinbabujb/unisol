@@ -1,8 +1,16 @@
-const ProfileSidebar = () => (
+import { useContext } from "react";
+import { ChatContext } from "../../context/ChatContext";
+import { AuthContext } from "../../context/AuthContext";
+import assets from "../assets";
+
+const ProfileSidebar = () => {
+  const {selectedUser,setSelectedUser, users}= useContext(ChatContext);
+  const {authUser} = useContext(AuthContext);
+  return selectedUser && (
   <div className="flex flex-col items-center">
     <div className="relative mb-6">
       <img 
-        src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400" 
+        src={selectedUser.avatar || assets.logo} 
         className="w-full aspect-[4/5] object-cover rounded-[2rem] shadow-xl shadow-pink-100" 
       />
       <div className="absolute -bottom-2 -right-2 bg-pink-500 p-2 rounded-full border-4 border-white">
@@ -11,8 +19,8 @@ const ProfileSidebar = () => (
     </div>
 
     <div className="text-center mb-6">
-      <h2 className="text-2xl font-bold">Emma, 24</h2>
-      <p className="text-gray-400 text-sm">Graphic Designer • London</p>
+      <h2 className="text-2xl font-bold">{selectedUser.fullName}</h2>
+      <p className="text-gray-400 text-sm">{selectedUser.bio}</p>
     </div>
 
     <div className="w-full space-y-3 mb-8">
@@ -36,5 +44,6 @@ const ProfileSidebar = () => (
     </div>
   </div>
 );
+}
 
 export default ProfileSidebar;
