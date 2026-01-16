@@ -6,86 +6,66 @@ import { ChatContext } from '../../context/ChatContext';
 
 const SideBar = () => {
   const { unseenMessages } = useContext(ChatContext);
-  const { authUser } = useContext(AuthContext); // Assuming authUser contains current user data
+  const { authUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
   const menuItems = [
     { name: 'Discovery', icon: '🧭', path: '/', badge: null },
-    { name: 'Messages', icon: '💬', path: '/messages', badge: Object.values(unseenMessages).reduce((a, b) => a + b, 0) || 3 },
+    { name: 'Messages', icon: '💬', path: '/messages', badge: Object.values(unseenMessages || {}).reduce((a, b) => a + b, 0) || 0 },
     { name: 'Likes', icon: '❤️', path: '/likes', badge: 12 },
     { name: 'Profile', icon: '👤', path: '/profile', badge: null },
     { name: 'Settings', icon: '⚙️', path: '/settings', badge: null },
   ];
 
   return (
-    <div className="flex h-full flex-col bg-white p-6 text-slate-600">
-      {/* 1. Logo */}
+    <div className="flex h-full w-full flex-col bg-white p-6 text-slate-600 overflow-y-auto">
       <div className="mb-10 flex items-center gap-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#E91E63] text-white">
-          <img src={assets.logo} alt='logo'/>
-        </div>
-        <h1 className="text-xl font-bold text-[#E91E63]">UNISOUL</h1>
+        <img src={assets.logo} alt='logo' className="w-8 h-8 rounded-lg bg-pink-500 p-1.5"/>
+        <h1 className="text-xl font-bold text-pink-600 tracking-tighter">UNISOUL</h1>
       </div>
 
-      {/* 2. User Profile Header */}
-      <div className="mb-10 flex items-center gap-3 px-2">
-        <img 
-          src={authUser?.avatar || assets.avatar_icon} 
-          alt="User" 
-          className="h-12 w-12 rounded-full border-2 border-pink-100 object-cover"
-        />
-        <div className="flex flex-col">
-          <p className="text-sm font-bold text-slate-800">{authUser?.fullName || "Elena Gomez"}</p>
-          <p className="text-sm font-bold text-slate-800">{authUser?.email || "Elena Gomez"}</p>
+      <div className="mb-10 flex items-center gap-3 bg-gray-50 p-3 rounded-2xl">
+        <img src={authUser?.avatar || assets.avatar_icon} className="h-10 w-10 rounded-full object-cover border-2 border-white shadow-sm" alt="User" />
+        <div className="flex flex-col min-w-0">
+          <p className="text-sm font-bold text-slate-800 truncate">{authUser?.fullName || "Elena Gomez"}</p>
           <p className="text-[10px] font-medium text-gray-400">Premium Member</p>
         </div>
       </div>
 
-      {/* 3. Navigation Menu */}
-      <nav className="flex flex-col gap-2">
+      <nav className="flex flex-col gap-1">
         {menuItems.map((item) => {
-          const isActive = location.pathname === item.path || (item.name === 'Discovery' && location.pathname === '/');
+          const isActive = location.pathname === item.path;
           return (
             <div
               key={item.name}
               onClick={() => navigate(item.path)}
-              className={`group relative flex cursor-pointer items-center justify-between rounded-full py-3 px-5 transition-all ${
-                isActive 
-                  ? 'bg-[#FFF0F7] text-[#E91E63]' 
-                  : 'hover:bg-gray-50 text-slate-500'
+              className={`flex cursor-pointer items-center justify-between rounded-2xl py-3 px-4 transition-all ${
+                isActive ? 'bg-pink-50 text-pink-600 shadow-sm' : 'hover:bg-gray-50 text-slate-500'
               }`}
             >
-              <div className="flex items-center gap-4">
-                <span className={`text-lg ${isActive ? 'opacity-100' : 'opacity-60 group-hover:opacity-100'}`}>
-                  {item.icon}
-                </span>
-                <span className={`text-sm font-semibold`}>{item.name}</span>
+              <div className="flex items-center gap-3">
+                <span className="text-lg">{item.icon}</span>
+                <span className="text-sm font-bold">{item.name}</span>
               </div>
-              
               {item.badge > 0 && (
-                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#E91E63] text-[10px] font-bold text-white">
+                <span className="bg-pink-500 text-[10px] font-bold text-white px-1.5 py-0.5 rounded-full">
                   {item.badge}
                 </span>
-              )}
-              
-              {isActive && (
-                <div className="absolute left-0 h-6 w-1 rounded-r-full bg-[#E91E63]" />
               )}
             </div>
           );
         })}
       </nav>
 
-      {/* 4. Upgrade Promo Card (Bottom) */}
-      <div className="mt-auto overflow-hidden rounded-3xl bg-gradient-to-br from-[#FF4E98] to-[#E91E63] p-5 text-white">
-        <h4 className="text-sm font-bold">Get more matches!</h4>
-        <p className="mt-1 text-[10px] leading-tight text-pink-100">
-          See who liked you with Gold
-        </p>
-        <button className="mt-4 w-full rounded-full bg-white py-2 text-[10px] font-bold text-[#E91E63] shadow-lg">
-          Upgrade to Gold
-        </button>
+      <div className="mt-auto pt-6">
+        <div className="rounded-2xl bg-gradient-to-br from-pink-400 to-rose-500 p-4 text-white">
+          <h4 className="text-xs font-bold">Boost Profile</h4>
+          <p className="mt-1 text-[10px] opacity-80">Get 10x more visibility</p>
+          <button className="mt-3 w-full rounded-xl bg-white/20 py-2 text-[10px] font-bold hover:bg-white/30 backdrop-blur-md">
+            Upgrade Now
+          </button>
+        </div>
       </div>
     </div>
   );
