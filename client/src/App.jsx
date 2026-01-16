@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { Toaster } from 'react-hot-toast';
+import LoginPage from './pages/LoginPage';
 import IncomingCallModal from './modal/incomingCallModal';
 import HomePage from './pages/HomePage';
 import ProfilePage from './pages/ProfilePage';
