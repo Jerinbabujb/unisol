@@ -1,14 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage';
-import ProfilePage from './pages/ProfilePage';
-import {Toaster} from 'react-hot-toast';
-import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import { Toaster } from 'react-hot-toast';
+import IncomingCallModal from './modal/incomingCallModal';
+import HomePage from './pages/HomePage';
+import ProfilePage from './pages/ProfilePage';
 import ChatPage from './pages/ChatPage';
+
 const App = () => {
-  const {authUser, isCheckingAuth}=useContext(AuthContext);
+  const { authUser, isCheckingAuth } = useContext(AuthContext);
+
   if (isCheckingAuth && !authUser) {
     return (
       <div className="flex items-center justify-center h-screen bg-[#F8F9FB]">
@@ -16,20 +17,24 @@ const App = () => {
       </div>
     );
   }
+
   return (
-    <div  className="bg-[url('/assets/bgImage.svg')] bg-cover bg-no-repeat">
-    <BrowserRouter>
-    <Toaster/>
-    <Routes>
-      <Route path='/' element={authUser? <HomePage/>: <Navigate to="/login"/>}/>
-      <Route path='/login' element={!authUser?<LoginPage/> :<Navigate to="/"/>}/>
-      <Route path='/profile' element={authUser?<ProfilePage/>: <Navigate to="/login"/> }/>
-      <Route path='/messages' element={authUser?<ChatPage/>:<Navigate to="/login"/>}/>
+    <div className="bg-[url('/assets/bgImage.svg')] bg-cover bg-no-repeat">
+      <BrowserRouter>
+        <Toaster />
+        
+        {/* GLOBAL MODAL: This allows the user to receive calls on ANY page */}
+        {authUser && <IncomingCallModal/>} 
 
-
-    </Routes>
-    </BrowserRouter>
+        <Routes>
+          <Route path='/' element={authUser ? <HomePage/> : <Navigate to="/login" />} />
+          <Route path='/login' element={!authUser ? <LoginPage /> : <Navigate to="/" />} />
+          <Route path='/profile' element={authUser ? <ProfilePage /> : <Navigate to="/login" />} />
+          <Route path='/messages' element={authUser ? <ChatPage/> : <Navigate to="/login" />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   )
 }
+
 export default App;

@@ -1,12 +1,24 @@
 import { useContext, useEffect, useState, useRef } from "react";
 import { ChatContext } from "../../context/ChatContext";
-import assets from "../assets";
 import { AuthContext } from "../../context/AuthContext";
+import { CallContext } from "../../context/CallContext"; // Import the new context
+import assets from "../assets";
 import toast from "react-hot-toast";
 
 const ChatWindow = () => {
   const { selectedUser, setSelectedUser, messages, getMessages, sendMessage } = useContext(ChatContext);
   const { authUser } = useContext(AuthContext);
+  
+  // Call Context states and functions
+  const { 
+    initiateCall, 
+    isCalling, 
+    callAccepted, 
+    localVideo, 
+    remoteVideo, 
+    endCall 
+  } = useContext(CallContext);
+
   const [input, setInput] = useState('');
   const scrollRef = useRef(null);
 
@@ -58,9 +70,40 @@ const ChatWindow = () => {
   }
 
   return (
-    <div className="flex flex-col h-full bg-white overflow-hidden">
+    <div className="flex flex-col h-full bg-white overflow-hidden relative">
+      
+      {/* --- CALL OVERLAY (Visible only during active calls) --- */}
+      {(isCalling || callAccepted) && (
+        <div className="absolute inset-0 z-50 bg-slate-900 flex flex-col items-center justify-center animate-in fade-in duration-300">
+          {/* Remote Video (Full Screen) */}
+          <video ref={remoteVideo} autoPlay playsInline className="w-full h-full object-cover" />
+          
+          {/* Local Video (Picture-in-Picture) */}
+          <video 
+            ref={localVideo} 
+            autoPlay 
+            muted 
+            playsInline 
+            className="absolute top-6 right-6 w-32 h-44 object-cover rounded-2xl border-2 border-white shadow-2xl z-50 bg-black" 
+          />
+          
+          {/* Call Controls */}
+          <div className="absolute bottom-12 flex flex-col items-center gap-4">
+            <p className="text-white font-medium text-lg drop-shadow-md">
+                {callAccepted ? "Connected" : `Calling ${selectedUser.fullName}...`}
+            </p>
+            <button 
+              onClick={endCall} 
+              className="w-16 h-16 bg-red-500 hover:bg-red-600 rounded-full text-white shadow-xl flex items-center justify-center transition-transform hover:scale-110 active:scale-90"
+            >
+              <span className="text-2xl">✕</span>
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
-      <div className="px-4 py-3 md:px-6 md:py-4 flex justify-between items-center border-b border-gray-100 shrink-0">
+      <div className="px-4 py-3 md:px-6 md:py-4 flex justify-between items-center border-b border-gray-100 shrink-0 z-10 bg-white">
         <div className="flex items-center gap-3">
           <button onClick={() => setSelectedUser(null)} className="md:hidden p-2 -ml-2 text-gray-500">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -74,6 +117,24 @@ const ChatWindow = () => {
               <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span> Active now
             </p>
           </div>
+        </div>
+
+        {/* Call Buttons in Header */}
+        <div className="flex items-center gap-2">
+          <button 
+            onClick={() => initiateCall(selectedUser.id, selectedUser.fullName, 'audio')}
+            className="p-2.5 bg-gray-50 rounded-full hover:bg-pink-50 text-gray-600 hover:text-pink-600 transition-colors"
+            title="Audio Call"
+          >
+            📞
+          </button>
+          <button 
+            onClick={() => initiateCall(selectedUser.id, selectedUser.fullName, 'video')}
+            className="p-2.5 bg-gray-50 rounded-full hover:bg-pink-50 text-gray-600 hover:text-pink-600 transition-colors"
+            title="Video Call"
+          >
+            📽️
+          </button>
         </div>
       </div>
 
@@ -108,10 +169,10 @@ const ChatWindow = () => {
                   {formatMessageTime(msg.createdAt)}
                 </span>
               </div>
-              <div ref={scrollRef} />
             </div>
           );
         })}
+        <div ref={scrollRef} />
       </div>
 
       {/* Input Area */}

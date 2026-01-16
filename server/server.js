@@ -15,18 +15,56 @@ export const io=new Server(server,{
 
 export const userSocketMap={};
 
-io.on("connection",(socket)=>{
-    const userId= socket.handshake.query.userId;
-    console.log("user connected",userId);
+io.on("connection", (socket) => {
+    const userId = socket.handshake.query.userId;
+    console.log("user connected", userId);
 
-    if(userId) userSocketMap[userId]=socket.id;
-    io.emit("getOnlineUsers",Object.keys(userSocketMap));
+    if (userId) userSocketMap[userId] = socket.id;
+    io.emit("getOnlineUsers", Object.keys(userSocketMap));
 
-    socket.on("disconnect",()=>{
-        console.log("user disconnected",userId);
-        io.emit("getOnlineUsers",Object.keys(userSocketMap));
-    })
-})
+    socket.on("disconnect", () => {
+        console.log("user disconnected", userId);
+        delete userSocketMap[userId]; // Important: remove user on disconnect
+        io.emit("getOnlineUsers", Object.keys(userSocketMap));
+    });
+
+    // 1. Call User
+    socket.on("call-user", ({ to, name, offer, type }) => {
+        const receiverSocketId = userSocketMap[to]; // Translate DB ID to Socket ID
+        if (receiverSocketId) {
+            io.to(receiverSocketId).emit("incoming-call", { 
+                from: userId, // Pass the DB ID of the caller
+                name, 
+                offer, 
+                type 
+            });
+        }
+    });
+
+    // 2. Answer Call
+    socket.on("answer-call", ({ to, answer }) => {
+        const callerSocketId = userSocketMap[to];
+        if (callerSocketId) {
+            io.to(callerSocketId).emit("call-accepted", { answer });
+        }
+    });
+
+    // 3. ICE Candidates
+    socket.on("ice-candidate", ({ to, candidate }) => {
+        const targetSocketId = userSocketMap[to];
+        if (targetSocketId) {
+            io.to(targetSocketId).emit("ice-candidate", { candidate });
+        }
+    });
+    // Server side
+socket.on("end-call", ({ to }) => {
+    const receiverSocketId = userSocketMap[to];
+    if (receiverSocketId) {
+        // Use "call-ended" because that's what your useEffect listens for
+        io.to(receiverSocketId).emit("call-ended"); 
+    }
+});
+});
 
 app.use(express.json( {limit:"4mb"}));
 app.use(cors());
