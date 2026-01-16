@@ -18,8 +18,11 @@ const getUserId = () => {
     }
 };
 
-const socket = io("http://localhost:5000" || "https://unisol-885n.onrender.com/", {
-    autoConnect: false,
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+
+const socket = io(BACKEND_URL, {
+    autoConnect: true,        // auto connect immediately
+    transports: ["websocket"] // optional, ensures WebSocket transport
 });
 
 createRoot(document.getElementById('root')).render(
