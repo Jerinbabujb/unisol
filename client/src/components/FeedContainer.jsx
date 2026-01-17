@@ -1,6 +1,18 @@
-import React from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
+import { ChatContext } from '../../context/ChatContext';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const FeedContainer = ({ onOpenMenu }) => {
+  const navigate = useNavigate();
+  const {users, getUsers, setSelectedUser} = useContext(ChatContext);
+  useEffect(()=>{
+    getUsers();
+  },[getUsers])
+
+  const gotoMessage = async (user)=>{
+    await setSelectedUser(user);
+    navigate('/messages');
+  }
   const topPicks = [
     { id: 1, name: 'Sarah', age: 24, bio: 'Passionate traveller...', img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400', verified: true },
     { id: 2, name: 'Marcus', age: 29, bio: 'Coffee lover & developer', img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400', online: true },
@@ -47,14 +59,14 @@ const FeedContainer = ({ onOpenMenu }) => {
 
       {/* Responsive Grid: 1 col on mobile, 2 on tablet, 4 on desktop */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-4 md:p-8">
-        {topPicks.map((user) => (
-          <div key={user.id} className="group relative cursor-pointer overflow-hidden rounded-[2.5rem] shadow-sm hover:shadow-xl transition-all hover:-translate-y-1 active:scale-[0.98]">
+        {users.map((user) => (
+          <div key={user.id} onClick={()=>gotoMessage(user)} className="group relative cursor-pointer overflow-hidden rounded-[2.5rem] shadow-sm hover:shadow-xl transition-all hover:-translate-y-1 active:scale-[0.98]">
             <div className="aspect-[4/5] overflow-hidden">
-              <img src={user.img} alt={user.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+              <img src={user.avatar} alt={user.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
             </div>
             <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/90 via-black/20 to-transparent p-6 text-white">
               <div className="flex items-center gap-1.5 mb-1">
-                <h3 className="text-lg font-bold">{user.name}, {user.age}</h3>
+                <h3 className="text-lg font-bold">{user.fullName}, {user.age}</h3>
                 {user.verified && <span className="bg-blue-500 p-0.5 rounded-full text-[8px]">✔</span>}
                 {user.online && <span className="h-2 w-2 rounded-full bg-green-500 ring-4 ring-green-500/20"></span>}
               </div>

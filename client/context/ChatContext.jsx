@@ -22,7 +22,12 @@ export const ChatProvider=({children})=>{
 
   try {
     const { data } = await axios.get("/api/messages/users");
-
+      const unseen = {};
+      data.users.forEach(u => {
+        unseen[u.id] = data.unseenMessages[u.id] || 0;
+      });
+      setUnseenMessages(unseen);
+    
     if (data.success) {
       setUsers(data.users);
     }
@@ -62,7 +67,7 @@ export const ChatProvider=({children})=>{
         if(!socket) return;
 
         socket.on("newMessage" ,(newMessage)=>{
-            if(selectedUser && newMessage.senderId === selectedUser._id){
+            if(selectedUser && newMessage.senderId === selectedUser.id){
                 newMessage.seen =true;
                 setMessages((prevMessages)=>[...prevMessages, newMessage]);
                 axios.put(`/api/messages/mark/${newMessage._id}`);

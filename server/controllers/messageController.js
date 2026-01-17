@@ -44,7 +44,7 @@ export const getUserForSidebar = async (req, res) => {
     res.json({
       success: true,
       users,
-    //   unseenMessages
+      unseenMessages
     });
 
   } catch (error) {

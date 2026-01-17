@@ -3,7 +3,7 @@ import { ChatContext } from "../../context/ChatContext";
 import assets from "../assets";
 
 const MessageList = () => {
-  const { users, getUsers, selectedUser, setSelectedUser } = useContext(ChatContext);
+  const { users, getUsers, selectedUser, setSelectedUser, unseenMessages, setUnseenMessages } = useContext(ChatContext);
 
   useEffect(() => {
     getUsers();
@@ -25,30 +25,44 @@ const MessageList = () => {
       </div>
 
       <div className="flex-1 overflow-y-auto">
-        {users?.map((user) => (
-          <div
-            key={user.id}
-            className={`flex items-center gap-4 p-4 cursor-pointer transition-colors ${
-              selectedUser?.id === user.id ? 'bg-pink-50' : 'hover:bg-gray-50'
-            }`}
-            onClick={() => setSelectedUser(user)}
-          >
-            <img
-              src={user.avatar || assets.logo}
-              className="w-12 h-12 rounded-full object-cover border border-gray-100"
-              alt={user.fullName}
-            />
-            <div className="flex-1 min-w-0">
-              <div className="flex justify-between items-baseline">
-                <span className="font-bold text-sm truncate">{user.fullName}</span>
-                <span className="text-[10px] text-gray-400">10:45 AM</span>
-              </div>
-              <p className="text-xs truncate text-gray-500">
-                {user.bio || "Start a conversation"}
-              </p>
-            </div>
-          </div>
-        ))}
+        <div className="flex-1 overflow-y-auto">
+  {users?.map((user) => (
+   <div
+  key={user.id}
+  className={`relative flex items-center gap-4 p-4 cursor-pointer transition-colors ${
+    selectedUser?.id === user.id ? 'bg-pink-50' : 'hover:bg-gray-50'
+  }`}
+  onClick={() => {
+    setSelectedUser(user);
+    setUnseenMessages(prev => ({ ...prev, [user.id]: 0 }));
+  }}
+>
+  <img
+    src={user.avatar || assets.logo}
+    className="w-12 h-12 rounded-full object-cover border border-gray-100"
+    alt={user.fullName}
+  />
+  <div className="flex-1 min-w-0">
+    <div className="flex justify-between items-baseline">
+      <span className="font-bold text-sm truncate">{user.fullName}</span>
+      
+      {unseenMessages[user.id] > 0 && (
+        <p className='absolute top-2 right-2 text-xs font-bold h-5 w-5 flex justify-center items-center rounded-full bg-violet-500 text-white'>
+          {unseenMessages[user.id]}
+        </p>
+      )}
+
+      <span className="text-[10px] text-gray-400">10:45 AM</span>
+    </div>
+    <p className="text-xs truncate text-gray-500">
+      {user.bio || "Start a conversation"}
+    </p>
+  </div>
+</div>
+
+  ))}
+</div>
+
       </div>
     </div>
   );
