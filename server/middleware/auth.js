@@ -26,7 +26,7 @@ export const protectRoute = async (req, res, next) => {
     }
 
     // ✅ Attach user info to request
-    req.user = { id: user.id, fullName: user.fullName, email: user.email };
+    req.user = { id: user.id, fullName: user.fullName, email: user.email, avatar:user.avatar };
 
     next();
   } catch (error) {

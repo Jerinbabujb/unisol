@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import assets from '../assets';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
@@ -6,10 +6,12 @@ import { ChatContext } from '../../context/ChatContext';
 
 const SideBar = () => {
   const { unseenMessages, users } = useContext(ChatContext);
-  const { authUser, logout } = useContext(AuthContext);
+  const { authUser, logout, checkAuth } = useContext(AuthContext);
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  
 
   // Calculate total unseen messages
   const totalUnseen = Object.values(unseenMessages || {}).reduce((a, b) => a + b, 0);
@@ -30,14 +32,15 @@ const SideBar = () => {
         <h1 className="text-xl font-bold text-pink-600 tracking-tighter">UNISOUL</h1>
       </div>
 
-      {/* User Info */}
+      {authUser &&
       <div className="mb-10 flex items-center gap-3 bg-gray-50 p-3 rounded-2xl">
-        <img src={authUser?.avatar || assets.avatar_icon} className="h-10 w-10 rounded-full object-cover border-2 border-white shadow-sm" alt="User" />
+        <img src={authUser?.avatar} className="h-10 w-10 rounded-full object-cover border-2 border-white shadow-sm" alt="User" />
         <div className="flex flex-col min-w-0">
           <p className="text-sm font-bold text-slate-800 truncate">{authUser?.fullName || "Elena Gomez"}</p>
           <p className="text-[10px] font-medium text-gray-400">Premium Member</p>
         </div>
       </div>
+}
 
       {/* Menu */}
       <nav className="flex flex-col gap-1">

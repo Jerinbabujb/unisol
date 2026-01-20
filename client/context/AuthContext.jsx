@@ -21,6 +21,7 @@ export const AuthProvider = ({ children }) => {
       const { data } = await axios.get("/api/auth/check");
 
       if (data.success) {
+        console.log(data);
         setAuthUser(data.user);
       } else {
         setAuthUser(null);
@@ -109,6 +110,7 @@ export const AuthProvider = ({ children }) => {
         login,
         logout,
         updateProfile,
+        checkAuth,
       }}
     >
       {children}
