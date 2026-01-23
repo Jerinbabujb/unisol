@@ -1,12 +1,19 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ChatContext } from "../../context/ChatContext";
 import { AuthContext } from "../../context/AuthContext";
 import assets from "../assets";
+import { useNavigate } from "react-router-dom";
 
 const ProfileSidebar = () => {
   const {selectedUser,setSelectedUser, users}= useContext(ChatContext);
   const {authUser} = useContext(AuthContext);
-  return selectedUser && (
+  const [userProfile, setUserProfile] = useState(false);
+  const navigate= useNavigate();
+
+ const profilegotopage=()=>{
+ navigate('/user-profile');
+}
+  return selectedUser &&(
   <div className="flex flex-col items-center">
     <div className="relative mb-6">
       <img 
@@ -35,7 +42,7 @@ const ProfileSidebar = () => {
     </div>
 
     <div className="w-full mt-auto flex flex-col gap-3">
-      <button className="w-full bg-pink-500 text-white py-4 rounded-2xl font-bold shadow-lg shadow-pink-200 hover:bg-pink-600 transition">
+      <button onClick={()=>profilegotopage()} className="w-full bg-pink-500 text-white py-4 rounded-2xl font-bold shadow-lg shadow-pink-200 hover:bg-pink-600 transition">
         View Full Profile
       </button>
       <button className="w-full border border-gray-200 py-4 rounded-2xl font-bold text-gray-400 hover:bg-gray-50 transition">
@@ -43,7 +50,7 @@ const ProfileSidebar = () => {
       </button>
     </div>
   </div>
-);
+)
 }
 
 export default ProfileSidebar;

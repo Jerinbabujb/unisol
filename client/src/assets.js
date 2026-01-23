@@ -12,6 +12,12 @@ const assets = {
   code: '/assets/code.svg',
   bgImage: '/assets/bgImage.svg',
   profile_martin: '/assets/profile_martin.png',
+   pic1: '/assets/pic1.png',
+  pic2: '/assets/pic2.png',
+  pic3: '/assets/pic3.png',
+  pic4: '/assets/pic4.png',
+  pic5: '/assets/pic1.png',
+  pic6: '/assets/pic2.png',
 };
 
 export default assets;

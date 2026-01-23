@@ -1,6 +1,7 @@
 import React, { useCallback, useContext, useEffect } from 'react';
 import { ChatContext } from '../../context/ChatContext';
 import { Navigate, useNavigate } from 'react-router-dom';
+import assets from '../assets';
 
 const FeedContainer = ({ onOpenMenu }) => {
   const navigate = useNavigate();
@@ -13,12 +14,7 @@ const FeedContainer = ({ onOpenMenu }) => {
     await setSelectedUser(user);
     navigate('/messages');
   }
-  const topPicks = [
-    { id: 1, name: 'Sarah', age: 24, bio: 'Passionate traveller...', img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400', verified: true },
-    { id: 2, name: 'Marcus', age: 29, bio: 'Coffee lover & developer', img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400', online: true },
-    { id: 3, name: 'Chloe', age: 23, bio: 'Yoga and Art enthusiast', img: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400', verified: true },
-    { id: 4, name: 'David', age: 31, bio: 'Architect & Music lover', img: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400' },
-  ];
+ 
 
   return (
     <div className="flex flex-col bg-white min-h-full">
@@ -62,11 +58,11 @@ const FeedContainer = ({ onOpenMenu }) => {
         {users.map((user) => (
           <div key={user.id} onClick={()=>gotoMessage(user)} className="group relative cursor-pointer overflow-hidden rounded-[2.5rem] shadow-sm hover:shadow-xl transition-all hover:-translate-y-1 active:scale-[0.98]">
             <div className="aspect-[4/5] overflow-hidden">
-              <img src={user.avatar} alt={user.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+              <img src={user.avatar || assets.logo} alt={user.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
             </div>
             <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/90 via-black/20 to-transparent p-6 text-white">
               <div className="flex items-center gap-1.5 mb-1">
-                <h3 className="text-lg font-bold">{user.fullName}, {user.age}</h3>
+                <h3 className="text-lg font-bold">{user.fullName} {user.age}</h3>
                 {user.verified && <span className="bg-blue-500 p-0.5 rounded-full text-[8px]">✔</span>}
                 {user.online && <span className="h-2 w-2 rounded-full bg-green-500 ring-4 ring-green-500/20"></span>}
               </div>

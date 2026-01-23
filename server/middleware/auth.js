@@ -18,6 +18,7 @@ export const protectRoute = async (req, res, next) => {
         fullName: true,
         email: true,
         avatar: true,
+        bio:true
       },
     });
 
@@ -26,7 +27,7 @@ export const protectRoute = async (req, res, next) => {
     }
 
     // ✅ Attach user info to request
-    req.user = { id: user.id, fullName: user.fullName, email: user.email, avatar:user.avatar };
+    req.user = { id: user.id, fullName: user.fullName, email: user.email, avatar:user.avatar, bio:user.bio };
 
     next();
   } catch (error) {

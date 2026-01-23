@@ -75,9 +75,9 @@ const ProfilePage = () => {
             </div>
             <div className="grid grid-cols-3 gap-4 mb-4">
                {/* Placeholders for Gallery */}
-               <div className="aspect-square bg-gray-100 rounded-3xl overflow-hidden"><img src={assets.sample1} className="w-full h-full object-cover"/></div>
-               <div className="aspect-square bg-gray-100 rounded-3xl overflow-hidden"><img src={assets.sample2} className="w-full h-full object-cover"/></div>
-               <div className="aspect-square bg-gray-100 rounded-3xl overflow-hidden"><img src={assets.sample3} className="w-full h-full object-cover"/></div>
+               <div className="aspect-square bg-gray-100 rounded-3xl overflow-hidden"><img src={assets.pic1} className="w-full h-full object-cover"/></div>
+               <div className="aspect-square bg-gray-100 rounded-3xl overflow-hidden"><img src={assets.pic2} className="w-full h-full object-cover"/></div>
+               <div className="aspect-square bg-gray-100 rounded-3xl overflow-hidden"><img src={assets.pic3} className="w-full h-full object-cover"/></div>
                <div className="aspect-square border-2 border-dashed border-pink-200 flex flex-col items-center justify-center rounded-3xl cursor-pointer">
                   <div className="text-[#ED719E] text-xs font-bold">ADD</div>
                </div>
@@ -111,7 +111,7 @@ const ProfilePage = () => {
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
                 className="w-full bg-[#F9F7F8] p-4 rounded-2xl focus:outline-none border-none text-gray-700 resize-none"
-                placeholder="Write something about yourself..."
+                placeholder={"Write something about yourself..."}
               />
             </div>
 
@@ -131,7 +131,7 @@ const ProfilePage = () => {
           </div>
 
           <div className="mt-auto pt-10 flex justify-end items-center gap-6">
-            <button type="button" className="text-gray-500 font-bold hover:text-gray-700">Discard Changes</button>
+            <button onClick={()=>navigate('/')} type="button" className="text-gray-500 font-bold hover:text-gray-700">Discard Changes</button>
             <button type="submit" className="bg-[#ED719E] text-white px-10 py-4 rounded-full font-bold shadow-lg shadow-pink-200 hover:bg-[#d65a88] transition-all">
               Save Profile
             </button>

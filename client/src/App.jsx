@@ -7,6 +7,7 @@ import IncomingCallModal from './modal/incomingCallModal';
 import HomePage from './pages/HomePage';
 import ProfilePage from './pages/ProfilePage';
 import ChatPage from './pages/ChatPage';
+import SelectedUserProfilePage from './pages/SelectedUserProfilePage';
 
 const App = () => {
   const { authUser, isCheckingAuth } = useContext(AuthContext);
@@ -31,6 +32,7 @@ const App = () => {
           <Route path='/' element={authUser ? <HomePage/> : <Navigate to="/login" />} />
           <Route path='/login' element={!authUser ? <LoginPage /> : <Navigate to="/" />} />
           <Route path='/profile' element={authUser ? <ProfilePage /> : <Navigate to="/login" />} />
+          <Route path='/user-profile' element={authUser? <SelectedUserProfilePage/>: <Navigate to='login'/>}/>
           <Route path='/messages' element={authUser ? <ChatPage/> : <Navigate to="/login" />} />
         </Routes>
       </BrowserRouter>
