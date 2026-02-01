@@ -16,7 +16,9 @@ model User {
   bio          String?
   avatar       String?
   birthday     DateTime?
+  location     String?
   gender       String?
+  purpose      String?
   interest     String?
   createdAt    DateTime  @default(now())
   recvMessages Message[] @relation("received")
@@ -29,7 +31,15 @@ model Message {
   receiverId String
   text       String
   createdAt  DateTime @default(now())
-  seen       Boolean?
+  seen       Boolean  @default(false)
   receiver   User     @relation("received", fields: [receiverId], references: [id])
   sender     User     @relation("sent", fields: [senderId], references: [id])
+}
+
+model connection {
+  id         String   @id @default(uuid())
+  senderId   String
+  receiverId String
+  status     String
+  updatedAt  DateTime @default(now())
 }

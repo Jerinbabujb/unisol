@@ -106,6 +106,71 @@ export const markMessageAsSeen = async (req, res) => {
 };
 
 
+export const connectionRequest = async (req, res) => {
+  try {
+
+    // 1. Match your variable names exactly to your schema fields
+    const senderId = req.user.id;
+    const receiverId = req.params.id;
+    const {status} = req.body;
+    console.log(senderId);
+    console.log(status);
+    // 2. Check for existing request
+    const existingRequest = await prisma.connection.findFirst({
+      where: {
+        OR: [
+          { senderId: senderId, receiverId: receiverId },
+          { senderId: receiverId, receiverId: senderId }
+        ]
+      }
+    });
+
+    if (existingRequest) {
+      return res.status(400).json({ success: false, message: "Request already exists" });
+    }
+   
+    
+
+    // 3. Create the record
+    const request = await prisma.connection.create({
+      data: {
+        senderId: senderId,
+        receiverId: receiverId,
+        status: status
+      }
+    });
+
+    res.json({ success: true, request });
+  } catch (error) {
+    // CRITICAL: This will print the actual error to your terminal
+    console.error("PRISMA ERROR:", error); 
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+export const requestCheck = async(req,res) =>{
+  try{
+    const senderId= req.user.id;
+    const receiverId = req.params.id;
+
+    const request = await prisma.connection.findFirst({
+      where:{
+        OR:[
+          { senderId: senderId, receiverId: receiverId },
+          { senderId: receiverId, receiverId: senderId }
+        ]
+      }
+    });
+    if(request){
+      return res.json({success:true, recerverId:request.receiverId, senderId:request.senderId, request})
+    }
+  }
+  catch (error) {
+    // CRITICAL: This will print the actual error to your terminal
+    console.error("PRISMA ERROR:", error); 
+    res.status(500).json({ success: false, message: error.message });
+  }
+}
 
 
 export const sendMessage = async (req, res) => {

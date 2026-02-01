@@ -102,7 +102,9 @@ exports.Prisma.UserScalarFieldEnum = {
   bio: 'bio',
   avatar: 'avatar',
   birthday: 'birthday',
+  location: 'location',
   gender: 'gender',
+  purpose: 'purpose',
   interest: 'interest',
   createdAt: 'createdAt'
 };
@@ -114,6 +116,14 @@ exports.Prisma.MessageScalarFieldEnum = {
   text: 'text',
   createdAt: 'createdAt',
   seen: 'seen'
+};
+
+exports.Prisma.ConnectionScalarFieldEnum = {
+  id: 'id',
+  senderId: 'senderId',
+  receiverId: 'receiverId',
+  status: 'status',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -134,7 +144,8 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Message: 'Message'
+  Message: 'Message',
+  connection: 'connection'
 };
 /**
  * Create the Client
@@ -144,10 +155,10 @@ const config = {
   "clientVersion": "7.2.0",
   "engineVersion": "0c8ef2ce45c83248ab3df073180d5eda9e8be7a3",
   "activeProvider": "postgresql",
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../app/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id           String    @id @default(uuid())\n  fullName     String\n  email        String    @unique\n  password     String?\n  googleId     String?\n  bio          String?\n  avatar       String?\n  birthday     DateTime?\n  gender       String?\n  interest     String?\n  createdAt    DateTime  @default(now())\n  recvMessages Message[] @relation(\"received\")\n  sentMessages Message[] @relation(\"sent\")\n}\n\nmodel Message {\n  id         String   @id @default(uuid())\n  senderId   String\n  receiverId String\n  text       String\n  createdAt  DateTime @default(now())\n  seen       Boolean?\n  receiver   User     @relation(\"received\", fields: [receiverId], references: [id])\n  sender     User     @relation(\"sent\", fields: [senderId], references: [id])\n}\n"
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../app/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id           String    @id @default(uuid())\n  fullName     String\n  email        String    @unique\n  password     String?\n  googleId     String?\n  bio          String?\n  avatar       String?\n  birthday     DateTime?\n  location     String?\n  gender       String?\n  purpose      String?\n  interest     String?\n  createdAt    DateTime  @default(now())\n  recvMessages Message[] @relation(\"received\")\n  sentMessages Message[] @relation(\"sent\")\n}\n\nmodel Message {\n  id         String   @id @default(uuid())\n  senderId   String\n  receiverId String\n  text       String\n  createdAt  DateTime @default(now())\n  seen       Boolean  @default(false)\n  receiver   User     @relation(\"received\", fields: [receiverId], references: [id])\n  sender     User     @relation(\"sent\", fields: [senderId], references: [id])\n}\n\nmodel connection {\n  id         String   @id @default(uuid())\n  senderId   String\n  receiverId String\n  status     String\n  updatedAt  DateTime @default(now())\n}\n"
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"fullName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"googleId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"bio\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"avatar\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"birthday\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"gender\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"interest\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"recvMessages\",\"kind\":\"object\",\"type\":\"Message\",\"relationName\":\"received\"},{\"name\":\"sentMessages\",\"kind\":\"object\",\"type\":\"Message\",\"relationName\":\"sent\"}],\"dbName\":null},\"Message\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"senderId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"receiverId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"text\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"seen\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"receiver\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"received\"},{\"name\":\"sender\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"sent\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"fullName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"googleId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"bio\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"avatar\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"birthday\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"location\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"gender\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"purpose\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"interest\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"recvMessages\",\"kind\":\"object\",\"type\":\"Message\",\"relationName\":\"received\"},{\"name\":\"sentMessages\",\"kind\":\"object\",\"type\":\"Message\",\"relationName\":\"sent\"}],\"dbName\":null},\"Message\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"senderId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"receiverId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"text\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"seen\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"receiver\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"received\"},{\"name\":\"sender\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"sent\"}],\"dbName\":null},\"connection\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"senderId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"receiverId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.compilerWasm = {
       getRuntime: async () => require('./query_compiler_bg.js'),

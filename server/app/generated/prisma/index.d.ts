@@ -23,6 +23,11 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  * 
  */
 export type Message = $Result.DefaultSelection<Prisma.$MessagePayload>
+/**
+ * Model connection
+ * 
+ */
+export type connection = $Result.DefaultSelection<Prisma.$connectionPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -160,6 +165,16 @@ export class PrismaClient<
     * ```
     */
   get message(): Prisma.MessageDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.connection`: Exposes CRUD operations for the **connection** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Connections
+    * const connections = await prisma.connection.findMany()
+    * ```
+    */
+  get connection(): Prisma.connectionDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -595,7 +610,8 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
-    Message: 'Message'
+    Message: 'Message',
+    connection: 'connection'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -611,7 +627,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "message"
+      modelProps: "user" | "message" | "connection"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -763,6 +779,80 @@ export namespace Prisma {
           }
         }
       }
+      connection: {
+        payload: Prisma.$connectionPayload<ExtArgs>
+        fields: Prisma.connectionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.connectionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$connectionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.connectionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$connectionPayload>
+          }
+          findFirst: {
+            args: Prisma.connectionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$connectionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.connectionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$connectionPayload>
+          }
+          findMany: {
+            args: Prisma.connectionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$connectionPayload>[]
+          }
+          create: {
+            args: Prisma.connectionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$connectionPayload>
+          }
+          createMany: {
+            args: Prisma.connectionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.connectionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$connectionPayload>[]
+          }
+          delete: {
+            args: Prisma.connectionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$connectionPayload>
+          }
+          update: {
+            args: Prisma.connectionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$connectionPayload>
+          }
+          deleteMany: {
+            args: Prisma.connectionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.connectionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.connectionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$connectionPayload>[]
+          }
+          upsert: {
+            args: Prisma.connectionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$connectionPayload>
+          }
+          aggregate: {
+            args: Prisma.ConnectionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateConnection>
+          }
+          groupBy: {
+            args: Prisma.connectionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ConnectionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.connectionCountArgs<ExtArgs>
+            result: $Utils.Optional<ConnectionCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -873,6 +963,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     user?: UserOmit
     message?: MessageOmit
+    connection?: connectionOmit
   }
 
   /* Types for Logging */
@@ -1011,7 +1102,9 @@ export namespace Prisma {
     bio: string | null
     avatar: string | null
     birthday: Date | null
+    location: string | null
     gender: string | null
+    purpose: string | null
     interest: string | null
     createdAt: Date | null
   }
@@ -1025,7 +1118,9 @@ export namespace Prisma {
     bio: string | null
     avatar: string | null
     birthday: Date | null
+    location: string | null
     gender: string | null
+    purpose: string | null
     interest: string | null
     createdAt: Date | null
   }
@@ -1039,7 +1134,9 @@ export namespace Prisma {
     bio: number
     avatar: number
     birthday: number
+    location: number
     gender: number
+    purpose: number
     interest: number
     createdAt: number
     _all: number
@@ -1055,7 +1152,9 @@ export namespace Prisma {
     bio?: true
     avatar?: true
     birthday?: true
+    location?: true
     gender?: true
+    purpose?: true
     interest?: true
     createdAt?: true
   }
@@ -1069,7 +1168,9 @@ export namespace Prisma {
     bio?: true
     avatar?: true
     birthday?: true
+    location?: true
     gender?: true
+    purpose?: true
     interest?: true
     createdAt?: true
   }
@@ -1083,7 +1184,9 @@ export namespace Prisma {
     bio?: true
     avatar?: true
     birthday?: true
+    location?: true
     gender?: true
+    purpose?: true
     interest?: true
     createdAt?: true
     _all?: true
@@ -1170,7 +1273,9 @@ export namespace Prisma {
     bio: string | null
     avatar: string | null
     birthday: Date | null
+    location: string | null
     gender: string | null
+    purpose: string | null
     interest: string | null
     createdAt: Date
     _count: UserCountAggregateOutputType | null
@@ -1201,7 +1306,9 @@ export namespace Prisma {
     bio?: boolean
     avatar?: boolean
     birthday?: boolean
+    location?: boolean
     gender?: boolean
+    purpose?: boolean
     interest?: boolean
     createdAt?: boolean
     recvMessages?: boolean | User$recvMessagesArgs<ExtArgs>
@@ -1218,7 +1325,9 @@ export namespace Prisma {
     bio?: boolean
     avatar?: boolean
     birthday?: boolean
+    location?: boolean
     gender?: boolean
+    purpose?: boolean
     interest?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1232,7 +1341,9 @@ export namespace Prisma {
     bio?: boolean
     avatar?: boolean
     birthday?: boolean
+    location?: boolean
     gender?: boolean
+    purpose?: boolean
     interest?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1246,12 +1357,14 @@ export namespace Prisma {
     bio?: boolean
     avatar?: boolean
     birthday?: boolean
+    location?: boolean
     gender?: boolean
+    purpose?: boolean
     interest?: boolean
     createdAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "email" | "password" | "googleId" | "bio" | "avatar" | "birthday" | "gender" | "interest" | "createdAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "email" | "password" | "googleId" | "bio" | "avatar" | "birthday" | "location" | "gender" | "purpose" | "interest" | "createdAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     recvMessages?: boolean | User$recvMessagesArgs<ExtArgs>
     sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
@@ -1275,7 +1388,9 @@ export namespace Prisma {
       bio: string | null
       avatar: string | null
       birthday: Date | null
+      location: string | null
       gender: string | null
+      purpose: string | null
       interest: string | null
       createdAt: Date
     }, ExtArgs["result"]["user"]>
@@ -1711,7 +1826,9 @@ export namespace Prisma {
     readonly bio: FieldRef<"User", 'String'>
     readonly avatar: FieldRef<"User", 'String'>
     readonly birthday: FieldRef<"User", 'DateTime'>
+    readonly location: FieldRef<"User", 'String'>
     readonly gender: FieldRef<"User", 'String'>
+    readonly purpose: FieldRef<"User", 'String'>
     readonly interest: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
   }
@@ -2313,7 +2430,7 @@ export namespace Prisma {
     receiverId: string
     text: string
     createdAt: Date
-    seen: boolean | null
+    seen: boolean
     _count: MessageCountAggregateOutputType | null
     _min: MessageMinAggregateOutputType | null
     _max: MessageMaxAggregateOutputType | null
@@ -2401,7 +2518,7 @@ export namespace Prisma {
       receiverId: string
       text: string
       createdAt: Date
-      seen: boolean | null
+      seen: boolean
     }, ExtArgs["result"]["message"]>
     composites: {}
   }
@@ -3248,6 +3365,1001 @@ export namespace Prisma {
 
 
   /**
+   * Model connection
+   */
+
+  export type AggregateConnection = {
+    _count: ConnectionCountAggregateOutputType | null
+    _min: ConnectionMinAggregateOutputType | null
+    _max: ConnectionMaxAggregateOutputType | null
+  }
+
+  export type ConnectionMinAggregateOutputType = {
+    id: string | null
+    senderId: string | null
+    receiverId: string | null
+    status: string | null
+    updatedAt: Date | null
+  }
+
+  export type ConnectionMaxAggregateOutputType = {
+    id: string | null
+    senderId: string | null
+    receiverId: string | null
+    status: string | null
+    updatedAt: Date | null
+  }
+
+  export type ConnectionCountAggregateOutputType = {
+    id: number
+    senderId: number
+    receiverId: number
+    status: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ConnectionMinAggregateInputType = {
+    id?: true
+    senderId?: true
+    receiverId?: true
+    status?: true
+    updatedAt?: true
+  }
+
+  export type ConnectionMaxAggregateInputType = {
+    id?: true
+    senderId?: true
+    receiverId?: true
+    status?: true
+    updatedAt?: true
+  }
+
+  export type ConnectionCountAggregateInputType = {
+    id?: true
+    senderId?: true
+    receiverId?: true
+    status?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ConnectionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which connection to aggregate.
+     */
+    where?: connectionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of connections to fetch.
+     */
+    orderBy?: connectionOrderByWithRelationInput | connectionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: connectionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` connections from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` connections.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned connections
+    **/
+    _count?: true | ConnectionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ConnectionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ConnectionMaxAggregateInputType
+  }
+
+  export type GetConnectionAggregateType<T extends ConnectionAggregateArgs> = {
+        [P in keyof T & keyof AggregateConnection]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateConnection[P]>
+      : GetScalarType<T[P], AggregateConnection[P]>
+  }
+
+
+
+
+  export type connectionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: connectionWhereInput
+    orderBy?: connectionOrderByWithAggregationInput | connectionOrderByWithAggregationInput[]
+    by: ConnectionScalarFieldEnum[] | ConnectionScalarFieldEnum
+    having?: connectionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ConnectionCountAggregateInputType | true
+    _min?: ConnectionMinAggregateInputType
+    _max?: ConnectionMaxAggregateInputType
+  }
+
+  export type ConnectionGroupByOutputType = {
+    id: string
+    senderId: string
+    receiverId: string
+    status: string
+    updatedAt: Date
+    _count: ConnectionCountAggregateOutputType | null
+    _min: ConnectionMinAggregateOutputType | null
+    _max: ConnectionMaxAggregateOutputType | null
+  }
+
+  type GetConnectionGroupByPayload<T extends connectionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ConnectionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ConnectionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ConnectionGroupByOutputType[P]>
+            : GetScalarType<T[P], ConnectionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type connectionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    senderId?: boolean
+    receiverId?: boolean
+    status?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["connection"]>
+
+  export type connectionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    senderId?: boolean
+    receiverId?: boolean
+    status?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["connection"]>
+
+  export type connectionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    senderId?: boolean
+    receiverId?: boolean
+    status?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["connection"]>
+
+  export type connectionSelectScalar = {
+    id?: boolean
+    senderId?: boolean
+    receiverId?: boolean
+    status?: boolean
+    updatedAt?: boolean
+  }
+
+  export type connectionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "senderId" | "receiverId" | "status" | "updatedAt", ExtArgs["result"]["connection"]>
+
+  export type $connectionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "connection"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      senderId: string
+      receiverId: string
+      status: string
+      updatedAt: Date
+    }, ExtArgs["result"]["connection"]>
+    composites: {}
+  }
+
+  type connectionGetPayload<S extends boolean | null | undefined | connectionDefaultArgs> = $Result.GetResult<Prisma.$connectionPayload, S>
+
+  type connectionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<connectionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ConnectionCountAggregateInputType | true
+    }
+
+  export interface connectionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['connection'], meta: { name: 'connection' } }
+    /**
+     * Find zero or one Connection that matches the filter.
+     * @param {connectionFindUniqueArgs} args - Arguments to find a Connection
+     * @example
+     * // Get one Connection
+     * const connection = await prisma.connection.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends connectionFindUniqueArgs>(args: SelectSubset<T, connectionFindUniqueArgs<ExtArgs>>): Prisma__connectionClient<$Result.GetResult<Prisma.$connectionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Connection that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {connectionFindUniqueOrThrowArgs} args - Arguments to find a Connection
+     * @example
+     * // Get one Connection
+     * const connection = await prisma.connection.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends connectionFindUniqueOrThrowArgs>(args: SelectSubset<T, connectionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__connectionClient<$Result.GetResult<Prisma.$connectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Connection that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {connectionFindFirstArgs} args - Arguments to find a Connection
+     * @example
+     * // Get one Connection
+     * const connection = await prisma.connection.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends connectionFindFirstArgs>(args?: SelectSubset<T, connectionFindFirstArgs<ExtArgs>>): Prisma__connectionClient<$Result.GetResult<Prisma.$connectionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Connection that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {connectionFindFirstOrThrowArgs} args - Arguments to find a Connection
+     * @example
+     * // Get one Connection
+     * const connection = await prisma.connection.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends connectionFindFirstOrThrowArgs>(args?: SelectSubset<T, connectionFindFirstOrThrowArgs<ExtArgs>>): Prisma__connectionClient<$Result.GetResult<Prisma.$connectionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Connections that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {connectionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Connections
+     * const connections = await prisma.connection.findMany()
+     * 
+     * // Get first 10 Connections
+     * const connections = await prisma.connection.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const connectionWithIdOnly = await prisma.connection.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends connectionFindManyArgs>(args?: SelectSubset<T, connectionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$connectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Connection.
+     * @param {connectionCreateArgs} args - Arguments to create a Connection.
+     * @example
+     * // Create one Connection
+     * const Connection = await prisma.connection.create({
+     *   data: {
+     *     // ... data to create a Connection
+     *   }
+     * })
+     * 
+     */
+    create<T extends connectionCreateArgs>(args: SelectSubset<T, connectionCreateArgs<ExtArgs>>): Prisma__connectionClient<$Result.GetResult<Prisma.$connectionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Connections.
+     * @param {connectionCreateManyArgs} args - Arguments to create many Connections.
+     * @example
+     * // Create many Connections
+     * const connection = await prisma.connection.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends connectionCreateManyArgs>(args?: SelectSubset<T, connectionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Connections and returns the data saved in the database.
+     * @param {connectionCreateManyAndReturnArgs} args - Arguments to create many Connections.
+     * @example
+     * // Create many Connections
+     * const connection = await prisma.connection.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Connections and only return the `id`
+     * const connectionWithIdOnly = await prisma.connection.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends connectionCreateManyAndReturnArgs>(args?: SelectSubset<T, connectionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$connectionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Connection.
+     * @param {connectionDeleteArgs} args - Arguments to delete one Connection.
+     * @example
+     * // Delete one Connection
+     * const Connection = await prisma.connection.delete({
+     *   where: {
+     *     // ... filter to delete one Connection
+     *   }
+     * })
+     * 
+     */
+    delete<T extends connectionDeleteArgs>(args: SelectSubset<T, connectionDeleteArgs<ExtArgs>>): Prisma__connectionClient<$Result.GetResult<Prisma.$connectionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Connection.
+     * @param {connectionUpdateArgs} args - Arguments to update one Connection.
+     * @example
+     * // Update one Connection
+     * const connection = await prisma.connection.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends connectionUpdateArgs>(args: SelectSubset<T, connectionUpdateArgs<ExtArgs>>): Prisma__connectionClient<$Result.GetResult<Prisma.$connectionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Connections.
+     * @param {connectionDeleteManyArgs} args - Arguments to filter Connections to delete.
+     * @example
+     * // Delete a few Connections
+     * const { count } = await prisma.connection.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends connectionDeleteManyArgs>(args?: SelectSubset<T, connectionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Connections.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {connectionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Connections
+     * const connection = await prisma.connection.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends connectionUpdateManyArgs>(args: SelectSubset<T, connectionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Connections and returns the data updated in the database.
+     * @param {connectionUpdateManyAndReturnArgs} args - Arguments to update many Connections.
+     * @example
+     * // Update many Connections
+     * const connection = await prisma.connection.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Connections and only return the `id`
+     * const connectionWithIdOnly = await prisma.connection.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends connectionUpdateManyAndReturnArgs>(args: SelectSubset<T, connectionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$connectionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Connection.
+     * @param {connectionUpsertArgs} args - Arguments to update or create a Connection.
+     * @example
+     * // Update or create a Connection
+     * const connection = await prisma.connection.upsert({
+     *   create: {
+     *     // ... data to create a Connection
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Connection we want to update
+     *   }
+     * })
+     */
+    upsert<T extends connectionUpsertArgs>(args: SelectSubset<T, connectionUpsertArgs<ExtArgs>>): Prisma__connectionClient<$Result.GetResult<Prisma.$connectionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Connections.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {connectionCountArgs} args - Arguments to filter Connections to count.
+     * @example
+     * // Count the number of Connections
+     * const count = await prisma.connection.count({
+     *   where: {
+     *     // ... the filter for the Connections we want to count
+     *   }
+     * })
+    **/
+    count<T extends connectionCountArgs>(
+      args?: Subset<T, connectionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ConnectionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Connection.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConnectionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ConnectionAggregateArgs>(args: Subset<T, ConnectionAggregateArgs>): Prisma.PrismaPromise<GetConnectionAggregateType<T>>
+
+    /**
+     * Group by Connection.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {connectionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends connectionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: connectionGroupByArgs['orderBy'] }
+        : { orderBy?: connectionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, connectionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetConnectionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the connection model
+   */
+  readonly fields: connectionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for connection.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__connectionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the connection model
+   */
+  interface connectionFieldRefs {
+    readonly id: FieldRef<"connection", 'String'>
+    readonly senderId: FieldRef<"connection", 'String'>
+    readonly receiverId: FieldRef<"connection", 'String'>
+    readonly status: FieldRef<"connection", 'String'>
+    readonly updatedAt: FieldRef<"connection", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * connection findUnique
+   */
+  export type connectionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the connection
+     */
+    select?: connectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the connection
+     */
+    omit?: connectionOmit<ExtArgs> | null
+    /**
+     * Filter, which connection to fetch.
+     */
+    where: connectionWhereUniqueInput
+  }
+
+  /**
+   * connection findUniqueOrThrow
+   */
+  export type connectionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the connection
+     */
+    select?: connectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the connection
+     */
+    omit?: connectionOmit<ExtArgs> | null
+    /**
+     * Filter, which connection to fetch.
+     */
+    where: connectionWhereUniqueInput
+  }
+
+  /**
+   * connection findFirst
+   */
+  export type connectionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the connection
+     */
+    select?: connectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the connection
+     */
+    omit?: connectionOmit<ExtArgs> | null
+    /**
+     * Filter, which connection to fetch.
+     */
+    where?: connectionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of connections to fetch.
+     */
+    orderBy?: connectionOrderByWithRelationInput | connectionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for connections.
+     */
+    cursor?: connectionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` connections from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` connections.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of connections.
+     */
+    distinct?: ConnectionScalarFieldEnum | ConnectionScalarFieldEnum[]
+  }
+
+  /**
+   * connection findFirstOrThrow
+   */
+  export type connectionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the connection
+     */
+    select?: connectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the connection
+     */
+    omit?: connectionOmit<ExtArgs> | null
+    /**
+     * Filter, which connection to fetch.
+     */
+    where?: connectionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of connections to fetch.
+     */
+    orderBy?: connectionOrderByWithRelationInput | connectionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for connections.
+     */
+    cursor?: connectionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` connections from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` connections.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of connections.
+     */
+    distinct?: ConnectionScalarFieldEnum | ConnectionScalarFieldEnum[]
+  }
+
+  /**
+   * connection findMany
+   */
+  export type connectionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the connection
+     */
+    select?: connectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the connection
+     */
+    omit?: connectionOmit<ExtArgs> | null
+    /**
+     * Filter, which connections to fetch.
+     */
+    where?: connectionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of connections to fetch.
+     */
+    orderBy?: connectionOrderByWithRelationInput | connectionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing connections.
+     */
+    cursor?: connectionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` connections from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` connections.
+     */
+    skip?: number
+    distinct?: ConnectionScalarFieldEnum | ConnectionScalarFieldEnum[]
+  }
+
+  /**
+   * connection create
+   */
+  export type connectionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the connection
+     */
+    select?: connectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the connection
+     */
+    omit?: connectionOmit<ExtArgs> | null
+    /**
+     * The data needed to create a connection.
+     */
+    data: XOR<connectionCreateInput, connectionUncheckedCreateInput>
+  }
+
+  /**
+   * connection createMany
+   */
+  export type connectionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many connections.
+     */
+    data: connectionCreateManyInput | connectionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * connection createManyAndReturn
+   */
+  export type connectionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the connection
+     */
+    select?: connectionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the connection
+     */
+    omit?: connectionOmit<ExtArgs> | null
+    /**
+     * The data used to create many connections.
+     */
+    data: connectionCreateManyInput | connectionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * connection update
+   */
+  export type connectionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the connection
+     */
+    select?: connectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the connection
+     */
+    omit?: connectionOmit<ExtArgs> | null
+    /**
+     * The data needed to update a connection.
+     */
+    data: XOR<connectionUpdateInput, connectionUncheckedUpdateInput>
+    /**
+     * Choose, which connection to update.
+     */
+    where: connectionWhereUniqueInput
+  }
+
+  /**
+   * connection updateMany
+   */
+  export type connectionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update connections.
+     */
+    data: XOR<connectionUpdateManyMutationInput, connectionUncheckedUpdateManyInput>
+    /**
+     * Filter which connections to update
+     */
+    where?: connectionWhereInput
+    /**
+     * Limit how many connections to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * connection updateManyAndReturn
+   */
+  export type connectionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the connection
+     */
+    select?: connectionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the connection
+     */
+    omit?: connectionOmit<ExtArgs> | null
+    /**
+     * The data used to update connections.
+     */
+    data: XOR<connectionUpdateManyMutationInput, connectionUncheckedUpdateManyInput>
+    /**
+     * Filter which connections to update
+     */
+    where?: connectionWhereInput
+    /**
+     * Limit how many connections to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * connection upsert
+   */
+  export type connectionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the connection
+     */
+    select?: connectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the connection
+     */
+    omit?: connectionOmit<ExtArgs> | null
+    /**
+     * The filter to search for the connection to update in case it exists.
+     */
+    where: connectionWhereUniqueInput
+    /**
+     * In case the connection found by the `where` argument doesn't exist, create a new connection with this data.
+     */
+    create: XOR<connectionCreateInput, connectionUncheckedCreateInput>
+    /**
+     * In case the connection was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<connectionUpdateInput, connectionUncheckedUpdateInput>
+  }
+
+  /**
+   * connection delete
+   */
+  export type connectionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the connection
+     */
+    select?: connectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the connection
+     */
+    omit?: connectionOmit<ExtArgs> | null
+    /**
+     * Filter which connection to delete.
+     */
+    where: connectionWhereUniqueInput
+  }
+
+  /**
+   * connection deleteMany
+   */
+  export type connectionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which connections to delete
+     */
+    where?: connectionWhereInput
+    /**
+     * Limit how many connections to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * connection without action
+   */
+  export type connectionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the connection
+     */
+    select?: connectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the connection
+     */
+    omit?: connectionOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -3270,7 +4382,9 @@ export namespace Prisma {
     bio: 'bio',
     avatar: 'avatar',
     birthday: 'birthday',
+    location: 'location',
     gender: 'gender',
+    purpose: 'purpose',
     interest: 'interest',
     createdAt: 'createdAt'
   };
@@ -3288,6 +4402,17 @@ export namespace Prisma {
   };
 
   export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
+
+
+  export const ConnectionScalarFieldEnum: {
+    id: 'id',
+    senderId: 'senderId',
+    receiverId: 'receiverId',
+    status: 'status',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ConnectionScalarFieldEnum = (typeof ConnectionScalarFieldEnum)[keyof typeof ConnectionScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -3383,7 +4508,9 @@ export namespace Prisma {
     bio?: StringNullableFilter<"User"> | string | null
     avatar?: StringNullableFilter<"User"> | string | null
     birthday?: DateTimeNullableFilter<"User"> | Date | string | null
+    location?: StringNullableFilter<"User"> | string | null
     gender?: StringNullableFilter<"User"> | string | null
+    purpose?: StringNullableFilter<"User"> | string | null
     interest?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     recvMessages?: MessageListRelationFilter
@@ -3399,7 +4526,9 @@ export namespace Prisma {
     bio?: SortOrderInput | SortOrder
     avatar?: SortOrderInput | SortOrder
     birthday?: SortOrderInput | SortOrder
+    location?: SortOrderInput | SortOrder
     gender?: SortOrderInput | SortOrder
+    purpose?: SortOrderInput | SortOrder
     interest?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     recvMessages?: MessageOrderByRelationAggregateInput
@@ -3418,7 +4547,9 @@ export namespace Prisma {
     bio?: StringNullableFilter<"User"> | string | null
     avatar?: StringNullableFilter<"User"> | string | null
     birthday?: DateTimeNullableFilter<"User"> | Date | string | null
+    location?: StringNullableFilter<"User"> | string | null
     gender?: StringNullableFilter<"User"> | string | null
+    purpose?: StringNullableFilter<"User"> | string | null
     interest?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     recvMessages?: MessageListRelationFilter
@@ -3434,7 +4565,9 @@ export namespace Prisma {
     bio?: SortOrderInput | SortOrder
     avatar?: SortOrderInput | SortOrder
     birthday?: SortOrderInput | SortOrder
+    location?: SortOrderInput | SortOrder
     gender?: SortOrderInput | SortOrder
+    purpose?: SortOrderInput | SortOrder
     interest?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -3454,7 +4587,9 @@ export namespace Prisma {
     bio?: StringNullableWithAggregatesFilter<"User"> | string | null
     avatar?: StringNullableWithAggregatesFilter<"User"> | string | null
     birthday?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    location?: StringNullableWithAggregatesFilter<"User"> | string | null
     gender?: StringNullableWithAggregatesFilter<"User"> | string | null
+    purpose?: StringNullableWithAggregatesFilter<"User"> | string | null
     interest?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -3468,7 +4603,7 @@ export namespace Prisma {
     receiverId?: StringFilter<"Message"> | string
     text?: StringFilter<"Message"> | string
     createdAt?: DateTimeFilter<"Message"> | Date | string
-    seen?: BoolNullableFilter<"Message"> | boolean | null
+    seen?: BoolFilter<"Message"> | boolean
     receiver?: XOR<UserScalarRelationFilter, UserWhereInput>
     sender?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
@@ -3479,7 +4614,7 @@ export namespace Prisma {
     receiverId?: SortOrder
     text?: SortOrder
     createdAt?: SortOrder
-    seen?: SortOrderInput | SortOrder
+    seen?: SortOrder
     receiver?: UserOrderByWithRelationInput
     sender?: UserOrderByWithRelationInput
   }
@@ -3493,7 +4628,7 @@ export namespace Prisma {
     receiverId?: StringFilter<"Message"> | string
     text?: StringFilter<"Message"> | string
     createdAt?: DateTimeFilter<"Message"> | Date | string
-    seen?: BoolNullableFilter<"Message"> | boolean | null
+    seen?: BoolFilter<"Message"> | boolean
     receiver?: XOR<UserScalarRelationFilter, UserWhereInput>
     sender?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
@@ -3504,7 +4639,7 @@ export namespace Prisma {
     receiverId?: SortOrder
     text?: SortOrder
     createdAt?: SortOrder
-    seen?: SortOrderInput | SortOrder
+    seen?: SortOrder
     _count?: MessageCountOrderByAggregateInput
     _max?: MessageMaxOrderByAggregateInput
     _min?: MessageMinOrderByAggregateInput
@@ -3519,7 +4654,59 @@ export namespace Prisma {
     receiverId?: StringWithAggregatesFilter<"Message"> | string
     text?: StringWithAggregatesFilter<"Message"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Message"> | Date | string
-    seen?: BoolNullableWithAggregatesFilter<"Message"> | boolean | null
+    seen?: BoolWithAggregatesFilter<"Message"> | boolean
+  }
+
+  export type connectionWhereInput = {
+    AND?: connectionWhereInput | connectionWhereInput[]
+    OR?: connectionWhereInput[]
+    NOT?: connectionWhereInput | connectionWhereInput[]
+    id?: StringFilter<"connection"> | string
+    senderId?: StringFilter<"connection"> | string
+    receiverId?: StringFilter<"connection"> | string
+    status?: StringFilter<"connection"> | string
+    updatedAt?: DateTimeFilter<"connection"> | Date | string
+  }
+
+  export type connectionOrderByWithRelationInput = {
+    id?: SortOrder
+    senderId?: SortOrder
+    receiverId?: SortOrder
+    status?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type connectionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: connectionWhereInput | connectionWhereInput[]
+    OR?: connectionWhereInput[]
+    NOT?: connectionWhereInput | connectionWhereInput[]
+    senderId?: StringFilter<"connection"> | string
+    receiverId?: StringFilter<"connection"> | string
+    status?: StringFilter<"connection"> | string
+    updatedAt?: DateTimeFilter<"connection"> | Date | string
+  }, "id">
+
+  export type connectionOrderByWithAggregationInput = {
+    id?: SortOrder
+    senderId?: SortOrder
+    receiverId?: SortOrder
+    status?: SortOrder
+    updatedAt?: SortOrder
+    _count?: connectionCountOrderByAggregateInput
+    _max?: connectionMaxOrderByAggregateInput
+    _min?: connectionMinOrderByAggregateInput
+  }
+
+  export type connectionScalarWhereWithAggregatesInput = {
+    AND?: connectionScalarWhereWithAggregatesInput | connectionScalarWhereWithAggregatesInput[]
+    OR?: connectionScalarWhereWithAggregatesInput[]
+    NOT?: connectionScalarWhereWithAggregatesInput | connectionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"connection"> | string
+    senderId?: StringWithAggregatesFilter<"connection"> | string
+    receiverId?: StringWithAggregatesFilter<"connection"> | string
+    status?: StringWithAggregatesFilter<"connection"> | string
+    updatedAt?: DateTimeWithAggregatesFilter<"connection"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -3531,7 +4718,9 @@ export namespace Prisma {
     bio?: string | null
     avatar?: string | null
     birthday?: Date | string | null
+    location?: string | null
     gender?: string | null
+    purpose?: string | null
     interest?: string | null
     createdAt?: Date | string
     recvMessages?: MessageCreateNestedManyWithoutReceiverInput
@@ -3547,7 +4736,9 @@ export namespace Prisma {
     bio?: string | null
     avatar?: string | null
     birthday?: Date | string | null
+    location?: string | null
     gender?: string | null
+    purpose?: string | null
     interest?: string | null
     createdAt?: Date | string
     recvMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
@@ -3563,7 +4754,9 @@ export namespace Prisma {
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
+    purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recvMessages?: MessageUpdateManyWithoutReceiverNestedInput
@@ -3579,7 +4772,9 @@ export namespace Prisma {
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
+    purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recvMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
@@ -3595,7 +4790,9 @@ export namespace Prisma {
     bio?: string | null
     avatar?: string | null
     birthday?: Date | string | null
+    location?: string | null
     gender?: string | null
+    purpose?: string | null
     interest?: string | null
     createdAt?: Date | string
   }
@@ -3609,7 +4806,9 @@ export namespace Prisma {
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
+    purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3623,7 +4822,9 @@ export namespace Prisma {
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
+    purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3632,7 +4833,7 @@ export namespace Prisma {
     id?: string
     text: string
     createdAt?: Date | string
-    seen?: boolean | null
+    seen?: boolean
     receiver: UserCreateNestedOneWithoutRecvMessagesInput
     sender: UserCreateNestedOneWithoutSentMessagesInput
   }
@@ -3643,14 +4844,14 @@ export namespace Prisma {
     receiverId: string
     text: string
     createdAt?: Date | string
-    seen?: boolean | null
+    seen?: boolean
   }
 
   export type MessageUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    seen?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    seen?: BoolFieldUpdateOperationsInput | boolean
     receiver?: UserUpdateOneRequiredWithoutRecvMessagesNestedInput
     sender?: UserUpdateOneRequiredWithoutSentMessagesNestedInput
   }
@@ -3661,7 +4862,7 @@ export namespace Prisma {
     receiverId?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    seen?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    seen?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MessageCreateManyInput = {
@@ -3670,14 +4871,14 @@ export namespace Prisma {
     receiverId: string
     text: string
     createdAt?: Date | string
-    seen?: boolean | null
+    seen?: boolean
   }
 
   export type MessageUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    seen?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    seen?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MessageUncheckedUpdateManyInput = {
@@ -3686,7 +4887,63 @@ export namespace Prisma {
     receiverId?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    seen?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    seen?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type connectionCreateInput = {
+    id?: string
+    senderId: string
+    receiverId: string
+    status: string
+    updatedAt?: Date | string
+  }
+
+  export type connectionUncheckedCreateInput = {
+    id?: string
+    senderId: string
+    receiverId: string
+    status: string
+    updatedAt?: Date | string
+  }
+
+  export type connectionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
+    receiverId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type connectionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
+    receiverId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type connectionCreateManyInput = {
+    id?: string
+    senderId: string
+    receiverId: string
+    status: string
+    updatedAt?: Date | string
+  }
+
+  export type connectionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
+    receiverId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type connectionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
+    receiverId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -3765,7 +5022,9 @@ export namespace Prisma {
     bio?: SortOrder
     avatar?: SortOrder
     birthday?: SortOrder
+    location?: SortOrder
     gender?: SortOrder
+    purpose?: SortOrder
     interest?: SortOrder
     createdAt?: SortOrder
   }
@@ -3779,7 +5038,9 @@ export namespace Prisma {
     bio?: SortOrder
     avatar?: SortOrder
     birthday?: SortOrder
+    location?: SortOrder
     gender?: SortOrder
+    purpose?: SortOrder
     interest?: SortOrder
     createdAt?: SortOrder
   }
@@ -3793,7 +5054,9 @@ export namespace Prisma {
     bio?: SortOrder
     avatar?: SortOrder
     birthday?: SortOrder
+    location?: SortOrder
     gender?: SortOrder
+    purpose?: SortOrder
     interest?: SortOrder
     createdAt?: SortOrder
   }
@@ -3862,9 +5125,9 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type BoolNullableFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type UserScalarRelationFilter = {
@@ -3899,12 +5162,36 @@ export namespace Prisma {
     seen?: SortOrder
   }
 
-  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedBoolNullableFilter<$PrismaModel>
-    _max?: NestedBoolNullableFilter<$PrismaModel>
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type connectionCountOrderByAggregateInput = {
+    id?: SortOrder
+    senderId?: SortOrder
+    receiverId?: SortOrder
+    status?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type connectionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    senderId?: SortOrder
+    receiverId?: SortOrder
+    status?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type connectionMinOrderByAggregateInput = {
+    id?: SortOrder
+    senderId?: SortOrder
+    receiverId?: SortOrder
+    status?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type MessageCreateNestedManyWithoutReceiverInput = {
@@ -4019,8 +5306,8 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type NullableBoolFieldUpdateOperationsInput = {
-    set?: boolean | null
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type UserUpdateOneRequiredWithoutRecvMessagesNestedInput = {
@@ -4173,24 +5460,24 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type NestedBoolNullableFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
-  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedBoolNullableFilter<$PrismaModel>
-    _max?: NestedBoolNullableFilter<$PrismaModel>
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type MessageCreateWithoutReceiverInput = {
     id?: string
     text: string
     createdAt?: Date | string
-    seen?: boolean | null
+    seen?: boolean
     sender: UserCreateNestedOneWithoutSentMessagesInput
   }
 
@@ -4199,7 +5486,7 @@ export namespace Prisma {
     senderId: string
     text: string
     createdAt?: Date | string
-    seen?: boolean | null
+    seen?: boolean
   }
 
   export type MessageCreateOrConnectWithoutReceiverInput = {
@@ -4216,7 +5503,7 @@ export namespace Prisma {
     id?: string
     text: string
     createdAt?: Date | string
-    seen?: boolean | null
+    seen?: boolean
     receiver: UserCreateNestedOneWithoutRecvMessagesInput
   }
 
@@ -4225,7 +5512,7 @@ export namespace Prisma {
     receiverId: string
     text: string
     createdAt?: Date | string
-    seen?: boolean | null
+    seen?: boolean
   }
 
   export type MessageCreateOrConnectWithoutSenderInput = {
@@ -4263,7 +5550,7 @@ export namespace Prisma {
     receiverId?: StringFilter<"Message"> | string
     text?: StringFilter<"Message"> | string
     createdAt?: DateTimeFilter<"Message"> | Date | string
-    seen?: BoolNullableFilter<"Message"> | boolean | null
+    seen?: BoolFilter<"Message"> | boolean
   }
 
   export type MessageUpsertWithWhereUniqueWithoutSenderInput = {
@@ -4291,7 +5578,9 @@ export namespace Prisma {
     bio?: string | null
     avatar?: string | null
     birthday?: Date | string | null
+    location?: string | null
     gender?: string | null
+    purpose?: string | null
     interest?: string | null
     createdAt?: Date | string
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
@@ -4306,7 +5595,9 @@ export namespace Prisma {
     bio?: string | null
     avatar?: string | null
     birthday?: Date | string | null
+    location?: string | null
     gender?: string | null
+    purpose?: string | null
     interest?: string | null
     createdAt?: Date | string
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
@@ -4326,7 +5617,9 @@ export namespace Prisma {
     bio?: string | null
     avatar?: string | null
     birthday?: Date | string | null
+    location?: string | null
     gender?: string | null
+    purpose?: string | null
     interest?: string | null
     createdAt?: Date | string
     recvMessages?: MessageCreateNestedManyWithoutReceiverInput
@@ -4341,7 +5634,9 @@ export namespace Prisma {
     bio?: string | null
     avatar?: string | null
     birthday?: Date | string | null
+    location?: string | null
     gender?: string | null
+    purpose?: string | null
     interest?: string | null
     createdAt?: Date | string
     recvMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
@@ -4372,7 +5667,9 @@ export namespace Prisma {
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
+    purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
@@ -4387,7 +5684,9 @@ export namespace Prisma {
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
+    purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
@@ -4413,7 +5712,9 @@ export namespace Prisma {
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
+    purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recvMessages?: MessageUpdateManyWithoutReceiverNestedInput
@@ -4428,7 +5729,9 @@ export namespace Prisma {
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
+    purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recvMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
@@ -4439,7 +5742,7 @@ export namespace Prisma {
     senderId: string
     text: string
     createdAt?: Date | string
-    seen?: boolean | null
+    seen?: boolean
   }
 
   export type MessageCreateManySenderInput = {
@@ -4447,14 +5750,14 @@ export namespace Prisma {
     receiverId: string
     text: string
     createdAt?: Date | string
-    seen?: boolean | null
+    seen?: boolean
   }
 
   export type MessageUpdateWithoutReceiverInput = {
     id?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    seen?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    seen?: BoolFieldUpdateOperationsInput | boolean
     sender?: UserUpdateOneRequiredWithoutSentMessagesNestedInput
   }
 
@@ -4463,7 +5766,7 @@ export namespace Prisma {
     senderId?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    seen?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    seen?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MessageUncheckedUpdateManyWithoutReceiverInput = {
@@ -4471,14 +5774,14 @@ export namespace Prisma {
     senderId?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    seen?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    seen?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MessageUpdateWithoutSenderInput = {
     id?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    seen?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    seen?: BoolFieldUpdateOperationsInput | boolean
     receiver?: UserUpdateOneRequiredWithoutRecvMessagesNestedInput
   }
 
@@ -4487,7 +5790,7 @@ export namespace Prisma {
     receiverId?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    seen?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    seen?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MessageUncheckedUpdateManyWithoutSenderInput = {
@@ -4495,7 +5798,7 @@ export namespace Prisma {
     receiverId?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    seen?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    seen?: BoolFieldUpdateOperationsInput | boolean
   }
 
 

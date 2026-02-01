@@ -129,7 +129,9 @@ exports.Prisma.UserScalarFieldEnum = {
   bio: 'bio',
   avatar: 'avatar',
   birthday: 'birthday',
+  location: 'location',
   gender: 'gender',
+  purpose: 'purpose',
   interest: 'interest',
   createdAt: 'createdAt'
 };
@@ -141,6 +143,14 @@ exports.Prisma.MessageScalarFieldEnum = {
   text: 'text',
   createdAt: 'createdAt',
   seen: 'seen'
+};
+
+exports.Prisma.ConnectionScalarFieldEnum = {
+  id: 'id',
+  senderId: 'senderId',
+  receiverId: 'receiverId',
+  status: 'status',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -161,7 +171,8 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Message: 'Message'
+  Message: 'Message',
+  connection: 'connection'
 };
 
 /**
