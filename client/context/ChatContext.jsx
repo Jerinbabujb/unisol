@@ -8,10 +8,13 @@ export const ChatContext=createContext();
 export const ChatProvider=({children})=>{  
 
     const [messages,setMessages]=useState([]);
+    const [status, setStatus]= useState('');
     const [users,setUsers]=useState([]);
+    const [checkReciver, setCheckReciver]= useState('');
+    const [checkSend, setCheckSend] =useState('');
     const [selectedUser,setSelectedUser]=useState(null);
     const[unseenMessages,setUnseenMessages]=useState({});
-
+    const {authUser} = useContext(AuthContext);
     const {socket, axios}= useContext(AuthContext);
 
   const getUsers = useCallback(async () => {
@@ -42,6 +45,18 @@ export const ChatProvider=({children})=>{
           if(data.success){
             setMessages(data.messages);
           }
+        }
+        catch(error){
+            toast.error(error.message);
+        }
+    }
+
+    const sendRequest=async(status)=>{
+        try{
+            const {data}= await axios.post(`/api/messages/request/${selectedUser.id}`,{status})
+            if(data.success){
+                console.log("request send succesfully");
+            }
         }
         catch(error){
             toast.error(error.message);
@@ -80,7 +95,23 @@ export const ChatProvider=({children})=>{
         })
     }
 
+    
 
+
+    const requestCheck=async()=>{
+        try{
+            const {data}= await axios.get(`api/messages/check/${selectedUser.id}`)
+            if(data.success){
+             setStatus(data.request.status);
+                setCheckReciver(data.recerverId);
+                setCheckSend(data.senderId)
+                console.log("the status is ",data.request.status);
+            }
+        }
+         catch(error){
+            toast.error(error.message);
+        }
+    }
     const unSubscribe= async()=>{
         if(socket)
             socket.off("newMessage");
@@ -88,8 +119,11 @@ export const ChatProvider=({children})=>{
 
     useEffect(()=>{
         subscribe();
+      
         return ()=> unSubscribe();
     },[socket,selectedUser])
+
+    
     const value={
         messages,
         users,
@@ -100,6 +134,12 @@ export const ChatProvider=({children})=>{
         setUnseenMessages,
         getUsers,
         sendMessage,
+        sendRequest,
+        status,
+        setStatus,
+        checkReciver,
+        checkSend,
+        requestCheck
     }
     return (
 

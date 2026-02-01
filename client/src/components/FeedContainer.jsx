@@ -12,7 +12,7 @@ const FeedContainer = ({ onOpenMenu }) => {
 
   const gotoMessage = async (user)=>{
     await setSelectedUser(user);
-    navigate('/messages');
+    navigate('/user-profile');
   }
  
 
