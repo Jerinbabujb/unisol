@@ -19,7 +19,7 @@ export const protectRoute = async (req, res, next) => {
         email: true,
         avatar: true,
         bio:true,
-        mood:true
+        mood:true,
       },
     });
 
