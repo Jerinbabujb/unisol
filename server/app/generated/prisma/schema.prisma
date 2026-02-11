@@ -18,6 +18,7 @@ model User {
   birthday     DateTime?
   location     String?
   gender       String?
+  mood         String?
   purpose      String?
   interest     String?
   createdAt    DateTime  @default(now())

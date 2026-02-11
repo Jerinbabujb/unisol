@@ -108,7 +108,7 @@ export const checkAuth = (req, res) => {
 };
 export const updateProfile = async (req, res) => {
     try {
-        const { fullName, avatar, bio } = req.body;
+        const { fullName, avatar, bio, mood } = req.body;
         const userId = req.user.id; // Use .id instead of ._id
 
         let profilePicUrl = avatar;
@@ -116,6 +116,8 @@ export const updateProfile = async (req, res) => {
             const upload = await cloudinary.uploader.upload(avatar);
             profilePicUrl = upload.secure_url;
         }
+       console.log("Updating user ID:", userId);
+console.log("Mood received:", mood);
 
         // Convert Mongoose findByIdAndUpdate to Prisma update
         const updatedUser = await prisma.user.update({
@@ -123,12 +125,15 @@ export const updateProfile = async (req, res) => {
             data: { 
                 fullName, 
                 bio, 
-                avatar: profilePicUrl 
+                mood,
+                avatar: profilePicUrl,
             },
         });
+console.log("updatedUser:", updatedUser);
 
         res.json({ success: true, user: updatedUser });
     } catch (error) {
+        console.error("UPDATE ERROR:", error);
         res.json({ success: false, message: error.message });
     }
 };

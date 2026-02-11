@@ -131,6 +131,7 @@ exports.Prisma.UserScalarFieldEnum = {
   birthday: 'birthday',
   location: 'location',
   gender: 'gender',
+  mood: 'mood',
   purpose: 'purpose',
   interest: 'interest',
   createdAt: 'createdAt'

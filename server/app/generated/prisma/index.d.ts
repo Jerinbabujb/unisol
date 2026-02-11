@@ -1104,6 +1104,7 @@ export namespace Prisma {
     birthday: Date | null
     location: string | null
     gender: string | null
+    mood: string | null
     purpose: string | null
     interest: string | null
     createdAt: Date | null
@@ -1120,6 +1121,7 @@ export namespace Prisma {
     birthday: Date | null
     location: string | null
     gender: string | null
+    mood: string | null
     purpose: string | null
     interest: string | null
     createdAt: Date | null
@@ -1136,6 +1138,7 @@ export namespace Prisma {
     birthday: number
     location: number
     gender: number
+    mood: number
     purpose: number
     interest: number
     createdAt: number
@@ -1154,6 +1157,7 @@ export namespace Prisma {
     birthday?: true
     location?: true
     gender?: true
+    mood?: true
     purpose?: true
     interest?: true
     createdAt?: true
@@ -1170,6 +1174,7 @@ export namespace Prisma {
     birthday?: true
     location?: true
     gender?: true
+    mood?: true
     purpose?: true
     interest?: true
     createdAt?: true
@@ -1186,6 +1191,7 @@ export namespace Prisma {
     birthday?: true
     location?: true
     gender?: true
+    mood?: true
     purpose?: true
     interest?: true
     createdAt?: true
@@ -1275,6 +1281,7 @@ export namespace Prisma {
     birthday: Date | null
     location: string | null
     gender: string | null
+    mood: string | null
     purpose: string | null
     interest: string | null
     createdAt: Date
@@ -1308,6 +1315,7 @@ export namespace Prisma {
     birthday?: boolean
     location?: boolean
     gender?: boolean
+    mood?: boolean
     purpose?: boolean
     interest?: boolean
     createdAt?: boolean
@@ -1327,6 +1335,7 @@ export namespace Prisma {
     birthday?: boolean
     location?: boolean
     gender?: boolean
+    mood?: boolean
     purpose?: boolean
     interest?: boolean
     createdAt?: boolean
@@ -1343,6 +1352,7 @@ export namespace Prisma {
     birthday?: boolean
     location?: boolean
     gender?: boolean
+    mood?: boolean
     purpose?: boolean
     interest?: boolean
     createdAt?: boolean
@@ -1359,12 +1369,13 @@ export namespace Prisma {
     birthday?: boolean
     location?: boolean
     gender?: boolean
+    mood?: boolean
     purpose?: boolean
     interest?: boolean
     createdAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "email" | "password" | "googleId" | "bio" | "avatar" | "birthday" | "location" | "gender" | "purpose" | "interest" | "createdAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "email" | "password" | "googleId" | "bio" | "avatar" | "birthday" | "location" | "gender" | "mood" | "purpose" | "interest" | "createdAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     recvMessages?: boolean | User$recvMessagesArgs<ExtArgs>
     sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
@@ -1390,6 +1401,7 @@ export namespace Prisma {
       birthday: Date | null
       location: string | null
       gender: string | null
+      mood: string | null
       purpose: string | null
       interest: string | null
       createdAt: Date
@@ -1828,6 +1840,7 @@ export namespace Prisma {
     readonly birthday: FieldRef<"User", 'DateTime'>
     readonly location: FieldRef<"User", 'String'>
     readonly gender: FieldRef<"User", 'String'>
+    readonly mood: FieldRef<"User", 'String'>
     readonly purpose: FieldRef<"User", 'String'>
     readonly interest: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
@@ -4384,6 +4397,7 @@ export namespace Prisma {
     birthday: 'birthday',
     location: 'location',
     gender: 'gender',
+    mood: 'mood',
     purpose: 'purpose',
     interest: 'interest',
     createdAt: 'createdAt'
@@ -4510,6 +4524,7 @@ export namespace Prisma {
     birthday?: DateTimeNullableFilter<"User"> | Date | string | null
     location?: StringNullableFilter<"User"> | string | null
     gender?: StringNullableFilter<"User"> | string | null
+    mood?: StringNullableFilter<"User"> | string | null
     purpose?: StringNullableFilter<"User"> | string | null
     interest?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
@@ -4528,6 +4543,7 @@ export namespace Prisma {
     birthday?: SortOrderInput | SortOrder
     location?: SortOrderInput | SortOrder
     gender?: SortOrderInput | SortOrder
+    mood?: SortOrderInput | SortOrder
     purpose?: SortOrderInput | SortOrder
     interest?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -4549,6 +4565,7 @@ export namespace Prisma {
     birthday?: DateTimeNullableFilter<"User"> | Date | string | null
     location?: StringNullableFilter<"User"> | string | null
     gender?: StringNullableFilter<"User"> | string | null
+    mood?: StringNullableFilter<"User"> | string | null
     purpose?: StringNullableFilter<"User"> | string | null
     interest?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
@@ -4567,6 +4584,7 @@ export namespace Prisma {
     birthday?: SortOrderInput | SortOrder
     location?: SortOrderInput | SortOrder
     gender?: SortOrderInput | SortOrder
+    mood?: SortOrderInput | SortOrder
     purpose?: SortOrderInput | SortOrder
     interest?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -4589,6 +4607,7 @@ export namespace Prisma {
     birthday?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     location?: StringNullableWithAggregatesFilter<"User"> | string | null
     gender?: StringNullableWithAggregatesFilter<"User"> | string | null
+    mood?: StringNullableWithAggregatesFilter<"User"> | string | null
     purpose?: StringNullableWithAggregatesFilter<"User"> | string | null
     interest?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -4720,6 +4739,7 @@ export namespace Prisma {
     birthday?: Date | string | null
     location?: string | null
     gender?: string | null
+    mood?: string | null
     purpose?: string | null
     interest?: string | null
     createdAt?: Date | string
@@ -4738,6 +4758,7 @@ export namespace Prisma {
     birthday?: Date | string | null
     location?: string | null
     gender?: string | null
+    mood?: string | null
     purpose?: string | null
     interest?: string | null
     createdAt?: Date | string
@@ -4756,6 +4777,7 @@ export namespace Prisma {
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
+    mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4774,6 +4796,7 @@ export namespace Prisma {
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
+    mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4792,6 +4815,7 @@ export namespace Prisma {
     birthday?: Date | string | null
     location?: string | null
     gender?: string | null
+    mood?: string | null
     purpose?: string | null
     interest?: string | null
     createdAt?: Date | string
@@ -4808,6 +4832,7 @@ export namespace Prisma {
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
+    mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4824,6 +4849,7 @@ export namespace Prisma {
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
+    mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5024,6 +5050,7 @@ export namespace Prisma {
     birthday?: SortOrder
     location?: SortOrder
     gender?: SortOrder
+    mood?: SortOrder
     purpose?: SortOrder
     interest?: SortOrder
     createdAt?: SortOrder
@@ -5040,6 +5067,7 @@ export namespace Prisma {
     birthday?: SortOrder
     location?: SortOrder
     gender?: SortOrder
+    mood?: SortOrder
     purpose?: SortOrder
     interest?: SortOrder
     createdAt?: SortOrder
@@ -5056,6 +5084,7 @@ export namespace Prisma {
     birthday?: SortOrder
     location?: SortOrder
     gender?: SortOrder
+    mood?: SortOrder
     purpose?: SortOrder
     interest?: SortOrder
     createdAt?: SortOrder
@@ -5580,6 +5609,7 @@ export namespace Prisma {
     birthday?: Date | string | null
     location?: string | null
     gender?: string | null
+    mood?: string | null
     purpose?: string | null
     interest?: string | null
     createdAt?: Date | string
@@ -5597,6 +5627,7 @@ export namespace Prisma {
     birthday?: Date | string | null
     location?: string | null
     gender?: string | null
+    mood?: string | null
     purpose?: string | null
     interest?: string | null
     createdAt?: Date | string
@@ -5619,6 +5650,7 @@ export namespace Prisma {
     birthday?: Date | string | null
     location?: string | null
     gender?: string | null
+    mood?: string | null
     purpose?: string | null
     interest?: string | null
     createdAt?: Date | string
@@ -5636,6 +5668,7 @@ export namespace Prisma {
     birthday?: Date | string | null
     location?: string | null
     gender?: string | null
+    mood?: string | null
     purpose?: string | null
     interest?: string | null
     createdAt?: Date | string
@@ -5669,6 +5702,7 @@ export namespace Prisma {
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
+    mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5686,6 +5720,7 @@ export namespace Prisma {
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
+    mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5714,6 +5749,7 @@ export namespace Prisma {
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
+    mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5731,6 +5767,7 @@ export namespace Prisma {
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
+    mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

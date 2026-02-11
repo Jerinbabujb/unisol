@@ -17,14 +17,13 @@ const SelectedUserProfilePage = () => {
     }
   }, [selectedUser, navigate]);
 
-  const handleSendRequest = () => {
-    sendRequest(status);
+  const handleSendRequest = (newStatus) => {
+    sendRequest(newStatus);
   };
 useEffect(() => {
     if (selectedUser?.id) {
         requestCheck();
-        console.log("inside status is ",status);
-        console.log("inside id is ",selectedUser.id);
+        
     }
 }, [selectedUser?.id]); 
   return (
@@ -77,7 +76,7 @@ useEffect(() => {
       type="button"
        onClick={() => {
         setStatus('accepted');
-        handleSendRequest();
+        handleSendRequest('accepted');
         
       }}
       className="flex-1 bg-[#4CAF50] hover:bg-[#43a047] text-white py-3 rounded-2xl font-bold shadow-md transition-all active:scale-95 flex items-center justify-center gap-2"
@@ -90,7 +89,7 @@ useEffect(() => {
       type="button"
        onClick={() => {
          setStatus('rejected');
-        handleSendRequest();
+        handleSendRequest('rejected');
        
       }}
       className="flex-1 bg-white border-2 border-[#FF4D4D] text-[#FF4D4D] hover:bg-[#FFF5F5] py-3 rounded-2xl font-bold transition-all active:scale-95 flex items-center justify-center gap-2"
@@ -108,7 +107,7 @@ useEffect(() => {
   <button
                 type="button"
                 onClick={() => {
-        handleSendRequest();
+        handleSendRequest('pending');
         setStatus("pending");
       }}
       
@@ -179,6 +178,18 @@ useEffect(() => {
                   readOnly
                   value={selectedUser.bio || ''}
                   className="w-full bg-[#F9F7F8] p-4 rounded-2xl border-none text-gray-700 resize-none"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[#9D7183] text-sm font-bold mb-2 ml-1">
+                 Mood
+                </label>
+                <input
+                  type="text"
+                  readOnly
+                  value={selectedUser.mood || "mood is not set"}
+                  className="w-full bg-[#F9F7F8] p-4 rounded-2xl border-none text-gray-700"
                 />
               </div>
 

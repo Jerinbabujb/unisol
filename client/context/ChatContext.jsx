@@ -55,7 +55,7 @@ export const ChatProvider=({children})=>{
         try{
             const {data}= await axios.post(`/api/messages/request/${selectedUser.id}`,{status})
             if(data.success){
-                console.log("request send succesfully");
+                console.log("request send succesfully",data);
             }
         }
         catch(error){

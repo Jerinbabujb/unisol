@@ -11,11 +11,12 @@ const ProfilePage = () => {
   const [selectedImg, setSelectedImg] = useState(null);
   const [name, setName] = useState(authUser?.fullName || "");
   const [bio, setBio] = useState(authUser?.bio || "");
+  const [mood,setMood] = useState(authUser?.mood ||"");
   const [interests, setInterests] = useState(['Travel', 'Art', 'Coffee']);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let profileData = { fullName: name, bio };
+    let profileData = { fullName: name, bio, mood };
 
     if (selectedImg) {
       const reader = new FileReader();
@@ -114,6 +115,28 @@ const ProfilePage = () => {
                 placeholder={"Write something about yourself..."}
               />
             </div>
+             <div className="mb-6">
+  <label className="block text-[#9D7183] text-sm font-bold mb-2 ml-1">Set Mood</label>
+  <div className="relative">
+    <select
+      value={mood}
+      onChange={(e) => setMood(e.target.value)}
+      className="w-full bg-[#F9F7F8] border-none rounded-2xl p-4 pr-10 text-gray-700 appearance-none focus:outline-none focus:ring-2 focus:ring-[#ED719E] focus:ring-opacity-30 cursor-pointer"
+    >
+      <option value="Low Energy">Low Energy</option>
+      <option value="Open to Chat">Open to Chat</option>
+      <option value="Quiet Mode">Quiet Mode</option>
+      <option value="Processing">Processing</option>
+      <option value="Social & Active">Social & Active</option>
+    </select>
+    {/* Arrow Icon */}
+    <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+        <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.939l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.25a.75.75 0 01-1.06 0L5.25 8.27a.75.75 0 01-.02-1.06z" clipRule="evenodd" />
+      </svg>
+    </div>
+  </div>
+</div>
 
             <div>
               <label className="block text-[#9D7183] text-sm font-bold mb-4 ml-1">Interests</label>

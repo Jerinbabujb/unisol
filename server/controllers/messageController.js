@@ -18,7 +18,8 @@ export const getUserForSidebar = async (req, res) => {
         id: true,
         fullName: true,
         avatar: true,
-        bio: true
+        bio: true,
+        mood:true,
       }
     });
 
