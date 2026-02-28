@@ -13,6 +13,7 @@ export const ChatProvider=({children})=>{
     const [checkReciver, setCheckReciver]= useState('');
     const [checkSend, setCheckSend] =useState('');
     const [selectedUser,setSelectedUser]=useState(null);
+    const [song,setSong]=useState([]);
     const[unseenMessages,setUnseenMessages]=useState({});
     const {authUser} = useContext(AuthContext);
     const {socket, axios}= useContext(AuthContext);
@@ -53,6 +54,7 @@ export const ChatProvider=({children})=>{
 
     const sendRequest=async(status)=>{
         try{
+            console.log(status);
             const {data}= await axios.post(`/api/messages/request/${selectedUser.id}`,{status})
             if(data.success){
                 console.log("request send succesfully",data);
@@ -95,6 +97,21 @@ export const ChatProvider=({children})=>{
         })
     }
 
+        const getSongs=useCallback(async()=>{
+            try{
+                const {data}= await axios.get('/api/messages/songs');
+                console.log("the data is :",data)
+               if (data?.success) {
+                console.log(data.songs);
+      setSong(data.songs);
+    } else {
+      toast.error(data?.message || "Failed to load songs");
+    }
+            }
+            catch(error){
+            toast.error(error.message);
+        }
+        },[]);
     
 
 
@@ -102,11 +119,17 @@ export const ChatProvider=({children})=>{
         try{
             const {data}= await axios.get(`api/messages/check/${selectedUser.id}`)
             if(data.success){
-             setStatus(data.request.status);
+                console.log("the status is :",data.request.status);
+                setStatus(data.request.status);
                 setCheckReciver(data.recerverId);
-                setCheckSend(data.senderId)
-                console.log("the status is ",data.request.status);
+                console.log(data.recerverId)
+                return{
+                    status:data.request.status,
+                    checkReciver: data.recerverId,
+                 senderId: data.senderId
+                }
             }
+            return null;
         }
          catch(error){
             toast.error(error.message);
@@ -139,7 +162,9 @@ export const ChatProvider=({children})=>{
         setStatus,
         checkReciver,
         checkSend,
-        requestCheck
+        requestCheck,
+        song,
+        getSongs
     }
     return (
 

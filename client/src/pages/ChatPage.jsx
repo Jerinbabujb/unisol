@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import Navbar from '../components/Navbar';
-import MessageList from '../components/MessageList';
-import ChatWindow from '../components/ChatWindow';
-import ProfileSidebar from '../components/ProfileSidebar';
+import MessageList from '../components/chat/MessageList';
+import ProfileSidebar from '../components/chat/ProfileSidebar';
 import { ChatContext } from "../../context/ChatContext";
+import ChatWindow from '../components/chat/ChatWindow';
 
 const ChatPage = () => {
   const { selectedUser } = useContext(ChatContext);

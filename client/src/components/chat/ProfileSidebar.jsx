@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
-import { ChatContext } from "../../context/ChatContext";
-import { AuthContext } from "../../context/AuthContext";
-import assets from "../assets";
+import { ChatContext } from "../../../context/ChatContext";
+import { AuthContext } from "../../../context/AuthContext";
+import assets from "../../assets";
 import { useNavigate } from "react-router-dom";
 
 const ProfileSidebar = () => {

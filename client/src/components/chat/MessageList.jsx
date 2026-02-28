@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
-import { ChatContext } from "../../context/ChatContext";
-import assets from "../assets";
+import { ChatContext } from "../../../context/ChatContext";
+import assets from "../../assets";
 
 const MessageList = () => {
   const { users, getUsers, selectedUser, setSelectedUser, unseenMessages, setUnseenMessages } = useContext(ChatContext);

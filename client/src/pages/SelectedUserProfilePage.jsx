@@ -9,6 +9,7 @@ const SelectedUserProfilePage = () => {
   const{status,setStatus} = useContext(ChatContext);
   const{authUser}= useContext(AuthContext);
   const [interests] = useState(['Travel', 'Art', 'Coffee']);
+  
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,14 +19,30 @@ const SelectedUserProfilePage = () => {
   }, [selectedUser, navigate]);
 
   const handleSendRequest = (newStatus) => {
+    console.log(newStatus);
     sendRequest(newStatus);
   };
 useEffect(() => {
-    if (selectedUser?.id) {
-        requestCheck();
-        
+  const check=async()=>{
+    
+  if (selectedUser?.id) {
+    const result=await requestCheck();
+    console.log(result);
+      if(!result){
+        setStatus("pending");
+        }
+        else{
+          setStatus(result.status);
+          
+        }
+       
     }
+  }
+  check();
 }, [selectedUser?.id]); 
+useEffect(() => {
+  console.log("Updated status:", status);
+}, [status]);
   return (
     selectedUser && (
       <div className="min-h-screen bg-[#FDF8F9] flex flex-col items-center py-12 px-4 font-sans">
@@ -52,7 +69,7 @@ useEffect(() => {
               </div>
 
               {/* Send Request Button */}
-              {status=="accepted" ? (
+              {status==="accepted" ? (
               <button
                 type="button"
                 onClick={() => {
