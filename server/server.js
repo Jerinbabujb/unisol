@@ -28,6 +28,47 @@ io.on("connection", (socket) => {
     console.log("🔴 USER DISCONNECTED:", userId);
     if (userId) delete userSocketMap[userId];
   });
+  /* ---------------- MUSIC INVITE ---------------- */
+socket.on("music-invite", ({ to, songUrl, songName }) => {
+  const receiverSocketId = userSocketMap[to];
+
+  if (receiverSocketId) {
+    io.to(receiverSocketId).emit("music-invite", {
+      from: userId,
+      songUrl,
+      songName,
+    });
+  }
+});
+socket.on("music-accepted", ({ to, songUrl }) => {
+  const receiverSocketId = userSocketMap[to];
+
+  if (receiverSocketId) {
+    io.to(receiverSocketId).emit("music-start", {
+      songUrl,
+      startTime: Date.now()
+    });
+  }
+});
+socket.on("music-sync", ({ to, action, currentTime }) => {
+  const receiverSocketId = userSocketMap[to];
+
+  if (receiverSocketId) {
+    io.to(receiverSocketId).emit("music-sync", {
+      action,
+      currentTime
+    });
+  }
+});
+socket.on("music-sync", ({ action, currentTime }) => {
+  audioRef.current.currentTime = currentTime;
+
+  if (action === "play") {
+    audioRef.current.play();
+  } else {
+    audioRef.current.pause();
+  }
+});
 
   /* ---------------- CALL USER ---------------- */
   socket.on("call-user", ({ to, name, offer, type }) => {

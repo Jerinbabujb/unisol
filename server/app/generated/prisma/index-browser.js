@@ -137,6 +137,13 @@ exports.Prisma.UserScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.SongScalarFieldEnum = {
+  id: 'id',
+  song_name: 'song_name',
+  song_url: 'song_url',
+  duration: 'duration'
+};
+
 exports.Prisma.MessageScalarFieldEnum = {
   id: 'id',
   senderId: 'senderId',
@@ -172,6 +179,7 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  song: 'song',
   Message: 'Message',
   connection: 'connection'
 };

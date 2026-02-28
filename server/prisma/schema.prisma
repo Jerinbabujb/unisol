@@ -26,6 +26,13 @@ model User {
   sentMessages Message[] @relation("sent")
 }
 
+model song {
+  id           String   @id @default(uuid())
+  song_name    String
+  song_url     String
+  duration     Int
+}
+
 model Message {
   id         String   @id @default(uuid())
   senderId   String

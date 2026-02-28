@@ -58,6 +58,24 @@ export const getUserForSidebar = async (req, res) => {
 };
 
 
+export const allSongs = async (req,res) => {
+  try{
+    const songs= await prisma.song.findMany({
+      select:{
+      id:true,
+      song_name:true,
+      song_url:true,
+      duration:true
+      },
+    })
+    console.log("Songs found in DB:", songs.length);
+   res.status(200).json({ success: true, songs: songs || [] });
+  }
+  catch(error){
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
 
 export const getMessages = async (req, res) => {
   try {
@@ -107,41 +125,50 @@ export const markMessageAsSeen = async (req, res) => {
 };
 
 
+
 export const connectionRequest = async (req, res) => {
   try {
 
     // 1. Match your variable names exactly to your schema fields
     const senderId = req.user.id;
     const receiverId = req.params.id;
-    const {status} = req.body;
+    let {status} = req.body;
     console.log(senderId);
-    console.log(status);
+    console.log("backedn :", status);
+    let updateStatus=null;
+    let request=null;
     // 2. Check for existing request
     const existingRequest = await prisma.connection.findFirst({
       where: {
         OR: [
-          { senderId: senderId, receiverId: receiverId },
           { senderId: receiverId, receiverId: senderId }
         ]
       }
     });
+    const connectionId = existingRequest?.id
 
     if (existingRequest) {
-      return res.status(400).json({ success: false, message: "Request already exists" });
+      updateStatus=await prisma.connection.update({
+        where: {id:connectionId},
+        data:{
+        status:status
+        }
+      })
     }
-   
+   else{
     
 
     // 3. Create the record
-    const request = await prisma.connection.create({
+    request = await prisma.connection.create({
       data: {
         senderId: senderId,
         receiverId: receiverId,
         status: status
       }
     });
+  }
 
-    res.json({ success: true, request });
+    res.json({ success: true, request, updateStatus});
   } catch (error) {
     // CRITICAL: This will print the actual error to your terminal
     console.error("PRISMA ERROR:", error); 
@@ -153,7 +180,7 @@ export const requestCheck = async(req,res) =>{
   try{
     const senderId= req.user.id;
     const receiverId = req.params.id;
-
+    console.log(receiverId);
     const request = await prisma.connection.findFirst({
       where:{
         OR:[
@@ -205,3 +232,5 @@ export const sendMessage = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
+
