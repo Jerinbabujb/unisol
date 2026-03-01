@@ -35,7 +35,7 @@ socket.on("music-invite", ({ to, songUrl, songName }) => {
   if (receiverSocketId) {
     io.to(receiverSocketId).emit("music-invite", {
       from: userId,
-      songUrl,
+      songUrl:songUrl,
       songName,
     });
   }
@@ -46,7 +46,8 @@ socket.on("music-accepted", ({ to, songUrl }) => {
   if (receiverSocketId) {
     io.to(receiverSocketId).emit("music-start", {
       songUrl,
-      startTime: Date.now()
+      startTime: Date.now(),
+      from: userId,
     });
   }
 });
