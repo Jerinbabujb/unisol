@@ -12,7 +12,8 @@ export const MusicProvider = ({ children }) => {
   const [currentSong, setCurrentSong] = useState(null);
   const [musicInvite, setMusicInvite] = useState(null);
   const [partnerId, setPartnerId] = useState(null);
-                                                                                                                                                                               
+  const [pendingTime, setPendingTime] = useState(0);
+  const [syncState, setSyncState] = useState({ action: null, time: 0, version: 0 });                                                                                                                 
   /* ---------------- SEND INVITE ---------------- */
   const sendMusicInvite = (toUserId, song) => {
     setPartnerId(toUserId);
@@ -82,58 +83,53 @@ const rejectInvite = () => {
       currentTime: audio.currentTime,
     });
   };
-
+useEffect(() => {
+  console.log("Current Audio Ref State:", audioRef.current?.audio?.current);
+}, [socket, audioRef.current?.audio?.current]);
   /* ---------------- SOCKET LISTENERS ---------------- */
 
   useEffect(() => {
-    if (!socket) return;
+  socket.on("music-invite", (data) => {
+    setMusicInvite(data);
+    console.log("Incoming invite:", data);
+  });
 
-    socket.on("music-invite", (data) => {
-      setMusicInvite(data);
-    });
+ socket.on("music-start", ({ songUrl, startTime }) => {
+    const delay = (Date.now() - startTime) / 1000;
+    setCurrentSong(songUrl);
+    // Use a version/timestamp to ensure the Effect triggers even if time is the same
+    setSyncState({ action: "play", time: delay, version: Date.now() });
+  });
 
-    socket.on("music-start", ({ songUrl, startTime }) => {
-      setCurrentSong(songUrl);
+  socket.on("music-sync", ({ action, currentTime }) => {
+    setSyncState({ action, time: currentTime, version: Date.now() });
+  });
 
-      const delay = (Date.now() - startTime) / 1000;
+  return () => {
+    socket.off("music-invite");
+    socket.off("music-start");
+    socket.off("music-sync");
+  };
+}, [socket]);
+useEffect(() => {
+  const audio = audioRef.current?.audio?.current;
+  console.log("audio",audio);
+  if (!audio || !syncState.action) return;
 
-      setTimeout(() => {
-        audioRef.current.audio.current.currentTime = delay;
-        audioRef.current.audio.current.play();
-      }, 100);
-    });
+  isRemoteAction.current = true;
 
-    socket.on("music-sync", ({ action, currentTime }) => {
-      if (!audioRef.current) return;
+  if (syncState.action === "play") {
+    audio.currentTime = syncState.time;
+    audio.play().catch(e => console.log("Autoplay blocked", e));
+  } else if (syncState.action === "pause") {
+    audio.pause();
+  } else if (syncState.action === "seek") {
+    audio.currentTime = syncState.time;
+  }
 
-      isRemoteAction.current = true;
-
-      audioRef.current.audio.current.currentTime = currentTime;
-
-      if (action === "play") {
-        audioRef.current.play();
-      }
-
-      if (action === "pause") {
-        audioRef.current.pause();
-      }
-
-      if (action === "seek") {
-        audioRef.current.audio.current.currentTime = currentTime;
-      }
-
-      setTimeout(() => {
-        isRemoteAction.current = false;
-      }, 200);
-    });
-
-    return () => {
-      socket.off("music-invite");
-      socket.off("music-start");
-      socket.off("music-sync");
-    };
-  }, [socket, partnerId]);
-
+  const timer = setTimeout(() => { isRemoteAction.current = false; }, 200);
+  return () => clearTimeout(timer);
+}, [syncState, audioRef.current?.audio?.current]);
   return (
     <MusicContext.Provider
       value={{
@@ -145,7 +141,9 @@ const rejectInvite = () => {
         handlePlay,
         handlePause,
         handleSeek,
-        rejectInvite
+        rejectInvite,
+        pendingTime,
+        setPendingTime
       }}
     >
       {children}

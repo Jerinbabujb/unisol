@@ -22,7 +22,9 @@ const {
   handlePlay,
   handlePause,
   handleSeek,
-  acceptInvite
+  acceptInvite,
+  pendingTime,
+  setPendingTime
 } = useContext(MusicContext);
   const [musicList,setMusicList]= useState(false);
   // Call Context states and functions
@@ -53,11 +55,6 @@ useEffect(()=>{
       getMessages(selectedUser.id);
     }
   }, [selectedUser, getMessages]);
-
-  useEffect(()=>{
-        console.log("The current songs is :",currentSong);
-
-  },[song]);
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
@@ -218,54 +215,49 @@ useEffect(()=>{
   </button>
 
   {/* Popup Box */}
-  {musicList && (
-    <div className="absolute bottom-12 right-0 w-72 bg-zinc-900 text-white rounded-xl shadow-2xl p-4 z-50 border border-zinc-700">
+  {/* --- 1. The Music List Popup (UI ONLY) --- */}
+{musicList && (
+  <div className="absolute bottom-12 right-0 w-72 bg-zinc-900 text-white rounded-xl shadow-2xl p-4 z-50 border border-zinc-700">
+    <div className="flex justify-between items-center mb-3">
+      <h3 className="text-sm font-semibold">Music List</h3>
+      <button onClick={() => setMusicList(false)} className="text-gray-400 hover:text-white">
+        <FiX size={18} />
+      </button>
+    </div>
 
-      {/* Header */}
-      <div className="flex justify-between items-center mb-3">
-        <h3 className="text-sm font-semibold">Music List</h3>
-        <button
-          onClick={() => setMusicList(false)}
-          className="text-gray-400 hover:text-white"
-        >
-          <FiX size={18} />
-        </button>
-      </div>
-
-      {/* Song List */}
-      <div className="max-h-40 overflow-y-auto space-y-2 mb-3">
-        {song?.map((item, index) => (
-          <div
-            key={item.id || index}
-            onClick={() => {
-  sendMusicInvite(selectedUser.id, item);
-}}
-            className="cursor-pointer px-2 py-1 rounded-md hover:bg-purple-600 transition text-sm"
-          >
-            {item.song_name}
-          </div>
-        ))}
-      </div>
-
-      {/* Audio Player */}
-      {currentSong && (
-  <div className="mt-2">
-    <AudioPlayer
-      ref={audioRef}
-      src={currentSong}
-      autoPlay
-      showJumpControls={false}
-      layout="horizontal"
-      customProgressBarSection={["PROGRESS_BAR"]}
-      onPlay={handlePlay}
-      onPause={handlePause}
-      onSeeked={handleSeek}
-    />
+    <div className="max-h-40 overflow-y-auto space-y-2 mb-3">
+      {song?.map((item, index) => (
+        <div key={item.id || index} onClick={() => sendMusicInvite(selectedUser.id, item)} className="...">
+          {item.song_name}
+        </div>
+      ))}
+    </div>
   </div>
 )}
 
-    </div>
-  )}
+{/* --- 2. The Audio Engine (ALWAYS MOUNTED) --- */}
+<div style={{ display: currentSong ? 'block' : 'none' }} className={musicList ? "block" : "hidden"}>
+  <AudioPlayer
+    ref={audioRef}
+    src={currentSong}
+    autoPlay
+    onCanPlay={() => {
+      if (pendingTime > 0) {
+        const audio = audioRef.current?.audio?.current;
+        if (audio) {
+          audio.currentTime = pendingTime;
+          audio.play();
+          setPendingTime(0);
+        }
+      }
+    }}
+    showJumpControls={false}
+    layout="horizontal"
+    onPlay={handlePlay}
+    onPause={handlePause}
+    onSeeked={handleSeek}
+  />
+</div>
 
 
 
