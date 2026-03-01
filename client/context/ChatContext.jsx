@@ -111,7 +111,7 @@ export const ChatProvider=({children})=>{
             catch(error){
             toast.error(error.message);
         }
-        },[]);
+        },[]); 
     
 
 

@@ -7,6 +7,7 @@ import { AuthProvider } from '../context/AuthContext';
 import { ChatProvider } from '../context/ChatContext.jsx';
 import { CallProvider } from '../context/CallContext.jsx';
 import { io } from 'socket.io-client';
+import { MusicProvider } from '../context/MusicContext.jsx';
 
 // Helper to get ID from your specific AuthProvider storage key
 const getUserId = () => {
@@ -30,7 +31,9 @@ createRoot(document.getElementById('root')).render(
         <AuthProvider>
             <ChatProvider>
                 <CallProvider socket={socket}>
+                    <MusicProvider>
                     <App />
+                    </MusicProvider>
                 </CallProvider>
             </ChatProvider>
         </AuthProvider>

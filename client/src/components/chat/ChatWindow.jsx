@@ -2,6 +2,7 @@ import { useContext, useEffect, useState, useRef } from "react";
 import { ChatContext } from "../../../context/ChatContext";
 import { AuthContext } from "../../../context/AuthContext";
 import { CallContext } from "../../../context/CallContext"; // Import the new context
+import { MusicContext } from "../../../context/MusicContext"; // Import the new context
 import assets from "../../assets";
 import toast from "react-hot-toast";
 import AudioPlayer from 'react-h5-audio-player';
@@ -14,8 +15,15 @@ import { MdPhotoLibrary } from "react-icons/md";
 const ChatWindow = () => {
   const { selectedUser, setSelectedUser, messages, getMessages, sendMessage, getSongs, song } = useContext(ChatContext);
   const { authUser } = useContext(AuthContext);
-  const [currentSong,setCurrentSong]=useState('');
-  const [play,setPlay]=useState(false);
+const {
+  audioRef,
+  currentSong,
+  sendMusicInvite,
+  handlePlay,
+  handlePause,
+  handleSeek,
+  acceptInvite
+} = useContext(MusicContext);
   const [musicList,setMusicList]= useState(false);
   // Call Context states and functions
   const { 
@@ -46,7 +54,10 @@ useEffect(()=>{
     }
   }, [selectedUser, getMessages]);
 
-  
+  useEffect(()=>{
+        console.log("The current songs is :",currentSong);
+
+  },[song]);
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
@@ -227,9 +238,8 @@ useEffect(()=>{
           <div
             key={item.id || index}
             onClick={() => {
-              setCurrentSong(item.song_url);
-              setPlay(true);
-            }}
+  sendMusicInvite(selectedUser.id, item);
+}}
             className="cursor-pointer px-2 py-1 rounded-md hover:bg-purple-600 transition text-sm"
           >
             {item.song_name}
@@ -238,17 +248,21 @@ useEffect(()=>{
       </div>
 
       {/* Audio Player */}
-      {play && (
-        <div className="mt-2">
-          <AudioPlayer
-            autoPlay
-            src={currentSong}
-            showJumpControls={false}
-            layout="horizontal"
-            customProgressBarSection={["PROGRESS_BAR"]}
-          />
-        </div>
-      )}
+      {currentSong && (
+  <div className="mt-2">
+    <AudioPlayer
+      ref={audioRef}
+      src={currentSong}
+      autoPlay
+      showJumpControls={false}
+      layout="horizontal"
+      customProgressBarSection={["PROGRESS_BAR"]}
+      onPlay={handlePlay}
+      onPause={handlePause}
+      onSeeked={handleSeek}
+    />
+  </div>
+)}
 
     </div>
   )}
