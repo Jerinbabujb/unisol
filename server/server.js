@@ -60,13 +60,11 @@ socket.on("music-sync", ({ to, action, currentTime }) => {
     });
   }
 });
-socket.on("music-sync", ({ action, currentTime }) => {
-  audioRef.current.currentTime = currentTime;
+socket.on("music-rejected", ({ to }) => {
+  const receiverSocketId = userSocketMap[to];
 
-  if (action === "play") {
-    audioRef.current.play();
-  } else {
-    audioRef.current.pause();
+  if (receiverSocketId) {
+    io.to(receiverSocketId).emit("music-rejected");
   }
 });
 
