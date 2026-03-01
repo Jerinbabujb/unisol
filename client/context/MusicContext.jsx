@@ -1,6 +1,9 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { socket } from "../socket"; 
 import MusicInviteModal from "../src/modal/MusicInviteModal";
+import AudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
+import { FiX } from "react-icons/fi";
 
 export const MusicContext = createContext();
 
@@ -10,7 +13,6 @@ export const MusicProvider = ({ children }) => {
   const isRemoteAction = useRef(false);
 
   const [currentSong, setCurrentSong] = useState(null);
-  const [musicInvite, setMusicInvite] = useState(null);
   const [partnerId, setPartnerId] = useState(null);
   const [pendingTime, setPendingTime] = useState(0);
   const [syncState, setSyncState] = useState({ action: null, time: 0, version: 0 });                                                                                                                 
@@ -23,20 +25,42 @@ export const MusicProvider = ({ children }) => {
       songUrl: song.song_url,
       songName: song.song_name,
     });
-    console.log("song name:",song.song_name);
-    console.log("reciver is:",toUserId);
+    console.log("Full song object:", song); // 👈 add this
+  console.log("song_url:", song.song_url);
+  console.log("song_name:", song.song_name);
+
   };
 
   /* ---------------- ACCEPT INVITE ---------------- */
-  const acceptInvite = () => {
-    socket.emit("music-accepted", {
-      to: musicInvite.from,
-      songUrl: musicInvite.songUrl,
-    });
+// In MusicContext.jsx
+const musicInviteRef = useRef(null);
+const [musicInvite, setMusicInviteState] = useState(null);
 
-    setPartnerId(musicInvite.from);
-    setMusicInvite(null);
-  };
+// Keep ref in sync with state
+const setMusicInvite = (val) => {
+  musicInviteRef.current = val;
+  setMusicInviteState(val);
+};
+
+const acceptInvite = () => {
+  const invite = musicInviteRef.current; // ✅ always fresh
+  if (!invite) return;
+
+  console.log("musicInvite.songUrl:", invite.songUrl);
+
+  socket.emit("music-accepted", {
+    to: invite.from,
+    songUrl: invite.songUrl,
+  });
+
+  setPartnerId(invite.from);
+  setCurrentSong(invite.songUrl);
+ 
+  setMusicInvite(null);
+  setTimeout(() => {
+    setSyncState({ action: "play", time: 0, version: Date.now() });
+  }, 500);
+};
 const rejectInvite = () => {
   socket.emit("music-rejected", {
     to: musicInvite.from,
@@ -83,9 +107,7 @@ const rejectInvite = () => {
       currentTime: audio.currentTime,
     });
   };
-useEffect(() => {
-  console.log("Current Audio Ref State:", audioRef.current?.audio?.current);
-}, [socket, audioRef.current?.audio?.current]);
+
   /* ---------------- SOCKET LISTENERS ---------------- */
 
   useEffect(() => {
@@ -94,9 +116,12 @@ useEffect(() => {
     console.log("Incoming invite:", data);
   });
 
- socket.on("music-start", ({ songUrl, startTime }) => {
+ socket.on("music-start", ({ songUrl, startTime, from }) => {
+    console.log("music started");
     const delay = (Date.now() - startTime) / 1000;
     setCurrentSong(songUrl);
+    setPartnerId(from);
+    console.log("from",from);
     // Use a version/timestamp to ensure the Effect triggers even if time is the same
     setSyncState({ action: "play", time: delay, version: Date.now() });
   });
@@ -112,44 +137,69 @@ useEffect(() => {
   };
 }, [socket]);
 useEffect(() => {
-  const audio = audioRef.current?.audio?.current;
-  console.log("audio",audio);
-  if (!audio || !syncState.action) return;
+  if (!syncState.action) return;
 
-  isRemoteAction.current = true;
+  // ✅ Retry until audio is available
+  const tryPlay = () => {
+    const audio = audioRef.current?.audio?.current;
+    console.log("tryPlay audio:", audio);
+    if (!audio) {
+      setTimeout(tryPlay, 100); // retry every 100ms
+      return;
+    }
 
-  if (syncState.action === "play") {
-    audio.currentTime = syncState.time;
-    audio.play().catch(e => console.log("Autoplay blocked", e));
-  } else if (syncState.action === "pause") {
-    audio.pause();
-  } else if (syncState.action === "seek") {
-    audio.currentTime = syncState.time;
-  }
+    isRemoteAction.current = true;
 
-  const timer = setTimeout(() => { isRemoteAction.current = false; }, 200);
-  return () => clearTimeout(timer);
-}, [syncState, audioRef.current?.audio?.current]);
-  return (
-    <MusicContext.Provider
-      value={{
-        audioRef,
-        currentSong,
-        musicInvite,
-        sendMusicInvite,
-        acceptInvite,
-        handlePlay,
-        handlePause,
-        handleSeek,
-        rejectInvite,
-        pendingTime,
-        setPendingTime
-      }}
-    >
-      {children}
-          <MusicInviteModal />
+    if (syncState.action === "play") {
+      audio.currentTime = syncState.time;
+      audio.play().catch(e => console.log("Autoplay blocked:", e));
+    } else if (syncState.action === "pause") {
+      audio.pause();
+    } else if (syncState.action === "seek") {
+      audio.currentTime = syncState.time;
+    }
 
-    </MusicContext.Provider>
-  );
+    setTimeout(() => { isRemoteAction.current = false; }, 200);
+  };
+
+  tryPlay();
+}, [syncState]); // ✅ only syncState as dependency
+ return (
+  <MusicContext.Provider value={{
+    audioRef, currentSong, musicInvite, sendMusicInvite,
+    acceptInvite, handlePlay, handlePause, handleSeek,
+    rejectInvite, pendingTime, setPendingTime
+  }}>
+    {children}
+    <MusicInviteModal />
+{currentSong && (
+  <div style={{
+    position: 'fixed', bottom: 0, left: 0, right: 0,
+    zIndex: 9999, background: '#1a1a2e', padding: '8px 16px'
+  }}>
+    {/* Close button */}
+    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <button
+        onClick={() => setCurrentSong(null)} // ✅ null not false
+        style={{ color: '#9ca3af', background: 'none', border: 'none', cursor: 'pointer', marginBottom: '4px' }}
+      >
+        <FiX size={18} />
+      </button>
+    </div>
+
+    <AudioPlayer
+      ref={audioRef}
+      src={currentSong}
+      autoPlay
+      showJumpControls={false}
+      layout="horizontal"
+      onPlay={handlePlay}
+      onPause={handlePause}
+      onSeeked={handleSeek}
+    />
+  </div>
+)}
+  </MusicContext.Provider>
+);
 };
 

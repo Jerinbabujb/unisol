@@ -5,8 +5,6 @@ import { CallContext } from "../../../context/CallContext"; // Import the new co
 import { MusicContext } from "../../../context/MusicContext"; // Import the new context
 import assets from "../../assets";
 import toast from "react-hot-toast";
-import AudioPlayer from 'react-h5-audio-player';
-import 'react-h5-audio-player/lib/styles.css';
 import { FiX } from "react-icons/fi";
 import { FiMusic } from "react-icons/fi";
 import { MdPhotoLibrary } from "react-icons/md";
@@ -22,9 +20,7 @@ const {
   handlePlay,
   handlePause,
   handleSeek,
-  acceptInvite,
-  pendingTime,
-  setPendingTime
+  acceptInvite
 } = useContext(MusicContext);
   const [musicList,setMusicList]= useState(false);
   // Call Context states and functions
@@ -197,7 +193,7 @@ useEffect(()=>{
       </div>
 
       {/* Input Area */}
-      <div className="p-4 bg-white border-t border-gray-100">
+      <div className="p-4 bg-white border-t border-gray-100" style={{ paddingBottom: currentSong ? '100px' : '0' }} >
         <form onSubmit={handleSendMessage} className="flex items-center gap-2 md:gap-3 bg-gray-100 px-4 py-2 rounded-full">
           <input 
             type='text' 
@@ -215,49 +211,39 @@ useEffect(()=>{
   </button>
 
   {/* Popup Box */}
-  {/* --- 1. The Music List Popup (UI ONLY) --- */}
-{musicList && (
-  <div className="absolute bottom-12 right-0 w-72 bg-zinc-900 text-white rounded-xl shadow-2xl p-4 z-50 border border-zinc-700">
-    <div className="flex justify-between items-center mb-3">
-      <h3 className="text-sm font-semibold">Music List</h3>
-      <button onClick={() => setMusicList(false)} className="text-gray-400 hover:text-white">
-        <FiX size={18} />
-      </button>
-    </div>
+  {musicList && (
+    <div className="absolute bottom-12 right-0 w-72 bg-zinc-900 text-white rounded-xl shadow-2xl p-4 z-50 border border-zinc-700">
 
-    <div className="max-h-40 overflow-y-auto space-y-2 mb-3">
-      {song?.map((item, index) => (
-        <div key={item.id || index} onClick={() => sendMusicInvite(selectedUser.id, item)} className="...">
-          {item.song_name}
-        </div>
-      ))}
-    </div>
-  </div>
-)}
+      {/* Header */}
+      <div className="flex justify-between items-center mb-3">
+        <h3 className="text-sm font-semibold">Music List</h3>
+        <button
+          onClick={() => setMusicList(false)}
+          className="text-gray-400 hover:text-white"
+        >
+          <FiX size={18} />
+        </button>
+      </div>
 
-{/* --- 2. The Audio Engine (ALWAYS MOUNTED) --- */}
-<div style={{ display: currentSong ? 'block' : 'none' }} className={musicList ? "block" : "hidden"}>
-  <AudioPlayer
-    ref={audioRef}
-    src={currentSong}
-    autoPlay
-    onCanPlay={() => {
-      if (pendingTime > 0) {
-        const audio = audioRef.current?.audio?.current;
-        if (audio) {
-          audio.currentTime = pendingTime;
-          audio.play();
-          setPendingTime(0);
-        }
-      }
-    }}
-    showJumpControls={false}
-    layout="horizontal"
-    onPlay={handlePlay}
-    onPause={handlePause}
-    onSeeked={handleSeek}
-  />
-</div>
+      {/* Song List */}
+      <div className="max-h-40 overflow-y-auto space-y-2 mb-3">
+        {song?.map((item, index) => (
+          <div
+            key={item.id || index}
+            onClick={() => {
+  sendMusicInvite(selectedUser.id, item);
+}}
+            className="cursor-pointer px-2 py-1 rounded-md hover:bg-purple-600 transition text-sm"
+          >
+            {item.song_name}
+          </div>
+        ))}
+      </div>
+
+      
+
+    </div>
+  )}
 
 
 
