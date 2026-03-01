@@ -232,6 +232,7 @@ useEffect(()=>{
             key={item.id || index}
             onClick={() => {
   sendMusicInvite(selectedUser.id, item);
+  setMusicList(false)
 }}
             className="cursor-pointer px-2 py-1 rounded-md hover:bg-purple-600 transition text-sm"
           >

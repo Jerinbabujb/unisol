@@ -11,7 +11,7 @@ export const MusicProvider = ({ children }) => {
 
   const audioRef = useRef(null);
   const isRemoteAction = useRef(false);
-
+  
   const [currentSong, setCurrentSong] = useState(null);
   const [partnerId, setPartnerId] = useState(null);
   const [pendingTime, setPendingTime] = useState(0);
@@ -172,18 +172,21 @@ useEffect(() => {
   }}>
     {children}
     <MusicInviteModal />
+    
 {currentSong && (
   <div style={{
     position: 'fixed', bottom: 0, left: 0, right: 0,
-    zIndex: 9999, background: '#1a1a2e', padding: '8px 16px'
+    zIndex: 9999, background: '#1a1a2e',
+    padding: '6px 12px 10px',
+    boxShadow: '0 -4px 20px rgba(0,0,0,0.4)'
   }}>
     {/* Close button */}
     <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
       <button
-        onClick={() => setCurrentSong(null)} // ✅ null not false
-        style={{ color: '#9ca3af', background: 'none', border: 'none', cursor: 'pointer', marginBottom: '4px' }}
+        onClick={() => setCurrentSong(null)}
+        style={{ color: '#9ca3af', background: 'none', border: 'none', cursor: 'pointer', marginBottom: '2px' }}
       >
-        <FiX size={18} />
+        <FiX size={16} />
       </button>
     </div>
 
@@ -192,7 +195,17 @@ useEffect(() => {
       src={currentSong}
       autoPlay
       showJumpControls={false}
+      showDownloadProgress={false}
+      showFilledProgress={true}
       layout="horizontal"
+      style={{
+        background: 'transparent',
+        boxShadow: 'none',
+        padding: '0',
+      }}
+      customStyles={{
+        mainColor: '#a855f7',
+      }}
       onPlay={handlePlay}
       onPause={handlePause}
       onSeeked={handleSeek}
