@@ -46,32 +46,40 @@ const rejectInvite = () => {
   /* ---------------- LOCAL CONTROLS ---------------- */
 
   const handlePlay = () => {
-    if (!partnerId || isRemoteAction.current) return;
+  if (!partnerId || isRemoteAction.current) return;
 
-    socket.emit("music-sync", {
-      to: partnerId,
-      action: "play",
-      currentTime: audioRef.current.currentTime,
-    });
-  };
+  const audio = audioRef.current?.audio?.current;
+  if (!audio) return;
+
+  socket.emit("music-sync", {
+    to: partnerId,
+    action: "play",
+    currentTime: audio.currentTime,
+  });
+
+  console.log("Audio element:", audio);
+  console.log("Current time:", audio.currentTime);
+};
 
   const handlePause = () => {
     if (!partnerId || isRemoteAction.current) return;
-
+    const audio = audioRef.current?.audio?.current;
+  if (!audio) return;
     socket.emit("music-sync", {
       to: partnerId,
       action: "pause",
-      currentTime: audioRef.current.currentTime,
+      currentTime: audio.currentTime,
     });
   };
 
   const handleSeek = () => {
     if (!partnerId || isRemoteAction.current) return;
-
+   const audio = audioRef.current?.audio?.current;
+  if (!audio) return;
     socket.emit("music-sync", {
       to: partnerId,
       action: "seek",
-      currentTime: audioRef.current.currentTime,
+      currentTime: audio.currentTime,
     });
   };
 
@@ -90,8 +98,8 @@ const rejectInvite = () => {
       const delay = (Date.now() - startTime) / 1000;
 
       setTimeout(() => {
-        audioRef.current.currentTime = delay;
-        audioRef.current.play();
+        audioRef.current.audio.current.currentTime = delay;
+        audioRef.current.audio.current.play();
       }, 100);
     });
 
