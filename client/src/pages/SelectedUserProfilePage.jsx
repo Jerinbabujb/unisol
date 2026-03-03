@@ -6,7 +6,8 @@ import { AuthContext } from '../../context/AuthContext';
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 
 const SelectedUserProfilePage = () => {
-  const { selectedUser,sendRequest, requestCheck,checkReciver,checkSend  } = useContext(ChatContext);
+  const { selectedUser,sendRequest, requestCheck,checkReciver,checkSend,instagramPreference,
+        facebookPreference  } = useContext(ChatContext);
   const{status,setStatus} = useContext(ChatContext);
   const{authUser}= useContext(AuthContext);
   const [interests] = useState(['Travel', 'Art', 'Coffee']);
@@ -206,8 +207,12 @@ useEffect(() => {
                 />
               </div>
               <div  style={{ display: "flex", gap: "10px" }}>
+                {facebookPreference &&
                 <a href={selectedUser.facebook} target="_blank"><FaFacebook size={30} color="#3b5998" /></a>
+}
+{instagramPreference &&
                 <a href={selectedUser.instagram} target="_blank"><FaInstagram size={30} color="#E1306C" /></a>
+}
               </div>
 
 
