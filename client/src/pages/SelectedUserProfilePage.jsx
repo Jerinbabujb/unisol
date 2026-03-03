@@ -3,6 +3,7 @@ import assets from '../assets';
 import { ChatContext } from '../../context/ChatContext';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
+import { FaFacebook, FaInstagram } from "react-icons/fa";
 
 const SelectedUserProfilePage = () => {
   const { selectedUser,sendRequest, requestCheck,checkReciver,checkSend  } = useContext(ChatContext);
@@ -10,13 +11,8 @@ const SelectedUserProfilePage = () => {
   const{authUser}= useContext(AuthContext);
   const [interests] = useState(['Travel', 'Art', 'Coffee']);
   
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!selectedUser) {
-      navigate('/messages');
-    }
-  }, [selectedUser, navigate]);
+ 
 
   const handleSendRequest = (newStatus) => {
     console.log(newStatus);
@@ -24,10 +20,10 @@ const SelectedUserProfilePage = () => {
   };
 useEffect(() => {
   const check=async()=>{
-    
+    console.log("selecteduser",selectedUser)
   if (selectedUser?.id) {
     const result=await requestCheck();
-    console.log(result);
+    console.log("result",result);
       if(!result){
         setStatus("pending");
         }
@@ -209,6 +205,12 @@ useEffect(() => {
                   className="w-full bg-[#F9F7F8] p-4 rounded-2xl border-none text-gray-700"
                 />
               </div>
+              <div  style={{ display: "flex", gap: "10px" }}>
+                <a href={selectedUser.facebook} target="_blank"><FaFacebook size={30} color="#3b5998" /></a>
+                <a href={selectedUser.instagram} target="_blank"><FaInstagram size={30} color="#E1306C" /></a>
+              </div>
+
+
 
               {/* Interests */}
               <div>

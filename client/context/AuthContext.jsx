@@ -87,7 +87,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const { data } = await axios.put("/api/auth/update-profile", body);
       if (data.success) {
-        console.log(data.user)
+        console.log("data",data.user)
         setAuthUser(data.user);
         toast.success("Profile updated");
       }
@@ -95,6 +95,9 @@ export const AuthProvider = ({ children }) => {
       toast.error(err.message);
     }
   };
+
+
+ 
 
   useEffect(() => {
     if (token) axios.defaults.headers.common["token"] = token;

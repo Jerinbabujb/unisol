@@ -12,11 +12,13 @@ const ProfilePage = () => {
   const [name, setName] = useState(authUser?.fullName || "");
   const [bio, setBio] = useState(authUser?.bio || "");
   const [mood,setMood] = useState(authUser?.mood ||"");
+  const [instagram, setInstagram]= useState(authUser?.instagram||'');
+  const [facebook,setFacebook]= useState(authUser?.facebook||'');
   const [interests, setInterests] = useState(['Travel', 'Art', 'Coffee']);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let profileData = { fullName: name, bio, mood };
+    let profileData = { fullName: name, bio, mood, instagram, facebook  };
 
     if (selectedImg) {
       const reader = new FileReader();
@@ -113,6 +115,24 @@ const ProfilePage = () => {
                 onChange={(e) => setBio(e.target.value)}
                 className="w-full bg-[#F9F7F8] p-4 rounded-2xl focus:outline-none border-none text-gray-700 resize-none"
                 placeholder={"Write something about yourself..."}
+              />
+            </div>
+             <div>
+              <label className="block text-[#9D7183] text-sm font-bold mb-2 ml-1">Instagram</label>
+              <input 
+                type="text" 
+                value={instagram}
+                onChange={(e) => setInstagram(e.target.value)}
+                className="w-full bg-[#F9F7F8] p-4 rounded-2xl focus:outline-none border-none text-gray-700"
+              />
+            </div>
+             <div>
+              <label className="block text-[#9D7183] text-sm font-bold mb-2 ml-1">Facebook</label>
+              <input 
+                type="text" 
+                value={facebook}
+                onChange={(e) => setFacebook(e.target.value)}
+                className="w-full bg-[#F9F7F8] p-4 rounded-2xl focus:outline-none border-none text-gray-700"
               />
             </div>
              <div className="mb-6">

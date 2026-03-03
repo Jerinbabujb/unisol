@@ -8,9 +8,10 @@ import toast from "react-hot-toast";
 import { FiX } from "react-icons/fi";
 import { FiMusic } from "react-icons/fi";
 import { MdPhotoLibrary } from "react-icons/md";
+import ChatPage from "../../pages/ChatPage";
 
 
-const ChatWindow = () => {
+const ChatWindow = ({setOpenProfile}) => {
   const { selectedUser, setSelectedUser, messages, getMessages, sendMessage, getSongs, song } = useContext(ChatContext);
   const { authUser } = useContext(AuthContext);
 const {
@@ -51,6 +52,7 @@ useEffect(()=>{
       getMessages(selectedUser.id);
     }
   }, [selectedUser, getMessages]);
+
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
@@ -121,7 +123,8 @@ useEffect(()=>{
 
       {/* Header */}
       <div className="px-4 py-3 md:px-6 md:py-4 flex justify-between items-center border-b border-gray-100 shrink-0 z-10 bg-white">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 cursor-pointer" onClick={()=>setOpenProfile(true)}>
+          
           <button onClick={() => setSelectedUser(null)} className="md:hidden p-2 -ml-2 text-gray-500">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" />
@@ -263,6 +266,7 @@ useEffect(()=>{
        
       </div>
     </div>
+    
   );
 };
 

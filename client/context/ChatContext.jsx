@@ -17,7 +17,10 @@ export const ChatProvider=({children})=>{
     const[unseenMessages,setUnseenMessages]=useState({});
     const {authUser} = useContext(AuthContext);
     const {socket, axios}= useContext(AuthContext);
-
+    const [instagramPreference,setInstagramPreference] =useState(false);
+    const [facebookPreference,setFacebookPreference] =useState(false);
+    const [facebookToggle,setFacebookToggle]=useState(false);
+    const [instagramToggle,setInstagramToggle]= useState(false);
   const getUsers = useCallback(async () => {
   if (!axios) {
     console.log("axios not ready yet");
@@ -100,9 +103,7 @@ export const ChatProvider=({children})=>{
         const getSongs=useCallback(async()=>{
             try{
                 const {data}= await axios.get('/api/messages/songs');
-                console.log("the data is :",data)
                if (data?.success) {
-                console.log(data.songs);
       setSong(data.songs);
     } else {
       toast.error(data?.message || "Failed to load songs");
@@ -119,10 +120,8 @@ export const ChatProvider=({children})=>{
         try{
             const {data}= await axios.get(`api/messages/check/${selectedUser.id}`)
             if(data.success){
-                console.log("the status is :",data.request.status);
                 setStatus(data.request.status);
                 setCheckReciver(data.recerverId);
-                console.log(data.recerverId)
                 return{
                     status:data.request.status,
                     checkReciver: data.recerverId,
@@ -135,6 +134,64 @@ export const ChatProvider=({children})=>{
             toast.error(error.message);
         }
     }
+
+     const privacyCreate=async(field,state)=>{
+        console.log("entered the fuinction");
+    try{
+      const {data}= await axios.post(`api/messages/privacy/${selectedUser.id}`,{field,state})
+      if(data.success){
+        console.log("data sent succesfully",data);
+      }
+      if(data.error){
+        console.log("error");
+      }
+    }
+    catch(error){
+            toast.error(error.message);
+        }
+  }
+
+  const privacyCheck= async()=>{
+    if (!selectedUser?.id) return;
+    try{
+        const {data} = await axios.get(`api/messages/privacycheck/${selectedUser.id}`,{});
+        if(data.success){
+            console.log("selecteduser",data.receiverId,selectedUser.id);
+            console.log("authuser",data.senderId,authUser.id);
+            console.log("the datais ",data);
+            setFacebookPreference(data.privacyCheck.facebookPreference);
+            setInstagramPreference(data.privacyCheck.instagramPreference)
+            
+        }
+    }
+    catch(error){
+            toast.error(error.message);
+        }
+    
+  }
+  const privacyToggle= async()=>{
+    if (!selectedUser?.id) return;
+    try{
+        const {data} = await axios.get(`api/messages/privacytoggle/${selectedUser.id}`,{});
+        if(data.success){
+            console.log("selecteduser",data.receiverId,selectedUser.id);
+            console.log("authuser",data.senderId,authUser.id);
+            console.log("the datais ",data);
+            setFacebookToggle(data.privacyToggle.facebookPreference);
+            setInstagramToggle(data.privacyToggle.instagramPreference)
+            
+        }
+    }
+    catch(error){
+            toast.error(error.message);
+        }
+    
+  }
+
+
+
+
+
     const unSubscribe= async()=>{
         if(socket)
             socket.off("newMessage");
@@ -142,7 +199,8 @@ export const ChatProvider=({children})=>{
 
     useEffect(()=>{
         subscribe();
-      
+        privacyCheck();
+        privacyToggle();
         return ()=> unSubscribe();
     },[socket,selectedUser])
 
@@ -163,8 +221,17 @@ export const ChatProvider=({children})=>{
         checkReciver,
         checkSend,
         requestCheck,
+        instagramPreference,
+        facebookPreference,
+        setInstagramPreference,
+        setFacebookPreference,
         song,
-        getSongs
+        getSongs,
+        privacyCreate,
+        instagramToggle,
+        facebookToggle,
+        setFacebookToggle,
+        setInstagramToggle
     }
     return (
 

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Navbar from '../components/Navbar';
 import MessageList from '../components/chat/MessageList';
 import ProfileSidebar from '../components/chat/ProfileSidebar';
@@ -7,6 +7,7 @@ import ChatWindow from '../components/chat/ChatWindow';
 
 const ChatPage = () => {
   const { selectedUser } = useContext(ChatContext);
+    const [openProfile,setOpenProfile] = useState(false);
 
   return (
     <div className="flex flex-col h-screen bg-white font-sans text-slate-900 overflow-hidden">
@@ -20,13 +21,23 @@ const ChatPage = () => {
 
         {/* Center Chat: Hidden on mobile when NO chat is open */}
         <main className={`${!selectedUser ? 'hidden md:flex' : 'flex'} flex-1 bg-[#F5F7FA] flex-col overflow-hidden`}>
-          <ChatWindow />
+          <ChatWindow setOpenProfile={setOpenProfile} />
         </main>
 
         {/* Right Sidebar: Desktop Only (Large screens) */}
-        <aside className="hidden lg:flex w-80 flex-shrink-0 border-l border-gray-100 p-6 overflow-y-auto bg-white">
-          <ProfileSidebar />
-        </aside>
+        {openProfile && (
+  <>
+    {/* Desktop Sidebar */}
+    <aside className="hidden lg:flex w-80 flex-shrink-0 border-l border-gray-100 p-6 overflow-y-auto bg-white">
+      <ProfileSidebar setOpenProfile={setOpenProfile} />
+    </aside>
+
+    {/* Mobile Overlay */}
+    <div className=" fixed inset-0 z-50 bg-white lg:hidden">
+      <ProfileSidebar setOpenProfile={setOpenProfile} />
+    </div>
+  </>
+)}
       </div>
     </div>
   );
