@@ -134,7 +134,17 @@ exports.Prisma.UserScalarFieldEnum = {
   mood: 'mood',
   purpose: 'purpose',
   interest: 'interest',
+  instagram: 'instagram',
+  facebook: 'facebook',
   createdAt: 'createdAt'
+};
+
+exports.Prisma.PrivacyScalarFieldEnum = {
+  id: 'id',
+  senderId: 'senderId',
+  receiverId: 'receiverId',
+  instagramPreference: 'instagramPreference',
+  facebookPreference: 'facebookPreference'
 };
 
 exports.Prisma.SongScalarFieldEnum = {
@@ -179,6 +189,7 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  privacy: 'privacy',
   song: 'song',
   Message: 'Message',
   connection: 'connection'

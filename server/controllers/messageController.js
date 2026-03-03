@@ -20,6 +20,8 @@ export const getUserForSidebar = async (req, res) => {
         avatar: true,
         bio: true,
         mood:true,
+        instagram:true,
+        facebook:true
       }
     });
 
@@ -233,4 +235,84 @@ export const sendMessage = async (req, res) => {
   }
 };
 
+export const privacy=async(req,res)=>{
+    try{
+        const {field,state}=req.body;
+        console.log("REQ BODY:", req.body);
+        const senderId=req.user.id;
+        const receiverId= req.params.id;
+        const privacy= await prisma.privacy.upsert({
+            where:{
+                senderId_receiverId:{senderId,receiverId}
+            },
+            update:{
+              [field]:state
+            },
+            create:{
+              senderId,
+              receiverId,
+              [field]:state,
+              instagramPreference: field === "instagramPreference" ? state : false,
+    facebookPreference: field === "facebookPreference" ? state : false
+            }
+          });
+                  console.log("privacy",privacy);
+
+            res.json({success:true,privacy})
+        }
+    
+    catch (error) {
+        console.error("UPDATE ERROR:", error);
+        res.json({ success: false, message: error.message });
+    }
+}
+
+export const privacyCheck=async(req,res)=>{
+  try{
+    const senderId=req.user.id;
+    const receiverId=req.params.id;
+    console.log("sender",senderId,"reciever",receiverId);
+    const privacyCheck= await prisma.privacy.findUnique({
+      where:{
+        senderId_receiverId:{senderId:receiverId,receiverId:senderId}
+      },
+      select:{
+        senderId:true,
+        receiverId:true,
+        instagramPreference:true,
+        facebookPreference:true
+      }
+    })
+    console.log("privacyCheck",privacyCheck);
+    res.json({success:true,privacyCheck,senderId,receiverId})
+  }
+  catch (error) {
+        console.error("UPDATE ERROR:", error);
+        res.json({ success: false, message: error.message });
+    }
+}
+export const privacyToggle=async(req,res)=>{
+  try{
+    const senderId=req.user.id;
+    const receiverId=req.params.id;
+    console.log("sender",senderId,"reciever",receiverId);
+    const privacyToggle= await prisma.privacy.findUnique({
+      where:{
+        senderId_receiverId:{senderId,receiverId}
+      },
+      select:{
+        senderId:true,
+        receiverId:true,
+        instagramPreference:true,
+        facebookPreference:true
+      }
+    })
+    console.log("privacyToggle",privacyToggle);
+    res.json({success:true,privacyToggle,senderId,receiverId})
+  }
+  catch (error) {
+        console.error("UPDATE ERROR:", error);
+        res.json({ success: false, message: error.message });
+    }
+}
 

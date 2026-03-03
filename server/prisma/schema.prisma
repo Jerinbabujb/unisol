@@ -21,11 +21,20 @@ model User {
   mood         String?
   purpose      String?
   interest     String?
+  instagram             String?
+  facebook              String?
   createdAt    DateTime  @default(now())
   recvMessages Message[] @relation("received")
   sentMessages Message[] @relation("sent")
 }
-
+model privacy{
+  id                    String  @id @default(uuid())
+  senderId              String
+  receiverId            String
+  instagramPreference   Boolean? @default(false)
+  facebookPreference    Boolean? @default(false)
+  @@unique([senderId,receiverId])
+}
 model song {
   id           String   @id @default(uuid())
   song_name    String

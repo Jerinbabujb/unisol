@@ -1,6 +1,6 @@
 import e from "express";
 import { protectRoute } from "../middleware/auth.js";
-import { allSongs, connectionRequest, getMessages, getUserForSidebar, markMessageAsSeen, requestCheck, sendMessage } from "../controllers/messageController.js";
+import { allSongs, connectionRequest, getMessages, getUserForSidebar, markMessageAsSeen, privacy, privacyCheck, privacyToggle, requestCheck, sendMessage } from "../controllers/messageController.js";
 
 
 const messageRouter=e.Router();
@@ -12,5 +12,7 @@ messageRouter.put("/mark/:id",protectRoute,markMessageAsSeen);
 messageRouter.post("/send/:id",protectRoute,sendMessage);
 messageRouter.post("/request/:id",protectRoute,connectionRequest);
 messageRouter.get("/check/:id", protectRoute,requestCheck);
-
+messageRouter.post("/privacy/:id",protectRoute,privacy);
+messageRouter.get("/privacycheck/:id",protectRoute,privacyCheck);
+messageRouter.get("/privacytoggle/:id",protectRoute,privacyToggle);
 export default messageRouter;

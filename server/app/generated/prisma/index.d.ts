@@ -19,6 +19,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
+ * Model privacy
+ * 
+ */
+export type privacy = $Result.DefaultSelection<Prisma.$privacyPayload>
+/**
  * Model song
  * 
  */
@@ -160,6 +165,16 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.privacy`: Exposes CRUD operations for the **privacy** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Privacies
+    * const privacies = await prisma.privacy.findMany()
+    * ```
+    */
+  get privacy(): Prisma.privacyDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.song`: Exposes CRUD operations for the **song** model.
@@ -625,6 +640,7 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
+    privacy: 'privacy',
     song: 'song',
     Message: 'Message',
     connection: 'connection'
@@ -643,7 +659,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "song" | "message" | "connection"
+      modelProps: "user" | "privacy" | "song" | "message" | "connection"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -718,6 +734,80 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      privacy: {
+        payload: Prisma.$privacyPayload<ExtArgs>
+        fields: Prisma.privacyFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.privacyFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$privacyPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.privacyFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$privacyPayload>
+          }
+          findFirst: {
+            args: Prisma.privacyFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$privacyPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.privacyFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$privacyPayload>
+          }
+          findMany: {
+            args: Prisma.privacyFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$privacyPayload>[]
+          }
+          create: {
+            args: Prisma.privacyCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$privacyPayload>
+          }
+          createMany: {
+            args: Prisma.privacyCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.privacyCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$privacyPayload>[]
+          }
+          delete: {
+            args: Prisma.privacyDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$privacyPayload>
+          }
+          update: {
+            args: Prisma.privacyUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$privacyPayload>
+          }
+          deleteMany: {
+            args: Prisma.privacyDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.privacyUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.privacyUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$privacyPayload>[]
+          }
+          upsert: {
+            args: Prisma.privacyUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$privacyPayload>
+          }
+          aggregate: {
+            args: Prisma.PrivacyAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePrivacy>
+          }
+          groupBy: {
+            args: Prisma.privacyGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PrivacyGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.privacyCountArgs<ExtArgs>
+            result: $Utils.Optional<PrivacyCountAggregateOutputType> | number
           }
         }
       }
@@ -1052,6 +1142,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
+    privacy?: privacyOmit
     song?: songOmit
     message?: MessageOmit
     connection?: connectionOmit
@@ -1198,6 +1289,8 @@ export namespace Prisma {
     mood: string | null
     purpose: string | null
     interest: string | null
+    instagram: string | null
+    facebook: string | null
     createdAt: Date | null
   }
 
@@ -1215,6 +1308,8 @@ export namespace Prisma {
     mood: string | null
     purpose: string | null
     interest: string | null
+    instagram: string | null
+    facebook: string | null
     createdAt: Date | null
   }
 
@@ -1232,6 +1327,8 @@ export namespace Prisma {
     mood: number
     purpose: number
     interest: number
+    instagram: number
+    facebook: number
     createdAt: number
     _all: number
   }
@@ -1251,6 +1348,8 @@ export namespace Prisma {
     mood?: true
     purpose?: true
     interest?: true
+    instagram?: true
+    facebook?: true
     createdAt?: true
   }
 
@@ -1268,6 +1367,8 @@ export namespace Prisma {
     mood?: true
     purpose?: true
     interest?: true
+    instagram?: true
+    facebook?: true
     createdAt?: true
   }
 
@@ -1285,6 +1386,8 @@ export namespace Prisma {
     mood?: true
     purpose?: true
     interest?: true
+    instagram?: true
+    facebook?: true
     createdAt?: true
     _all?: true
   }
@@ -1375,6 +1478,8 @@ export namespace Prisma {
     mood: string | null
     purpose: string | null
     interest: string | null
+    instagram: string | null
+    facebook: string | null
     createdAt: Date
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
@@ -1409,6 +1514,8 @@ export namespace Prisma {
     mood?: boolean
     purpose?: boolean
     interest?: boolean
+    instagram?: boolean
+    facebook?: boolean
     createdAt?: boolean
     recvMessages?: boolean | User$recvMessagesArgs<ExtArgs>
     sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
@@ -1429,6 +1536,8 @@ export namespace Prisma {
     mood?: boolean
     purpose?: boolean
     interest?: boolean
+    instagram?: boolean
+    facebook?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["user"]>
 
@@ -1446,6 +1555,8 @@ export namespace Prisma {
     mood?: boolean
     purpose?: boolean
     interest?: boolean
+    instagram?: boolean
+    facebook?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["user"]>
 
@@ -1463,10 +1574,12 @@ export namespace Prisma {
     mood?: boolean
     purpose?: boolean
     interest?: boolean
+    instagram?: boolean
+    facebook?: boolean
     createdAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "email" | "password" | "googleId" | "bio" | "avatar" | "birthday" | "location" | "gender" | "mood" | "purpose" | "interest" | "createdAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "email" | "password" | "googleId" | "bio" | "avatar" | "birthday" | "location" | "gender" | "mood" | "purpose" | "interest" | "instagram" | "facebook" | "createdAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     recvMessages?: boolean | User$recvMessagesArgs<ExtArgs>
     sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
@@ -1495,6 +1608,8 @@ export namespace Prisma {
       mood: string | null
       purpose: string | null
       interest: string | null
+      instagram: string | null
+      facebook: string | null
       createdAt: Date
     }, ExtArgs["result"]["user"]>
     composites: {}
@@ -1934,6 +2049,8 @@ export namespace Prisma {
     readonly mood: FieldRef<"User", 'String'>
     readonly purpose: FieldRef<"User", 'String'>
     readonly interest: FieldRef<"User", 'String'>
+    readonly instagram: FieldRef<"User", 'String'>
+    readonly facebook: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
   }
     
@@ -2386,6 +2503,1001 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model privacy
+   */
+
+  export type AggregatePrivacy = {
+    _count: PrivacyCountAggregateOutputType | null
+    _min: PrivacyMinAggregateOutputType | null
+    _max: PrivacyMaxAggregateOutputType | null
+  }
+
+  export type PrivacyMinAggregateOutputType = {
+    id: string | null
+    senderId: string | null
+    receiverId: string | null
+    instagramPreference: boolean | null
+    facebookPreference: boolean | null
+  }
+
+  export type PrivacyMaxAggregateOutputType = {
+    id: string | null
+    senderId: string | null
+    receiverId: string | null
+    instagramPreference: boolean | null
+    facebookPreference: boolean | null
+  }
+
+  export type PrivacyCountAggregateOutputType = {
+    id: number
+    senderId: number
+    receiverId: number
+    instagramPreference: number
+    facebookPreference: number
+    _all: number
+  }
+
+
+  export type PrivacyMinAggregateInputType = {
+    id?: true
+    senderId?: true
+    receiverId?: true
+    instagramPreference?: true
+    facebookPreference?: true
+  }
+
+  export type PrivacyMaxAggregateInputType = {
+    id?: true
+    senderId?: true
+    receiverId?: true
+    instagramPreference?: true
+    facebookPreference?: true
+  }
+
+  export type PrivacyCountAggregateInputType = {
+    id?: true
+    senderId?: true
+    receiverId?: true
+    instagramPreference?: true
+    facebookPreference?: true
+    _all?: true
+  }
+
+  export type PrivacyAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which privacy to aggregate.
+     */
+    where?: privacyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of privacies to fetch.
+     */
+    orderBy?: privacyOrderByWithRelationInput | privacyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: privacyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` privacies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` privacies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned privacies
+    **/
+    _count?: true | PrivacyCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PrivacyMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PrivacyMaxAggregateInputType
+  }
+
+  export type GetPrivacyAggregateType<T extends PrivacyAggregateArgs> = {
+        [P in keyof T & keyof AggregatePrivacy]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePrivacy[P]>
+      : GetScalarType<T[P], AggregatePrivacy[P]>
+  }
+
+
+
+
+  export type privacyGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: privacyWhereInput
+    orderBy?: privacyOrderByWithAggregationInput | privacyOrderByWithAggregationInput[]
+    by: PrivacyScalarFieldEnum[] | PrivacyScalarFieldEnum
+    having?: privacyScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PrivacyCountAggregateInputType | true
+    _min?: PrivacyMinAggregateInputType
+    _max?: PrivacyMaxAggregateInputType
+  }
+
+  export type PrivacyGroupByOutputType = {
+    id: string
+    senderId: string
+    receiverId: string
+    instagramPreference: boolean | null
+    facebookPreference: boolean | null
+    _count: PrivacyCountAggregateOutputType | null
+    _min: PrivacyMinAggregateOutputType | null
+    _max: PrivacyMaxAggregateOutputType | null
+  }
+
+  type GetPrivacyGroupByPayload<T extends privacyGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PrivacyGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PrivacyGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PrivacyGroupByOutputType[P]>
+            : GetScalarType<T[P], PrivacyGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type privacySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    senderId?: boolean
+    receiverId?: boolean
+    instagramPreference?: boolean
+    facebookPreference?: boolean
+  }, ExtArgs["result"]["privacy"]>
+
+  export type privacySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    senderId?: boolean
+    receiverId?: boolean
+    instagramPreference?: boolean
+    facebookPreference?: boolean
+  }, ExtArgs["result"]["privacy"]>
+
+  export type privacySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    senderId?: boolean
+    receiverId?: boolean
+    instagramPreference?: boolean
+    facebookPreference?: boolean
+  }, ExtArgs["result"]["privacy"]>
+
+  export type privacySelectScalar = {
+    id?: boolean
+    senderId?: boolean
+    receiverId?: boolean
+    instagramPreference?: boolean
+    facebookPreference?: boolean
+  }
+
+  export type privacyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "senderId" | "receiverId" | "instagramPreference" | "facebookPreference", ExtArgs["result"]["privacy"]>
+
+  export type $privacyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "privacy"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      senderId: string
+      receiverId: string
+      instagramPreference: boolean | null
+      facebookPreference: boolean | null
+    }, ExtArgs["result"]["privacy"]>
+    composites: {}
+  }
+
+  type privacyGetPayload<S extends boolean | null | undefined | privacyDefaultArgs> = $Result.GetResult<Prisma.$privacyPayload, S>
+
+  type privacyCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<privacyFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PrivacyCountAggregateInputType | true
+    }
+
+  export interface privacyDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['privacy'], meta: { name: 'privacy' } }
+    /**
+     * Find zero or one Privacy that matches the filter.
+     * @param {privacyFindUniqueArgs} args - Arguments to find a Privacy
+     * @example
+     * // Get one Privacy
+     * const privacy = await prisma.privacy.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends privacyFindUniqueArgs>(args: SelectSubset<T, privacyFindUniqueArgs<ExtArgs>>): Prisma__privacyClient<$Result.GetResult<Prisma.$privacyPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Privacy that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {privacyFindUniqueOrThrowArgs} args - Arguments to find a Privacy
+     * @example
+     * // Get one Privacy
+     * const privacy = await prisma.privacy.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends privacyFindUniqueOrThrowArgs>(args: SelectSubset<T, privacyFindUniqueOrThrowArgs<ExtArgs>>): Prisma__privacyClient<$Result.GetResult<Prisma.$privacyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Privacy that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {privacyFindFirstArgs} args - Arguments to find a Privacy
+     * @example
+     * // Get one Privacy
+     * const privacy = await prisma.privacy.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends privacyFindFirstArgs>(args?: SelectSubset<T, privacyFindFirstArgs<ExtArgs>>): Prisma__privacyClient<$Result.GetResult<Prisma.$privacyPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Privacy that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {privacyFindFirstOrThrowArgs} args - Arguments to find a Privacy
+     * @example
+     * // Get one Privacy
+     * const privacy = await prisma.privacy.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends privacyFindFirstOrThrowArgs>(args?: SelectSubset<T, privacyFindFirstOrThrowArgs<ExtArgs>>): Prisma__privacyClient<$Result.GetResult<Prisma.$privacyPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Privacies that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {privacyFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Privacies
+     * const privacies = await prisma.privacy.findMany()
+     * 
+     * // Get first 10 Privacies
+     * const privacies = await prisma.privacy.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const privacyWithIdOnly = await prisma.privacy.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends privacyFindManyArgs>(args?: SelectSubset<T, privacyFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$privacyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Privacy.
+     * @param {privacyCreateArgs} args - Arguments to create a Privacy.
+     * @example
+     * // Create one Privacy
+     * const Privacy = await prisma.privacy.create({
+     *   data: {
+     *     // ... data to create a Privacy
+     *   }
+     * })
+     * 
+     */
+    create<T extends privacyCreateArgs>(args: SelectSubset<T, privacyCreateArgs<ExtArgs>>): Prisma__privacyClient<$Result.GetResult<Prisma.$privacyPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Privacies.
+     * @param {privacyCreateManyArgs} args - Arguments to create many Privacies.
+     * @example
+     * // Create many Privacies
+     * const privacy = await prisma.privacy.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends privacyCreateManyArgs>(args?: SelectSubset<T, privacyCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Privacies and returns the data saved in the database.
+     * @param {privacyCreateManyAndReturnArgs} args - Arguments to create many Privacies.
+     * @example
+     * // Create many Privacies
+     * const privacy = await prisma.privacy.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Privacies and only return the `id`
+     * const privacyWithIdOnly = await prisma.privacy.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends privacyCreateManyAndReturnArgs>(args?: SelectSubset<T, privacyCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$privacyPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Privacy.
+     * @param {privacyDeleteArgs} args - Arguments to delete one Privacy.
+     * @example
+     * // Delete one Privacy
+     * const Privacy = await prisma.privacy.delete({
+     *   where: {
+     *     // ... filter to delete one Privacy
+     *   }
+     * })
+     * 
+     */
+    delete<T extends privacyDeleteArgs>(args: SelectSubset<T, privacyDeleteArgs<ExtArgs>>): Prisma__privacyClient<$Result.GetResult<Prisma.$privacyPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Privacy.
+     * @param {privacyUpdateArgs} args - Arguments to update one Privacy.
+     * @example
+     * // Update one Privacy
+     * const privacy = await prisma.privacy.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends privacyUpdateArgs>(args: SelectSubset<T, privacyUpdateArgs<ExtArgs>>): Prisma__privacyClient<$Result.GetResult<Prisma.$privacyPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Privacies.
+     * @param {privacyDeleteManyArgs} args - Arguments to filter Privacies to delete.
+     * @example
+     * // Delete a few Privacies
+     * const { count } = await prisma.privacy.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends privacyDeleteManyArgs>(args?: SelectSubset<T, privacyDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Privacies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {privacyUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Privacies
+     * const privacy = await prisma.privacy.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends privacyUpdateManyArgs>(args: SelectSubset<T, privacyUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Privacies and returns the data updated in the database.
+     * @param {privacyUpdateManyAndReturnArgs} args - Arguments to update many Privacies.
+     * @example
+     * // Update many Privacies
+     * const privacy = await prisma.privacy.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Privacies and only return the `id`
+     * const privacyWithIdOnly = await prisma.privacy.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends privacyUpdateManyAndReturnArgs>(args: SelectSubset<T, privacyUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$privacyPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Privacy.
+     * @param {privacyUpsertArgs} args - Arguments to update or create a Privacy.
+     * @example
+     * // Update or create a Privacy
+     * const privacy = await prisma.privacy.upsert({
+     *   create: {
+     *     // ... data to create a Privacy
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Privacy we want to update
+     *   }
+     * })
+     */
+    upsert<T extends privacyUpsertArgs>(args: SelectSubset<T, privacyUpsertArgs<ExtArgs>>): Prisma__privacyClient<$Result.GetResult<Prisma.$privacyPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Privacies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {privacyCountArgs} args - Arguments to filter Privacies to count.
+     * @example
+     * // Count the number of Privacies
+     * const count = await prisma.privacy.count({
+     *   where: {
+     *     // ... the filter for the Privacies we want to count
+     *   }
+     * })
+    **/
+    count<T extends privacyCountArgs>(
+      args?: Subset<T, privacyCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PrivacyCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Privacy.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PrivacyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PrivacyAggregateArgs>(args: Subset<T, PrivacyAggregateArgs>): Prisma.PrismaPromise<GetPrivacyAggregateType<T>>
+
+    /**
+     * Group by Privacy.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {privacyGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends privacyGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: privacyGroupByArgs['orderBy'] }
+        : { orderBy?: privacyGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, privacyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPrivacyGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the privacy model
+   */
+  readonly fields: privacyFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for privacy.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__privacyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the privacy model
+   */
+  interface privacyFieldRefs {
+    readonly id: FieldRef<"privacy", 'String'>
+    readonly senderId: FieldRef<"privacy", 'String'>
+    readonly receiverId: FieldRef<"privacy", 'String'>
+    readonly instagramPreference: FieldRef<"privacy", 'Boolean'>
+    readonly facebookPreference: FieldRef<"privacy", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * privacy findUnique
+   */
+  export type privacyFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the privacy
+     */
+    select?: privacySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the privacy
+     */
+    omit?: privacyOmit<ExtArgs> | null
+    /**
+     * Filter, which privacy to fetch.
+     */
+    where: privacyWhereUniqueInput
+  }
+
+  /**
+   * privacy findUniqueOrThrow
+   */
+  export type privacyFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the privacy
+     */
+    select?: privacySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the privacy
+     */
+    omit?: privacyOmit<ExtArgs> | null
+    /**
+     * Filter, which privacy to fetch.
+     */
+    where: privacyWhereUniqueInput
+  }
+
+  /**
+   * privacy findFirst
+   */
+  export type privacyFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the privacy
+     */
+    select?: privacySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the privacy
+     */
+    omit?: privacyOmit<ExtArgs> | null
+    /**
+     * Filter, which privacy to fetch.
+     */
+    where?: privacyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of privacies to fetch.
+     */
+    orderBy?: privacyOrderByWithRelationInput | privacyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for privacies.
+     */
+    cursor?: privacyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` privacies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` privacies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of privacies.
+     */
+    distinct?: PrivacyScalarFieldEnum | PrivacyScalarFieldEnum[]
+  }
+
+  /**
+   * privacy findFirstOrThrow
+   */
+  export type privacyFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the privacy
+     */
+    select?: privacySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the privacy
+     */
+    omit?: privacyOmit<ExtArgs> | null
+    /**
+     * Filter, which privacy to fetch.
+     */
+    where?: privacyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of privacies to fetch.
+     */
+    orderBy?: privacyOrderByWithRelationInput | privacyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for privacies.
+     */
+    cursor?: privacyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` privacies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` privacies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of privacies.
+     */
+    distinct?: PrivacyScalarFieldEnum | PrivacyScalarFieldEnum[]
+  }
+
+  /**
+   * privacy findMany
+   */
+  export type privacyFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the privacy
+     */
+    select?: privacySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the privacy
+     */
+    omit?: privacyOmit<ExtArgs> | null
+    /**
+     * Filter, which privacies to fetch.
+     */
+    where?: privacyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of privacies to fetch.
+     */
+    orderBy?: privacyOrderByWithRelationInput | privacyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing privacies.
+     */
+    cursor?: privacyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` privacies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` privacies.
+     */
+    skip?: number
+    distinct?: PrivacyScalarFieldEnum | PrivacyScalarFieldEnum[]
+  }
+
+  /**
+   * privacy create
+   */
+  export type privacyCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the privacy
+     */
+    select?: privacySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the privacy
+     */
+    omit?: privacyOmit<ExtArgs> | null
+    /**
+     * The data needed to create a privacy.
+     */
+    data: XOR<privacyCreateInput, privacyUncheckedCreateInput>
+  }
+
+  /**
+   * privacy createMany
+   */
+  export type privacyCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many privacies.
+     */
+    data: privacyCreateManyInput | privacyCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * privacy createManyAndReturn
+   */
+  export type privacyCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the privacy
+     */
+    select?: privacySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the privacy
+     */
+    omit?: privacyOmit<ExtArgs> | null
+    /**
+     * The data used to create many privacies.
+     */
+    data: privacyCreateManyInput | privacyCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * privacy update
+   */
+  export type privacyUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the privacy
+     */
+    select?: privacySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the privacy
+     */
+    omit?: privacyOmit<ExtArgs> | null
+    /**
+     * The data needed to update a privacy.
+     */
+    data: XOR<privacyUpdateInput, privacyUncheckedUpdateInput>
+    /**
+     * Choose, which privacy to update.
+     */
+    where: privacyWhereUniqueInput
+  }
+
+  /**
+   * privacy updateMany
+   */
+  export type privacyUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update privacies.
+     */
+    data: XOR<privacyUpdateManyMutationInput, privacyUncheckedUpdateManyInput>
+    /**
+     * Filter which privacies to update
+     */
+    where?: privacyWhereInput
+    /**
+     * Limit how many privacies to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * privacy updateManyAndReturn
+   */
+  export type privacyUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the privacy
+     */
+    select?: privacySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the privacy
+     */
+    omit?: privacyOmit<ExtArgs> | null
+    /**
+     * The data used to update privacies.
+     */
+    data: XOR<privacyUpdateManyMutationInput, privacyUncheckedUpdateManyInput>
+    /**
+     * Filter which privacies to update
+     */
+    where?: privacyWhereInput
+    /**
+     * Limit how many privacies to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * privacy upsert
+   */
+  export type privacyUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the privacy
+     */
+    select?: privacySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the privacy
+     */
+    omit?: privacyOmit<ExtArgs> | null
+    /**
+     * The filter to search for the privacy to update in case it exists.
+     */
+    where: privacyWhereUniqueInput
+    /**
+     * In case the privacy found by the `where` argument doesn't exist, create a new privacy with this data.
+     */
+    create: XOR<privacyCreateInput, privacyUncheckedCreateInput>
+    /**
+     * In case the privacy was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<privacyUpdateInput, privacyUncheckedUpdateInput>
+  }
+
+  /**
+   * privacy delete
+   */
+  export type privacyDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the privacy
+     */
+    select?: privacySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the privacy
+     */
+    omit?: privacyOmit<ExtArgs> | null
+    /**
+     * Filter which privacy to delete.
+     */
+    where: privacyWhereUniqueInput
+  }
+
+  /**
+   * privacy deleteMany
+   */
+  export type privacyDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which privacies to delete
+     */
+    where?: privacyWhereInput
+    /**
+     * Limit how many privacies to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * privacy without action
+   */
+  export type privacyDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the privacy
+     */
+    select?: privacySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the privacy
+     */
+    omit?: privacyOmit<ExtArgs> | null
   }
 
 
@@ -5507,10 +6619,23 @@ export namespace Prisma {
     mood: 'mood',
     purpose: 'purpose',
     interest: 'interest',
+    instagram: 'instagram',
+    facebook: 'facebook',
     createdAt: 'createdAt'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+  export const PrivacyScalarFieldEnum: {
+    id: 'id',
+    senderId: 'senderId',
+    receiverId: 'receiverId',
+    instagramPreference: 'instagramPreference',
+    facebookPreference: 'facebookPreference'
+  };
+
+  export type PrivacyScalarFieldEnum = (typeof PrivacyScalarFieldEnum)[keyof typeof PrivacyScalarFieldEnum]
 
 
   export const SongScalarFieldEnum: {
@@ -5604,6 +6729,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -5614,13 +6746,6 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -5658,6 +6783,8 @@ export namespace Prisma {
     mood?: StringNullableFilter<"User"> | string | null
     purpose?: StringNullableFilter<"User"> | string | null
     interest?: StringNullableFilter<"User"> | string | null
+    instagram?: StringNullableFilter<"User"> | string | null
+    facebook?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     recvMessages?: MessageListRelationFilter
     sentMessages?: MessageListRelationFilter
@@ -5677,6 +6804,8 @@ export namespace Prisma {
     mood?: SortOrderInput | SortOrder
     purpose?: SortOrderInput | SortOrder
     interest?: SortOrderInput | SortOrder
+    instagram?: SortOrderInput | SortOrder
+    facebook?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     recvMessages?: MessageOrderByRelationAggregateInput
     sentMessages?: MessageOrderByRelationAggregateInput
@@ -5699,6 +6828,8 @@ export namespace Prisma {
     mood?: StringNullableFilter<"User"> | string | null
     purpose?: StringNullableFilter<"User"> | string | null
     interest?: StringNullableFilter<"User"> | string | null
+    instagram?: StringNullableFilter<"User"> | string | null
+    facebook?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     recvMessages?: MessageListRelationFilter
     sentMessages?: MessageListRelationFilter
@@ -5718,6 +6849,8 @@ export namespace Prisma {
     mood?: SortOrderInput | SortOrder
     purpose?: SortOrderInput | SortOrder
     interest?: SortOrderInput | SortOrder
+    instagram?: SortOrderInput | SortOrder
+    facebook?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -5741,7 +6874,62 @@ export namespace Prisma {
     mood?: StringNullableWithAggregatesFilter<"User"> | string | null
     purpose?: StringNullableWithAggregatesFilter<"User"> | string | null
     interest?: StringNullableWithAggregatesFilter<"User"> | string | null
+    instagram?: StringNullableWithAggregatesFilter<"User"> | string | null
+    facebook?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+  }
+
+  export type privacyWhereInput = {
+    AND?: privacyWhereInput | privacyWhereInput[]
+    OR?: privacyWhereInput[]
+    NOT?: privacyWhereInput | privacyWhereInput[]
+    id?: StringFilter<"privacy"> | string
+    senderId?: StringFilter<"privacy"> | string
+    receiverId?: StringFilter<"privacy"> | string
+    instagramPreference?: BoolNullableFilter<"privacy"> | boolean | null
+    facebookPreference?: BoolNullableFilter<"privacy"> | boolean | null
+  }
+
+  export type privacyOrderByWithRelationInput = {
+    id?: SortOrder
+    senderId?: SortOrder
+    receiverId?: SortOrder
+    instagramPreference?: SortOrderInput | SortOrder
+    facebookPreference?: SortOrderInput | SortOrder
+  }
+
+  export type privacyWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    senderId_receiverId?: privacySenderIdReceiverIdCompoundUniqueInput
+    AND?: privacyWhereInput | privacyWhereInput[]
+    OR?: privacyWhereInput[]
+    NOT?: privacyWhereInput | privacyWhereInput[]
+    senderId?: StringFilter<"privacy"> | string
+    receiverId?: StringFilter<"privacy"> | string
+    instagramPreference?: BoolNullableFilter<"privacy"> | boolean | null
+    facebookPreference?: BoolNullableFilter<"privacy"> | boolean | null
+  }, "id" | "senderId_receiverId">
+
+  export type privacyOrderByWithAggregationInput = {
+    id?: SortOrder
+    senderId?: SortOrder
+    receiverId?: SortOrder
+    instagramPreference?: SortOrderInput | SortOrder
+    facebookPreference?: SortOrderInput | SortOrder
+    _count?: privacyCountOrderByAggregateInput
+    _max?: privacyMaxOrderByAggregateInput
+    _min?: privacyMinOrderByAggregateInput
+  }
+
+  export type privacyScalarWhereWithAggregatesInput = {
+    AND?: privacyScalarWhereWithAggregatesInput | privacyScalarWhereWithAggregatesInput[]
+    OR?: privacyScalarWhereWithAggregatesInput[]
+    NOT?: privacyScalarWhereWithAggregatesInput | privacyScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"privacy"> | string
+    senderId?: StringWithAggregatesFilter<"privacy"> | string
+    receiverId?: StringWithAggregatesFilter<"privacy"> | string
+    instagramPreference?: BoolNullableWithAggregatesFilter<"privacy"> | boolean | null
+    facebookPreference?: BoolNullableWithAggregatesFilter<"privacy"> | boolean | null
   }
 
   export type songWhereInput = {
@@ -5922,6 +7110,8 @@ export namespace Prisma {
     mood?: string | null
     purpose?: string | null
     interest?: string | null
+    instagram?: string | null
+    facebook?: string | null
     createdAt?: Date | string
     recvMessages?: MessageCreateNestedManyWithoutReceiverInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
@@ -5941,6 +7131,8 @@ export namespace Prisma {
     mood?: string | null
     purpose?: string | null
     interest?: string | null
+    instagram?: string | null
+    facebook?: string | null
     createdAt?: Date | string
     recvMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
@@ -5960,6 +7152,8 @@ export namespace Prisma {
     mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recvMessages?: MessageUpdateManyWithoutReceiverNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
@@ -5979,6 +7173,8 @@ export namespace Prisma {
     mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recvMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
@@ -5998,6 +7194,8 @@ export namespace Prisma {
     mood?: string | null
     purpose?: string | null
     interest?: string | null
+    instagram?: string | null
+    facebook?: string | null
     createdAt?: Date | string
   }
 
@@ -6015,6 +7213,8 @@ export namespace Prisma {
     mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -6032,7 +7232,65 @@ export namespace Prisma {
     mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type privacyCreateInput = {
+    id?: string
+    senderId: string
+    receiverId: string
+    instagramPreference?: boolean | null
+    facebookPreference?: boolean | null
+  }
+
+  export type privacyUncheckedCreateInput = {
+    id?: string
+    senderId: string
+    receiverId: string
+    instagramPreference?: boolean | null
+    facebookPreference?: boolean | null
+  }
+
+  export type privacyUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
+    receiverId?: StringFieldUpdateOperationsInput | string
+    instagramPreference?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    facebookPreference?: NullableBoolFieldUpdateOperationsInput | boolean | null
+  }
+
+  export type privacyUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
+    receiverId?: StringFieldUpdateOperationsInput | string
+    instagramPreference?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    facebookPreference?: NullableBoolFieldUpdateOperationsInput | boolean | null
+  }
+
+  export type privacyCreateManyInput = {
+    id?: string
+    senderId: string
+    receiverId: string
+    instagramPreference?: boolean | null
+    facebookPreference?: boolean | null
+  }
+
+  export type privacyUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
+    receiverId?: StringFieldUpdateOperationsInput | string
+    instagramPreference?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    facebookPreference?: NullableBoolFieldUpdateOperationsInput | boolean | null
+  }
+
+  export type privacyUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
+    receiverId?: StringFieldUpdateOperationsInput | string
+    instagramPreference?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    facebookPreference?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type songCreateInput = {
@@ -6282,6 +7540,8 @@ export namespace Prisma {
     mood?: SortOrder
     purpose?: SortOrder
     interest?: SortOrder
+    instagram?: SortOrder
+    facebook?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -6299,6 +7559,8 @@ export namespace Prisma {
     mood?: SortOrder
     purpose?: SortOrder
     interest?: SortOrder
+    instagram?: SortOrder
+    facebook?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -6316,6 +7578,8 @@ export namespace Prisma {
     mood?: SortOrder
     purpose?: SortOrder
     interest?: SortOrder
+    instagram?: SortOrder
+    facebook?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -6381,6 +7645,48 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type BoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
+  export type privacySenderIdReceiverIdCompoundUniqueInput = {
+    senderId: string
+    receiverId: string
+  }
+
+  export type privacyCountOrderByAggregateInput = {
+    id?: SortOrder
+    senderId?: SortOrder
+    receiverId?: SortOrder
+    instagramPreference?: SortOrder
+    facebookPreference?: SortOrder
+  }
+
+  export type privacyMaxOrderByAggregateInput = {
+    id?: SortOrder
+    senderId?: SortOrder
+    receiverId?: SortOrder
+    instagramPreference?: SortOrder
+    facebookPreference?: SortOrder
+  }
+
+  export type privacyMinOrderByAggregateInput = {
+    id?: SortOrder
+    senderId?: SortOrder
+    receiverId?: SortOrder
+    instagramPreference?: SortOrder
+    facebookPreference?: SortOrder
+  }
+
+  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -6608,6 +7914,10 @@ export namespace Prisma {
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
   }
 
+  export type NullableBoolFieldUpdateOperationsInput = {
+    set?: boolean | null
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -6782,6 +8092,19 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
+  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -6932,6 +8255,8 @@ export namespace Prisma {
     mood?: string | null
     purpose?: string | null
     interest?: string | null
+    instagram?: string | null
+    facebook?: string | null
     createdAt?: Date | string
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
   }
@@ -6950,6 +8275,8 @@ export namespace Prisma {
     mood?: string | null
     purpose?: string | null
     interest?: string | null
+    instagram?: string | null
+    facebook?: string | null
     createdAt?: Date | string
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
   }
@@ -6973,6 +8300,8 @@ export namespace Prisma {
     mood?: string | null
     purpose?: string | null
     interest?: string | null
+    instagram?: string | null
+    facebook?: string | null
     createdAt?: Date | string
     recvMessages?: MessageCreateNestedManyWithoutReceiverInput
   }
@@ -6991,6 +8320,8 @@ export namespace Prisma {
     mood?: string | null
     purpose?: string | null
     interest?: string | null
+    instagram?: string | null
+    facebook?: string | null
     createdAt?: Date | string
     recvMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
   }
@@ -7025,6 +8356,8 @@ export namespace Prisma {
     mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
   }
@@ -7043,6 +8376,8 @@ export namespace Prisma {
     mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
   }
@@ -7072,6 +8407,8 @@ export namespace Prisma {
     mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recvMessages?: MessageUpdateManyWithoutReceiverNestedInput
   }
@@ -7090,6 +8427,8 @@ export namespace Prisma {
     mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recvMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
   }

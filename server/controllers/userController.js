@@ -108,7 +108,7 @@ export const checkAuth = (req, res) => {
 };
 export const updateProfile = async (req, res) => {
     try {
-        const { fullName, avatar, bio, mood } = req.body;
+        const { fullName, avatar, bio, mood, instagram, facebook } = req.body;
         const userId = req.user.id; // Use .id instead of ._id
 
         let profilePicUrl = avatar;
@@ -127,6 +127,8 @@ console.log("Mood received:", mood);
                 bio, 
                 mood,
                 avatar: profilePicUrl,
+                instagram,
+                facebook
             },
         });
 console.log("updatedUser:", updatedUser);
@@ -137,3 +139,4 @@ console.log("updatedUser:", updatedUser);
         res.json({ success: false, message: error.message });
     }
 };
+
