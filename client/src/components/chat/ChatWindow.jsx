@@ -9,6 +9,7 @@ import { FiX } from "react-icons/fi";
 import { FiMusic } from "react-icons/fi";
 import { MdPhotoLibrary } from "react-icons/md";
 import ChatPage from "../../pages/ChatPage";
+import { useNavigate } from "react-router-dom";
 
 
 const ChatWindow = ({setOpenProfile}) => {
@@ -36,6 +37,7 @@ const {
 
   const [input, setInput] = useState('');
   const scrollRef = useRef(null);
+  const navigate=useNavigate();
 useEffect(()=>{
     getSongs();
     console.log("the songs are :",song);
@@ -53,7 +55,11 @@ useEffect(()=>{
     }
   }, [selectedUser, getMessages]);
 
-
+const handleBack = () => {
+  setSelectedUser(null);
+  navigate('/');
+  setTimeout(()=>navigate('/messages'),10);
+};
   const handleSendMessage = async (e) => {
     e.preventDefault();
     if (input.trim() === "") return;
@@ -125,7 +131,7 @@ useEffect(()=>{
       <div className="px-4 py-3 md:px-6 md:py-4 flex justify-between items-center border-b border-gray-100 shrink-0 z-10 bg-white">
         <div className="flex items-center gap-3 cursor-pointer" onClick={()=>setOpenProfile(true)}>
           
-          <button onClick={() => setSelectedUser(null)} className="md:hidden p-2 -ml-2 text-gray-500">
+          <button onClick={handleBack} className="md:hidden p-2 -ml-2 text-gray-500">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" />
             </svg>

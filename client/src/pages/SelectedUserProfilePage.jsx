@@ -11,9 +11,12 @@ const SelectedUserProfilePage = () => {
   const{status,setStatus} = useContext(ChatContext);
   const{authUser}= useContext(AuthContext);
   const [interests] = useState(['Travel', 'Art', 'Coffee']);
-  
+  const navigate = useNavigate();
 
- 
+ useEffect(()=>{
+  if(!selectedUser?.id)
+    navigate('/');
+ },[])
 
   const handleSendRequest = (newStatus) => {
     console.log(newStatus);
