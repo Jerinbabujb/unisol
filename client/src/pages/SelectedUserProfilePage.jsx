@@ -16,7 +16,12 @@ const SelectedUserProfilePage = () => {
  useEffect(()=>{
   if(!selectedUser?.id)
     navigate('/');
- },[])
+ },[]);
+
+ 
+   const handleBack=()=>{
+    navigate("/");
+  }
 
   const handleSendRequest = (newStatus) => {
     console.log(newStatus);
@@ -47,6 +52,29 @@ useEffect(() => {
     selectedUser && (
       <div className="min-h-screen bg-[#FDF8F9] flex flex-col items-center py-12 px-4 font-sans">
         {/* Header */}
+        <div className="w-full max-w-5xl relative mb-10 flex items-center justify-center">
+
+  {/* Back Button */}
+  <button
+    onClick={handleBack}
+    className="absolute left-0 p-2 text-gray-500 hover:text-gray-700 transition"
+  >
+    <svg
+      className="w-6 h-6"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2.5"
+        d="M15 19l-7-7 7-7"
+      />
+    </svg>
+  </button>
+</div>
+
         <div className="text-center mb-10">
           <h1 className="text-4xl font-bold text-gray-800 mb-2">
             {selectedUser.fullName}

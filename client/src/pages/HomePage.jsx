@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import SideBar from '../components/SideBar';
 import FeedContainer from '../components/FeedContainer';
 import RightSideBar from '../components/RightSideBar';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
+  const navigate=useNavigate();
   return (
     <div className="flex h-screen w-full bg-[#F9F9F9] font-sans text-slate-800 overflow-hidden relative">
       
@@ -40,10 +41,10 @@ const HomePage = () => {
 
       {/* MOBILE BOTTOM TAB BAR */}
       <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-6 py-3 flex justify-between items-center z-40">
-        <button className="text-pink-500 text-2xl">🧭</button>
-        <button className="text-gray-400 text-2xl">💬</button>
+        <button onClick={()=>navigate('/')} className="text-pink-500 text-2xl">🧭</button>
+        <button onClick={()=>navigate('/messages')} className="text-gray-400 text-2xl">💬</button>
         <button className="text-gray-400 text-2xl">❤️</button>
-        <button className="text-gray-400 text-2xl">👤</button>
+        <button onClick={()=>navigate('/profile')} className="text-gray-400 text-2xl">👤</button>
       </nav>
     </div>
   );
