@@ -2,11 +2,13 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import assets from '../assets';
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
 
 const ProfilePage = () => {
   const { authUser, updateProfile } = useContext(AuthContext);
   const navigate = useNavigate();
-
+  const [open,setOpen]= useState(false);
   // States
   const [selectedImg, setSelectedImg] = useState(null);
   const [name, setName] = useState(authUser?.fullName || "");
@@ -15,6 +17,7 @@ const ProfilePage = () => {
   const [instagram, setInstagram]= useState(authUser?.instagram||'');
   const [facebook,setFacebook]= useState(authUser?.facebook||'');
   const [interests, setInterests] = useState(['Travel', 'Art', 'Coffee']);
+  const [index, setIndex] = useState(-1);
 
   const handleBack=()=>{
     navigate("/");
@@ -37,6 +40,11 @@ const ProfilePage = () => {
       navigate("/");
     }
   };
+  const images = [
+    { src: assets.pic1 },
+    { src: assets.pic2 },
+    { src: assets.pic3 },
+  ];
 
   return (
     <div className="min-h-screen bg-[#FDF8F9] flex flex-col items-center py-12 px-4 font-sans">
@@ -108,17 +116,26 @@ const ProfilePage = () => {
           <div className="bg-white p-8 rounded-[40px] shadow-sm border border-gray-100">
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-xl font-bold text-gray-800">Photo Gallery</h3>
-              <span className="bg-[#FFE5EE] text-[#ED719E] px-3 py-1 rounded-full text-xs font-bold">4/6 Slots</span>
+              <span className="bg-[#FFE5EE] text-[#ED719E] px-3 py-1 rounded-full text-xs font-bold">3/6 Slots</span>
             </div>
-            <div className="grid grid-cols-3 gap-4 mb-4">
-               {/* Placeholders for Gallery */}
-               <div className="aspect-square bg-gray-100 rounded-3xl overflow-hidden"><img src={assets.pic1} className="w-full h-full object-cover"/></div>
-               <div className="aspect-square bg-gray-100 rounded-3xl overflow-hidden"><img src={assets.pic2} className="w-full h-full object-cover"/></div>
-               <div className="aspect-square bg-gray-100 rounded-3xl overflow-hidden"><img src={assets.pic3} className="w-full h-full object-cover"/></div>
-               <div className="aspect-square border-2 border-dashed border-pink-200 flex flex-col items-center justify-center rounded-3xl cursor-pointer">
-                  <div className="text-[#ED719E] text-xs font-bold">ADD</div>
-               </div>
-            </div>
+            <div className="grid grid-cols-3 gap-4">
+      {images.map((img, i) => (
+        <div key={i} className="aspect-square bg-gray-100 rounded-3xl overflow-hidden cursor-pointer">
+          <img 
+            src={img.src} 
+            onClick={() => setIndex(i)} 
+            className="w-full h-full object-cover hover:scale-105 transition-transform"
+          />
+        </div>
+      ))}
+
+      <Lightbox
+        index={index}
+        open={index >= 0}
+        close={() => setIndex(-1)}
+        slides={images}
+      />
+    </div>
             <p className="text-center text-gray-400 text-xs italic">Drag and drop to rearrange photos</p>
           </div>
         </div>

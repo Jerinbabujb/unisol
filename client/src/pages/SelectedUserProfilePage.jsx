@@ -4,6 +4,8 @@ import { ChatContext } from '../../context/ChatContext';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { FaFacebook, FaInstagram } from "react-icons/fa";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
 
 const SelectedUserProfilePage = () => {
   const { selectedUser,sendRequest, requestCheck,checkReciver,checkSend,instagramPreference,
@@ -11,14 +13,19 @@ const SelectedUserProfilePage = () => {
   const{status,setStatus} = useContext(ChatContext);
   const{authUser}= useContext(AuthContext);
   const [interests] = useState(['Travel', 'Art', 'Coffee']);
+  const [index, setIndex] = useState(-1);
   const navigate = useNavigate();
 
  useEffect(()=>{
   if(!selectedUser?.id)
     navigate('/');
  },[]);
+ const images = [
+    { src: assets.pic1 },
+    { src: assets.pic2 },
+    { src: assets.pic3 },
+  ];
 
- 
    const handleBack=()=>{
     navigate("/");
   }
@@ -174,17 +181,24 @@ useEffect(() => {
                 </span>
               </div>
 
-              <div className="grid grid-cols-3 gap-4">
-                <div className="aspect-square bg-gray-100 rounded-3xl overflow-hidden">
-                  <img src={assets.pic1} className="w-full h-full object-cover" />
-                </div>
-                <div className="aspect-square bg-gray-100 rounded-3xl overflow-hidden">
-                  <img src={assets.pic2} className="w-full h-full object-cover" />
-                </div>
-                <div className="aspect-square bg-gray-100 rounded-3xl overflow-hidden">
-                  <img src={assets.pic3} className="w-full h-full object-cover" />
-                </div>
-              </div>
+                <div className="grid grid-cols-3 gap-4">
+      {images.map((img, i) => (
+        <div key={i} className="aspect-square bg-gray-100 rounded-3xl overflow-hidden cursor-pointer">
+          <img 
+            src={img.src} 
+            onClick={() => setIndex(i)} 
+            className="w-full h-full object-cover hover:scale-105 transition-transform"
+          />
+        </div>
+      ))}
+
+      <Lightbox
+        index={index}
+        open={index >= 0}
+        close={() => setIndex(-1)}
+        slides={images}
+      />
+    </div>
             </div>
           </div>
 
