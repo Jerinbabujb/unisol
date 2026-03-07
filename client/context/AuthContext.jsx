@@ -39,8 +39,9 @@ export const AuthProvider = ({ children }) => {
       socket.auth = { userId: authUser.id };
       socket.connect();
       console.log("🟢 SOCKET CONNECTED:", authUser.id);
-
       socket.on("getOnlineUsers", setOnlineUsers);
+            console.log("onlineUsers",onlineUsers)
+
     }
 
     if (!authUser && socket.connected) {
@@ -52,6 +53,10 @@ export const AuthProvider = ({ children }) => {
       socket.off("getOnlineUsers");
     };
   }, [authUser]);
+
+  useEffect(() => {
+  console.log("Updated onlineUsers:", onlineUsers);
+}, [onlineUsers]);
 
   /* -------------------- LOGIN -------------------- */
   const login = async (state, credentials) => {

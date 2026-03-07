@@ -12,7 +12,6 @@ const SelectedUserProfilePage = () => {
         facebookPreference  } = useContext(ChatContext);
   const{status,setStatus} = useContext(ChatContext);
   const{authUser}= useContext(AuthContext);
-  const [interests] = useState(['Travel', 'Art', 'Coffee']);
   const [index, setIndex] = useState(-1);
   const navigate = useNavigate();
 
@@ -34,9 +33,34 @@ const SelectedUserProfilePage = () => {
     console.log(newStatus);
     sendRequest(newStatus);
   };
+
+
+  useEffect(()=>{
+    console.log("the selected user ids",selectedUser?.id);
+  },[selectedUser?.id]);
+
+
+  useEffect(() => {
+  if (!selectedUser?.id) return;
+
+  setStatus("pending"); // reset immediately
+
+  const check = async () => {
+    const result = await requestCheck();
+
+    console.log("result", result);
+
+    if (!result) {
+      setStatus("pending");
+    } else {
+      setStatus(result.status);
+    }
+  };
+
+  check();
+}, [selectedUser?.id]);
 useEffect(() => {
   const check=async()=>{
-    console.log("selecteduser",selectedUser)
   if (selectedUser?.id) {
     const result=await requestCheck();
     console.log("result",result);
@@ -268,7 +292,7 @@ useEffect(() => {
                   Interests
                 </label>
                 <div className="flex flex-wrap gap-2">
-                  {interests.map((item) => (
+                  {selectedUser.interest?.map((item) => (
                     <div
                       key={item}
                       className="bg-[#FFE5EE] text-[#ED719E] px-4 py-2 rounded-full text-sm font-semibold"

@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 
 const ChatWindow = ({setOpenProfile}) => {
   const { selectedUser, setSelectedUser, messages, getMessages, sendMessage, getSongs, song } = useContext(ChatContext);
-  const { authUser } = useContext(AuthContext);
+  const { authUser,onlineUsers } = useContext(AuthContext);
 const {
   audioRef,
   currentSong,
@@ -139,9 +139,11 @@ const handleBack = () => {
           <img src={selectedUser.avatar || assets.logo} className="w-10 h-10 rounded-full object-cover" alt="" />
           <div>
             <h3 className="font-bold text-sm md:text-base">{selectedUser.fullName}</h3>
+            {onlineUsers &&
             <p className="text-[10px] text-green-500 flex items-center gap-1">
               <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span> Active now
             </p>
+}
           </div>
         </div>
 

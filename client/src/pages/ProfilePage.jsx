@@ -16,7 +16,7 @@ const ProfilePage = () => {
   const [mood,setMood] = useState(authUser?.mood ||"");
   const [instagram, setInstagram]= useState(authUser?.instagram||'');
   const [facebook,setFacebook]= useState(authUser?.facebook||'');
-  const [interests, setInterests] = useState(['Travel', 'Art', 'Coffee']);
+  const [interests, setInterests] = useState(authUser?.interest||[]);
   const [index, setIndex] = useState(-1);
 
   const handleBack=()=>{
@@ -213,7 +213,7 @@ const ProfilePage = () => {
               <label className="block text-[#9D7183] text-sm font-bold mb-4 ml-1">Interests</label>
               <div className="flex flex-wrap gap-2">
                 {interests.map(item => (
-                  <div key={item} className="bg-[#FFE5EE] text-[#ED719E] px-4 py-2 rounded-full flex items-center gap-2 text-sm font-semibold">
+                  <div key={index} className="bg-[#FFE5EE] text-[#ED719E] px-4 py-2 rounded-full flex items-center gap-2 text-sm font-semibold">
                     {item} <span className="cursor-pointer text-lg">×</span>
                   </div>
                 ))}

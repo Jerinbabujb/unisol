@@ -184,6 +184,8 @@ const LoginPage = () => {
                 <div className='animate-in fade-in slide-in-from-right-8 duration-500 space-y-4'>
                   <InputField label="Full Name" type="text" name="fullName" value={formData.fullName} onChange={handleChange} placeholder="John Doe" />
                   <InputField label="Date of Birth" type="date" name="birthday" value={formData.birthday} onChange={handleChange} placeholder="" />
+                  <InputField label="Intrests" type="textarea" name="interest" value={formData.interest} onChange={handleChange} placeholder="Walking, Gaming" />
+
                   <div className='flex flex-col gap-2'>
                     <label className='text-xs font-black text-gray-500 uppercase tracking-widest ml-1'>I am a...</label>
                     <select name="gender" onChange={handleChange} value={formData.gender} className='p-4 bg-gray-50 border border-transparent rounded-2xl focus:bg-white focus:border-pink-500 outline-none transition-all font-medium appearance-none'>

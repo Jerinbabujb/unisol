@@ -8,7 +8,7 @@ export const ChatContext=createContext();
 export const ChatProvider=({children})=>{  
 
     const [messages,setMessages]=useState([]);
-    const [status, setStatus]= useState('');
+    const [status, setStatus]= useState('pending');
     const [users,setUsers]=useState([]);
     const [checkReciver, setCheckReciver]= useState('');
     const [checkSend, setCheckSend] =useState('');
@@ -136,11 +136,9 @@ export const ChatProvider=({children})=>{
     }
 
      const privacyCreate=async(field,state)=>{
-        console.log("entered the fuinction");
     try{
       const {data}= await axios.post(`api/messages/privacy/${selectedUser.id}`,{field,state})
       if(data.success){
-        console.log("data sent succesfully",data);
       }
       if(data.error){
         console.log("error");
@@ -156,9 +154,6 @@ export const ChatProvider=({children})=>{
     try{
         const {data} = await axios.get(`api/messages/privacycheck/${selectedUser.id}`,{});
         if(data.success){
-            console.log("selecteduser",data.receiverId,selectedUser.id);
-            console.log("authuser",data.senderId,authUser.id);
-            console.log("the datais ",data);
             setFacebookPreference(data.privacyCheck.facebookPreference);
             setInstagramPreference(data.privacyCheck.instagramPreference)
             
@@ -174,9 +169,6 @@ export const ChatProvider=({children})=>{
     try{
         const {data} = await axios.get(`api/messages/privacytoggle/${selectedUser.id}`,{});
         if(data.success){
-            console.log("selecteduser",data.receiverId,selectedUser.id);
-            console.log("authuser",data.senderId,authUser.id);
-            console.log("the datais ",data);
             setFacebookToggle(data.privacyToggle.facebookPreference);
             setInstagramToggle(data.privacyToggle.instagramPreference)
             
