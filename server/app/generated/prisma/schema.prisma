@@ -20,7 +20,7 @@ model User {
   gender       String?
   mood         String?
   purpose      String?
-  interest     String?
+  interest     String[]  @default([])
   instagram    String?
   facebook     String?
   createdAt    DateTime  @default(now())
@@ -62,4 +62,6 @@ model connection {
   receiverId String
   status     String
   updatedAt  DateTime @default(now())
+
+  @@unique([senderId, receiverId])
 }

@@ -1288,7 +1288,6 @@ export namespace Prisma {
     gender: string | null
     mood: string | null
     purpose: string | null
-    interest: string | null
     instagram: string | null
     facebook: string | null
     createdAt: Date | null
@@ -1307,7 +1306,6 @@ export namespace Prisma {
     gender: string | null
     mood: string | null
     purpose: string | null
-    interest: string | null
     instagram: string | null
     facebook: string | null
     createdAt: Date | null
@@ -1347,7 +1345,6 @@ export namespace Prisma {
     gender?: true
     mood?: true
     purpose?: true
-    interest?: true
     instagram?: true
     facebook?: true
     createdAt?: true
@@ -1366,7 +1363,6 @@ export namespace Prisma {
     gender?: true
     mood?: true
     purpose?: true
-    interest?: true
     instagram?: true
     facebook?: true
     createdAt?: true
@@ -1477,7 +1473,7 @@ export namespace Prisma {
     gender: string | null
     mood: string | null
     purpose: string | null
-    interest: string | null
+    interest: string[]
     instagram: string | null
     facebook: string | null
     createdAt: Date
@@ -1607,7 +1603,7 @@ export namespace Prisma {
       gender: string | null
       mood: string | null
       purpose: string | null
-      interest: string | null
+      interest: string[]
       instagram: string | null
       facebook: string | null
       createdAt: Date
@@ -2048,7 +2044,7 @@ export namespace Prisma {
     readonly gender: FieldRef<"User", 'String'>
     readonly mood: FieldRef<"User", 'String'>
     readonly purpose: FieldRef<"User", 'String'>
-    readonly interest: FieldRef<"User", 'String'>
+    readonly interest: FieldRef<"User", 'String[]'>
     readonly instagram: FieldRef<"User", 'String'>
     readonly facebook: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
@@ -6782,7 +6778,7 @@ export namespace Prisma {
     gender?: StringNullableFilter<"User"> | string | null
     mood?: StringNullableFilter<"User"> | string | null
     purpose?: StringNullableFilter<"User"> | string | null
-    interest?: StringNullableFilter<"User"> | string | null
+    interest?: StringNullableListFilter<"User">
     instagram?: StringNullableFilter<"User"> | string | null
     facebook?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
@@ -6803,7 +6799,7 @@ export namespace Prisma {
     gender?: SortOrderInput | SortOrder
     mood?: SortOrderInput | SortOrder
     purpose?: SortOrderInput | SortOrder
-    interest?: SortOrderInput | SortOrder
+    interest?: SortOrder
     instagram?: SortOrderInput | SortOrder
     facebook?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -6827,7 +6823,7 @@ export namespace Prisma {
     gender?: StringNullableFilter<"User"> | string | null
     mood?: StringNullableFilter<"User"> | string | null
     purpose?: StringNullableFilter<"User"> | string | null
-    interest?: StringNullableFilter<"User"> | string | null
+    interest?: StringNullableListFilter<"User">
     instagram?: StringNullableFilter<"User"> | string | null
     facebook?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
@@ -6848,7 +6844,7 @@ export namespace Prisma {
     gender?: SortOrderInput | SortOrder
     mood?: SortOrderInput | SortOrder
     purpose?: SortOrderInput | SortOrder
-    interest?: SortOrderInput | SortOrder
+    interest?: SortOrder
     instagram?: SortOrderInput | SortOrder
     facebook?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -6873,7 +6869,7 @@ export namespace Prisma {
     gender?: StringNullableWithAggregatesFilter<"User"> | string | null
     mood?: StringNullableWithAggregatesFilter<"User"> | string | null
     purpose?: StringNullableWithAggregatesFilter<"User"> | string | null
-    interest?: StringNullableWithAggregatesFilter<"User"> | string | null
+    interest?: StringNullableListFilter<"User">
     instagram?: StringNullableWithAggregatesFilter<"User"> | string | null
     facebook?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -7065,6 +7061,7 @@ export namespace Prisma {
 
   export type connectionWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    senderId_receiverId?: connectionSenderIdReceiverIdCompoundUniqueInput
     AND?: connectionWhereInput | connectionWhereInput[]
     OR?: connectionWhereInput[]
     NOT?: connectionWhereInput | connectionWhereInput[]
@@ -7072,7 +7069,7 @@ export namespace Prisma {
     receiverId?: StringFilter<"connection"> | string
     status?: StringFilter<"connection"> | string
     updatedAt?: DateTimeFilter<"connection"> | Date | string
-  }, "id">
+  }, "id" | "senderId_receiverId">
 
   export type connectionOrderByWithAggregationInput = {
     id?: SortOrder
@@ -7109,7 +7106,7 @@ export namespace Prisma {
     gender?: string | null
     mood?: string | null
     purpose?: string | null
-    interest?: string | null
+    interest?: UserCreateinterestInput | string[]
     instagram?: string | null
     facebook?: string | null
     createdAt?: Date | string
@@ -7130,7 +7127,7 @@ export namespace Prisma {
     gender?: string | null
     mood?: string | null
     purpose?: string | null
-    interest?: string | null
+    interest?: UserCreateinterestInput | string[]
     instagram?: string | null
     facebook?: string | null
     createdAt?: Date | string
@@ -7151,7 +7148,7 @@ export namespace Prisma {
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
-    interest?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: UserUpdateinterestInput | string[]
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7172,7 +7169,7 @@ export namespace Prisma {
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
-    interest?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: UserUpdateinterestInput | string[]
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7193,7 +7190,7 @@ export namespace Prisma {
     gender?: string | null
     mood?: string | null
     purpose?: string | null
-    interest?: string | null
+    interest?: UserCreateinterestInput | string[]
     instagram?: string | null
     facebook?: string | null
     createdAt?: Date | string
@@ -7212,7 +7209,7 @@ export namespace Prisma {
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
-    interest?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: UserUpdateinterestInput | string[]
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7231,7 +7228,7 @@ export namespace Prisma {
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
-    interest?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: UserUpdateinterestInput | string[]
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7500,6 +7497,14 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -7558,7 +7563,6 @@ export namespace Prisma {
     gender?: SortOrder
     mood?: SortOrder
     purpose?: SortOrder
-    interest?: SortOrder
     instagram?: SortOrder
     facebook?: SortOrder
     createdAt?: SortOrder
@@ -7577,7 +7581,6 @@ export namespace Prisma {
     gender?: SortOrder
     mood?: SortOrder
     purpose?: SortOrder
-    interest?: SortOrder
     instagram?: SortOrder
     facebook?: SortOrder
     createdAt?: SortOrder
@@ -7790,6 +7793,11 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type connectionSenderIdReceiverIdCompoundUniqueInput = {
+    senderId: string
+    receiverId: string
+  }
+
   export type connectionCountOrderByAggregateInput = {
     id?: SortOrder
     senderId?: SortOrder
@@ -7812,6 +7820,10 @@ export namespace Prisma {
     receiverId?: SortOrder
     status?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type UserCreateinterestInput = {
+    set: string[]
   }
 
   export type MessageCreateNestedManyWithoutReceiverInput = {
@@ -7852,6 +7864,11 @@ export namespace Prisma {
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
+  }
+
+  export type UserUpdateinterestInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -8254,7 +8271,7 @@ export namespace Prisma {
     gender?: string | null
     mood?: string | null
     purpose?: string | null
-    interest?: string | null
+    interest?: UserCreateinterestInput | string[]
     instagram?: string | null
     facebook?: string | null
     createdAt?: Date | string
@@ -8274,7 +8291,7 @@ export namespace Prisma {
     gender?: string | null
     mood?: string | null
     purpose?: string | null
-    interest?: string | null
+    interest?: UserCreateinterestInput | string[]
     instagram?: string | null
     facebook?: string | null
     createdAt?: Date | string
@@ -8299,7 +8316,7 @@ export namespace Prisma {
     gender?: string | null
     mood?: string | null
     purpose?: string | null
-    interest?: string | null
+    interest?: UserCreateinterestInput | string[]
     instagram?: string | null
     facebook?: string | null
     createdAt?: Date | string
@@ -8319,7 +8336,7 @@ export namespace Prisma {
     gender?: string | null
     mood?: string | null
     purpose?: string | null
-    interest?: string | null
+    interest?: UserCreateinterestInput | string[]
     instagram?: string | null
     facebook?: string | null
     createdAt?: Date | string
@@ -8355,7 +8372,7 @@ export namespace Prisma {
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
-    interest?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: UserUpdateinterestInput | string[]
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8375,7 +8392,7 @@ export namespace Prisma {
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
-    interest?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: UserUpdateinterestInput | string[]
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8406,7 +8423,7 @@ export namespace Prisma {
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
-    interest?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: UserUpdateinterestInput | string[]
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8426,7 +8443,7 @@ export namespace Prisma {
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
-    interest?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: UserUpdateinterestInput | string[]
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

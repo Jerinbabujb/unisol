@@ -18,14 +18,14 @@ export const userSocketMap = {};
 io.on("connection", (socket) => {
   const userId = socket.handshake.auth?.userId;
 
-  console.log("🟢 USER CONNECTED:", userId, socket.id);
+ console.log("user connected",userId);
 
-  if (userId) {
-    userSocketMap[userId] = socket.id;
-  }
+    if(userId) userSocketMap[userId]=socket.id;
+    io.emit("getOnlineUsers",Object.keys(userSocketMap));
 
   socket.on("disconnect", () => {
     console.log("🔴 USER DISCONNECTED:", userId);
+    io.emit("getOnlineUsers",Object.keys(userSocketMap));
     if (userId) delete userSocketMap[userId];
   });
   /* ---------------- MUSIC INVITE ---------------- */

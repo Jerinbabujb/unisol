@@ -8,11 +8,26 @@ import { io, userSocketMap } from "../server.js";
 export const getUserForSidebar = async (req, res) => {
   try {
     const userId = req.user.id;
-
+    const getUsers= await prisma.connection.findMany({
+      where:{
+        OR:[
+          {senderId:userId},
+          {receiverId:userId}
+        ]
+        
+      },
+      select:{
+          senderId:true,
+          receiverId:true
+        }
+    });
+    const ids=getUsers.map(id=>
+      id.senderId===userId?id.receiverId:id.senderId
+    );
     // 1. Get all users except logged-in user
     const users = await prisma.user.findMany({
       where: {
-        id: { not: userId }
+        id: { in:ids }
       },
       select: {
         id: true,
@@ -21,7 +36,8 @@ export const getUserForSidebar = async (req, res) => {
         bio: true,
         mood:true,
         instagram:true,
-        facebook:true
+        facebook:true,
+        interest:true
       }
     });
 
@@ -70,7 +86,6 @@ export const allSongs = async (req,res) => {
       duration:true
       },
     })
-    console.log("Songs found in DB:", songs.length);
    res.status(200).json({ success: true, songs: songs || [] });
   }
   catch(error){
@@ -238,7 +253,6 @@ export const sendMessage = async (req, res) => {
 export const privacy=async(req,res)=>{
     try{
         const {field,state}=req.body;
-        console.log("REQ BODY:", req.body);
         const senderId=req.user.id;
         const receiverId= req.params.id;
         const privacy= await prisma.privacy.upsert({
@@ -256,7 +270,6 @@ export const privacy=async(req,res)=>{
     facebookPreference: field === "facebookPreference" ? state : false
             }
           });
-                  console.log("privacy",privacy);
 
             res.json({success:true,privacy})
         }
@@ -271,7 +284,6 @@ export const privacyCheck=async(req,res)=>{
   try{
     const senderId=req.user.id;
     const receiverId=req.params.id;
-    console.log("sender",senderId,"reciever",receiverId);
     const privacyCheck= await prisma.privacy.findUnique({
       where:{
         senderId_receiverId:{senderId:receiverId,receiverId:senderId}
@@ -283,7 +295,6 @@ export const privacyCheck=async(req,res)=>{
         facebookPreference:true
       }
     })
-    console.log("privacyCheck",privacyCheck);
     res.json({success:true,privacyCheck,senderId,receiverId})
   }
   catch (error) {
@@ -295,7 +306,6 @@ export const privacyToggle=async(req,res)=>{
   try{
     const senderId=req.user.id;
     const receiverId=req.params.id;
-    console.log("sender",senderId,"reciever",receiverId);
     const privacyToggle= await prisma.privacy.findUnique({
       where:{
         senderId_receiverId:{senderId,receiverId}
@@ -307,7 +317,6 @@ export const privacyToggle=async(req,res)=>{
         facebookPreference:true
       }
     })
-    console.log("privacyToggle",privacyToggle);
     res.json({success:true,privacyToggle,senderId,receiverId})
   }
   catch (error) {

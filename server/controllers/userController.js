@@ -18,7 +18,7 @@ export const signup = async (req, res) => {
             const salt = await bcrypt.genSalt(10);
             hashedPassword = await bcrypt.hash(password, salt);
         }
-
+       const interestsArray = interest.split(",");
         // 2. Use UPSERT to handle both new and returning Google users
         const user = await prisma.user.upsert({
             where: { email: email },
@@ -36,7 +36,7 @@ export const signup = async (req, res) => {
                 bio,
                 gender,
                 birthday: birthday ? new Date(birthday) : null,
-                interest,
+                interest: interestsArray,
             }
         });
 
@@ -108,7 +108,7 @@ export const checkAuth = (req, res) => {
 };
 export const updateProfile = async (req, res) => {
     try {
-        const { fullName, avatar, bio, mood, instagram, facebook } = req.body;
+        const { fullName, avatar, bio, mood, instagram, facebook,interest } = req.body;
         const userId = req.user.id; // Use .id instead of ._id
 
         let profilePicUrl = avatar;
@@ -128,7 +128,10 @@ console.log("Mood received:", mood);
                 mood,
                 avatar: profilePicUrl,
                 instagram,
-                facebook
+                facebook,
+                interest:{
+                    push:interest
+                }
             },
         });
 console.log("updatedUser:", updatedUser);
