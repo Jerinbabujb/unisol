@@ -39,10 +39,12 @@ export const AuthProvider = ({ children }) => {
       socket.auth = { userId: authUser.id };
       socket.connect();
       console.log("🟢 SOCKET CONNECTED:", authUser.id);
-      socket.on("getOnlineUsers", setOnlineUsers);
-            console.log("onlineUsers",onlineUsers)
-
-    }
+             const handleOnlineUsers=(userIds)=>{
+              console.log("Online users are", userIds);
+              setOnlineUsers(userIds)
+            }
+socket.on("getOnlineUsers",handleOnlineUsers);
+    
 
     if (!authUser && socket.connected) {
       socket.disconnect();
@@ -50,8 +52,11 @@ export const AuthProvider = ({ children }) => {
     }
 
     return () => {
-      socket.off("getOnlineUsers");
+      if (socket){
+      socket.off("getOnlineUsers",handleOnlineUsers);
+      }
     };
+  }
   }, [authUser]);
 
   useEffect(() => {
