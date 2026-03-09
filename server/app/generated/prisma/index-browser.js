@@ -134,6 +134,7 @@ exports.Prisma.UserScalarFieldEnum = {
   mood: 'mood',
   purpose: 'purpose',
   interest: 'interest',
+  images: 'images',
   instagram: 'instagram',
   facebook: 'facebook',
   createdAt: 'createdAt'

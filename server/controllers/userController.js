@@ -134,7 +134,6 @@ console.log("Mood received:", mood);
                 }
             },
         });
-console.log("updatedUser:", updatedUser);
 
         res.json({ success: true, user: updatedUser });
     } catch (error) {

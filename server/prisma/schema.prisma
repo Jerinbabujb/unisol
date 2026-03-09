@@ -21,6 +21,7 @@ model User {
   mood         String?
   purpose      String?
   interest     String[] @default([])
+  images     String[] @default([])
   instagram             String?
   facebook              String?
   createdAt    DateTime  @default(now())
