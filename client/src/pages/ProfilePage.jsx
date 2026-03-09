@@ -150,7 +150,9 @@ const [imageGallery, setImageGallery] = useState(
         index={index}
         open={index >= 0}
         close={() => setIndex(-1)}
-        slides={imageGallery}
+        slides={imageGallery.map(img => ({
+    src: typeof img === "string" ? img : img.src
+  }))}
       />
     
     {imageGallery.length<6 &&
