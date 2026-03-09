@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import assets from '../assets';
@@ -18,6 +18,7 @@ const ProfilePage = () => {
   const [facebook,setFacebook]= useState(authUser?.facebook||'');
   const [interests, setInterests] = useState(authUser?.interest||[]);
   const [index, setIndex] = useState(-1);
+  const [interestsButton,setInterestsButton]= useState(false);
 
   const handleBack=()=>{
     navigate("/");
@@ -25,7 +26,7 @@ const ProfilePage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let profileData = { fullName: name, bio, mood, instagram, facebook  };
+    let profileData = { fullName: name, bio, mood, instagram, facebook, interest:interests };
 
     if (selectedImg) {
       const reader = new FileReader();
@@ -212,14 +213,18 @@ const ProfilePage = () => {
             <div>
               <label className="block text-[#9D7183] text-sm font-bold mb-4 ml-1">Interests</label>
               <div className="flex flex-wrap gap-2">
+
                 {interests.map(item => (
                   <div key={index} className="bg-[#FFE5EE] text-[#ED719E] px-4 py-2 rounded-full flex items-center gap-2 text-sm font-semibold">
                     {item} <span className="cursor-pointer text-lg">×</span>
                   </div>
                 ))}
-                <button type="button" className="border-2 border-dashed border-gray-300 text-gray-400 px-4 py-2 rounded-full text-sm font-semibold">
+                <button type="button" onClick={()=>setInterestsButton(true)} className={`${interestsButton? 'hidden':'block'} border-2 border-dashed border-gray-300 text-gray-400 px-4 py-2 rounded-full text-sm font-semibold`}>
                   + Add Interest
                 </button>
+                {interestsButton &&
+                  <input label="Intrests" type="textarea" name="interest" value={interests} onChange={(e)=>setInterests(e.target.value.split(","))} placeholder="Walking, Gaming" className="w-full bg-[#F9F7F8] border-none rounded-2xl p-4 pr-10 text-gray-700 appearance-none focus:outline-none focus:ring-2 focus:ring-[#ED719E] focus:ring-opacity-30 cursor-pointer"/>
+}
               </div>
             </div>
           </div>
