@@ -108,7 +108,7 @@ export const checkAuth = (req, res) => {
 };
 export const updateProfile = async (req, res) => {
     try {
-        const { fullName, avatar, bio, mood, instagram, facebook,interest } = req.body;
+        const { fullName, avatar, bio, mood, instagram, facebook,interest,images } = req.body;
         const userId = req.user.id; // Use .id instead of ._id
 
         let profilePicUrl = avatar;
@@ -116,8 +116,22 @@ export const updateProfile = async (req, res) => {
             const upload = await cloudinary.uploader.upload(avatar);
             profilePicUrl = upload.secure_url;
         }
-       console.log("Updating user ID:", userId);
-console.log("Mood received:", mood);
+          let uploadedImages = [];
+
+if (Array.isArray(images)) {
+  for (const img of images) {
+    const src = img.src || img; // handle both object or string
+
+    if (typeof src === "string" && src.startsWith("data:image")) {
+      const upload = await cloudinary.uploader.upload(src);
+      uploadedImages.push(upload.secure_url);
+    } else {
+      uploadedImages.push(src);
+    }
+  }
+}
+       console.log("Updating user ID:", uploadedImages);
+console.log("Mood received:", interest);
 
         // Convert Mongoose findByIdAndUpdate to Prisma update
         const updatedUser = await prisma.user.update({
@@ -129,9 +143,8 @@ console.log("Mood received:", mood);
                 avatar: profilePicUrl,
                 instagram,
                 facebook,
-                interest:{
-                    push:interest
-                }
+                interest:interest,
+                images:uploadedImages
             },
         });
 

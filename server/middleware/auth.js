@@ -22,7 +22,8 @@ export const protectRoute = async (req, res, next) => {
         mood:true,
         instagram:true,
         facebook:true,
-        interest:true
+        interest:true,
+        images:true
       },
     });
 
@@ -31,7 +32,7 @@ export const protectRoute = async (req, res, next) => {
     }
 
     // ✅ Attach user info to request
-    req.user = { id: user.id, fullName: user.fullName, email: user.email, avatar:user.avatar, bio:user.bio, mood:user.mood, instagram:user.instagram, facebook:user.facebook, interest:user.interest };
+    req.user = { id: user.id, fullName: user.fullName, email: user.email, avatar:user.avatar, bio:user.bio, mood:user.mood, instagram:user.instagram, facebook:user.facebook, interest:user.interest, images:user.images };
 
     next();
   } catch (error) {

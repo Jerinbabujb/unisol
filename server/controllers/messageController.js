@@ -37,7 +37,8 @@ export const getUserForSidebar = async (req, res) => {
         mood:true,
         instagram:true,
         facebook:true,
-        interest:true
+        interest:true,
+        images:true
       }
     });
 
