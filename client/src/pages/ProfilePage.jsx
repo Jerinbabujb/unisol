@@ -19,14 +19,32 @@ const ProfilePage = () => {
   const [interests, setInterests] = useState(authUser?.interest||[]);
   const [index, setIndex] = useState(-1);
   const [interestsButton,setInterestsButton]= useState(false);
-
+const [imageGallery, setImageGallery] = useState(
+  authUser?.images || []
+);
   const handleBack=()=>{
     navigate("/");
   }
 
+  useEffect(()=>{
+    console.log("the imageGallery is ", imageGallery);
+  },[])
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let profileData = { fullName: name, bio, mood, instagram, facebook, interest:interests };
+//     if(imageGallery){
+//       const convertedImages = await Promise.all(
+//     imageGallery.map(img => {
+//       if (!img.file) return img.src;
+
+//       return new Promise(resolve => {
+//         const reader = new FileReader();
+//         reader.readAsDataURL(img.file);
+//         reader.onload = () => resolve(reader.result);
+//       });
+//     })
+//   );
+// }
+    let profileData = { fullName: name, bio, mood, instagram, facebook, interest:interests, images:imageGallery };
 
     if (selectedImg) {
       const reader = new FileReader();
@@ -36,16 +54,20 @@ const ProfilePage = () => {
         await updateProfile(profileData);
         navigate("/");
       };
-    } else {
+    }
+   else {
       await updateProfile(profileData);
       navigate("/");
     }
   };
-  const images = [
-    { src: assets.pic1 },
-    { src: assets.pic2 },
-    { src: assets.pic3 },
-  ];
+  const removeImage = (index) => {
+  setImageGallery(prev => prev.filter((_, i) => i !== index));
+};
+  // const images = [
+  //   { src: assets.pic1 },
+  //   { src: assets.pic2 },
+  //   { src: assets.pic3 },
+  // ];
 
   return (
     <div className="min-h-screen bg-[#FDF8F9] flex flex-col items-center py-12 px-4 font-sans">
@@ -117,29 +139,60 @@ const ProfilePage = () => {
           <div className="bg-white p-8 rounded-[40px] shadow-sm border border-gray-100">
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-xl font-bold text-gray-800">Photo Gallery</h3>
-              <span className="bg-[#FFE5EE] text-[#ED719E] px-3 py-1 rounded-full text-xs font-bold">3/6 Slots</span>
+              <span className="bg-[#FFE5EE] text-[#ED719E] px-3 py-1 rounded-full text-xs font-bold">{imageGallery.length}/6 Slots</span>
             </div>
             <div className="grid grid-cols-3 gap-4">
-      {images.map((img, i) => (
-        <div key={i} className="aspect-square bg-gray-100 rounded-3xl overflow-hidden cursor-pointer">
-          <img 
-            src={img.src} 
-            onClick={() => setIndex(i)} 
-            className="w-full h-full object-cover hover:scale-105 transition-transform"
-          />
-        </div>
-      ))}
+      {imageGallery.map((img, i) => (
+    <div key={i} className="relative aspect-square bg-gray-100 rounded-3xl overflow-hidden cursor-pointer">
+      <img 
+        src={img.src || img} 
+        onClick={() => setIndex(i)} 
+        className="w-full h-full object-cover hover:scale-105 transition-transform"
+      />
+      {/* Delete Button */}
+      <button
+        onClick={() => removeImage(i)}
+        className="absolute top-2 right-2 bg-black/60 text-white w-6 h-6 flex items-center justify-center rounded-full text-sm hover:bg-black/80 transition"
+      >
+        ×
+      </button>
+    </div>
+  ))}
+      
 
       <Lightbox
         index={index}
         open={index >= 0}
         close={() => setIndex(-1)}
-        slides={images}
+        slides={imageGallery}
       />
-    </div>
-            <p className="text-center text-gray-400 text-xs italic">Drag and drop to rearrange photos</p>
+    
+    {imageGallery.length<6 &&
+<label className="w-25 aspect-square flex items-center justify-center border-2 border-dashed border-gray-300 rounded-3xl cursor-pointer text-gray-400 hover:bg-gray-50">
+
+      +                
+                <input type="file" id="image" hidden onChange={(e) => {
+ const file = e.target.files[0];
+
+const reader = new FileReader();
+
+reader.onload = () => {
+  setImageGallery(prev => [
+    ...prev,
+    { src: reader.result }
+  ]);
+};
+
+reader.readAsDataURL(file);
+}} />
+              </label>
+}
+</div>
           </div>
         </div>
+        <div>
+              
+              </div>
 
         {/* RIGHT COLUMN: Personal Info */}
         <div className="flex-[1.2] bg-white p-10 rounded-[40px] shadow-sm border border-gray-100 flex flex-col">
