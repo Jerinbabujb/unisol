@@ -31,19 +31,7 @@ const [imageGallery, setImageGallery] = useState(
   },[])
   const handleSubmit = async (e) => {
     e.preventDefault();
-//     if(imageGallery){
-//       const convertedImages = await Promise.all(
-//     imageGallery.map(img => {
-//       if (!img.file) return img.src;
 
-//       return new Promise(resolve => {
-//         const reader = new FileReader();
-//         reader.readAsDataURL(img.file);
-//         reader.onload = () => resolve(reader.result);
-//       });
-//     })
-//   );
-// }
     let profileData = { fullName: name, bio, mood, instagram, facebook, interest:interests, images:imageGallery };
 
     if (selectedImg) {
@@ -63,11 +51,9 @@ const [imageGallery, setImageGallery] = useState(
   const removeImage = (index) => {
   setImageGallery(prev => prev.filter((_, i) => i !== index));
 };
-  // const images = [
-  //   { src: assets.pic1 },
-  //   { src: assets.pic2 },
-  //   { src: assets.pic3 },
-  // ];
+  const removeInteresets =(index)=>{
+    setInterests (prev=>prev.filter((_,i)=>i !==index));
+  }
 
   return (
     <div className="min-h-screen bg-[#FDF8F9] flex flex-col items-center py-12 px-4 font-sans">
@@ -267,9 +253,9 @@ reader.readAsDataURL(file);
               <label className="block text-[#9D7183] text-sm font-bold mb-4 ml-1">Interests</label>
               <div className="flex flex-wrap gap-2">
 
-                {interests.map(item => (
+                {interests.map((item,index) => (
                   <div key={index} className="bg-[#FFE5EE] text-[#ED719E] px-4 py-2 rounded-full flex items-center gap-2 text-sm font-semibold">
-                    {item} <span className="cursor-pointer text-lg">×</span>
+                    {item} <span onClick={()=>removeInteresets(index)} className="cursor-pointer text-lg">×</span>
                   </div>
                 ))}
                 <button type="button" onClick={()=>setInterestsButton(true)} className={`${interestsButton? 'hidden':'block'} border-2 border-dashed border-gray-300 text-gray-400 px-4 py-2 rounded-full text-sm font-semibold`}>
