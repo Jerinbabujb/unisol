@@ -1,31 +1,38 @@
-import React, { useContext, useEffect } from 'react';
+import React, { use, useContext, useEffect } from 'react';
 import assets from '../assets';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { ChatContext } from '../../context/ChatContext';
 
 const SideBar = () => {
-  const { unseenMessages, users } = useContext(ChatContext);
+  const { unseenMessages, users,requestData,freindRequestCheck } = useContext(ChatContext);
   const { authUser, logout, checkAuth } = useContext(AuthContext);
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  
+ 
 
   // Calculate total unseen messages
   const totalUnseen = Object.values(unseenMessages || {}).reduce((a, b) => a + b, 0);
 
+useEffect(() => {
+  freindRequestCheck();
+}, []); 
+
+
   const menuItems = [
     { name: 'Discovery', icon: '🧭', path: '/', badge: null },
     { name: 'Messages', icon: '💬', path: '/messages', badge: totalUnseen > 0 ? totalUnseen : null },
-    { name: 'Likes', icon: '❤️', path: '/likes', badge: 12 },
+    { name: 'Requests', icon: '❤️', path: '/friend-request', badge: requestData?.friendRequest?.length },
     { name: 'Profile', icon: '👤', path: '/profile', badge: null },
     { name: 'Settings', icon: '⚙️', path: '/settings', badge: null },
   ];
+  
 
   return (
     <div className="flex h-full w-full flex-col bg-white p-6 text-slate-600 overflow-y-auto">
+    
       {/* Logo */}
       <div className="mb-10 flex items-center gap-2">
         <img src={assets.logo} alt='logo' className="w-8 h-8 rounded-lg bg-pink-500 p-1.5"/>

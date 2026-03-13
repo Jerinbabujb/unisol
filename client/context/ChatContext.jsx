@@ -21,6 +21,7 @@ export const ChatProvider=({children})=>{
     const [facebookPreference,setFacebookPreference] =useState(false);
     const [facebookToggle,setFacebookToggle]=useState(false);
     const [instagramToggle,setInstagramToggle]= useState(false);
+    const [requestData,setRequestData]=  useState('');
   const getUsers = useCallback(async () => {
   if (!axios) {
     console.log("axios not ready yet");
@@ -55,10 +56,28 @@ export const ChatProvider=({children})=>{
         }
     }
 
-    const sendRequest=async(status)=>{
+
+     const allUsers=async()=>{
         try{
             console.log(status);
-            const {data}= await axios.post(`/api/messages/request/${selectedUser.id}`,{status})
+            const {data}= await axios.get('/api/messages/all-users/')
+            if(data.success){
+                console.log("data request succesfully",data);
+                setUsers(data.users);
+            }
+        }
+        catch(error){
+            toast.error(error.message);
+        }
+    }
+
+
+
+
+    const sendRequest=async(status,id)=>{
+        try{
+            console.log(status);
+            const {data}= await axios.post('/api/messages/request/',{status,id})
             if(data.success){
                 console.log("request send succesfully",data);
             }
@@ -118,10 +137,12 @@ export const ChatProvider=({children})=>{
 
     const requestCheck=async()=>{
         try{
+            console.log("requestcheck");
             const {data}= await axios.get(`api/messages/check/${selectedUser.id}`)
             if(data.success){
                 setStatus(data.request.status);
                 setCheckReciver(data.recerverId);
+                console.log("data",data);
                 return{
                     status:data.request.status,
                     checkReciver: data.recerverId,
@@ -134,7 +155,43 @@ export const ChatProvider=({children})=>{
             toast.error(error.message);
         }
     }
+    // const freindRequestCheck=async()=>{
+    //     try{
+    //         console.log("freindRequestCheck");
+    //         const {data}= await axios.get('api/messages/freind-request')
+    //         if(data.success){
+    //             setCheckReciver(data.recerverId);
+    //             console.log("data",data);
+    //             return{
+    //                 status:data.request.status,
+    //                 checkReciver: data.recerverId,
+    //              senderId: data.senderId
+    //             }
+    //         }
+    //         return null;
+    //     }
+    //      catch(error){
+    //         toast.error(error.message);
+    //     }
+    // }
+     const freindRequestCheck=async()=>{
+        try{
+            const {data}= await axios.get('/api/messages/freind-request');
+            console.log("freindRequestCheck");
+            if(data.success){
+                console.log("data request succesfully",data);
+                setRequestData(data);
+            }
+            else{
+                console.log("error happend");
+            }
+        }
+        catch(error){
+            toast.error(error.message);
+        }
+    }
 
+ 
      const privacyCreate=async(field,state)=>{
     try{
       const {data}= await axios.post(`api/messages/privacy/${selectedUser.id}`,{field,state})
@@ -206,6 +263,7 @@ export const ChatProvider=({children})=>{
         unseenMessages,
         setUnseenMessages,
         getUsers,
+        allUsers,
         sendMessage,
         sendRequest,
         status,
@@ -213,6 +271,7 @@ export const ChatProvider=({children})=>{
         checkReciver,
         checkSend,
         requestCheck,
+        freindRequestCheck,
         instagramPreference,
         facebookPreference,
         setInstagramPreference,
@@ -223,7 +282,8 @@ export const ChatProvider=({children})=>{
         instagramToggle,
         facebookToggle,
         setFacebookToggle,
-        setInstagramToggle
+        setInstagramToggle,
+        requestData
     }
     return (
 

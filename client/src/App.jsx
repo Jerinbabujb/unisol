@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage';
 import ProfilePage from './pages/ProfilePage';
 import ChatPage from './pages/ChatPage';
 import SelectedUserProfilePage from './pages/SelectedUserProfilePage';
+import FriendRequests from './components/friends/FriendRequests';
 
 const App = () => {
   const { authUser, isCheckingAuth } = useContext(AuthContext);
@@ -34,6 +35,7 @@ const App = () => {
           <Route path='/profile' element={authUser ? <ProfilePage /> : <Navigate to="/login" />} />
           <Route path='/user-profile' element={authUser? <SelectedUserProfilePage/>: <Navigate to='login'/>}/>
           <Route path='/messages' element={authUser ? <ChatPage/> : <Navigate to="/login" />} />
+          <Route path='/friend-request' element={authUser? <FriendRequests/>:<Navigate to="/login"/>}/>
         </Routes>
       </BrowserRouter>
     </div>

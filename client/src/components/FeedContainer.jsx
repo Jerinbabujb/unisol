@@ -5,10 +5,10 @@ import assets from '../assets';
 
 const FeedContainer = ({ onOpenMenu }) => {
   const navigate = useNavigate();
-  const {users, getUsers, setSelectedUser} = useContext(ChatContext);
+  const {users, allUsers, setSelectedUser} = useContext(ChatContext);
   useEffect(()=>{
-    getUsers();
-  },[getUsers])
+    allUsers();
+  },[])
 
   const gotoMessage = async (user)=>{
     await setSelectedUser(user);

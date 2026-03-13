@@ -13,6 +13,7 @@ const SelectedUserProfilePage = () => {
   const{status,setStatus} = useContext(ChatContext);
   const{authUser}= useContext(AuthContext);
   const [index, setIndex] = useState(-1);
+ 
   const navigate = useNavigate();
 
  useEffect(()=>{
@@ -206,7 +207,7 @@ useEffect(() => {
               </div>
 
                 <div className="grid grid-cols-3 gap-4">
-      {images.map((img, i) => (
+      {selectedUser?.images.map((img, i) => (
         <div key={i} className="aspect-square bg-gray-100 rounded-3xl overflow-hidden cursor-pointer">
           <img 
             src={img.src} 
@@ -220,7 +221,7 @@ useEffect(() => {
         index={index}
         open={index >= 0}
         close={() => setIndex(-1)}
-        slides={images}
+        slides={selectedUser?.images.src||selectedUser?.images}
       />
     </div>
             </div>
