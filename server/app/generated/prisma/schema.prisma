@@ -1,32 +1,34 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "../app/generated/prisma"
+  provider        = "prisma-client-js"
+  output          = "../app/generated/prisma"
+  previewFeatures = ["postgresqlExtensions"]
 }
 
 datasource db {
-  provider = "postgresql"
+  provider   = "postgresql"
+  extensions = [postgis]
 }
 
 model User {
-  id           String    @id @default(uuid())
+  id           String                                 @id @default(uuid())
   fullName     String
-  email        String    @unique
+  email        String                                 @unique
   password     String?
   googleId     String?
   bio          String?
   avatar       String?
   birthday     DateTime?
-  location     String?
+  location     Unsupported("geography(Point, 4326)")?
   gender       String?
   mood         String?
   purpose      String?
-  interest     String[]  @default([])
-  images       String[]  @default([])
+  interest     String[]                               @default([])
+  images       String[]                               @default([])
   instagram    String?
   facebook     String?
-  createdAt    DateTime  @default(now())
-  recvMessages Message[] @relation("received")
-  sentMessages Message[] @relation("sent")
+  createdAt    DateTime                               @default(now())
+  recvMessages Message[]                              @relation("received")
+  sentMessages Message[]                              @relation("sent")
 }
 
 model privacy {

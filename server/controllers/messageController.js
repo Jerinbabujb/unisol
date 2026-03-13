@@ -3,7 +3,41 @@ import cloudinary from "../lib/cloudinary.js";
 
 import { io, userSocketMap } from "../server.js";
 
+export const getUsers = async (req, res) => {
+  try {
+    const userId = req.user.id;
+   
+    // 1. Get all users except logged-in user
+    const users = await prisma.user.findMany({
+      where: {
+        id: { not:userId }
+      },
+      select: {
+        id: true,
+        fullName: true,
+        avatar: true,
+        bio: true,
+        mood:true,
+        instagram:true,
+        facebook:true,
+        interest:true,
+        images:true
+      }
+    });
+    
+    res.json({
+      success: true,
+      users,
+    });
 
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+};
 
 export const getUserForSidebar = async (req, res) => {
   try {
@@ -149,7 +183,9 @@ export const connectionRequest = async (req, res) => {
 
     // 1. Match your variable names exactly to your schema fields
     const senderId = req.user.id;
-    const receiverId = req.params.id;
+    let {id} = req.body;
+    const receiverId=id;
+    console.log("req.body",req.body);
     let {status} = req.body;
     console.log(senderId);
     console.log("backedn :", status);
@@ -198,7 +234,6 @@ export const requestCheck = async(req,res) =>{
   try{
     const senderId= req.user.id;
     const receiverId = req.params.id;
-    console.log(receiverId);
     const request = await prisma.connection.findFirst({
       where:{
         OR:[
@@ -208,8 +243,47 @@ export const requestCheck = async(req,res) =>{
       }
     });
     if(request){
+      console.log("recevierID",request.receiverId);
       return res.json({success:true, recerverId:request.receiverId, senderId:request.senderId, request})
     }
+  }
+  catch (error) {
+    // CRITICAL: This will print the actual error to your terminal
+    console.error("PRISMA ERROR:", error); 
+    res.status(500).json({ success: false, message: error.message });
+  }
+}
+
+export const freindRequestCheck = async(req,res) =>{
+  try{
+    const senderId= req.user.id;
+
+     const friendRequest = await prisma.connection.findMany({
+      where:{
+  receiverId:senderId,
+  status:"pending"
+},
+      select: {
+        id: true,
+        senderId: true,
+        receiverId: true,
+        status: true
+      }
+    });
+    
+      const senders= friendRequest.map(req=>req.senderId);
+
+      const user=await prisma.user.findMany({
+        where:{
+          id:{in:senders}
+        },
+        select:{
+          avatar:true,
+          fullName:true
+        }
+      })
+      return res.json({success:true, friendRequest, user})
+    
   }
   catch (error) {
     // CRITICAL: This will print the actual error to your terminal
