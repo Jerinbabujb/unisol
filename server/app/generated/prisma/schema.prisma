@@ -21,6 +21,7 @@ model User {
   location     Unsupported("geography(Point, 4326)")?
   gender       String?
   mood         String?
+  avatar2      String?
   purpose      String?
   interest     String[]                               @default([])
   images       String[]                               @default([])

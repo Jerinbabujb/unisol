@@ -45,7 +45,9 @@ export type connection = $Result.DefaultSelection<Prisma.$connectionPayload>
  * Type-safe database client for TypeScript & Node.js
  * @example
  * ```
- * const prisma = new PrismaClient()
+ * const prisma = new PrismaClient({
+ *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
+ * })
  * // Fetch zero or more Users
  * const users = await prisma.user.findMany()
  * ```
@@ -66,7 +68,9 @@ export class PrismaClient<
    * Type-safe database client for TypeScript & Node.js
    * @example
    * ```
-   * const prisma = new PrismaClient()
+   * const prisma = new PrismaClient({
+   *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
+   * })
    * // Fetch zero or more Users
    * const users = await prisma.user.findMany()
    * ```
@@ -146,7 +150,7 @@ export class PrismaClient<
    * ])
    * ```
    * 
-   * Read more in our [docs](https://www.prisma.io/docs/concepts/components/prisma-client/transactions).
+   * Read more in our [docs](https://www.prisma.io/docs/orm/prisma-client/queries/transactions).
    */
   $transaction<P extends Prisma.PrismaPromise<any>[]>(arg: [...P], options?: { isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>
 
@@ -255,8 +259,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 7.2.0
-   * Query Engine version: 0c8ef2ce45c83248ab3df073180d5eda9e8be7a3
+   * Prisma Client JS version: 7.5.0
+   * Query Engine version: 280c870be64f457428992c43c1f6d557fab6e29e
    */
   export type PrismaVersion = {
     client: string
@@ -1286,6 +1290,7 @@ export namespace Prisma {
     birthday: Date | null
     gender: string | null
     mood: string | null
+    avatar2: string | null
     purpose: string | null
     instagram: string | null
     facebook: string | null
@@ -1303,6 +1308,7 @@ export namespace Prisma {
     birthday: Date | null
     gender: string | null
     mood: string | null
+    avatar2: string | null
     purpose: string | null
     instagram: string | null
     facebook: string | null
@@ -1320,6 +1326,7 @@ export namespace Prisma {
     birthday: number
     gender: number
     mood: number
+    avatar2: number
     purpose: number
     interest: number
     images: number
@@ -1341,6 +1348,7 @@ export namespace Prisma {
     birthday?: true
     gender?: true
     mood?: true
+    avatar2?: true
     purpose?: true
     instagram?: true
     facebook?: true
@@ -1358,6 +1366,7 @@ export namespace Prisma {
     birthday?: true
     gender?: true
     mood?: true
+    avatar2?: true
     purpose?: true
     instagram?: true
     facebook?: true
@@ -1375,6 +1384,7 @@ export namespace Prisma {
     birthday?: true
     gender?: true
     mood?: true
+    avatar2?: true
     purpose?: true
     interest?: true
     images?: true
@@ -1467,6 +1477,7 @@ export namespace Prisma {
     birthday: Date | null
     gender: string | null
     mood: string | null
+    avatar2: string | null
     purpose: string | null
     interest: string[]
     images: string[]
@@ -1503,6 +1514,7 @@ export namespace Prisma {
     birthday?: boolean
     gender?: boolean
     mood?: boolean
+    avatar2?: boolean
     purpose?: boolean
     interest?: boolean
     images?: boolean
@@ -1525,6 +1537,7 @@ export namespace Prisma {
     birthday?: boolean
     gender?: boolean
     mood?: boolean
+    avatar2?: boolean
     purpose?: boolean
     interest?: boolean
     images?: boolean
@@ -1544,6 +1557,7 @@ export namespace Prisma {
     birthday?: boolean
     gender?: boolean
     mood?: boolean
+    avatar2?: boolean
     purpose?: boolean
     interest?: boolean
     images?: boolean
@@ -1563,6 +1577,7 @@ export namespace Prisma {
     birthday?: boolean
     gender?: boolean
     mood?: boolean
+    avatar2?: boolean
     purpose?: boolean
     interest?: boolean
     images?: boolean
@@ -1571,7 +1586,7 @@ export namespace Prisma {
     createdAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "email" | "password" | "googleId" | "bio" | "avatar" | "birthday" | "gender" | "mood" | "purpose" | "interest" | "images" | "instagram" | "facebook" | "createdAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "email" | "password" | "googleId" | "bio" | "avatar" | "birthday" | "gender" | "mood" | "avatar2" | "purpose" | "interest" | "images" | "instagram" | "facebook" | "createdAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     recvMessages?: boolean | User$recvMessagesArgs<ExtArgs>
     sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
@@ -1597,6 +1612,7 @@ export namespace Prisma {
       birthday: Date | null
       gender: string | null
       mood: string | null
+      avatar2: string | null
       purpose: string | null
       interest: string[]
       images: string[]
@@ -2038,6 +2054,7 @@ export namespace Prisma {
     readonly birthday: FieldRef<"User", 'DateTime'>
     readonly gender: FieldRef<"User", 'String'>
     readonly mood: FieldRef<"User", 'String'>
+    readonly avatar2: FieldRef<"User", 'String'>
     readonly purpose: FieldRef<"User", 'String'>
     readonly interest: FieldRef<"User", 'String[]'>
     readonly images: FieldRef<"User", 'String[]'>
@@ -2240,6 +2257,11 @@ export namespace Prisma {
      * Skip the first `n` Users.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Users.
+     */
     distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
   }
 
@@ -3303,6 +3325,11 @@ export namespace Prisma {
      * Skip the first `n` privacies.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of privacies.
+     */
     distinct?: PrivacyScalarFieldEnum | PrivacyScalarFieldEnum[]
   }
 
@@ -4319,6 +4346,11 @@ export namespace Prisma {
      * Skip the first `n` songs.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of songs.
+     */
     distinct?: SongScalarFieldEnum | SongScalarFieldEnum[]
   }
 
@@ -5370,6 +5402,11 @@ export namespace Prisma {
      * Skip the first `n` Messages.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Messages.
+     */
     distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
   }
 
@@ -6393,6 +6430,11 @@ export namespace Prisma {
      * Skip the first `n` connections.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of connections.
+     */
     distinct?: ConnectionScalarFieldEnum | ConnectionScalarFieldEnum[]
   }
 
@@ -6608,6 +6650,7 @@ export namespace Prisma {
     birthday: 'birthday',
     gender: 'gender',
     mood: 'mood',
+    avatar2: 'avatar2',
     purpose: 'purpose',
     interest: 'interest',
     images: 'images',
@@ -6772,6 +6815,7 @@ export namespace Prisma {
     birthday?: DateTimeNullableFilter<"User"> | Date | string | null
     gender?: StringNullableFilter<"User"> | string | null
     mood?: StringNullableFilter<"User"> | string | null
+    avatar2?: StringNullableFilter<"User"> | string | null
     purpose?: StringNullableFilter<"User"> | string | null
     interest?: StringNullableListFilter<"User">
     images?: StringNullableListFilter<"User">
@@ -6793,6 +6837,7 @@ export namespace Prisma {
     birthday?: SortOrderInput | SortOrder
     gender?: SortOrderInput | SortOrder
     mood?: SortOrderInput | SortOrder
+    avatar2?: SortOrderInput | SortOrder
     purpose?: SortOrderInput | SortOrder
     interest?: SortOrder
     images?: SortOrder
@@ -6817,6 +6862,7 @@ export namespace Prisma {
     birthday?: DateTimeNullableFilter<"User"> | Date | string | null
     gender?: StringNullableFilter<"User"> | string | null
     mood?: StringNullableFilter<"User"> | string | null
+    avatar2?: StringNullableFilter<"User"> | string | null
     purpose?: StringNullableFilter<"User"> | string | null
     interest?: StringNullableListFilter<"User">
     images?: StringNullableListFilter<"User">
@@ -6838,6 +6884,7 @@ export namespace Prisma {
     birthday?: SortOrderInput | SortOrder
     gender?: SortOrderInput | SortOrder
     mood?: SortOrderInput | SortOrder
+    avatar2?: SortOrderInput | SortOrder
     purpose?: SortOrderInput | SortOrder
     interest?: SortOrder
     images?: SortOrder
@@ -6863,6 +6910,7 @@ export namespace Prisma {
     birthday?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     gender?: StringNullableWithAggregatesFilter<"User"> | string | null
     mood?: StringNullableWithAggregatesFilter<"User"> | string | null
+    avatar2?: StringNullableWithAggregatesFilter<"User"> | string | null
     purpose?: StringNullableWithAggregatesFilter<"User"> | string | null
     interest?: StringNullableListFilter<"User">
     images?: StringNullableListFilter<"User">
@@ -7100,6 +7148,7 @@ export namespace Prisma {
     birthday?: Date | string | null
     gender?: string | null
     mood?: string | null
+    avatar2?: string | null
     purpose?: string | null
     interest?: UserCreateinterestInput | string[]
     images?: UserCreateimagesInput | string[]
@@ -7121,6 +7170,7 @@ export namespace Prisma {
     birthday?: Date | string | null
     gender?: string | null
     mood?: string | null
+    avatar2?: string | null
     purpose?: string | null
     interest?: UserCreateinterestInput | string[]
     images?: UserCreateimagesInput | string[]
@@ -7142,6 +7192,7 @@ export namespace Prisma {
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
     images?: UserUpdateimagesInput | string[]
@@ -7163,6 +7214,7 @@ export namespace Prisma {
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
     images?: UserUpdateimagesInput | string[]
@@ -7184,6 +7236,7 @@ export namespace Prisma {
     birthday?: Date | string | null
     gender?: string | null
     mood?: string | null
+    avatar2?: string | null
     purpose?: string | null
     interest?: UserCreateinterestInput | string[]
     images?: UserCreateimagesInput | string[]
@@ -7203,6 +7256,7 @@ export namespace Prisma {
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
     images?: UserUpdateimagesInput | string[]
@@ -7222,6 +7276,7 @@ export namespace Prisma {
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
     images?: UserUpdateimagesInput | string[]
@@ -7538,6 +7593,7 @@ export namespace Prisma {
     birthday?: SortOrder
     gender?: SortOrder
     mood?: SortOrder
+    avatar2?: SortOrder
     purpose?: SortOrder
     interest?: SortOrder
     images?: SortOrder
@@ -7557,6 +7613,7 @@ export namespace Prisma {
     birthday?: SortOrder
     gender?: SortOrder
     mood?: SortOrder
+    avatar2?: SortOrder
     purpose?: SortOrder
     instagram?: SortOrder
     facebook?: SortOrder
@@ -7574,6 +7631,7 @@ export namespace Prisma {
     birthday?: SortOrder
     gender?: SortOrder
     mood?: SortOrder
+    avatar2?: SortOrder
     purpose?: SortOrder
     instagram?: SortOrder
     facebook?: SortOrder
@@ -8272,6 +8330,7 @@ export namespace Prisma {
     birthday?: Date | string | null
     gender?: string | null
     mood?: string | null
+    avatar2?: string | null
     purpose?: string | null
     interest?: UserCreateinterestInput | string[]
     images?: UserCreateimagesInput | string[]
@@ -8292,6 +8351,7 @@ export namespace Prisma {
     birthday?: Date | string | null
     gender?: string | null
     mood?: string | null
+    avatar2?: string | null
     purpose?: string | null
     interest?: UserCreateinterestInput | string[]
     images?: UserCreateimagesInput | string[]
@@ -8317,6 +8377,7 @@ export namespace Prisma {
     birthday?: Date | string | null
     gender?: string | null
     mood?: string | null
+    avatar2?: string | null
     purpose?: string | null
     interest?: UserCreateinterestInput | string[]
     images?: UserCreateimagesInput | string[]
@@ -8337,6 +8398,7 @@ export namespace Prisma {
     birthday?: Date | string | null
     gender?: string | null
     mood?: string | null
+    avatar2?: string | null
     purpose?: string | null
     interest?: UserCreateinterestInput | string[]
     images?: UserCreateimagesInput | string[]
@@ -8373,6 +8435,7 @@ export namespace Prisma {
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
     images?: UserUpdateimagesInput | string[]
@@ -8393,6 +8456,7 @@ export namespace Prisma {
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
     images?: UserUpdateimagesInput | string[]
@@ -8424,6 +8488,7 @@ export namespace Prisma {
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
     images?: UserUpdateimagesInput | string[]
@@ -8444,6 +8509,7 @@ export namespace Prisma {
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
     images?: UserUpdateimagesInput | string[]
