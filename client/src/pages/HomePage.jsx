@@ -3,6 +3,7 @@ import SideBar from '../components/SideBar';
 import FeedContainer from '../components/FeedContainer';
 import RightSideBar from '../components/RightSideBar';
 import { useNavigate } from 'react-router-dom';
+import FriendRequests from '../components/friends/FriendRequests';
 
 const HomePage = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -19,6 +20,7 @@ const HomePage = () => {
       <main className="flex-1 overflow-y-auto bg-white pb-20 lg:pb-0">
         <FeedContainer onOpenMenu={() => setIsMobileMenuOpen(true)} />
       </main>
+   
 
       {/* 3. Right Activity Bar - Desktop Only (Fixed) */}
       <aside className="hidden xl:flex w-80 flex-shrink-0 border-l border-gray-100 bg-white">

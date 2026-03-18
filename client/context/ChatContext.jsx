@@ -62,7 +62,6 @@ export const ChatProvider=({children})=>{
             console.log(status);
             const {data}= await axios.get('/api/messages/all-users/')
             if(data.success){
-                console.log("data request succesfully",data);
                 setUsers(data.users);
             }
         }
@@ -137,12 +136,10 @@ export const ChatProvider=({children})=>{
 
     const requestCheck=async()=>{
         try{
-            console.log("requestcheck");
             const {data}= await axios.get(`api/messages/check/${selectedUser.id}`)
             if(data.success){
                 setStatus(data.request.status);
                 setCheckReciver(data.recerverId);
-                console.log("data",data);
                 return{
                     status:data.request.status,
                     checkReciver: data.recerverId,
@@ -177,9 +174,7 @@ export const ChatProvider=({children})=>{
      const freindRequestCheck=async()=>{
         try{
             const {data}= await axios.get('/api/messages/freind-request');
-            console.log("freindRequestCheck");
             if(data.success){
-                console.log("data request succesfully",data);
                 setRequestData(data);
             }
             else{

@@ -20,12 +20,8 @@ const SelectedUserProfilePage = () => {
   if(!selectedUser?.id)
     navigate('/');
  },[]);
- const images = [
-    { src: assets.pic1 },
-    { src: assets.pic2 },
-    { src: assets.pic3 },
-  ];
-
+useEffect(()=>{
+},[])
    const handleBack=()=>{
     navigate("/");
   }
@@ -36,9 +32,7 @@ const SelectedUserProfilePage = () => {
   };
 
 
-  useEffect(()=>{
-    console.log("the selected user ids",selectedUser?.id);
-  },[selectedUser?.id]);
+
 
 
   useEffect(() => {
@@ -49,7 +43,6 @@ const SelectedUserProfilePage = () => {
   const check = async () => {
     const result = await requestCheck();
 
-    console.log("result", result);
 
     if (!result) {
       setStatus("pending");
@@ -64,7 +57,6 @@ useEffect(() => {
   const check=async()=>{
   if (selectedUser?.id) {
     const result=await requestCheck();
-    console.log("result",result);
       if(!result){
         setStatus("pending");
         }
@@ -77,9 +69,7 @@ useEffect(() => {
   }
   check();
 }, [selectedUser?.id]); 
-useEffect(() => {
-  console.log("Updated status:", status);
-}, [status]);
+
   return (
     selectedUser && (
       <div className="min-h-screen bg-[#FDF8F9] flex flex-col items-center py-12 px-4 font-sans">
@@ -202,7 +192,7 @@ useEffect(() => {
                   Photo Gallery
                 </h3>
                 <span className="bg-[#FFE5EE] text-[#ED719E] px-3 py-1 rounded-full text-xs font-bold">
-                  4/6 Slots
+                  {selectedUser?.images.length}/6 Slots
                 </span>
               </div>
 
@@ -210,7 +200,7 @@ useEffect(() => {
       {selectedUser?.images.map((img, i) => (
         <div key={i} className="aspect-square bg-gray-100 rounded-3xl overflow-hidden cursor-pointer">
           <img 
-            src={img.src} 
+            src={img.src||img} 
             onClick={() => setIndex(i)} 
             className="w-full h-full object-cover hover:scale-105 transition-transform"
           />
@@ -221,7 +211,9 @@ useEffect(() => {
         index={index}
         open={index >= 0}
         close={() => setIndex(-1)}
-        slides={selectedUser?.images.src||selectedUser?.images}
+        slides={selectedUser?.images.map((img) => ({
+    src: img.src || img
+  }))}
       />
     </div>
             </div>

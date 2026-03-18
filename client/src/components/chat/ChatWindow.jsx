@@ -10,7 +10,7 @@ import { FiMusic } from "react-icons/fi";
 import { MdPhotoLibrary } from "react-icons/md";
 import ChatPage from "../../pages/ChatPage";
 import { useNavigate } from "react-router-dom";
-
+import { GiGamepad } from "react-icons/gi";
 
 const ChatWindow = ({setOpenProfile}) => {
   const { selectedUser, setSelectedUser, messages, getMessages, sendMessage, getSongs, song } = useContext(ChatContext);
@@ -36,6 +36,8 @@ const {
   } = useContext(CallContext);
 
   const [input, setInput] = useState('');
+    const [games,setGames]= useState(false);
+
   const scrollRef = useRef(null);
   const navigate=useNavigate();
 useEffect(()=>{
@@ -219,6 +221,33 @@ const handleBack = () => {
   >
     <FiMusic size={26} />
   </button>
+          
+          <button 
+    onClick={() => setGames(!musicList)}
+    className="hover:text-purple-400 transition"
+  >
+    <GiGamepad size={26} />
+  </button>
+  {games &&
+  <div style={{
+    position: 'fixed', bottom: 0, left: 0, right: 0,
+    zIndex: 9999, background: '#1a1a2e',
+    padding: '6px 12px 10px',
+    boxShadow: '0 -4px 20px rgba(0,0,0,0.4)'
+  }}>
+    {/* Close button */}
+    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <button
+        onClick={() => setGames(null)}
+        style={{ color: '#9ca3af', background: 'none', border: 'none', cursor: 'pointer', marginBottom: '2px' }}
+      >
+        <FiX size={16} />
+      </button>
+    </div>
+
+    
+  </div>
+}
 
   {/* Popup Box */}
   {musicList && (
