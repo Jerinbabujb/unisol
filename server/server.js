@@ -5,6 +5,7 @@ import http from 'http';
 import userRouter from "./routes/userRoutes.js";
 import messageRouter from "./routes/messageRoutes.js";
 import { Server } from "socket.io";
+import gamesRouter from "./routes/gamesRoutes.js";
 
 const app=express();
 const server= http.createServer(app);
@@ -97,6 +98,7 @@ res.send("server is live"));
 
 app.use("/api/auth",userRouter);
 app.use("/api/messages",messageRouter);
+app.use("/api/games/",gamesRouter);
 const port=process.env.PORT || 5000;
 
 server.listen(port,()=>console.log("server is running on "+port))

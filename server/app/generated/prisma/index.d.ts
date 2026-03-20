@@ -38,6 +38,16 @@ export type Message = $Result.DefaultSelection<Prisma.$MessagePayload>
  * 
  */
 export type connection = $Result.DefaultSelection<Prisma.$connectionPayload>
+/**
+ * Model Games
+ * 
+ */
+export type Games = $Result.DefaultSelection<Prisma.$GamesPayload>
+/**
+ * Model EmojiCharades
+ * 
+ */
+export type EmojiCharades = $Result.DefaultSelection<Prisma.$EmojiCharadesPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -209,6 +219,26 @@ export class PrismaClient<
     * ```
     */
   get connection(): Prisma.connectionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.games`: Exposes CRUD operations for the **Games** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Games
+    * const games = await prisma.games.findMany()
+    * ```
+    */
+  get games(): Prisma.GamesDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.emojiCharades`: Exposes CRUD operations for the **EmojiCharades** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EmojiCharades
+    * const emojiCharades = await prisma.emojiCharades.findMany()
+    * ```
+    */
+  get emojiCharades(): Prisma.EmojiCharadesDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -647,7 +677,9 @@ export namespace Prisma {
     privacy: 'privacy',
     song: 'song',
     Message: 'Message',
-    connection: 'connection'
+    connection: 'connection',
+    Games: 'Games',
+    EmojiCharades: 'EmojiCharades'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -663,7 +695,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "privacy" | "song" | "message" | "connection"
+      modelProps: "user" | "privacy" | "song" | "message" | "connection" | "games" | "emojiCharades"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1037,6 +1069,154 @@ export namespace Prisma {
           }
         }
       }
+      Games: {
+        payload: Prisma.$GamesPayload<ExtArgs>
+        fields: Prisma.GamesFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.GamesFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GamesPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.GamesFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GamesPayload>
+          }
+          findFirst: {
+            args: Prisma.GamesFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GamesPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.GamesFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GamesPayload>
+          }
+          findMany: {
+            args: Prisma.GamesFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GamesPayload>[]
+          }
+          create: {
+            args: Prisma.GamesCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GamesPayload>
+          }
+          createMany: {
+            args: Prisma.GamesCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.GamesCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GamesPayload>[]
+          }
+          delete: {
+            args: Prisma.GamesDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GamesPayload>
+          }
+          update: {
+            args: Prisma.GamesUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GamesPayload>
+          }
+          deleteMany: {
+            args: Prisma.GamesDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.GamesUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.GamesUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GamesPayload>[]
+          }
+          upsert: {
+            args: Prisma.GamesUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GamesPayload>
+          }
+          aggregate: {
+            args: Prisma.GamesAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateGames>
+          }
+          groupBy: {
+            args: Prisma.GamesGroupByArgs<ExtArgs>
+            result: $Utils.Optional<GamesGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.GamesCountArgs<ExtArgs>
+            result: $Utils.Optional<GamesCountAggregateOutputType> | number
+          }
+        }
+      }
+      EmojiCharades: {
+        payload: Prisma.$EmojiCharadesPayload<ExtArgs>
+        fields: Prisma.EmojiCharadesFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EmojiCharadesFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmojiCharadesPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EmojiCharadesFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmojiCharadesPayload>
+          }
+          findFirst: {
+            args: Prisma.EmojiCharadesFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmojiCharadesPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EmojiCharadesFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmojiCharadesPayload>
+          }
+          findMany: {
+            args: Prisma.EmojiCharadesFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmojiCharadesPayload>[]
+          }
+          create: {
+            args: Prisma.EmojiCharadesCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmojiCharadesPayload>
+          }
+          createMany: {
+            args: Prisma.EmojiCharadesCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EmojiCharadesCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmojiCharadesPayload>[]
+          }
+          delete: {
+            args: Prisma.EmojiCharadesDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmojiCharadesPayload>
+          }
+          update: {
+            args: Prisma.EmojiCharadesUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmojiCharadesPayload>
+          }
+          deleteMany: {
+            args: Prisma.EmojiCharadesDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EmojiCharadesUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EmojiCharadesUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmojiCharadesPayload>[]
+          }
+          upsert: {
+            args: Prisma.EmojiCharadesUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmojiCharadesPayload>
+          }
+          aggregate: {
+            args: Prisma.EmojiCharadesAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEmojiCharades>
+          }
+          groupBy: {
+            args: Prisma.EmojiCharadesGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EmojiCharadesGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EmojiCharadesCountArgs<ExtArgs>
+            result: $Utils.Optional<EmojiCharadesCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1150,6 +1330,8 @@ export namespace Prisma {
     song?: songOmit
     message?: MessageOmit
     connection?: connectionOmit
+    games?: GamesOmit
+    emojiCharades?: EmojiCharadesOmit
   }
 
   /* Types for Logging */
@@ -6626,6 +6808,1954 @@ export namespace Prisma {
 
 
   /**
+   * Model Games
+   */
+
+  export type AggregateGames = {
+    _count: GamesCountAggregateOutputType | null
+    _min: GamesMinAggregateOutputType | null
+    _max: GamesMaxAggregateOutputType | null
+  }
+
+  export type GamesMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    icon: string | null
+  }
+
+  export type GamesMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    icon: string | null
+  }
+
+  export type GamesCountAggregateOutputType = {
+    id: number
+    name: number
+    icon: number
+    _all: number
+  }
+
+
+  export type GamesMinAggregateInputType = {
+    id?: true
+    name?: true
+    icon?: true
+  }
+
+  export type GamesMaxAggregateInputType = {
+    id?: true
+    name?: true
+    icon?: true
+  }
+
+  export type GamesCountAggregateInputType = {
+    id?: true
+    name?: true
+    icon?: true
+    _all?: true
+  }
+
+  export type GamesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Games to aggregate.
+     */
+    where?: GamesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Games to fetch.
+     */
+    orderBy?: GamesOrderByWithRelationInput | GamesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: GamesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Games from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Games.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Games
+    **/
+    _count?: true | GamesCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: GamesMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: GamesMaxAggregateInputType
+  }
+
+  export type GetGamesAggregateType<T extends GamesAggregateArgs> = {
+        [P in keyof T & keyof AggregateGames]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateGames[P]>
+      : GetScalarType<T[P], AggregateGames[P]>
+  }
+
+
+
+
+  export type GamesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GamesWhereInput
+    orderBy?: GamesOrderByWithAggregationInput | GamesOrderByWithAggregationInput[]
+    by: GamesScalarFieldEnum[] | GamesScalarFieldEnum
+    having?: GamesScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: GamesCountAggregateInputType | true
+    _min?: GamesMinAggregateInputType
+    _max?: GamesMaxAggregateInputType
+  }
+
+  export type GamesGroupByOutputType = {
+    id: string
+    name: string
+    icon: string
+    _count: GamesCountAggregateOutputType | null
+    _min: GamesMinAggregateOutputType | null
+    _max: GamesMaxAggregateOutputType | null
+  }
+
+  type GetGamesGroupByPayload<T extends GamesGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<GamesGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof GamesGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], GamesGroupByOutputType[P]>
+            : GetScalarType<T[P], GamesGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type GamesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    icon?: boolean
+  }, ExtArgs["result"]["games"]>
+
+  export type GamesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    icon?: boolean
+  }, ExtArgs["result"]["games"]>
+
+  export type GamesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    icon?: boolean
+  }, ExtArgs["result"]["games"]>
+
+  export type GamesSelectScalar = {
+    id?: boolean
+    name?: boolean
+    icon?: boolean
+  }
+
+  export type GamesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "icon", ExtArgs["result"]["games"]>
+
+  export type $GamesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Games"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      icon: string
+    }, ExtArgs["result"]["games"]>
+    composites: {}
+  }
+
+  type GamesGetPayload<S extends boolean | null | undefined | GamesDefaultArgs> = $Result.GetResult<Prisma.$GamesPayload, S>
+
+  type GamesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<GamesFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: GamesCountAggregateInputType | true
+    }
+
+  export interface GamesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Games'], meta: { name: 'Games' } }
+    /**
+     * Find zero or one Games that matches the filter.
+     * @param {GamesFindUniqueArgs} args - Arguments to find a Games
+     * @example
+     * // Get one Games
+     * const games = await prisma.games.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends GamesFindUniqueArgs>(args: SelectSubset<T, GamesFindUniqueArgs<ExtArgs>>): Prisma__GamesClient<$Result.GetResult<Prisma.$GamesPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Games that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {GamesFindUniqueOrThrowArgs} args - Arguments to find a Games
+     * @example
+     * // Get one Games
+     * const games = await prisma.games.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends GamesFindUniqueOrThrowArgs>(args: SelectSubset<T, GamesFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GamesClient<$Result.GetResult<Prisma.$GamesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Games that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GamesFindFirstArgs} args - Arguments to find a Games
+     * @example
+     * // Get one Games
+     * const games = await prisma.games.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends GamesFindFirstArgs>(args?: SelectSubset<T, GamesFindFirstArgs<ExtArgs>>): Prisma__GamesClient<$Result.GetResult<Prisma.$GamesPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Games that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GamesFindFirstOrThrowArgs} args - Arguments to find a Games
+     * @example
+     * // Get one Games
+     * const games = await prisma.games.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends GamesFindFirstOrThrowArgs>(args?: SelectSubset<T, GamesFindFirstOrThrowArgs<ExtArgs>>): Prisma__GamesClient<$Result.GetResult<Prisma.$GamesPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Games that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GamesFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Games
+     * const games = await prisma.games.findMany()
+     * 
+     * // Get first 10 Games
+     * const games = await prisma.games.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const gamesWithIdOnly = await prisma.games.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends GamesFindManyArgs>(args?: SelectSubset<T, GamesFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GamesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Games.
+     * @param {GamesCreateArgs} args - Arguments to create a Games.
+     * @example
+     * // Create one Games
+     * const Games = await prisma.games.create({
+     *   data: {
+     *     // ... data to create a Games
+     *   }
+     * })
+     * 
+     */
+    create<T extends GamesCreateArgs>(args: SelectSubset<T, GamesCreateArgs<ExtArgs>>): Prisma__GamesClient<$Result.GetResult<Prisma.$GamesPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Games.
+     * @param {GamesCreateManyArgs} args - Arguments to create many Games.
+     * @example
+     * // Create many Games
+     * const games = await prisma.games.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends GamesCreateManyArgs>(args?: SelectSubset<T, GamesCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Games and returns the data saved in the database.
+     * @param {GamesCreateManyAndReturnArgs} args - Arguments to create many Games.
+     * @example
+     * // Create many Games
+     * const games = await prisma.games.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Games and only return the `id`
+     * const gamesWithIdOnly = await prisma.games.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends GamesCreateManyAndReturnArgs>(args?: SelectSubset<T, GamesCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GamesPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Games.
+     * @param {GamesDeleteArgs} args - Arguments to delete one Games.
+     * @example
+     * // Delete one Games
+     * const Games = await prisma.games.delete({
+     *   where: {
+     *     // ... filter to delete one Games
+     *   }
+     * })
+     * 
+     */
+    delete<T extends GamesDeleteArgs>(args: SelectSubset<T, GamesDeleteArgs<ExtArgs>>): Prisma__GamesClient<$Result.GetResult<Prisma.$GamesPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Games.
+     * @param {GamesUpdateArgs} args - Arguments to update one Games.
+     * @example
+     * // Update one Games
+     * const games = await prisma.games.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends GamesUpdateArgs>(args: SelectSubset<T, GamesUpdateArgs<ExtArgs>>): Prisma__GamesClient<$Result.GetResult<Prisma.$GamesPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Games.
+     * @param {GamesDeleteManyArgs} args - Arguments to filter Games to delete.
+     * @example
+     * // Delete a few Games
+     * const { count } = await prisma.games.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends GamesDeleteManyArgs>(args?: SelectSubset<T, GamesDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Games.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GamesUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Games
+     * const games = await prisma.games.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends GamesUpdateManyArgs>(args: SelectSubset<T, GamesUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Games and returns the data updated in the database.
+     * @param {GamesUpdateManyAndReturnArgs} args - Arguments to update many Games.
+     * @example
+     * // Update many Games
+     * const games = await prisma.games.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Games and only return the `id`
+     * const gamesWithIdOnly = await prisma.games.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends GamesUpdateManyAndReturnArgs>(args: SelectSubset<T, GamesUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GamesPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Games.
+     * @param {GamesUpsertArgs} args - Arguments to update or create a Games.
+     * @example
+     * // Update or create a Games
+     * const games = await prisma.games.upsert({
+     *   create: {
+     *     // ... data to create a Games
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Games we want to update
+     *   }
+     * })
+     */
+    upsert<T extends GamesUpsertArgs>(args: SelectSubset<T, GamesUpsertArgs<ExtArgs>>): Prisma__GamesClient<$Result.GetResult<Prisma.$GamesPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Games.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GamesCountArgs} args - Arguments to filter Games to count.
+     * @example
+     * // Count the number of Games
+     * const count = await prisma.games.count({
+     *   where: {
+     *     // ... the filter for the Games we want to count
+     *   }
+     * })
+    **/
+    count<T extends GamesCountArgs>(
+      args?: Subset<T, GamesCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], GamesCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Games.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GamesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends GamesAggregateArgs>(args: Subset<T, GamesAggregateArgs>): Prisma.PrismaPromise<GetGamesAggregateType<T>>
+
+    /**
+     * Group by Games.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GamesGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends GamesGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: GamesGroupByArgs['orderBy'] }
+        : { orderBy?: GamesGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, GamesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGamesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Games model
+   */
+  readonly fields: GamesFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Games.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__GamesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Games model
+   */
+  interface GamesFieldRefs {
+    readonly id: FieldRef<"Games", 'String'>
+    readonly name: FieldRef<"Games", 'String'>
+    readonly icon: FieldRef<"Games", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Games findUnique
+   */
+  export type GamesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Games
+     */
+    select?: GamesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Games
+     */
+    omit?: GamesOmit<ExtArgs> | null
+    /**
+     * Filter, which Games to fetch.
+     */
+    where: GamesWhereUniqueInput
+  }
+
+  /**
+   * Games findUniqueOrThrow
+   */
+  export type GamesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Games
+     */
+    select?: GamesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Games
+     */
+    omit?: GamesOmit<ExtArgs> | null
+    /**
+     * Filter, which Games to fetch.
+     */
+    where: GamesWhereUniqueInput
+  }
+
+  /**
+   * Games findFirst
+   */
+  export type GamesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Games
+     */
+    select?: GamesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Games
+     */
+    omit?: GamesOmit<ExtArgs> | null
+    /**
+     * Filter, which Games to fetch.
+     */
+    where?: GamesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Games to fetch.
+     */
+    orderBy?: GamesOrderByWithRelationInput | GamesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Games.
+     */
+    cursor?: GamesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Games from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Games.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Games.
+     */
+    distinct?: GamesScalarFieldEnum | GamesScalarFieldEnum[]
+  }
+
+  /**
+   * Games findFirstOrThrow
+   */
+  export type GamesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Games
+     */
+    select?: GamesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Games
+     */
+    omit?: GamesOmit<ExtArgs> | null
+    /**
+     * Filter, which Games to fetch.
+     */
+    where?: GamesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Games to fetch.
+     */
+    orderBy?: GamesOrderByWithRelationInput | GamesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Games.
+     */
+    cursor?: GamesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Games from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Games.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Games.
+     */
+    distinct?: GamesScalarFieldEnum | GamesScalarFieldEnum[]
+  }
+
+  /**
+   * Games findMany
+   */
+  export type GamesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Games
+     */
+    select?: GamesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Games
+     */
+    omit?: GamesOmit<ExtArgs> | null
+    /**
+     * Filter, which Games to fetch.
+     */
+    where?: GamesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Games to fetch.
+     */
+    orderBy?: GamesOrderByWithRelationInput | GamesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Games.
+     */
+    cursor?: GamesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Games from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Games.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Games.
+     */
+    distinct?: GamesScalarFieldEnum | GamesScalarFieldEnum[]
+  }
+
+  /**
+   * Games create
+   */
+  export type GamesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Games
+     */
+    select?: GamesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Games
+     */
+    omit?: GamesOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Games.
+     */
+    data: XOR<GamesCreateInput, GamesUncheckedCreateInput>
+  }
+
+  /**
+   * Games createMany
+   */
+  export type GamesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Games.
+     */
+    data: GamesCreateManyInput | GamesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Games createManyAndReturn
+   */
+  export type GamesCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Games
+     */
+    select?: GamesSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Games
+     */
+    omit?: GamesOmit<ExtArgs> | null
+    /**
+     * The data used to create many Games.
+     */
+    data: GamesCreateManyInput | GamesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Games update
+   */
+  export type GamesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Games
+     */
+    select?: GamesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Games
+     */
+    omit?: GamesOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Games.
+     */
+    data: XOR<GamesUpdateInput, GamesUncheckedUpdateInput>
+    /**
+     * Choose, which Games to update.
+     */
+    where: GamesWhereUniqueInput
+  }
+
+  /**
+   * Games updateMany
+   */
+  export type GamesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Games.
+     */
+    data: XOR<GamesUpdateManyMutationInput, GamesUncheckedUpdateManyInput>
+    /**
+     * Filter which Games to update
+     */
+    where?: GamesWhereInput
+    /**
+     * Limit how many Games to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Games updateManyAndReturn
+   */
+  export type GamesUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Games
+     */
+    select?: GamesSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Games
+     */
+    omit?: GamesOmit<ExtArgs> | null
+    /**
+     * The data used to update Games.
+     */
+    data: XOR<GamesUpdateManyMutationInput, GamesUncheckedUpdateManyInput>
+    /**
+     * Filter which Games to update
+     */
+    where?: GamesWhereInput
+    /**
+     * Limit how many Games to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Games upsert
+   */
+  export type GamesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Games
+     */
+    select?: GamesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Games
+     */
+    omit?: GamesOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Games to update in case it exists.
+     */
+    where: GamesWhereUniqueInput
+    /**
+     * In case the Games found by the `where` argument doesn't exist, create a new Games with this data.
+     */
+    create: XOR<GamesCreateInput, GamesUncheckedCreateInput>
+    /**
+     * In case the Games was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<GamesUpdateInput, GamesUncheckedUpdateInput>
+  }
+
+  /**
+   * Games delete
+   */
+  export type GamesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Games
+     */
+    select?: GamesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Games
+     */
+    omit?: GamesOmit<ExtArgs> | null
+    /**
+     * Filter which Games to delete.
+     */
+    where: GamesWhereUniqueInput
+  }
+
+  /**
+   * Games deleteMany
+   */
+  export type GamesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Games to delete
+     */
+    where?: GamesWhereInput
+    /**
+     * Limit how many Games to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Games without action
+   */
+  export type GamesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Games
+     */
+    select?: GamesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Games
+     */
+    omit?: GamesOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model EmojiCharades
+   */
+
+  export type AggregateEmojiCharades = {
+    _count: EmojiCharadesCountAggregateOutputType | null
+    _min: EmojiCharadesMinAggregateOutputType | null
+    _max: EmojiCharadesMaxAggregateOutputType | null
+  }
+
+  export type EmojiCharadesMinAggregateOutputType = {
+    id: string | null
+    questions: string | null
+    answer: string | null
+  }
+
+  export type EmojiCharadesMaxAggregateOutputType = {
+    id: string | null
+    questions: string | null
+    answer: string | null
+  }
+
+  export type EmojiCharadesCountAggregateOutputType = {
+    id: number
+    questions: number
+    answer: number
+    _all: number
+  }
+
+
+  export type EmojiCharadesMinAggregateInputType = {
+    id?: true
+    questions?: true
+    answer?: true
+  }
+
+  export type EmojiCharadesMaxAggregateInputType = {
+    id?: true
+    questions?: true
+    answer?: true
+  }
+
+  export type EmojiCharadesCountAggregateInputType = {
+    id?: true
+    questions?: true
+    answer?: true
+    _all?: true
+  }
+
+  export type EmojiCharadesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmojiCharades to aggregate.
+     */
+    where?: EmojiCharadesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmojiCharades to fetch.
+     */
+    orderBy?: EmojiCharadesOrderByWithRelationInput | EmojiCharadesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EmojiCharadesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmojiCharades from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmojiCharades.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EmojiCharades
+    **/
+    _count?: true | EmojiCharadesCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EmojiCharadesMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EmojiCharadesMaxAggregateInputType
+  }
+
+  export type GetEmojiCharadesAggregateType<T extends EmojiCharadesAggregateArgs> = {
+        [P in keyof T & keyof AggregateEmojiCharades]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEmojiCharades[P]>
+      : GetScalarType<T[P], AggregateEmojiCharades[P]>
+  }
+
+
+
+
+  export type EmojiCharadesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmojiCharadesWhereInput
+    orderBy?: EmojiCharadesOrderByWithAggregationInput | EmojiCharadesOrderByWithAggregationInput[]
+    by: EmojiCharadesScalarFieldEnum[] | EmojiCharadesScalarFieldEnum
+    having?: EmojiCharadesScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EmojiCharadesCountAggregateInputType | true
+    _min?: EmojiCharadesMinAggregateInputType
+    _max?: EmojiCharadesMaxAggregateInputType
+  }
+
+  export type EmojiCharadesGroupByOutputType = {
+    id: string
+    questions: string
+    answer: string
+    _count: EmojiCharadesCountAggregateOutputType | null
+    _min: EmojiCharadesMinAggregateOutputType | null
+    _max: EmojiCharadesMaxAggregateOutputType | null
+  }
+
+  type GetEmojiCharadesGroupByPayload<T extends EmojiCharadesGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EmojiCharadesGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EmojiCharadesGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EmojiCharadesGroupByOutputType[P]>
+            : GetScalarType<T[P], EmojiCharadesGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EmojiCharadesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    questions?: boolean
+    answer?: boolean
+  }, ExtArgs["result"]["emojiCharades"]>
+
+  export type EmojiCharadesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    questions?: boolean
+    answer?: boolean
+  }, ExtArgs["result"]["emojiCharades"]>
+
+  export type EmojiCharadesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    questions?: boolean
+    answer?: boolean
+  }, ExtArgs["result"]["emojiCharades"]>
+
+  export type EmojiCharadesSelectScalar = {
+    id?: boolean
+    questions?: boolean
+    answer?: boolean
+  }
+
+  export type EmojiCharadesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "questions" | "answer", ExtArgs["result"]["emojiCharades"]>
+
+  export type $EmojiCharadesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EmojiCharades"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      questions: string
+      answer: string
+    }, ExtArgs["result"]["emojiCharades"]>
+    composites: {}
+  }
+
+  type EmojiCharadesGetPayload<S extends boolean | null | undefined | EmojiCharadesDefaultArgs> = $Result.GetResult<Prisma.$EmojiCharadesPayload, S>
+
+  type EmojiCharadesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EmojiCharadesFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EmojiCharadesCountAggregateInputType | true
+    }
+
+  export interface EmojiCharadesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EmojiCharades'], meta: { name: 'EmojiCharades' } }
+    /**
+     * Find zero or one EmojiCharades that matches the filter.
+     * @param {EmojiCharadesFindUniqueArgs} args - Arguments to find a EmojiCharades
+     * @example
+     * // Get one EmojiCharades
+     * const emojiCharades = await prisma.emojiCharades.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EmojiCharadesFindUniqueArgs>(args: SelectSubset<T, EmojiCharadesFindUniqueArgs<ExtArgs>>): Prisma__EmojiCharadesClient<$Result.GetResult<Prisma.$EmojiCharadesPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EmojiCharades that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EmojiCharadesFindUniqueOrThrowArgs} args - Arguments to find a EmojiCharades
+     * @example
+     * // Get one EmojiCharades
+     * const emojiCharades = await prisma.emojiCharades.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EmojiCharadesFindUniqueOrThrowArgs>(args: SelectSubset<T, EmojiCharadesFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EmojiCharadesClient<$Result.GetResult<Prisma.$EmojiCharadesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmojiCharades that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmojiCharadesFindFirstArgs} args - Arguments to find a EmojiCharades
+     * @example
+     * // Get one EmojiCharades
+     * const emojiCharades = await prisma.emojiCharades.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EmojiCharadesFindFirstArgs>(args?: SelectSubset<T, EmojiCharadesFindFirstArgs<ExtArgs>>): Prisma__EmojiCharadesClient<$Result.GetResult<Prisma.$EmojiCharadesPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmojiCharades that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmojiCharadesFindFirstOrThrowArgs} args - Arguments to find a EmojiCharades
+     * @example
+     * // Get one EmojiCharades
+     * const emojiCharades = await prisma.emojiCharades.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EmojiCharadesFindFirstOrThrowArgs>(args?: SelectSubset<T, EmojiCharadesFindFirstOrThrowArgs<ExtArgs>>): Prisma__EmojiCharadesClient<$Result.GetResult<Prisma.$EmojiCharadesPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EmojiCharades that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmojiCharadesFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EmojiCharades
+     * const emojiCharades = await prisma.emojiCharades.findMany()
+     * 
+     * // Get first 10 EmojiCharades
+     * const emojiCharades = await prisma.emojiCharades.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const emojiCharadesWithIdOnly = await prisma.emojiCharades.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EmojiCharadesFindManyArgs>(args?: SelectSubset<T, EmojiCharadesFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmojiCharadesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EmojiCharades.
+     * @param {EmojiCharadesCreateArgs} args - Arguments to create a EmojiCharades.
+     * @example
+     * // Create one EmojiCharades
+     * const EmojiCharades = await prisma.emojiCharades.create({
+     *   data: {
+     *     // ... data to create a EmojiCharades
+     *   }
+     * })
+     * 
+     */
+    create<T extends EmojiCharadesCreateArgs>(args: SelectSubset<T, EmojiCharadesCreateArgs<ExtArgs>>): Prisma__EmojiCharadesClient<$Result.GetResult<Prisma.$EmojiCharadesPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EmojiCharades.
+     * @param {EmojiCharadesCreateManyArgs} args - Arguments to create many EmojiCharades.
+     * @example
+     * // Create many EmojiCharades
+     * const emojiCharades = await prisma.emojiCharades.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EmojiCharadesCreateManyArgs>(args?: SelectSubset<T, EmojiCharadesCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EmojiCharades and returns the data saved in the database.
+     * @param {EmojiCharadesCreateManyAndReturnArgs} args - Arguments to create many EmojiCharades.
+     * @example
+     * // Create many EmojiCharades
+     * const emojiCharades = await prisma.emojiCharades.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EmojiCharades and only return the `id`
+     * const emojiCharadesWithIdOnly = await prisma.emojiCharades.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EmojiCharadesCreateManyAndReturnArgs>(args?: SelectSubset<T, EmojiCharadesCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmojiCharadesPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a EmojiCharades.
+     * @param {EmojiCharadesDeleteArgs} args - Arguments to delete one EmojiCharades.
+     * @example
+     * // Delete one EmojiCharades
+     * const EmojiCharades = await prisma.emojiCharades.delete({
+     *   where: {
+     *     // ... filter to delete one EmojiCharades
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EmojiCharadesDeleteArgs>(args: SelectSubset<T, EmojiCharadesDeleteArgs<ExtArgs>>): Prisma__EmojiCharadesClient<$Result.GetResult<Prisma.$EmojiCharadesPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EmojiCharades.
+     * @param {EmojiCharadesUpdateArgs} args - Arguments to update one EmojiCharades.
+     * @example
+     * // Update one EmojiCharades
+     * const emojiCharades = await prisma.emojiCharades.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EmojiCharadesUpdateArgs>(args: SelectSubset<T, EmojiCharadesUpdateArgs<ExtArgs>>): Prisma__EmojiCharadesClient<$Result.GetResult<Prisma.$EmojiCharadesPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EmojiCharades.
+     * @param {EmojiCharadesDeleteManyArgs} args - Arguments to filter EmojiCharades to delete.
+     * @example
+     * // Delete a few EmojiCharades
+     * const { count } = await prisma.emojiCharades.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EmojiCharadesDeleteManyArgs>(args?: SelectSubset<T, EmojiCharadesDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EmojiCharades.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmojiCharadesUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EmojiCharades
+     * const emojiCharades = await prisma.emojiCharades.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EmojiCharadesUpdateManyArgs>(args: SelectSubset<T, EmojiCharadesUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EmojiCharades and returns the data updated in the database.
+     * @param {EmojiCharadesUpdateManyAndReturnArgs} args - Arguments to update many EmojiCharades.
+     * @example
+     * // Update many EmojiCharades
+     * const emojiCharades = await prisma.emojiCharades.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more EmojiCharades and only return the `id`
+     * const emojiCharadesWithIdOnly = await prisma.emojiCharades.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EmojiCharadesUpdateManyAndReturnArgs>(args: SelectSubset<T, EmojiCharadesUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmojiCharadesPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one EmojiCharades.
+     * @param {EmojiCharadesUpsertArgs} args - Arguments to update or create a EmojiCharades.
+     * @example
+     * // Update or create a EmojiCharades
+     * const emojiCharades = await prisma.emojiCharades.upsert({
+     *   create: {
+     *     // ... data to create a EmojiCharades
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EmojiCharades we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EmojiCharadesUpsertArgs>(args: SelectSubset<T, EmojiCharadesUpsertArgs<ExtArgs>>): Prisma__EmojiCharadesClient<$Result.GetResult<Prisma.$EmojiCharadesPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EmojiCharades.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmojiCharadesCountArgs} args - Arguments to filter EmojiCharades to count.
+     * @example
+     * // Count the number of EmojiCharades
+     * const count = await prisma.emojiCharades.count({
+     *   where: {
+     *     // ... the filter for the EmojiCharades we want to count
+     *   }
+     * })
+    **/
+    count<T extends EmojiCharadesCountArgs>(
+      args?: Subset<T, EmojiCharadesCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EmojiCharadesCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EmojiCharades.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmojiCharadesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EmojiCharadesAggregateArgs>(args: Subset<T, EmojiCharadesAggregateArgs>): Prisma.PrismaPromise<GetEmojiCharadesAggregateType<T>>
+
+    /**
+     * Group by EmojiCharades.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmojiCharadesGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EmojiCharadesGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EmojiCharadesGroupByArgs['orderBy'] }
+        : { orderBy?: EmojiCharadesGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EmojiCharadesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEmojiCharadesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EmojiCharades model
+   */
+  readonly fields: EmojiCharadesFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EmojiCharades.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EmojiCharadesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EmojiCharades model
+   */
+  interface EmojiCharadesFieldRefs {
+    readonly id: FieldRef<"EmojiCharades", 'String'>
+    readonly questions: FieldRef<"EmojiCharades", 'String'>
+    readonly answer: FieldRef<"EmojiCharades", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EmojiCharades findUnique
+   */
+  export type EmojiCharadesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmojiCharades
+     */
+    select?: EmojiCharadesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmojiCharades
+     */
+    omit?: EmojiCharadesOmit<ExtArgs> | null
+    /**
+     * Filter, which EmojiCharades to fetch.
+     */
+    where: EmojiCharadesWhereUniqueInput
+  }
+
+  /**
+   * EmojiCharades findUniqueOrThrow
+   */
+  export type EmojiCharadesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmojiCharades
+     */
+    select?: EmojiCharadesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmojiCharades
+     */
+    omit?: EmojiCharadesOmit<ExtArgs> | null
+    /**
+     * Filter, which EmojiCharades to fetch.
+     */
+    where: EmojiCharadesWhereUniqueInput
+  }
+
+  /**
+   * EmojiCharades findFirst
+   */
+  export type EmojiCharadesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmojiCharades
+     */
+    select?: EmojiCharadesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmojiCharades
+     */
+    omit?: EmojiCharadesOmit<ExtArgs> | null
+    /**
+     * Filter, which EmojiCharades to fetch.
+     */
+    where?: EmojiCharadesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmojiCharades to fetch.
+     */
+    orderBy?: EmojiCharadesOrderByWithRelationInput | EmojiCharadesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EmojiCharades.
+     */
+    cursor?: EmojiCharadesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmojiCharades from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmojiCharades.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmojiCharades.
+     */
+    distinct?: EmojiCharadesScalarFieldEnum | EmojiCharadesScalarFieldEnum[]
+  }
+
+  /**
+   * EmojiCharades findFirstOrThrow
+   */
+  export type EmojiCharadesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmojiCharades
+     */
+    select?: EmojiCharadesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmojiCharades
+     */
+    omit?: EmojiCharadesOmit<ExtArgs> | null
+    /**
+     * Filter, which EmojiCharades to fetch.
+     */
+    where?: EmojiCharadesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmojiCharades to fetch.
+     */
+    orderBy?: EmojiCharadesOrderByWithRelationInput | EmojiCharadesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EmojiCharades.
+     */
+    cursor?: EmojiCharadesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmojiCharades from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmojiCharades.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmojiCharades.
+     */
+    distinct?: EmojiCharadesScalarFieldEnum | EmojiCharadesScalarFieldEnum[]
+  }
+
+  /**
+   * EmojiCharades findMany
+   */
+  export type EmojiCharadesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmojiCharades
+     */
+    select?: EmojiCharadesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmojiCharades
+     */
+    omit?: EmojiCharadesOmit<ExtArgs> | null
+    /**
+     * Filter, which EmojiCharades to fetch.
+     */
+    where?: EmojiCharadesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmojiCharades to fetch.
+     */
+    orderBy?: EmojiCharadesOrderByWithRelationInput | EmojiCharadesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EmojiCharades.
+     */
+    cursor?: EmojiCharadesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmojiCharades from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmojiCharades.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmojiCharades.
+     */
+    distinct?: EmojiCharadesScalarFieldEnum | EmojiCharadesScalarFieldEnum[]
+  }
+
+  /**
+   * EmojiCharades create
+   */
+  export type EmojiCharadesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmojiCharades
+     */
+    select?: EmojiCharadesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmojiCharades
+     */
+    omit?: EmojiCharadesOmit<ExtArgs> | null
+    /**
+     * The data needed to create a EmojiCharades.
+     */
+    data: XOR<EmojiCharadesCreateInput, EmojiCharadesUncheckedCreateInput>
+  }
+
+  /**
+   * EmojiCharades createMany
+   */
+  export type EmojiCharadesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EmojiCharades.
+     */
+    data: EmojiCharadesCreateManyInput | EmojiCharadesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EmojiCharades createManyAndReturn
+   */
+  export type EmojiCharadesCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmojiCharades
+     */
+    select?: EmojiCharadesSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmojiCharades
+     */
+    omit?: EmojiCharadesOmit<ExtArgs> | null
+    /**
+     * The data used to create many EmojiCharades.
+     */
+    data: EmojiCharadesCreateManyInput | EmojiCharadesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EmojiCharades update
+   */
+  export type EmojiCharadesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmojiCharades
+     */
+    select?: EmojiCharadesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmojiCharades
+     */
+    omit?: EmojiCharadesOmit<ExtArgs> | null
+    /**
+     * The data needed to update a EmojiCharades.
+     */
+    data: XOR<EmojiCharadesUpdateInput, EmojiCharadesUncheckedUpdateInput>
+    /**
+     * Choose, which EmojiCharades to update.
+     */
+    where: EmojiCharadesWhereUniqueInput
+  }
+
+  /**
+   * EmojiCharades updateMany
+   */
+  export type EmojiCharadesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EmojiCharades.
+     */
+    data: XOR<EmojiCharadesUpdateManyMutationInput, EmojiCharadesUncheckedUpdateManyInput>
+    /**
+     * Filter which EmojiCharades to update
+     */
+    where?: EmojiCharadesWhereInput
+    /**
+     * Limit how many EmojiCharades to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmojiCharades updateManyAndReturn
+   */
+  export type EmojiCharadesUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmojiCharades
+     */
+    select?: EmojiCharadesSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmojiCharades
+     */
+    omit?: EmojiCharadesOmit<ExtArgs> | null
+    /**
+     * The data used to update EmojiCharades.
+     */
+    data: XOR<EmojiCharadesUpdateManyMutationInput, EmojiCharadesUncheckedUpdateManyInput>
+    /**
+     * Filter which EmojiCharades to update
+     */
+    where?: EmojiCharadesWhereInput
+    /**
+     * Limit how many EmojiCharades to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmojiCharades upsert
+   */
+  export type EmojiCharadesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmojiCharades
+     */
+    select?: EmojiCharadesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmojiCharades
+     */
+    omit?: EmojiCharadesOmit<ExtArgs> | null
+    /**
+     * The filter to search for the EmojiCharades to update in case it exists.
+     */
+    where: EmojiCharadesWhereUniqueInput
+    /**
+     * In case the EmojiCharades found by the `where` argument doesn't exist, create a new EmojiCharades with this data.
+     */
+    create: XOR<EmojiCharadesCreateInput, EmojiCharadesUncheckedCreateInput>
+    /**
+     * In case the EmojiCharades was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EmojiCharadesUpdateInput, EmojiCharadesUncheckedUpdateInput>
+  }
+
+  /**
+   * EmojiCharades delete
+   */
+  export type EmojiCharadesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmojiCharades
+     */
+    select?: EmojiCharadesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmojiCharades
+     */
+    omit?: EmojiCharadesOmit<ExtArgs> | null
+    /**
+     * Filter which EmojiCharades to delete.
+     */
+    where: EmojiCharadesWhereUniqueInput
+  }
+
+  /**
+   * EmojiCharades deleteMany
+   */
+  export type EmojiCharadesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmojiCharades to delete
+     */
+    where?: EmojiCharadesWhereInput
+    /**
+     * Limit how many EmojiCharades to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmojiCharades without action
+   */
+  export type EmojiCharadesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmojiCharades
+     */
+    select?: EmojiCharadesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmojiCharades
+     */
+    omit?: EmojiCharadesOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -6704,6 +8834,24 @@ export namespace Prisma {
   };
 
   export type ConnectionScalarFieldEnum = (typeof ConnectionScalarFieldEnum)[keyof typeof ConnectionScalarFieldEnum]
+
+
+  export const GamesScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    icon: 'icon'
+  };
+
+  export type GamesScalarFieldEnum = (typeof GamesScalarFieldEnum)[keyof typeof GamesScalarFieldEnum]
+
+
+  export const EmojiCharadesScalarFieldEnum: {
+    id: 'id',
+    questions: 'questions',
+    answer: 'answer'
+  };
+
+  export type EmojiCharadesScalarFieldEnum = (typeof EmojiCharadesScalarFieldEnum)[keyof typeof EmojiCharadesScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -7137,6 +9285,90 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"connection"> | Date | string
   }
 
+  export type GamesWhereInput = {
+    AND?: GamesWhereInput | GamesWhereInput[]
+    OR?: GamesWhereInput[]
+    NOT?: GamesWhereInput | GamesWhereInput[]
+    id?: StringFilter<"Games"> | string
+    name?: StringFilter<"Games"> | string
+    icon?: StringFilter<"Games"> | string
+  }
+
+  export type GamesOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    icon?: SortOrder
+  }
+
+  export type GamesWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: GamesWhereInput | GamesWhereInput[]
+    OR?: GamesWhereInput[]
+    NOT?: GamesWhereInput | GamesWhereInput[]
+    name?: StringFilter<"Games"> | string
+    icon?: StringFilter<"Games"> | string
+  }, "id">
+
+  export type GamesOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    icon?: SortOrder
+    _count?: GamesCountOrderByAggregateInput
+    _max?: GamesMaxOrderByAggregateInput
+    _min?: GamesMinOrderByAggregateInput
+  }
+
+  export type GamesScalarWhereWithAggregatesInput = {
+    AND?: GamesScalarWhereWithAggregatesInput | GamesScalarWhereWithAggregatesInput[]
+    OR?: GamesScalarWhereWithAggregatesInput[]
+    NOT?: GamesScalarWhereWithAggregatesInput | GamesScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Games"> | string
+    name?: StringWithAggregatesFilter<"Games"> | string
+    icon?: StringWithAggregatesFilter<"Games"> | string
+  }
+
+  export type EmojiCharadesWhereInput = {
+    AND?: EmojiCharadesWhereInput | EmojiCharadesWhereInput[]
+    OR?: EmojiCharadesWhereInput[]
+    NOT?: EmojiCharadesWhereInput | EmojiCharadesWhereInput[]
+    id?: StringFilter<"EmojiCharades"> | string
+    questions?: StringFilter<"EmojiCharades"> | string
+    answer?: StringFilter<"EmojiCharades"> | string
+  }
+
+  export type EmojiCharadesOrderByWithRelationInput = {
+    id?: SortOrder
+    questions?: SortOrder
+    answer?: SortOrder
+  }
+
+  export type EmojiCharadesWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: EmojiCharadesWhereInput | EmojiCharadesWhereInput[]
+    OR?: EmojiCharadesWhereInput[]
+    NOT?: EmojiCharadesWhereInput | EmojiCharadesWhereInput[]
+    questions?: StringFilter<"EmojiCharades"> | string
+    answer?: StringFilter<"EmojiCharades"> | string
+  }, "id">
+
+  export type EmojiCharadesOrderByWithAggregationInput = {
+    id?: SortOrder
+    questions?: SortOrder
+    answer?: SortOrder
+    _count?: EmojiCharadesCountOrderByAggregateInput
+    _max?: EmojiCharadesMaxOrderByAggregateInput
+    _min?: EmojiCharadesMinOrderByAggregateInput
+  }
+
+  export type EmojiCharadesScalarWhereWithAggregatesInput = {
+    AND?: EmojiCharadesScalarWhereWithAggregatesInput | EmojiCharadesScalarWhereWithAggregatesInput[]
+    OR?: EmojiCharadesScalarWhereWithAggregatesInput[]
+    NOT?: EmojiCharadesScalarWhereWithAggregatesInput | EmojiCharadesScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"EmojiCharades"> | string
+    questions?: StringWithAggregatesFilter<"EmojiCharades"> | string
+    answer?: StringWithAggregatesFilter<"EmojiCharades"> | string
+  }
+
   export type UserCreateInput = {
     id?: string
     fullName: string
@@ -7507,6 +9739,90 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type GamesCreateInput = {
+    id?: string
+    name: string
+    icon: string
+  }
+
+  export type GamesUncheckedCreateInput = {
+    id?: string
+    name: string
+    icon: string
+  }
+
+  export type GamesUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type GamesUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type GamesCreateManyInput = {
+    id?: string
+    name: string
+    icon: string
+  }
+
+  export type GamesUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type GamesUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type EmojiCharadesCreateInput = {
+    id?: string
+    questions: string
+    answer: string
+  }
+
+  export type EmojiCharadesUncheckedCreateInput = {
+    id?: string
+    questions: string
+    answer: string
+  }
+
+  export type EmojiCharadesUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    questions?: StringFieldUpdateOperationsInput | string
+    answer?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type EmojiCharadesUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    questions?: StringFieldUpdateOperationsInput | string
+    answer?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type EmojiCharadesCreateManyInput = {
+    id?: string
+    questions: string
+    answer: string
+  }
+
+  export type EmojiCharadesUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    questions?: StringFieldUpdateOperationsInput | string
+    answer?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type EmojiCharadesUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    questions?: StringFieldUpdateOperationsInput | string
+    answer?: StringFieldUpdateOperationsInput | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -7872,6 +10188,42 @@ export namespace Prisma {
     receiverId?: SortOrder
     status?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type GamesCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    icon?: SortOrder
+  }
+
+  export type GamesMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    icon?: SortOrder
+  }
+
+  export type GamesMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    icon?: SortOrder
+  }
+
+  export type EmojiCharadesCountOrderByAggregateInput = {
+    id?: SortOrder
+    questions?: SortOrder
+    answer?: SortOrder
+  }
+
+  export type EmojiCharadesMaxOrderByAggregateInput = {
+    id?: SortOrder
+    questions?: SortOrder
+    answer?: SortOrder
+  }
+
+  export type EmojiCharadesMinOrderByAggregateInput = {
+    id?: SortOrder
+    questions?: SortOrder
+    answer?: SortOrder
   }
 
   export type UserCreateinterestInput = {

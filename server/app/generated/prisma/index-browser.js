@@ -172,6 +172,18 @@ exports.Prisma.ConnectionScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.GamesScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  icon: 'icon'
+};
+
+exports.Prisma.EmojiCharadesScalarFieldEnum = {
+  id: 'id',
+  questions: 'questions',
+  answer: 'answer'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -193,7 +205,9 @@ exports.Prisma.ModelName = {
   privacy: 'privacy',
   song: 'song',
   Message: 'Message',
-  connection: 'connection'
+  connection: 'connection',
+  Games: 'Games',
+  EmojiCharades: 'EmojiCharades'
 };
 
 /**

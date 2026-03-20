@@ -68,3 +68,16 @@ model connection{
 
   @@unique([senderId,receiverId])
 }
+
+
+model Games{
+  id        String  @id @default(uuid())
+  name      String
+  icon      String
+}
+
+model EmojiCharades{
+  id    String @id @default(uuid())
+  questions  String
+  answer    String
+}
