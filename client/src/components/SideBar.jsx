@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { ChatContext } from '../../context/ChatContext';
 
-const SideBar = () => {
+const SideBar = ({onFriendRequest}) => {
   const { unseenMessages, users,requestData,freindRequestCheck } = useContext(ChatContext);
   const { authUser, logout, checkAuth } = useContext(AuthContext);
 

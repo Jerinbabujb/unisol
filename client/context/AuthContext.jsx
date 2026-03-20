@@ -21,7 +21,6 @@ export const AuthProvider = ({ children }) => {
       const { data } = await axios.get("/api/auth/check");
 
       if (data.success) {
-        console.log(data);
         setAuthUser(data.user);
       } else {
         setAuthUser(null);
@@ -38,9 +37,7 @@ export const AuthProvider = ({ children }) => {
     if (authUser?.id && !socket.connected) {
       socket.auth = { userId: authUser.id };
       socket.connect();
-      console.log("🟢 SOCKET CONNECTED:", authUser.id);
              const handleOnlineUsers=(userIds)=>{
-              console.log("Online users are", userIds);
               setOnlineUsers(userIds)
             }
 socket.on("getOnlineUsers",handleOnlineUsers);
@@ -60,7 +57,6 @@ socket.on("getOnlineUsers",handleOnlineUsers);
   }, [authUser]);
 
   useEffect(() => {
-  console.log("Updated onlineUsers:", onlineUsers);
 }, [onlineUsers]);
 
   /* -------------------- LOGIN -------------------- */
@@ -97,7 +93,6 @@ socket.on("getOnlineUsers",handleOnlineUsers);
     try {
       const { data } = await axios.put("/api/auth/update-profile", body);
       if (data.success) {
-        console.log("data",data.user)
         setAuthUser(data.user);
         toast.success("Profile updated");
       }

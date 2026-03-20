@@ -11,6 +11,8 @@ import { MdPhotoLibrary } from "react-icons/md";
 import ChatPage from "../../pages/ChatPage";
 import { useNavigate } from "react-router-dom";
 import { GiGamepad } from "react-icons/gi";
+import { GameContext } from "../../../context/GameContext";
+import EmojiCharades from "../games/EmojiCharades";
 
 const ChatWindow = ({setOpenProfile}) => {
   const { selectedUser, setSelectedUser, messages, getMessages, sendMessage, getSongs, song } = useContext(ChatContext);
@@ -35,6 +37,9 @@ const {
     endCall 
   } = useContext(CallContext);
 
+  const {getGames,
+        gamesLists} = useContext(GameContext);
+
   const [input, setInput] = useState('');
     const [games,setGames]= useState(false);
 
@@ -42,6 +47,7 @@ const {
   const navigate=useNavigate();
 useEffect(()=>{
     getSongs();
+    getGames();
   },[])
   // Auto-scroll to bottom whenever messages change
   useEffect(() => {
@@ -82,6 +88,9 @@ const handleBack = () => {
     reader.readAsDataURL(file);
   };
 
+  const selectedUserIdTransfer=(url)=>{
+    navigate(`/${url}`,{state:{selectedUserId:selectedUser?.id}});
+  }
   const formatMessageTime = (date) => {
     return new Date(date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
@@ -222,32 +231,8 @@ const handleBack = () => {
     <FiMusic size={26} />
   </button>
           
-          <button 
-    onClick={() => setGames(!musicList)}
-    className="hover:text-purple-400 transition"
-  >
-    <GiGamepad size={26} />
-  </button>
-  {games &&
-  <div style={{
-    position: 'fixed', bottom: 0, left: 0, right: 0,
-    zIndex: 9999, background: '#1a1a2e',
-    padding: '6px 12px 10px',
-    boxShadow: '0 -4px 20px rgba(0,0,0,0.4)'
-  }}>
-    {/* Close button */}
-    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-      <button
-        onClick={() => setGames(null)}
-        style={{ color: '#9ca3af', background: 'none', border: 'none', cursor: 'pointer', marginBottom: '2px' }}
-      >
-        <FiX size={16} />
-      </button>
-    </div>
-
-    
-  </div>
-}
+          
+ 
 
   {/* Popup Box */}
   {musicList && (
@@ -286,7 +271,47 @@ const handleBack = () => {
   )}
 
 
+{/* Games */}
 
+<button 
+    onClick={() => setGames(!games)}
+    className="hover:text-purple-400 transition"
+  >
+    <GiGamepad size={26} />
+  </button>
+  {games && (
+    <div className="absolute bottom-12 right-0 w-72 bg-zinc-900 text-white rounded-xl shadow-2xl p-4 z-50 border border-zinc-700">
+
+      {/* Header */}
+      <div className="flex justify-between items-center mb-3">
+        <h3 className="text-sm font-semibold">Games List</h3>
+        <button
+          onClick={() => setGames(false)}
+          className="text-gray-400 hover:text-white"
+        >
+          <FiX size={18} />
+        </button>
+      </div>
+
+      {/* Games List */}
+      <div className="max-h-40 overflow-y-auto space-y-2 mb-3">
+        {gamesLists?.map((item, index) => (
+          <div
+            key={item.id || index}
+            onClick={() => {
+  setGames(false)
+}}
+            className="cursor-pointer px-2 py-1 rounded-md hover:bg-purple-600 transition text-sm"
+          >
+            <a onClick={()=>selectedUserIdTransfer(item.name)}><img src={item.icon}  className="w-5" title={item.name}></img></a>
+          </div>
+        ))}
+      </div>
+
+      
+
+    </div>
+  )}
 
           <input type='file' id='image' onChange={handleSendImage} accept='image/*' hidden />
           <label htmlFor='image' className="cursor-pointer hover:opacity-70 transition hover:text-purple-400 ">

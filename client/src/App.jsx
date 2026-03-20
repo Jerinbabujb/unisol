@@ -9,6 +9,7 @@ import ProfilePage from './pages/ProfilePage';
 import ChatPage from './pages/ChatPage';
 import SelectedUserProfilePage from './pages/SelectedUserProfilePage';
 import FriendRequests from './components/friends/FriendRequests';
+import EmojiCharades from './components/games/EmojiCharades';
 
 const App = () => {
   const { authUser, isCheckingAuth } = useContext(AuthContext);
@@ -22,7 +23,7 @@ const App = () => {
   }
 
   return (
-    <div className="bg-[url('/assets/bgImage.svg')] bg-cover bg-no-repeat">
+    <div className="bg-[url('./assets/bgImage.svg')] bg-cover bg-no-repeat">
       <BrowserRouter>
         <Toaster />
         
@@ -36,6 +37,7 @@ const App = () => {
           <Route path='/user-profile' element={authUser? <SelectedUserProfilePage/>: <Navigate to='login'/>}/>
           <Route path='/messages' element={authUser ? <ChatPage/> : <Navigate to="/login" />} />
           <Route path='/friend-request' element={authUser? <FriendRequests/>:<Navigate to="/login"/>}/>
+          <Route path='/Emoji Charades' element={authUser? <EmojiCharades/>:<Navigate to="/login"/>}/>
         </Routes>
       </BrowserRouter>
     </div>
