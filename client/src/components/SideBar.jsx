@@ -7,10 +7,10 @@ import { ChatContext } from '../../context/ChatContext';
 const SideBar = ({onFriendRequest}) => {
   const { unseenMessages, users,requestData,freindRequestCheck } = useContext(ChatContext);
   const { authUser, logout, checkAuth } = useContext(AuthContext);
+  const [activeView, setActiveView] = useState("feed");
 
   const navigate = useNavigate();
   const location = useLocation();
-
  
 
   // Calculate total unseen messages
@@ -24,7 +24,9 @@ useEffect(() => {
   const menuItems = [
     { name: 'Discovery', icon: '🧭', path: '/', badge: null },
     { name: 'Messages', icon: '💬', path: '/messages', badge: totalUnseen > 0 ? totalUnseen : null },
+    { name: 'Chat-Rooms', icon: '🗣️', path: '#',badge:null},
     { name: 'Requests', icon: '❤️', path: '/friend-request', badge: requestData?.friendRequest?.length },
+    { name: 'Games', icon: '🎮', path: '#', badge: null },
     { name: 'Profile', icon: '👤', path: '/profile', badge: null },
     { name: 'Settings', icon: '⚙️', path: '/settings', badge: null },
   ];

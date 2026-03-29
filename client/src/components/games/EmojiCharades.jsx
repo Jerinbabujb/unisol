@@ -3,13 +3,15 @@ import { GameContext } from "../../../context/GameContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ChatContext } from "../../../context/ChatContext";
 import { AuthContext } from "../../../context/AuthContext";
+import Invite from "./invite";
 
 const EmojiCharades = () => {
   const { emojiCharades, emojiAnswers, emojiQuestions,getUser,
-        selectedUser } = useContext(GameContext);
+        selectedUser,postAnswer } = useContext(GameContext);
   const {authUser} = useContext(AuthContext);
   const [score, setScore] = useState(0);
-  const [answer, setAnswer] = useState('');
+  const [answer, setAnswer] = useState([]);
+  const [answered, setAnswered] = useState([]);
 
 const navigate= useNavigate();
   const handleBack=()=>{
@@ -24,14 +26,24 @@ const navigate= useNavigate();
       }, []);
 
 
-  const checkAnswer = (correctAnswer) => {
-    if (answer.toLowerCase() === correctAnswer.toLowerCase()) {
-      setScore(prev => prev + 1);
-      setAnswer('');
-    } else {
-      alert("Wrong answer 😢");
-    }
-  };
+const checkAnswer = (correctAnswer, userAnswer,index) => {
+  let newScore = score;
+
+  if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+    newScore = score + 1;
+    setScore(newScore);
+  } 
+
+  setAnswered(prev=>{
+    const updated=[...prev];
+    updated[index]=true;
+    return updated;
+  })
+  sendAnswer(userAnswer, newScore);
+};
+const sendAnswer = async (userAnswer, updatedScore) => {
+  await postAnswer(selectedUserId, userAnswer, updatedScore);
+};
 
   return (
     <div className="min-h-screen flex flex-col items-center bg-gradient-to-br from-purple-600 to-indigo-800 text-white px-3 py-4 sm:p-6">
@@ -75,13 +87,18 @@ const navigate= useNavigate();
             <input
               type="text"
               placeholder="Your answer..."
-              value={answer}
-              onChange={(e) => setAnswer(e.target.value)}
+              disabled={answered[index]}
+              value={answer[index]||''}
+              onChange={(e) => {const newAswer=[...answer];
+                newAswer[index]=e.target.value;
+                setAnswer(newAswer);
+              }}
               className="w-full px-3 py-2 rounded-lg text-black outline-none mb-3 text-sm sm:text-base"
             />
 
             <button
-              onClick={() => checkAnswer(item.answer)}
+              onClick={() => checkAnswer(item.answer,answer[index],score,index)}
+              disabled={answered[index]}
               className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 rounded-lg transition text-sm sm:text-base"
             >
               Submit Answer

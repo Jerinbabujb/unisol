@@ -38,7 +38,7 @@ const {
   } = useContext(CallContext);
 
   const {getGames,
-        gamesLists} = useContext(GameContext);
+        gamesLists,postAnswer} = useContext(GameContext);
 
   const [input, setInput] = useState('');
     const [games,setGames]= useState(false);
@@ -89,11 +89,15 @@ const handleBack = () => {
   };
 
   const selectedUserIdTransfer=(url)=>{
+    postAnswer(selectedUser?.id);
     navigate(`/${url}`,{state:{selectedUserId:selectedUser?.id}});
   }
   const formatMessageTime = (date) => {
     return new Date(date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
+
+
+ 
 
   if (!selectedUser) {
     return (

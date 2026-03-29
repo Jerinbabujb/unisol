@@ -59,6 +59,30 @@ export const GameProvider=({children})=>{
         }
     }
 
+    const postAnswer=async(userId,answers,score)=>{
+        try{
+            const {data}= await axios.post('api/games/post-answers',{userId,answers,score});
+            if(data.success){
+                console.log(data);
+            }
+        }
+        catch(error){
+            toast.error(error.message);
+        }
+    }
+
+    const getScores=async(userId)=>{
+        try{
+            const {data}= await axios.get('api/games/get-scores',{params:{userId:userId}});
+            if(data.success){
+                getScores(data.scores.senderScore);
+            }
+        }
+        catch(error){
+            toast.error(error.message);
+        }
+    }
+
     const value={
         getGames,
         gamesLists,
@@ -66,7 +90,8 @@ export const GameProvider=({children})=>{
         emojiAnswers,
         emojiQuestions,
         getUser,
-        selectedUser
+        selectedUser,
+        postAnswer
     }
     return(
         <GameContext.Provider value={value}>
