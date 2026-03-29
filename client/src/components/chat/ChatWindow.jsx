@@ -49,6 +49,9 @@ useEffect(()=>{
     getSongs();
     getGames();
   },[])
+  useEffect(()=>{
+    console.log("games lists",gamesLists);
+  },[]);
   // Auto-scroll to bottom whenever messages change
   useEffect(() => {
     if (scrollRef.current) {
