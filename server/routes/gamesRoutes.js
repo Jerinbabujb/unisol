@@ -5,7 +5,7 @@ import { emojiCharades, emojiCharadesAnswers, emojiCharadesScore, getGames, getU
 
 const gamesRouter=e.Router();
 
-gamesRouter.get("/games-list",getGames);
+gamesRouter.get("/games-list",protectRoute,getGames);
 gamesRouter.get("/emoji-charades-questions",protectRoute,emojiCharades);
 gamesRouter.get("/get-user",protectRoute,getUser);
 gamesRouter.post("/post-answers",protectRoute,emojiCharadesAnswers);
