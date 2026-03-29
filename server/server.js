@@ -98,7 +98,7 @@ res.send("server is live"));
 
 app.use("/api/auth",userRouter);
 app.use("/api/messages",messageRouter);
-app.use("/api/games/",gamesRouter);
+app.use("/api/games",gamesRouter);
 const port=process.env.PORT || 5000;
 
 server.listen(port,()=>console.log("server is running on "+port))
