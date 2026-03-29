@@ -7,7 +7,6 @@ import { ChatContext } from '../../context/ChatContext';
 const SideBar = ({onFriendRequest}) => {
   const { unseenMessages, users,requestData,freindRequestCheck } = useContext(ChatContext);
   const { authUser, logout, checkAuth } = useContext(AuthContext);
-  const [activeView, setActiveView] = useState("feed");
 
   const navigate = useNavigate();
   const location = useLocation();
