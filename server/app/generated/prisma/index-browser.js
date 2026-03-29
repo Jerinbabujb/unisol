@@ -184,6 +184,16 @@ exports.Prisma.EmojiCharadesScalarFieldEnum = {
   answer: 'answer'
 };
 
+exports.Prisma.ScoringScalarFieldEnum = {
+  id: 'id',
+  senderId: 'senderId',
+  receiverId: 'receiverId',
+  senderAnswer: 'senderAnswer',
+  receiverAnswer: 'receiverAnswer',
+  senderScore: 'senderScore',
+  receiverScore: 'receiverScore'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -207,7 +217,8 @@ exports.Prisma.ModelName = {
   Message: 'Message',
   connection: 'connection',
   Games: 'Games',
-  EmojiCharades: 'EmojiCharades'
+  EmojiCharades: 'EmojiCharades',
+  Scoring: 'Scoring'
 };
 
 /**

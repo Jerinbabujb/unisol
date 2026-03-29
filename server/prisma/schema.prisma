@@ -81,3 +81,17 @@ model EmojiCharades{
   questions  String
   answer    String
 }
+
+
+
+model Scoring{
+  id              String @id @default(uuid())
+  senderId        String
+  receiverId      String
+  senderAnswer    String[] @default([])
+  receiverAnswer  String[] @default([])
+  senderScore     Int
+  receiverScore   Int
+
+  @@unique([senderId,receiverId])
+}
