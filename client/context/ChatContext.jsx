@@ -22,6 +22,7 @@ export const ChatProvider=({children})=>{
     const [facebookToggle,setFacebookToggle]=useState(false);
     const [instagramToggle,setInstagramToggle]= useState(false);
     const [requestData,setRequestData]=  useState('');
+    const [globalRoom,setGlobalRoom]=useState([]);
   const getUsers = useCallback(async () => {
   if (!axios) {
     console.log("axios not ready yet");
@@ -233,6 +234,29 @@ export const ChatProvider=({children})=>{
   }
 
 
+  const globalRoomLists=async()=>{
+    try{
+        const {data}= await axios.get('api/messages/global-rooms')
+        if(data.success){
+            setGlobalRoom(data.globalRoomLists);
+            console.log("global room",data.globalRoomLists);
+        }
+    }
+    catch(error){
+            toast.error(error.message);
+        }
+  }
+
+  const globalRoomJoin=async(room)=>{
+    try{
+        const {data}= await axios.post('/api/messages/joining',{room});
+    }
+    catch(error){
+            toast.error(error.message);
+        }
+
+  }
+
 
 
 
@@ -278,7 +302,10 @@ export const ChatProvider=({children})=>{
         facebookToggle,
         setFacebookToggle,
         setInstagramToggle,
-        requestData
+        requestData,
+        globalRoomLists,
+        globalRoom,
+        globalRoomJoin
     }
     return (
 

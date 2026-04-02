@@ -10,6 +10,9 @@ import ChatPage from './pages/ChatPage';
 import SelectedUserProfilePage from './pages/SelectedUserProfilePage';
 import FriendRequests from './components/friends/FriendRequests';
 import EmojiCharades from './components/games/EmojiCharades';
+import GroupsLists from './components/chatroom/global/GroupLists';
+import ChatWindow from './components/chat/ChatWindow';
+import GlobalChatWindow from './components/chatroom/global/ChatWindow';
 
 const App = () => {
   const { authUser, isCheckingAuth } = useContext(AuthContext);
@@ -38,6 +41,8 @@ const App = () => {
           <Route path='/messages' element={authUser ? <ChatPage/> : <Navigate to="/login" />} />
           <Route path='/friend-request' element={authUser? <FriendRequests/>:<Navigate to="/login"/>}/>
           <Route path='/Emoji Charades' element={authUser? <EmojiCharades/>:<Navigate to="/login"/>}/>
+          <Route path='/global-room-lists' element={authUser? <GroupsLists/>:<Navigate to="/login"/>}/>
+          <Route path='/global-room/:roomName' element={authUser? <GlobalChatWindow/>:<Navigate to='/login'/>}/>
         </Routes>
       </BrowserRouter>
     </div>

@@ -23,7 +23,7 @@ useEffect(() => {
   const menuItems = [
     { name: 'Discovery', icon: '🧭', path: '/', badge: null },
     { name: 'Messages', icon: '💬', path: '/messages', badge: totalUnseen > 0 ? totalUnseen : null },
-    { name: 'Chat-Rooms', icon: '🗣️', path: '#',badge:null},
+    { name: 'Chat-Rooms', icon: '🗣️', path: '/global-room-lists',badge:null},
     { name: 'Requests', icon: '❤️', path: '/friend-request', badge: requestData?.friendRequest?.length },
     { name: 'Games', icon: '🎮', path: '#', badge: null },
     { name: 'Profile', icon: '👤', path: '/profile', badge: null },
