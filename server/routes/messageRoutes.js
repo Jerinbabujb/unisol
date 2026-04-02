@@ -1,6 +1,6 @@
 import e from "express";
 import { protectRoute } from "../middleware/auth.js";
-import { allSongs, connectionRequest, freindRequestCheck, getMessages, getUserForSidebar, getUsers, markMessageAsSeen, privacy, privacyCheck, privacyToggle, requestCheck, sendMessage } from "../controllers/messageController.js";
+import { allSongs, connectionRequest, freindRequestCheck, getMessages, getUserForSidebar, getUsers, globalRoom, globalRoomJoin, markMessageAsSeen, privacy, privacyCheck, privacyToggle, requestCheck, sendMessage } from "../controllers/messageController.js";
 
 
 const messageRouter=e.Router();
@@ -10,6 +10,8 @@ messageRouter.get("/all-users",protectRoute,getUsers);
 messageRouter.get("/songs",protectRoute,allSongs);
 messageRouter.get("/freind-request",protectRoute,freindRequestCheck);
 messageRouter.post("/request",protectRoute,connectionRequest);
+messageRouter.get("/global-rooms",protectRoute,globalRoom);
+messageRouter.post("/joining",protectRoute,globalRoomJoin);
 messageRouter.get("/:id",protectRoute,getMessages);
 messageRouter.put("/mark/:id",protectRoute,markMessageAsSeen);
 messageRouter.post("/send/:id",protectRoute,sendMessage);

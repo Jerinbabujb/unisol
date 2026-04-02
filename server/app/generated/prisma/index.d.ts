@@ -53,6 +53,11 @@ export type EmojiCharades = $Result.DefaultSelection<Prisma.$EmojiCharadesPayloa
  * 
  */
 export type Scoring = $Result.DefaultSelection<Prisma.$ScoringPayload>
+/**
+ * Model GlobalChats
+ * 
+ */
+export type GlobalChats = $Result.DefaultSelection<Prisma.$GlobalChatsPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -254,6 +259,16 @@ export class PrismaClient<
     * ```
     */
   get scoring(): Prisma.ScoringDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.globalChats`: Exposes CRUD operations for the **GlobalChats** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more GlobalChats
+    * const globalChats = await prisma.globalChats.findMany()
+    * ```
+    */
+  get globalChats(): Prisma.GlobalChatsDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -695,7 +710,8 @@ export namespace Prisma {
     connection: 'connection',
     Games: 'Games',
     EmojiCharades: 'EmojiCharades',
-    Scoring: 'Scoring'
+    Scoring: 'Scoring',
+    GlobalChats: 'GlobalChats'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -711,7 +727,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "privacy" | "song" | "message" | "connection" | "games" | "emojiCharades" | "scoring"
+      modelProps: "user" | "privacy" | "song" | "message" | "connection" | "games" | "emojiCharades" | "scoring" | "globalChats"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1307,6 +1323,80 @@ export namespace Prisma {
           }
         }
       }
+      GlobalChats: {
+        payload: Prisma.$GlobalChatsPayload<ExtArgs>
+        fields: Prisma.GlobalChatsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.GlobalChatsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalChatsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.GlobalChatsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalChatsPayload>
+          }
+          findFirst: {
+            args: Prisma.GlobalChatsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalChatsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.GlobalChatsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalChatsPayload>
+          }
+          findMany: {
+            args: Prisma.GlobalChatsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalChatsPayload>[]
+          }
+          create: {
+            args: Prisma.GlobalChatsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalChatsPayload>
+          }
+          createMany: {
+            args: Prisma.GlobalChatsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.GlobalChatsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalChatsPayload>[]
+          }
+          delete: {
+            args: Prisma.GlobalChatsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalChatsPayload>
+          }
+          update: {
+            args: Prisma.GlobalChatsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalChatsPayload>
+          }
+          deleteMany: {
+            args: Prisma.GlobalChatsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.GlobalChatsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.GlobalChatsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalChatsPayload>[]
+          }
+          upsert: {
+            args: Prisma.GlobalChatsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalChatsPayload>
+          }
+          aggregate: {
+            args: Prisma.GlobalChatsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateGlobalChats>
+          }
+          groupBy: {
+            args: Prisma.GlobalChatsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<GlobalChatsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.GlobalChatsCountArgs<ExtArgs>
+            result: $Utils.Optional<GlobalChatsCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1423,6 +1513,7 @@ export namespace Prisma {
     games?: GamesOmit
     emojiCharades?: EmojiCharadesOmit
     scoring?: ScoringOmit
+    globalChats?: GlobalChatsOmit
   }
 
   /* Types for Logging */
@@ -9903,6 +9994,976 @@ export namespace Prisma {
 
 
   /**
+   * Model GlobalChats
+   */
+
+  export type AggregateGlobalChats = {
+    _count: GlobalChatsCountAggregateOutputType | null
+    _min: GlobalChatsMinAggregateOutputType | null
+    _max: GlobalChatsMaxAggregateOutputType | null
+  }
+
+  export type GlobalChatsMinAggregateOutputType = {
+    id: string | null
+    roomName: string | null
+  }
+
+  export type GlobalChatsMaxAggregateOutputType = {
+    id: string | null
+    roomName: string | null
+  }
+
+  export type GlobalChatsCountAggregateOutputType = {
+    id: number
+    roomName: number
+    memberLists: number
+    _all: number
+  }
+
+
+  export type GlobalChatsMinAggregateInputType = {
+    id?: true
+    roomName?: true
+  }
+
+  export type GlobalChatsMaxAggregateInputType = {
+    id?: true
+    roomName?: true
+  }
+
+  export type GlobalChatsCountAggregateInputType = {
+    id?: true
+    roomName?: true
+    memberLists?: true
+    _all?: true
+  }
+
+  export type GlobalChatsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GlobalChats to aggregate.
+     */
+    where?: GlobalChatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GlobalChats to fetch.
+     */
+    orderBy?: GlobalChatsOrderByWithRelationInput | GlobalChatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: GlobalChatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GlobalChats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GlobalChats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned GlobalChats
+    **/
+    _count?: true | GlobalChatsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: GlobalChatsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: GlobalChatsMaxAggregateInputType
+  }
+
+  export type GetGlobalChatsAggregateType<T extends GlobalChatsAggregateArgs> = {
+        [P in keyof T & keyof AggregateGlobalChats]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateGlobalChats[P]>
+      : GetScalarType<T[P], AggregateGlobalChats[P]>
+  }
+
+
+
+
+  export type GlobalChatsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GlobalChatsWhereInput
+    orderBy?: GlobalChatsOrderByWithAggregationInput | GlobalChatsOrderByWithAggregationInput[]
+    by: GlobalChatsScalarFieldEnum[] | GlobalChatsScalarFieldEnum
+    having?: GlobalChatsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: GlobalChatsCountAggregateInputType | true
+    _min?: GlobalChatsMinAggregateInputType
+    _max?: GlobalChatsMaxAggregateInputType
+  }
+
+  export type GlobalChatsGroupByOutputType = {
+    id: string
+    roomName: string
+    memberLists: string[]
+    _count: GlobalChatsCountAggregateOutputType | null
+    _min: GlobalChatsMinAggregateOutputType | null
+    _max: GlobalChatsMaxAggregateOutputType | null
+  }
+
+  type GetGlobalChatsGroupByPayload<T extends GlobalChatsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<GlobalChatsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof GlobalChatsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], GlobalChatsGroupByOutputType[P]>
+            : GetScalarType<T[P], GlobalChatsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type GlobalChatsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    roomName?: boolean
+    memberLists?: boolean
+  }, ExtArgs["result"]["globalChats"]>
+
+  export type GlobalChatsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    roomName?: boolean
+    memberLists?: boolean
+  }, ExtArgs["result"]["globalChats"]>
+
+  export type GlobalChatsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    roomName?: boolean
+    memberLists?: boolean
+  }, ExtArgs["result"]["globalChats"]>
+
+  export type GlobalChatsSelectScalar = {
+    id?: boolean
+    roomName?: boolean
+    memberLists?: boolean
+  }
+
+  export type GlobalChatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "roomName" | "memberLists", ExtArgs["result"]["globalChats"]>
+
+  export type $GlobalChatsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "GlobalChats"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      roomName: string
+      memberLists: string[]
+    }, ExtArgs["result"]["globalChats"]>
+    composites: {}
+  }
+
+  type GlobalChatsGetPayload<S extends boolean | null | undefined | GlobalChatsDefaultArgs> = $Result.GetResult<Prisma.$GlobalChatsPayload, S>
+
+  type GlobalChatsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<GlobalChatsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: GlobalChatsCountAggregateInputType | true
+    }
+
+  export interface GlobalChatsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['GlobalChats'], meta: { name: 'GlobalChats' } }
+    /**
+     * Find zero or one GlobalChats that matches the filter.
+     * @param {GlobalChatsFindUniqueArgs} args - Arguments to find a GlobalChats
+     * @example
+     * // Get one GlobalChats
+     * const globalChats = await prisma.globalChats.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends GlobalChatsFindUniqueArgs>(args: SelectSubset<T, GlobalChatsFindUniqueArgs<ExtArgs>>): Prisma__GlobalChatsClient<$Result.GetResult<Prisma.$GlobalChatsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one GlobalChats that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {GlobalChatsFindUniqueOrThrowArgs} args - Arguments to find a GlobalChats
+     * @example
+     * // Get one GlobalChats
+     * const globalChats = await prisma.globalChats.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends GlobalChatsFindUniqueOrThrowArgs>(args: SelectSubset<T, GlobalChatsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GlobalChatsClient<$Result.GetResult<Prisma.$GlobalChatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GlobalChats that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlobalChatsFindFirstArgs} args - Arguments to find a GlobalChats
+     * @example
+     * // Get one GlobalChats
+     * const globalChats = await prisma.globalChats.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends GlobalChatsFindFirstArgs>(args?: SelectSubset<T, GlobalChatsFindFirstArgs<ExtArgs>>): Prisma__GlobalChatsClient<$Result.GetResult<Prisma.$GlobalChatsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GlobalChats that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlobalChatsFindFirstOrThrowArgs} args - Arguments to find a GlobalChats
+     * @example
+     * // Get one GlobalChats
+     * const globalChats = await prisma.globalChats.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends GlobalChatsFindFirstOrThrowArgs>(args?: SelectSubset<T, GlobalChatsFindFirstOrThrowArgs<ExtArgs>>): Prisma__GlobalChatsClient<$Result.GetResult<Prisma.$GlobalChatsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more GlobalChats that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlobalChatsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all GlobalChats
+     * const globalChats = await prisma.globalChats.findMany()
+     * 
+     * // Get first 10 GlobalChats
+     * const globalChats = await prisma.globalChats.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const globalChatsWithIdOnly = await prisma.globalChats.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends GlobalChatsFindManyArgs>(args?: SelectSubset<T, GlobalChatsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GlobalChatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a GlobalChats.
+     * @param {GlobalChatsCreateArgs} args - Arguments to create a GlobalChats.
+     * @example
+     * // Create one GlobalChats
+     * const GlobalChats = await prisma.globalChats.create({
+     *   data: {
+     *     // ... data to create a GlobalChats
+     *   }
+     * })
+     * 
+     */
+    create<T extends GlobalChatsCreateArgs>(args: SelectSubset<T, GlobalChatsCreateArgs<ExtArgs>>): Prisma__GlobalChatsClient<$Result.GetResult<Prisma.$GlobalChatsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many GlobalChats.
+     * @param {GlobalChatsCreateManyArgs} args - Arguments to create many GlobalChats.
+     * @example
+     * // Create many GlobalChats
+     * const globalChats = await prisma.globalChats.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends GlobalChatsCreateManyArgs>(args?: SelectSubset<T, GlobalChatsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many GlobalChats and returns the data saved in the database.
+     * @param {GlobalChatsCreateManyAndReturnArgs} args - Arguments to create many GlobalChats.
+     * @example
+     * // Create many GlobalChats
+     * const globalChats = await prisma.globalChats.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many GlobalChats and only return the `id`
+     * const globalChatsWithIdOnly = await prisma.globalChats.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends GlobalChatsCreateManyAndReturnArgs>(args?: SelectSubset<T, GlobalChatsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GlobalChatsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a GlobalChats.
+     * @param {GlobalChatsDeleteArgs} args - Arguments to delete one GlobalChats.
+     * @example
+     * // Delete one GlobalChats
+     * const GlobalChats = await prisma.globalChats.delete({
+     *   where: {
+     *     // ... filter to delete one GlobalChats
+     *   }
+     * })
+     * 
+     */
+    delete<T extends GlobalChatsDeleteArgs>(args: SelectSubset<T, GlobalChatsDeleteArgs<ExtArgs>>): Prisma__GlobalChatsClient<$Result.GetResult<Prisma.$GlobalChatsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one GlobalChats.
+     * @param {GlobalChatsUpdateArgs} args - Arguments to update one GlobalChats.
+     * @example
+     * // Update one GlobalChats
+     * const globalChats = await prisma.globalChats.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends GlobalChatsUpdateArgs>(args: SelectSubset<T, GlobalChatsUpdateArgs<ExtArgs>>): Prisma__GlobalChatsClient<$Result.GetResult<Prisma.$GlobalChatsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more GlobalChats.
+     * @param {GlobalChatsDeleteManyArgs} args - Arguments to filter GlobalChats to delete.
+     * @example
+     * // Delete a few GlobalChats
+     * const { count } = await prisma.globalChats.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends GlobalChatsDeleteManyArgs>(args?: SelectSubset<T, GlobalChatsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GlobalChats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlobalChatsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many GlobalChats
+     * const globalChats = await prisma.globalChats.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends GlobalChatsUpdateManyArgs>(args: SelectSubset<T, GlobalChatsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GlobalChats and returns the data updated in the database.
+     * @param {GlobalChatsUpdateManyAndReturnArgs} args - Arguments to update many GlobalChats.
+     * @example
+     * // Update many GlobalChats
+     * const globalChats = await prisma.globalChats.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more GlobalChats and only return the `id`
+     * const globalChatsWithIdOnly = await prisma.globalChats.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends GlobalChatsUpdateManyAndReturnArgs>(args: SelectSubset<T, GlobalChatsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GlobalChatsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one GlobalChats.
+     * @param {GlobalChatsUpsertArgs} args - Arguments to update or create a GlobalChats.
+     * @example
+     * // Update or create a GlobalChats
+     * const globalChats = await prisma.globalChats.upsert({
+     *   create: {
+     *     // ... data to create a GlobalChats
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the GlobalChats we want to update
+     *   }
+     * })
+     */
+    upsert<T extends GlobalChatsUpsertArgs>(args: SelectSubset<T, GlobalChatsUpsertArgs<ExtArgs>>): Prisma__GlobalChatsClient<$Result.GetResult<Prisma.$GlobalChatsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of GlobalChats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlobalChatsCountArgs} args - Arguments to filter GlobalChats to count.
+     * @example
+     * // Count the number of GlobalChats
+     * const count = await prisma.globalChats.count({
+     *   where: {
+     *     // ... the filter for the GlobalChats we want to count
+     *   }
+     * })
+    **/
+    count<T extends GlobalChatsCountArgs>(
+      args?: Subset<T, GlobalChatsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], GlobalChatsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a GlobalChats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlobalChatsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends GlobalChatsAggregateArgs>(args: Subset<T, GlobalChatsAggregateArgs>): Prisma.PrismaPromise<GetGlobalChatsAggregateType<T>>
+
+    /**
+     * Group by GlobalChats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlobalChatsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends GlobalChatsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: GlobalChatsGroupByArgs['orderBy'] }
+        : { orderBy?: GlobalChatsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, GlobalChatsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGlobalChatsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the GlobalChats model
+   */
+  readonly fields: GlobalChatsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for GlobalChats.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__GlobalChatsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the GlobalChats model
+   */
+  interface GlobalChatsFieldRefs {
+    readonly id: FieldRef<"GlobalChats", 'String'>
+    readonly roomName: FieldRef<"GlobalChats", 'String'>
+    readonly memberLists: FieldRef<"GlobalChats", 'String[]'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * GlobalChats findUnique
+   */
+  export type GlobalChatsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalChats
+     */
+    select?: GlobalChatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalChats
+     */
+    omit?: GlobalChatsOmit<ExtArgs> | null
+    /**
+     * Filter, which GlobalChats to fetch.
+     */
+    where: GlobalChatsWhereUniqueInput
+  }
+
+  /**
+   * GlobalChats findUniqueOrThrow
+   */
+  export type GlobalChatsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalChats
+     */
+    select?: GlobalChatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalChats
+     */
+    omit?: GlobalChatsOmit<ExtArgs> | null
+    /**
+     * Filter, which GlobalChats to fetch.
+     */
+    where: GlobalChatsWhereUniqueInput
+  }
+
+  /**
+   * GlobalChats findFirst
+   */
+  export type GlobalChatsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalChats
+     */
+    select?: GlobalChatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalChats
+     */
+    omit?: GlobalChatsOmit<ExtArgs> | null
+    /**
+     * Filter, which GlobalChats to fetch.
+     */
+    where?: GlobalChatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GlobalChats to fetch.
+     */
+    orderBy?: GlobalChatsOrderByWithRelationInput | GlobalChatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GlobalChats.
+     */
+    cursor?: GlobalChatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GlobalChats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GlobalChats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GlobalChats.
+     */
+    distinct?: GlobalChatsScalarFieldEnum | GlobalChatsScalarFieldEnum[]
+  }
+
+  /**
+   * GlobalChats findFirstOrThrow
+   */
+  export type GlobalChatsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalChats
+     */
+    select?: GlobalChatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalChats
+     */
+    omit?: GlobalChatsOmit<ExtArgs> | null
+    /**
+     * Filter, which GlobalChats to fetch.
+     */
+    where?: GlobalChatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GlobalChats to fetch.
+     */
+    orderBy?: GlobalChatsOrderByWithRelationInput | GlobalChatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GlobalChats.
+     */
+    cursor?: GlobalChatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GlobalChats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GlobalChats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GlobalChats.
+     */
+    distinct?: GlobalChatsScalarFieldEnum | GlobalChatsScalarFieldEnum[]
+  }
+
+  /**
+   * GlobalChats findMany
+   */
+  export type GlobalChatsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalChats
+     */
+    select?: GlobalChatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalChats
+     */
+    omit?: GlobalChatsOmit<ExtArgs> | null
+    /**
+     * Filter, which GlobalChats to fetch.
+     */
+    where?: GlobalChatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GlobalChats to fetch.
+     */
+    orderBy?: GlobalChatsOrderByWithRelationInput | GlobalChatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing GlobalChats.
+     */
+    cursor?: GlobalChatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GlobalChats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GlobalChats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GlobalChats.
+     */
+    distinct?: GlobalChatsScalarFieldEnum | GlobalChatsScalarFieldEnum[]
+  }
+
+  /**
+   * GlobalChats create
+   */
+  export type GlobalChatsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalChats
+     */
+    select?: GlobalChatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalChats
+     */
+    omit?: GlobalChatsOmit<ExtArgs> | null
+    /**
+     * The data needed to create a GlobalChats.
+     */
+    data: XOR<GlobalChatsCreateInput, GlobalChatsUncheckedCreateInput>
+  }
+
+  /**
+   * GlobalChats createMany
+   */
+  export type GlobalChatsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many GlobalChats.
+     */
+    data: GlobalChatsCreateManyInput | GlobalChatsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * GlobalChats createManyAndReturn
+   */
+  export type GlobalChatsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalChats
+     */
+    select?: GlobalChatsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalChats
+     */
+    omit?: GlobalChatsOmit<ExtArgs> | null
+    /**
+     * The data used to create many GlobalChats.
+     */
+    data: GlobalChatsCreateManyInput | GlobalChatsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * GlobalChats update
+   */
+  export type GlobalChatsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalChats
+     */
+    select?: GlobalChatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalChats
+     */
+    omit?: GlobalChatsOmit<ExtArgs> | null
+    /**
+     * The data needed to update a GlobalChats.
+     */
+    data: XOR<GlobalChatsUpdateInput, GlobalChatsUncheckedUpdateInput>
+    /**
+     * Choose, which GlobalChats to update.
+     */
+    where: GlobalChatsWhereUniqueInput
+  }
+
+  /**
+   * GlobalChats updateMany
+   */
+  export type GlobalChatsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update GlobalChats.
+     */
+    data: XOR<GlobalChatsUpdateManyMutationInput, GlobalChatsUncheckedUpdateManyInput>
+    /**
+     * Filter which GlobalChats to update
+     */
+    where?: GlobalChatsWhereInput
+    /**
+     * Limit how many GlobalChats to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * GlobalChats updateManyAndReturn
+   */
+  export type GlobalChatsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalChats
+     */
+    select?: GlobalChatsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalChats
+     */
+    omit?: GlobalChatsOmit<ExtArgs> | null
+    /**
+     * The data used to update GlobalChats.
+     */
+    data: XOR<GlobalChatsUpdateManyMutationInput, GlobalChatsUncheckedUpdateManyInput>
+    /**
+     * Filter which GlobalChats to update
+     */
+    where?: GlobalChatsWhereInput
+    /**
+     * Limit how many GlobalChats to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * GlobalChats upsert
+   */
+  export type GlobalChatsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalChats
+     */
+    select?: GlobalChatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalChats
+     */
+    omit?: GlobalChatsOmit<ExtArgs> | null
+    /**
+     * The filter to search for the GlobalChats to update in case it exists.
+     */
+    where: GlobalChatsWhereUniqueInput
+    /**
+     * In case the GlobalChats found by the `where` argument doesn't exist, create a new GlobalChats with this data.
+     */
+    create: XOR<GlobalChatsCreateInput, GlobalChatsUncheckedCreateInput>
+    /**
+     * In case the GlobalChats was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<GlobalChatsUpdateInput, GlobalChatsUncheckedUpdateInput>
+  }
+
+  /**
+   * GlobalChats delete
+   */
+  export type GlobalChatsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalChats
+     */
+    select?: GlobalChatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalChats
+     */
+    omit?: GlobalChatsOmit<ExtArgs> | null
+    /**
+     * Filter which GlobalChats to delete.
+     */
+    where: GlobalChatsWhereUniqueInput
+  }
+
+  /**
+   * GlobalChats deleteMany
+   */
+  export type GlobalChatsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GlobalChats to delete
+     */
+    where?: GlobalChatsWhereInput
+    /**
+     * Limit how many GlobalChats to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * GlobalChats without action
+   */
+  export type GlobalChatsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalChats
+     */
+    select?: GlobalChatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalChats
+     */
+    omit?: GlobalChatsOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -10012,6 +11073,15 @@ export namespace Prisma {
   };
 
   export type ScoringScalarFieldEnum = (typeof ScoringScalarFieldEnum)[keyof typeof ScoringScalarFieldEnum]
+
+
+  export const GlobalChatsScalarFieldEnum: {
+    id: 'id',
+    roomName: 'roomName',
+    memberLists: 'memberLists'
+  };
+
+  export type GlobalChatsScalarFieldEnum = (typeof GlobalChatsScalarFieldEnum)[keyof typeof GlobalChatsScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -10594,6 +11664,48 @@ export namespace Prisma {
     receiverScore?: IntWithAggregatesFilter<"Scoring"> | number
   }
 
+  export type GlobalChatsWhereInput = {
+    AND?: GlobalChatsWhereInput | GlobalChatsWhereInput[]
+    OR?: GlobalChatsWhereInput[]
+    NOT?: GlobalChatsWhereInput | GlobalChatsWhereInput[]
+    id?: StringFilter<"GlobalChats"> | string
+    roomName?: StringFilter<"GlobalChats"> | string
+    memberLists?: StringNullableListFilter<"GlobalChats">
+  }
+
+  export type GlobalChatsOrderByWithRelationInput = {
+    id?: SortOrder
+    roomName?: SortOrder
+    memberLists?: SortOrder
+  }
+
+  export type GlobalChatsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    roomName?: string
+    AND?: GlobalChatsWhereInput | GlobalChatsWhereInput[]
+    OR?: GlobalChatsWhereInput[]
+    NOT?: GlobalChatsWhereInput | GlobalChatsWhereInput[]
+    memberLists?: StringNullableListFilter<"GlobalChats">
+  }, "id" | "roomName">
+
+  export type GlobalChatsOrderByWithAggregationInput = {
+    id?: SortOrder
+    roomName?: SortOrder
+    memberLists?: SortOrder
+    _count?: GlobalChatsCountOrderByAggregateInput
+    _max?: GlobalChatsMaxOrderByAggregateInput
+    _min?: GlobalChatsMinOrderByAggregateInput
+  }
+
+  export type GlobalChatsScalarWhereWithAggregatesInput = {
+    AND?: GlobalChatsScalarWhereWithAggregatesInput | GlobalChatsScalarWhereWithAggregatesInput[]
+    OR?: GlobalChatsScalarWhereWithAggregatesInput[]
+    NOT?: GlobalChatsScalarWhereWithAggregatesInput | GlobalChatsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"GlobalChats"> | string
+    roomName?: StringWithAggregatesFilter<"GlobalChats"> | string
+    memberLists?: StringNullableListFilter<"GlobalChats">
+  }
+
   export type UserCreateInput = {
     id?: string
     fullName: string
@@ -11118,6 +12230,48 @@ export namespace Prisma {
     receiverScore?: IntFieldUpdateOperationsInput | number
   }
 
+  export type GlobalChatsCreateInput = {
+    id?: string
+    roomName: string
+    memberLists?: GlobalChatsCreatememberListsInput | string[]
+  }
+
+  export type GlobalChatsUncheckedCreateInput = {
+    id?: string
+    roomName: string
+    memberLists?: GlobalChatsCreatememberListsInput | string[]
+  }
+
+  export type GlobalChatsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roomName?: StringFieldUpdateOperationsInput | string
+    memberLists?: GlobalChatsUpdatememberListsInput | string[]
+  }
+
+  export type GlobalChatsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roomName?: StringFieldUpdateOperationsInput | string
+    memberLists?: GlobalChatsUpdatememberListsInput | string[]
+  }
+
+  export type GlobalChatsCreateManyInput = {
+    id?: string
+    roomName: string
+    memberLists?: GlobalChatsCreatememberListsInput | string[]
+  }
+
+  export type GlobalChatsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roomName?: StringFieldUpdateOperationsInput | string
+    memberLists?: GlobalChatsUpdatememberListsInput | string[]
+  }
+
+  export type GlobalChatsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roomName?: StringFieldUpdateOperationsInput | string
+    memberLists?: GlobalChatsUpdatememberListsInput | string[]
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -11562,6 +12716,22 @@ export namespace Prisma {
     receiverScore?: SortOrder
   }
 
+  export type GlobalChatsCountOrderByAggregateInput = {
+    id?: SortOrder
+    roomName?: SortOrder
+    memberLists?: SortOrder
+  }
+
+  export type GlobalChatsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    roomName?: SortOrder
+  }
+
+  export type GlobalChatsMinOrderByAggregateInput = {
+    id?: SortOrder
+    roomName?: SortOrder
+  }
+
   export type UserCreateinterestInput = {
     set: string[]
   }
@@ -11738,6 +12908,15 @@ export namespace Prisma {
   }
 
   export type ScoringUpdatereceiverAnswerInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type GlobalChatsCreatememberListsInput = {
+    set: string[]
+  }
+
+  export type GlobalChatsUpdatememberListsInput = {
     set?: string[]
     push?: string | string[]
   }

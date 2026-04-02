@@ -400,3 +400,44 @@ export const privacyToggle=async(req,res)=>{
     }
 }
 
+
+export const globalRoom=async(req,res)=>{
+  try{
+    const globalRoomLists=await prisma.GlobalChats.findMany({
+      select:{
+        id:true,
+        roomName:true,
+        memberLists:true
+      }
+    });
+    res.json({success:true,globalRoomLists});
+  }
+  catch (error) {
+        console.error("UPDATE ERROR:", error);
+        res.json({ success: false, message: error.message });
+    }
+}
+
+export const globalRoomJoin=async(req,res)=>{
+  try{
+    const userId=req.user.id;
+    const {room}= req.body;
+    const join= await prisma.GlobalChats.update({
+      where:{
+        roomName:room
+      },
+      data:{
+        memberLists:{
+          push:userId
+        }
+      }
+    })
+
+    res.json({success:true,join});
+  }
+   catch (error) {
+        console.error("UPDATE ERROR:", error);
+        res.json({ success: false, message: error.message });
+    }
+}
+

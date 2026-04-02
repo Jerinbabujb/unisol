@@ -93,3 +93,9 @@ model Scoring {
 
   @@unique([senderId, receiverId])
 }
+
+model GlobalChats {
+  id          String   @id @default(uuid())
+  roomName    String   @unique
+  memberLists String[] @default([])
+}
