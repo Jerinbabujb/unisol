@@ -13,6 +13,7 @@ import EmojiCharades from './components/games/EmojiCharades';
 import GroupsLists from './components/chatroom/global/GroupLists';
 import ChatWindow from './components/chat/ChatWindow';
 import GlobalChatWindow from './components/chatroom/global/ChatWindow';
+import GlobalSideBar from './components/chatroom/global/SideBar';
 
 const App = () => {
   const { authUser, isCheckingAuth } = useContext(AuthContext);
@@ -43,6 +44,7 @@ const App = () => {
           <Route path='/Emoji Charades' element={authUser? <EmojiCharades/>:<Navigate to="/login"/>}/>
           <Route path='/global-room-lists' element={authUser? <GroupsLists/>:<Navigate to="/login"/>}/>
           <Route path='/global-room/:roomName' element={authUser? <GlobalChatWindow/>:<Navigate to='/login'/>}/>
+          <Route path='/:room/profile' element={authUser? <GlobalSideBar/>:<Navigate to='/login'/>}/>
         </Routes>
       </BrowserRouter>
     </div>

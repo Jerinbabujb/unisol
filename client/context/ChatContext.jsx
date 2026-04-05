@@ -23,6 +23,10 @@ export const ChatProvider=({children})=>{
     const [instagramToggle,setInstagramToggle]= useState(false);
     const [requestData,setRequestData]=  useState('');
     const [globalRoom,setGlobalRoom]=useState([]);
+    const [members,setMembers]=useState([]);
+    const [currentRoom, setCurrentRoom] = useState(''); 
+const [roomMessages, setRoomMessages] = useState({}); 
+const [joinedRooms, setJoinedRooms] = useState([]);
   const getUsers = useCallback(async () => {
   if (!axios) {
     console.log("axios not ready yet");
@@ -103,7 +107,10 @@ export const ChatProvider=({children})=>{
 
 
     const subscribe=async()=>{
-        if(!socket) return;
+       if (!socket || !socket.connected) {
+    console.log("hello ❌ socket not connected yet");
+    return;
+  }
 
         socket.on("newMessage" ,(newMessage)=>{
             if(selectedUser && newMessage.senderId === selectedUser.id){
@@ -116,7 +123,15 @@ export const ChatProvider=({children})=>{
                     ...prevUnSeenMessages,[newMessage.senderId]: prevUnSeenMessages[newMessage.senderId]? prevUnSeenMessages [newMessage.senderId] +1 : 1
                 }))
             }
-        })
+        });
+         socket.on("new_room_message",(message)=>{
+            console.log("socket is on");
+                setRoomMessages((prev)=>{
+                    const roomId=message.roomId;
+                    const updated=prev[roomId]? [...prev[roomId],message]:[message];
+                    return {...prev,[roomId]:updated};
+                })
+            })
     }
 
         const getSongs=useCallback(async()=>{
@@ -250,6 +265,11 @@ export const ChatProvider=({children})=>{
   const globalRoomJoin=async(room)=>{
     try{
         const {data}= await axios.post('/api/messages/joining',{room});
+        // if(data.success){
+        //     if(data.exists===true){
+        //         setUserExistsInGlobal(data.exists);
+        //     }
+        // }
     }
     catch(error){
             toast.error(error.message);
@@ -257,7 +277,82 @@ export const ChatProvider=({children})=>{
 
   }
 
+  const globalRoomUserExists=async()=>{
+    try{
+        const {data}= await axios.get('api/messages/exists')
+        if(data.success){
+            setJoinedRooms(data.exists);
+        }     
+    }
+    catch(error){
+            toast.error(error.message);
+        }
+  }
 
+
+  const globalRoomMembers=async(room)=>{
+    try{
+        const {data}= await axios.post('api/messages/members-lists',{room});
+        console.log(room);
+        if(data.success){
+            console.log("room Members",data.members);
+            setMembers(data.members);
+        }
+    }
+    catch(error){
+            toast.error(error.message);
+        }
+  }
+
+
+
+ const joinRoom = (roomId) => {
+  
+
+  console.log("room id is ", roomId);
+//   socket.emit("join-room", roomId);
+  setCurrentRoom(roomId);
+};
+
+const sendRoomMessage = (text) => {
+  if (!socket) return;
+  console.log("roomid",currentRoom);
+  socket.emit("send_room_message", { roomId:currentRoom, senderId: authUser.id, text });
+};
+
+const globalSendMessage = async (text) => {
+  try {
+    const { data } = await axios.post(`/api/messages/global-send`, { text,currentRoom });
+
+    if (data.success) {
+      setMessages((prevMessages) => [...prevMessages, data.newMessage]);
+    } else {
+      toast.error(data.message || "Failed to send message");
+    }
+  } catch (error) {
+    toast.error(error.message);
+  }
+};
+
+const getRoomMessages=async()=>{
+        try{
+          const {data}=  await axios.post('/api/messages/get-messages',{currentRoom})
+          if(data.success){
+            setMessages(data.messages);
+          }
+        }
+        catch(error){
+            toast.error(error.message);
+        }
+    }
+
+
+
+  useEffect(() => {
+  if (!authUser) return;
+
+  globalRoomUserExists();
+}, [authUser]);
 
 
     const unSubscribe= async()=>{
@@ -305,7 +400,16 @@ export const ChatProvider=({children})=>{
         requestData,
         globalRoomLists,
         globalRoom,
-        globalRoomJoin
+        globalRoomJoin,
+        joinedRooms,
+        globalRoomMembers,
+        members,
+        currentRoom,
+        roomMessages,
+        joinRoom,
+        sendRoomMessage,
+        globalSendMessage,
+        getRoomMessages
     }
     return (
 
