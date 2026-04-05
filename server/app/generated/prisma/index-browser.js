@@ -197,7 +197,16 @@ exports.Prisma.ScoringScalarFieldEnum = {
 exports.Prisma.GlobalChatsScalarFieldEnum = {
   id: 'id',
   roomName: 'roomName',
+  roomImage: 'roomImage',
   memberLists: 'memberLists'
+};
+
+exports.Prisma.GlobalChatMessageScalarFieldEnum = {
+  id: 'id',
+  roomId: 'roomId',
+  senderId: 'senderId',
+  text: 'text',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -225,7 +234,8 @@ exports.Prisma.ModelName = {
   Games: 'Games',
   EmojiCharades: 'EmojiCharades',
   Scoring: 'Scoring',
-  GlobalChats: 'GlobalChats'
+  GlobalChats: 'GlobalChats',
+  GlobalChatMessage: 'GlobalChatMessage'
 };
 
 /**

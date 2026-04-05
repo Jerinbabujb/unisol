@@ -1,3 +1,4 @@
+import { connect } from "mongoose";
 import prisma from "../config/prisma.js";
 import cloudinary from "../lib/cloudinary.js";
 
@@ -407,7 +408,8 @@ export const globalRoom=async(req,res)=>{
       select:{
         id:true,
         roomName:true,
-        memberLists:true
+        memberLists:true,
+        roomImage:true
       }
     });
     res.json({success:true,globalRoomLists});
@@ -433,6 +435,8 @@ export const globalRoomJoin=async(req,res)=>{
       }
     })
 
+    
+
     res.json({success:true,join});
   }
    catch (error) {
@@ -441,3 +445,111 @@ export const globalRoomJoin=async(req,res)=>{
     }
 }
 
+export const userGlobalRoomExists=async(req,res)=>{
+  try{
+    const userId=req.user.id;
+    console.log("userId",userId);
+    const exists= await prisma.GlobalChats.findMany({
+      where:{
+        memberLists:{has:userId}
+      },
+      select:{
+        id:true,
+        roomName:true,
+        roomImage:true
+      }
+    });
+    console.log("user exists?",exists);
+    res.json({success:true,exists});
+  }
+   catch (error) {
+        console.error("UPDATE ERROR:", error);
+        res.json({ success: false, message: error.message });
+    }
+}
+
+
+export const globalRoomMembers=async(req,res)=>{
+  try{
+    const{room}= req.body;
+    const globalRoomMembers=await prisma.GlobalChats.findUnique({
+      where:{
+        roomName:room
+      },
+      select:{
+        id:true,
+        memberLists:true
+      }
+    });
+
+    const members= await prisma.user.findMany({
+      where:{
+        id:{in:globalRoomMembers.memberLists}
+      },
+      select:{
+        id:true,
+        fullName:true,
+        avatar:true
+      }
+    })
+    res.json({success:true,globalRoomMembers,members});
+  }
+  catch (error) {
+        console.error("UPDATE ERROR:", error);
+        res.json({ success: false, message: error.message });
+    }
+}
+
+export const globalRoomSendMessage=async(req,res)=>{
+  try{
+  const senderId=req.user.id;
+  const {text}= req.body
+  const {currentRoom} =req.body
+  const sendMessage=await prisma.GlobalChatMessage.create({
+    data:{
+      text,
+      room:{connect:{id:currentRoom}},
+      sender:{connect:{id:senderId}}
+    }
+  });
+  res.json({success:true,sendMessage});
+}
+catch (error) {
+        console.error("UPDATE ERROR:", error);
+        res.json({ success: false, message: error.message });
+    }
+}
+
+
+export const getRoomMessages = async (req, res) => {
+  try {
+    const myId = req.user.id;
+    const { currentRoom } = req.body;
+
+    const messages = await prisma.GlobalChatMessage.findMany({
+      where: {
+        roomId: currentRoom,
+      },
+      select: {
+        id: true,
+        text: true,
+        senderId: true,
+        createdAt:true,
+        sender:{
+          select:{
+            id:true,
+            fullName:true,
+            avatar:true
+          }
+        }
+      },
+    });
+
+    const user=await prisma.User.findFirst
+
+    res.json({ success: true, messages });
+  } catch (error) {
+    console.error("GET ROOM MESSAGES ERROR:", error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+};

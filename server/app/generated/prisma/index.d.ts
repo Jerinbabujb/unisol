@@ -58,6 +58,11 @@ export type Scoring = $Result.DefaultSelection<Prisma.$ScoringPayload>
  * 
  */
 export type GlobalChats = $Result.DefaultSelection<Prisma.$GlobalChatsPayload>
+/**
+ * Model GlobalChatMessage
+ * 
+ */
+export type GlobalChatMessage = $Result.DefaultSelection<Prisma.$GlobalChatMessagePayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -269,6 +274,16 @@ export class PrismaClient<
     * ```
     */
   get globalChats(): Prisma.GlobalChatsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.globalChatMessage`: Exposes CRUD operations for the **GlobalChatMessage** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more GlobalChatMessages
+    * const globalChatMessages = await prisma.globalChatMessage.findMany()
+    * ```
+    */
+  get globalChatMessage(): Prisma.GlobalChatMessageDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -711,7 +726,8 @@ export namespace Prisma {
     Games: 'Games',
     EmojiCharades: 'EmojiCharades',
     Scoring: 'Scoring',
-    GlobalChats: 'GlobalChats'
+    GlobalChats: 'GlobalChats',
+    GlobalChatMessage: 'GlobalChatMessage'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -727,7 +743,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "privacy" | "song" | "message" | "connection" | "games" | "emojiCharades" | "scoring" | "globalChats"
+      modelProps: "user" | "privacy" | "song" | "message" | "connection" | "games" | "emojiCharades" | "scoring" | "globalChats" | "globalChatMessage"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1397,6 +1413,80 @@ export namespace Prisma {
           }
         }
       }
+      GlobalChatMessage: {
+        payload: Prisma.$GlobalChatMessagePayload<ExtArgs>
+        fields: Prisma.GlobalChatMessageFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.GlobalChatMessageFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalChatMessagePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.GlobalChatMessageFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalChatMessagePayload>
+          }
+          findFirst: {
+            args: Prisma.GlobalChatMessageFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalChatMessagePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.GlobalChatMessageFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalChatMessagePayload>
+          }
+          findMany: {
+            args: Prisma.GlobalChatMessageFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalChatMessagePayload>[]
+          }
+          create: {
+            args: Prisma.GlobalChatMessageCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalChatMessagePayload>
+          }
+          createMany: {
+            args: Prisma.GlobalChatMessageCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.GlobalChatMessageCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalChatMessagePayload>[]
+          }
+          delete: {
+            args: Prisma.GlobalChatMessageDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalChatMessagePayload>
+          }
+          update: {
+            args: Prisma.GlobalChatMessageUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalChatMessagePayload>
+          }
+          deleteMany: {
+            args: Prisma.GlobalChatMessageDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.GlobalChatMessageUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.GlobalChatMessageUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalChatMessagePayload>[]
+          }
+          upsert: {
+            args: Prisma.GlobalChatMessageUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlobalChatMessagePayload>
+          }
+          aggregate: {
+            args: Prisma.GlobalChatMessageAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateGlobalChatMessage>
+          }
+          groupBy: {
+            args: Prisma.GlobalChatMessageGroupByArgs<ExtArgs>
+            result: $Utils.Optional<GlobalChatMessageGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.GlobalChatMessageCountArgs<ExtArgs>
+            result: $Utils.Optional<GlobalChatMessageCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1514,6 +1604,7 @@ export namespace Prisma {
     emojiCharades?: EmojiCharadesOmit
     scoring?: ScoringOmit
     globalChats?: GlobalChatsOmit
+    globalChatMessage?: GlobalChatMessageOmit
   }
 
   /* Types for Logging */
@@ -1596,11 +1687,13 @@ export namespace Prisma {
   export type UserCountOutputType = {
     recvMessages: number
     sentMessages: number
+    globalMessages: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     recvMessages?: boolean | UserCountOutputTypeCountRecvMessagesArgs
     sentMessages?: boolean | UserCountOutputTypeCountSentMessagesArgs
+    globalMessages?: boolean | UserCountOutputTypeCountGlobalMessagesArgs
   }
 
   // Custom InputTypes
@@ -1626,6 +1719,44 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountSentMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MessageWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountGlobalMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GlobalChatMessageWhereInput
+  }
+
+
+  /**
+   * Count Type GlobalChatsCountOutputType
+   */
+
+  export type GlobalChatsCountOutputType = {
+    messages: number
+  }
+
+  export type GlobalChatsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    messages?: boolean | GlobalChatsCountOutputTypeCountMessagesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * GlobalChatsCountOutputType without action
+   */
+  export type GlobalChatsCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalChatsCountOutputType
+     */
+    select?: GlobalChatsCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * GlobalChatsCountOutputType without action
+   */
+  export type GlobalChatsCountOutputTypeCountMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GlobalChatMessageWhereInput
   }
 
 
@@ -1887,6 +2018,7 @@ export namespace Prisma {
     createdAt?: boolean
     recvMessages?: boolean | User$recvMessagesArgs<ExtArgs>
     sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
+    globalMessages?: boolean | User$globalMessagesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1954,6 +2086,7 @@ export namespace Prisma {
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     recvMessages?: boolean | User$recvMessagesArgs<ExtArgs>
     sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
+    globalMessages?: boolean | User$globalMessagesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1964,6 +2097,7 @@ export namespace Prisma {
     objects: {
       recvMessages: Prisma.$MessagePayload<ExtArgs>[]
       sentMessages: Prisma.$MessagePayload<ExtArgs>[]
+      globalMessages: Prisma.$GlobalChatMessagePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2379,6 +2513,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     recvMessages<T extends User$recvMessagesArgs<ExtArgs> = {}>(args?: Subset<T, User$recvMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sentMessages<T extends User$sentMessagesArgs<ExtArgs> = {}>(args?: Subset<T, User$sentMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    globalMessages<T extends User$globalMessagesArgs<ExtArgs> = {}>(args?: Subset<T, User$globalMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GlobalChatMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2863,6 +2998,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
+   * User.globalMessages
+   */
+  export type User$globalMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalChatMessage
+     */
+    select?: GlobalChatMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalChatMessage
+     */
+    omit?: GlobalChatMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalChatMessageInclude<ExtArgs> | null
+    where?: GlobalChatMessageWhereInput
+    orderBy?: GlobalChatMessageOrderByWithRelationInput | GlobalChatMessageOrderByWithRelationInput[]
+    cursor?: GlobalChatMessageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GlobalChatMessageScalarFieldEnum | GlobalChatMessageScalarFieldEnum[]
   }
 
   /**
@@ -10006,16 +10165,19 @@ export namespace Prisma {
   export type GlobalChatsMinAggregateOutputType = {
     id: string | null
     roomName: string | null
+    roomImage: string | null
   }
 
   export type GlobalChatsMaxAggregateOutputType = {
     id: string | null
     roomName: string | null
+    roomImage: string | null
   }
 
   export type GlobalChatsCountAggregateOutputType = {
     id: number
     roomName: number
+    roomImage: number
     memberLists: number
     _all: number
   }
@@ -10024,16 +10186,19 @@ export namespace Prisma {
   export type GlobalChatsMinAggregateInputType = {
     id?: true
     roomName?: true
+    roomImage?: true
   }
 
   export type GlobalChatsMaxAggregateInputType = {
     id?: true
     roomName?: true
+    roomImage?: true
   }
 
   export type GlobalChatsCountAggregateInputType = {
     id?: true
     roomName?: true
+    roomImage?: true
     memberLists?: true
     _all?: true
   }
@@ -10113,6 +10278,7 @@ export namespace Prisma {
   export type GlobalChatsGroupByOutputType = {
     id: string
     roomName: string
+    roomImage: string | null
     memberLists: string[]
     _count: GlobalChatsCountAggregateOutputType | null
     _min: GlobalChatsMinAggregateOutputType | null
@@ -10136,35 +10302,50 @@ export namespace Prisma {
   export type GlobalChatsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     roomName?: boolean
+    roomImage?: boolean
     memberLists?: boolean
+    messages?: boolean | GlobalChats$messagesArgs<ExtArgs>
+    _count?: boolean | GlobalChatsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["globalChats"]>
 
   export type GlobalChatsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     roomName?: boolean
+    roomImage?: boolean
     memberLists?: boolean
   }, ExtArgs["result"]["globalChats"]>
 
   export type GlobalChatsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     roomName?: boolean
+    roomImage?: boolean
     memberLists?: boolean
   }, ExtArgs["result"]["globalChats"]>
 
   export type GlobalChatsSelectScalar = {
     id?: boolean
     roomName?: boolean
+    roomImage?: boolean
     memberLists?: boolean
   }
 
-  export type GlobalChatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "roomName" | "memberLists", ExtArgs["result"]["globalChats"]>
+  export type GlobalChatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "roomName" | "roomImage" | "memberLists", ExtArgs["result"]["globalChats"]>
+  export type GlobalChatsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    messages?: boolean | GlobalChats$messagesArgs<ExtArgs>
+    _count?: boolean | GlobalChatsCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type GlobalChatsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type GlobalChatsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $GlobalChatsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "GlobalChats"
-    objects: {}
+    objects: {
+      messages: Prisma.$GlobalChatMessagePayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       roomName: string
+      roomImage: string | null
       memberLists: string[]
     }, ExtArgs["result"]["globalChats"]>
     composites: {}
@@ -10560,6 +10741,7 @@ export namespace Prisma {
    */
   export interface Prisma__GlobalChatsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    messages<T extends GlobalChats$messagesArgs<ExtArgs> = {}>(args?: Subset<T, GlobalChats$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GlobalChatMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10591,6 +10773,7 @@ export namespace Prisma {
   interface GlobalChatsFieldRefs {
     readonly id: FieldRef<"GlobalChats", 'String'>
     readonly roomName: FieldRef<"GlobalChats", 'String'>
+    readonly roomImage: FieldRef<"GlobalChats", 'String'>
     readonly memberLists: FieldRef<"GlobalChats", 'String[]'>
   }
     
@@ -10608,6 +10791,10 @@ export namespace Prisma {
      * Omit specific fields from the GlobalChats
      */
     omit?: GlobalChatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalChatsInclude<ExtArgs> | null
     /**
      * Filter, which GlobalChats to fetch.
      */
@@ -10627,6 +10814,10 @@ export namespace Prisma {
      */
     omit?: GlobalChatsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalChatsInclude<ExtArgs> | null
+    /**
      * Filter, which GlobalChats to fetch.
      */
     where: GlobalChatsWhereUniqueInput
@@ -10644,6 +10835,10 @@ export namespace Prisma {
      * Omit specific fields from the GlobalChats
      */
     omit?: GlobalChatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalChatsInclude<ExtArgs> | null
     /**
      * Filter, which GlobalChats to fetch.
      */
@@ -10693,6 +10888,10 @@ export namespace Prisma {
      */
     omit?: GlobalChatsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalChatsInclude<ExtArgs> | null
+    /**
      * Filter, which GlobalChats to fetch.
      */
     where?: GlobalChatsWhereInput
@@ -10740,6 +10939,10 @@ export namespace Prisma {
      * Omit specific fields from the GlobalChats
      */
     omit?: GlobalChatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalChatsInclude<ExtArgs> | null
     /**
      * Filter, which GlobalChats to fetch.
      */
@@ -10789,6 +10992,10 @@ export namespace Prisma {
      */
     omit?: GlobalChatsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalChatsInclude<ExtArgs> | null
+    /**
      * The data needed to create a GlobalChats.
      */
     data: XOR<GlobalChatsCreateInput, GlobalChatsUncheckedCreateInput>
@@ -10836,6 +11043,10 @@ export namespace Prisma {
      * Omit specific fields from the GlobalChats
      */
     omit?: GlobalChatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalChatsInclude<ExtArgs> | null
     /**
      * The data needed to update a GlobalChats.
      */
@@ -10903,6 +11114,10 @@ export namespace Prisma {
      */
     omit?: GlobalChatsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalChatsInclude<ExtArgs> | null
+    /**
      * The filter to search for the GlobalChats to update in case it exists.
      */
     where: GlobalChatsWhereUniqueInput
@@ -10929,6 +11144,10 @@ export namespace Prisma {
      */
     omit?: GlobalChatsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalChatsInclude<ExtArgs> | null
+    /**
      * Filter which GlobalChats to delete.
      */
     where: GlobalChatsWhereUniqueInput
@@ -10949,6 +11168,30 @@ export namespace Prisma {
   }
 
   /**
+   * GlobalChats.messages
+   */
+  export type GlobalChats$messagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalChatMessage
+     */
+    select?: GlobalChatMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalChatMessage
+     */
+    omit?: GlobalChatMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalChatMessageInclude<ExtArgs> | null
+    where?: GlobalChatMessageWhereInput
+    orderBy?: GlobalChatMessageOrderByWithRelationInput | GlobalChatMessageOrderByWithRelationInput[]
+    cursor?: GlobalChatMessageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GlobalChatMessageScalarFieldEnum | GlobalChatMessageScalarFieldEnum[]
+  }
+
+  /**
    * GlobalChats without action
    */
   export type GlobalChatsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -10960,6 +11203,1081 @@ export namespace Prisma {
      * Omit specific fields from the GlobalChats
      */
     omit?: GlobalChatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalChatsInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model GlobalChatMessage
+   */
+
+  export type AggregateGlobalChatMessage = {
+    _count: GlobalChatMessageCountAggregateOutputType | null
+    _min: GlobalChatMessageMinAggregateOutputType | null
+    _max: GlobalChatMessageMaxAggregateOutputType | null
+  }
+
+  export type GlobalChatMessageMinAggregateOutputType = {
+    id: string | null
+    roomId: string | null
+    senderId: string | null
+    text: string | null
+    createdAt: Date | null
+  }
+
+  export type GlobalChatMessageMaxAggregateOutputType = {
+    id: string | null
+    roomId: string | null
+    senderId: string | null
+    text: string | null
+    createdAt: Date | null
+  }
+
+  export type GlobalChatMessageCountAggregateOutputType = {
+    id: number
+    roomId: number
+    senderId: number
+    text: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type GlobalChatMessageMinAggregateInputType = {
+    id?: true
+    roomId?: true
+    senderId?: true
+    text?: true
+    createdAt?: true
+  }
+
+  export type GlobalChatMessageMaxAggregateInputType = {
+    id?: true
+    roomId?: true
+    senderId?: true
+    text?: true
+    createdAt?: true
+  }
+
+  export type GlobalChatMessageCountAggregateInputType = {
+    id?: true
+    roomId?: true
+    senderId?: true
+    text?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type GlobalChatMessageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GlobalChatMessage to aggregate.
+     */
+    where?: GlobalChatMessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GlobalChatMessages to fetch.
+     */
+    orderBy?: GlobalChatMessageOrderByWithRelationInput | GlobalChatMessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: GlobalChatMessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GlobalChatMessages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GlobalChatMessages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned GlobalChatMessages
+    **/
+    _count?: true | GlobalChatMessageCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: GlobalChatMessageMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: GlobalChatMessageMaxAggregateInputType
+  }
+
+  export type GetGlobalChatMessageAggregateType<T extends GlobalChatMessageAggregateArgs> = {
+        [P in keyof T & keyof AggregateGlobalChatMessage]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateGlobalChatMessage[P]>
+      : GetScalarType<T[P], AggregateGlobalChatMessage[P]>
+  }
+
+
+
+
+  export type GlobalChatMessageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GlobalChatMessageWhereInput
+    orderBy?: GlobalChatMessageOrderByWithAggregationInput | GlobalChatMessageOrderByWithAggregationInput[]
+    by: GlobalChatMessageScalarFieldEnum[] | GlobalChatMessageScalarFieldEnum
+    having?: GlobalChatMessageScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: GlobalChatMessageCountAggregateInputType | true
+    _min?: GlobalChatMessageMinAggregateInputType
+    _max?: GlobalChatMessageMaxAggregateInputType
+  }
+
+  export type GlobalChatMessageGroupByOutputType = {
+    id: string
+    roomId: string
+    senderId: string
+    text: string
+    createdAt: Date
+    _count: GlobalChatMessageCountAggregateOutputType | null
+    _min: GlobalChatMessageMinAggregateOutputType | null
+    _max: GlobalChatMessageMaxAggregateOutputType | null
+  }
+
+  type GetGlobalChatMessageGroupByPayload<T extends GlobalChatMessageGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<GlobalChatMessageGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof GlobalChatMessageGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], GlobalChatMessageGroupByOutputType[P]>
+            : GetScalarType<T[P], GlobalChatMessageGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type GlobalChatMessageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    roomId?: boolean
+    senderId?: boolean
+    text?: boolean
+    createdAt?: boolean
+    sender?: boolean | UserDefaultArgs<ExtArgs>
+    room?: boolean | GlobalChatsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["globalChatMessage"]>
+
+  export type GlobalChatMessageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    roomId?: boolean
+    senderId?: boolean
+    text?: boolean
+    createdAt?: boolean
+    sender?: boolean | UserDefaultArgs<ExtArgs>
+    room?: boolean | GlobalChatsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["globalChatMessage"]>
+
+  export type GlobalChatMessageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    roomId?: boolean
+    senderId?: boolean
+    text?: boolean
+    createdAt?: boolean
+    sender?: boolean | UserDefaultArgs<ExtArgs>
+    room?: boolean | GlobalChatsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["globalChatMessage"]>
+
+  export type GlobalChatMessageSelectScalar = {
+    id?: boolean
+    roomId?: boolean
+    senderId?: boolean
+    text?: boolean
+    createdAt?: boolean
+  }
+
+  export type GlobalChatMessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "roomId" | "senderId" | "text" | "createdAt", ExtArgs["result"]["globalChatMessage"]>
+  export type GlobalChatMessageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sender?: boolean | UserDefaultArgs<ExtArgs>
+    room?: boolean | GlobalChatsDefaultArgs<ExtArgs>
+  }
+  export type GlobalChatMessageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sender?: boolean | UserDefaultArgs<ExtArgs>
+    room?: boolean | GlobalChatsDefaultArgs<ExtArgs>
+  }
+  export type GlobalChatMessageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sender?: boolean | UserDefaultArgs<ExtArgs>
+    room?: boolean | GlobalChatsDefaultArgs<ExtArgs>
+  }
+
+  export type $GlobalChatMessagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "GlobalChatMessage"
+    objects: {
+      sender: Prisma.$UserPayload<ExtArgs>
+      room: Prisma.$GlobalChatsPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      roomId: string
+      senderId: string
+      text: string
+      createdAt: Date
+    }, ExtArgs["result"]["globalChatMessage"]>
+    composites: {}
+  }
+
+  type GlobalChatMessageGetPayload<S extends boolean | null | undefined | GlobalChatMessageDefaultArgs> = $Result.GetResult<Prisma.$GlobalChatMessagePayload, S>
+
+  type GlobalChatMessageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<GlobalChatMessageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: GlobalChatMessageCountAggregateInputType | true
+    }
+
+  export interface GlobalChatMessageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['GlobalChatMessage'], meta: { name: 'GlobalChatMessage' } }
+    /**
+     * Find zero or one GlobalChatMessage that matches the filter.
+     * @param {GlobalChatMessageFindUniqueArgs} args - Arguments to find a GlobalChatMessage
+     * @example
+     * // Get one GlobalChatMessage
+     * const globalChatMessage = await prisma.globalChatMessage.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends GlobalChatMessageFindUniqueArgs>(args: SelectSubset<T, GlobalChatMessageFindUniqueArgs<ExtArgs>>): Prisma__GlobalChatMessageClient<$Result.GetResult<Prisma.$GlobalChatMessagePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one GlobalChatMessage that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {GlobalChatMessageFindUniqueOrThrowArgs} args - Arguments to find a GlobalChatMessage
+     * @example
+     * // Get one GlobalChatMessage
+     * const globalChatMessage = await prisma.globalChatMessage.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends GlobalChatMessageFindUniqueOrThrowArgs>(args: SelectSubset<T, GlobalChatMessageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GlobalChatMessageClient<$Result.GetResult<Prisma.$GlobalChatMessagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GlobalChatMessage that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlobalChatMessageFindFirstArgs} args - Arguments to find a GlobalChatMessage
+     * @example
+     * // Get one GlobalChatMessage
+     * const globalChatMessage = await prisma.globalChatMessage.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends GlobalChatMessageFindFirstArgs>(args?: SelectSubset<T, GlobalChatMessageFindFirstArgs<ExtArgs>>): Prisma__GlobalChatMessageClient<$Result.GetResult<Prisma.$GlobalChatMessagePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GlobalChatMessage that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlobalChatMessageFindFirstOrThrowArgs} args - Arguments to find a GlobalChatMessage
+     * @example
+     * // Get one GlobalChatMessage
+     * const globalChatMessage = await prisma.globalChatMessage.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends GlobalChatMessageFindFirstOrThrowArgs>(args?: SelectSubset<T, GlobalChatMessageFindFirstOrThrowArgs<ExtArgs>>): Prisma__GlobalChatMessageClient<$Result.GetResult<Prisma.$GlobalChatMessagePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more GlobalChatMessages that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlobalChatMessageFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all GlobalChatMessages
+     * const globalChatMessages = await prisma.globalChatMessage.findMany()
+     * 
+     * // Get first 10 GlobalChatMessages
+     * const globalChatMessages = await prisma.globalChatMessage.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const globalChatMessageWithIdOnly = await prisma.globalChatMessage.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends GlobalChatMessageFindManyArgs>(args?: SelectSubset<T, GlobalChatMessageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GlobalChatMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a GlobalChatMessage.
+     * @param {GlobalChatMessageCreateArgs} args - Arguments to create a GlobalChatMessage.
+     * @example
+     * // Create one GlobalChatMessage
+     * const GlobalChatMessage = await prisma.globalChatMessage.create({
+     *   data: {
+     *     // ... data to create a GlobalChatMessage
+     *   }
+     * })
+     * 
+     */
+    create<T extends GlobalChatMessageCreateArgs>(args: SelectSubset<T, GlobalChatMessageCreateArgs<ExtArgs>>): Prisma__GlobalChatMessageClient<$Result.GetResult<Prisma.$GlobalChatMessagePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many GlobalChatMessages.
+     * @param {GlobalChatMessageCreateManyArgs} args - Arguments to create many GlobalChatMessages.
+     * @example
+     * // Create many GlobalChatMessages
+     * const globalChatMessage = await prisma.globalChatMessage.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends GlobalChatMessageCreateManyArgs>(args?: SelectSubset<T, GlobalChatMessageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many GlobalChatMessages and returns the data saved in the database.
+     * @param {GlobalChatMessageCreateManyAndReturnArgs} args - Arguments to create many GlobalChatMessages.
+     * @example
+     * // Create many GlobalChatMessages
+     * const globalChatMessage = await prisma.globalChatMessage.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many GlobalChatMessages and only return the `id`
+     * const globalChatMessageWithIdOnly = await prisma.globalChatMessage.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends GlobalChatMessageCreateManyAndReturnArgs>(args?: SelectSubset<T, GlobalChatMessageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GlobalChatMessagePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a GlobalChatMessage.
+     * @param {GlobalChatMessageDeleteArgs} args - Arguments to delete one GlobalChatMessage.
+     * @example
+     * // Delete one GlobalChatMessage
+     * const GlobalChatMessage = await prisma.globalChatMessage.delete({
+     *   where: {
+     *     // ... filter to delete one GlobalChatMessage
+     *   }
+     * })
+     * 
+     */
+    delete<T extends GlobalChatMessageDeleteArgs>(args: SelectSubset<T, GlobalChatMessageDeleteArgs<ExtArgs>>): Prisma__GlobalChatMessageClient<$Result.GetResult<Prisma.$GlobalChatMessagePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one GlobalChatMessage.
+     * @param {GlobalChatMessageUpdateArgs} args - Arguments to update one GlobalChatMessage.
+     * @example
+     * // Update one GlobalChatMessage
+     * const globalChatMessage = await prisma.globalChatMessage.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends GlobalChatMessageUpdateArgs>(args: SelectSubset<T, GlobalChatMessageUpdateArgs<ExtArgs>>): Prisma__GlobalChatMessageClient<$Result.GetResult<Prisma.$GlobalChatMessagePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more GlobalChatMessages.
+     * @param {GlobalChatMessageDeleteManyArgs} args - Arguments to filter GlobalChatMessages to delete.
+     * @example
+     * // Delete a few GlobalChatMessages
+     * const { count } = await prisma.globalChatMessage.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends GlobalChatMessageDeleteManyArgs>(args?: SelectSubset<T, GlobalChatMessageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GlobalChatMessages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlobalChatMessageUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many GlobalChatMessages
+     * const globalChatMessage = await prisma.globalChatMessage.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends GlobalChatMessageUpdateManyArgs>(args: SelectSubset<T, GlobalChatMessageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GlobalChatMessages and returns the data updated in the database.
+     * @param {GlobalChatMessageUpdateManyAndReturnArgs} args - Arguments to update many GlobalChatMessages.
+     * @example
+     * // Update many GlobalChatMessages
+     * const globalChatMessage = await prisma.globalChatMessage.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more GlobalChatMessages and only return the `id`
+     * const globalChatMessageWithIdOnly = await prisma.globalChatMessage.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends GlobalChatMessageUpdateManyAndReturnArgs>(args: SelectSubset<T, GlobalChatMessageUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GlobalChatMessagePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one GlobalChatMessage.
+     * @param {GlobalChatMessageUpsertArgs} args - Arguments to update or create a GlobalChatMessage.
+     * @example
+     * // Update or create a GlobalChatMessage
+     * const globalChatMessage = await prisma.globalChatMessage.upsert({
+     *   create: {
+     *     // ... data to create a GlobalChatMessage
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the GlobalChatMessage we want to update
+     *   }
+     * })
+     */
+    upsert<T extends GlobalChatMessageUpsertArgs>(args: SelectSubset<T, GlobalChatMessageUpsertArgs<ExtArgs>>): Prisma__GlobalChatMessageClient<$Result.GetResult<Prisma.$GlobalChatMessagePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of GlobalChatMessages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlobalChatMessageCountArgs} args - Arguments to filter GlobalChatMessages to count.
+     * @example
+     * // Count the number of GlobalChatMessages
+     * const count = await prisma.globalChatMessage.count({
+     *   where: {
+     *     // ... the filter for the GlobalChatMessages we want to count
+     *   }
+     * })
+    **/
+    count<T extends GlobalChatMessageCountArgs>(
+      args?: Subset<T, GlobalChatMessageCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], GlobalChatMessageCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a GlobalChatMessage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlobalChatMessageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends GlobalChatMessageAggregateArgs>(args: Subset<T, GlobalChatMessageAggregateArgs>): Prisma.PrismaPromise<GetGlobalChatMessageAggregateType<T>>
+
+    /**
+     * Group by GlobalChatMessage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlobalChatMessageGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends GlobalChatMessageGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: GlobalChatMessageGroupByArgs['orderBy'] }
+        : { orderBy?: GlobalChatMessageGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, GlobalChatMessageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGlobalChatMessageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the GlobalChatMessage model
+   */
+  readonly fields: GlobalChatMessageFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for GlobalChatMessage.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__GlobalChatMessageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    sender<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    room<T extends GlobalChatsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GlobalChatsDefaultArgs<ExtArgs>>): Prisma__GlobalChatsClient<$Result.GetResult<Prisma.$GlobalChatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the GlobalChatMessage model
+   */
+  interface GlobalChatMessageFieldRefs {
+    readonly id: FieldRef<"GlobalChatMessage", 'String'>
+    readonly roomId: FieldRef<"GlobalChatMessage", 'String'>
+    readonly senderId: FieldRef<"GlobalChatMessage", 'String'>
+    readonly text: FieldRef<"GlobalChatMessage", 'String'>
+    readonly createdAt: FieldRef<"GlobalChatMessage", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * GlobalChatMessage findUnique
+   */
+  export type GlobalChatMessageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalChatMessage
+     */
+    select?: GlobalChatMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalChatMessage
+     */
+    omit?: GlobalChatMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalChatMessageInclude<ExtArgs> | null
+    /**
+     * Filter, which GlobalChatMessage to fetch.
+     */
+    where: GlobalChatMessageWhereUniqueInput
+  }
+
+  /**
+   * GlobalChatMessage findUniqueOrThrow
+   */
+  export type GlobalChatMessageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalChatMessage
+     */
+    select?: GlobalChatMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalChatMessage
+     */
+    omit?: GlobalChatMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalChatMessageInclude<ExtArgs> | null
+    /**
+     * Filter, which GlobalChatMessage to fetch.
+     */
+    where: GlobalChatMessageWhereUniqueInput
+  }
+
+  /**
+   * GlobalChatMessage findFirst
+   */
+  export type GlobalChatMessageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalChatMessage
+     */
+    select?: GlobalChatMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalChatMessage
+     */
+    omit?: GlobalChatMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalChatMessageInclude<ExtArgs> | null
+    /**
+     * Filter, which GlobalChatMessage to fetch.
+     */
+    where?: GlobalChatMessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GlobalChatMessages to fetch.
+     */
+    orderBy?: GlobalChatMessageOrderByWithRelationInput | GlobalChatMessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GlobalChatMessages.
+     */
+    cursor?: GlobalChatMessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GlobalChatMessages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GlobalChatMessages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GlobalChatMessages.
+     */
+    distinct?: GlobalChatMessageScalarFieldEnum | GlobalChatMessageScalarFieldEnum[]
+  }
+
+  /**
+   * GlobalChatMessage findFirstOrThrow
+   */
+  export type GlobalChatMessageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalChatMessage
+     */
+    select?: GlobalChatMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalChatMessage
+     */
+    omit?: GlobalChatMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalChatMessageInclude<ExtArgs> | null
+    /**
+     * Filter, which GlobalChatMessage to fetch.
+     */
+    where?: GlobalChatMessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GlobalChatMessages to fetch.
+     */
+    orderBy?: GlobalChatMessageOrderByWithRelationInput | GlobalChatMessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GlobalChatMessages.
+     */
+    cursor?: GlobalChatMessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GlobalChatMessages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GlobalChatMessages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GlobalChatMessages.
+     */
+    distinct?: GlobalChatMessageScalarFieldEnum | GlobalChatMessageScalarFieldEnum[]
+  }
+
+  /**
+   * GlobalChatMessage findMany
+   */
+  export type GlobalChatMessageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalChatMessage
+     */
+    select?: GlobalChatMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalChatMessage
+     */
+    omit?: GlobalChatMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalChatMessageInclude<ExtArgs> | null
+    /**
+     * Filter, which GlobalChatMessages to fetch.
+     */
+    where?: GlobalChatMessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GlobalChatMessages to fetch.
+     */
+    orderBy?: GlobalChatMessageOrderByWithRelationInput | GlobalChatMessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing GlobalChatMessages.
+     */
+    cursor?: GlobalChatMessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GlobalChatMessages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GlobalChatMessages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GlobalChatMessages.
+     */
+    distinct?: GlobalChatMessageScalarFieldEnum | GlobalChatMessageScalarFieldEnum[]
+  }
+
+  /**
+   * GlobalChatMessage create
+   */
+  export type GlobalChatMessageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalChatMessage
+     */
+    select?: GlobalChatMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalChatMessage
+     */
+    omit?: GlobalChatMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalChatMessageInclude<ExtArgs> | null
+    /**
+     * The data needed to create a GlobalChatMessage.
+     */
+    data: XOR<GlobalChatMessageCreateInput, GlobalChatMessageUncheckedCreateInput>
+  }
+
+  /**
+   * GlobalChatMessage createMany
+   */
+  export type GlobalChatMessageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many GlobalChatMessages.
+     */
+    data: GlobalChatMessageCreateManyInput | GlobalChatMessageCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * GlobalChatMessage createManyAndReturn
+   */
+  export type GlobalChatMessageCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalChatMessage
+     */
+    select?: GlobalChatMessageSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalChatMessage
+     */
+    omit?: GlobalChatMessageOmit<ExtArgs> | null
+    /**
+     * The data used to create many GlobalChatMessages.
+     */
+    data: GlobalChatMessageCreateManyInput | GlobalChatMessageCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalChatMessageIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * GlobalChatMessage update
+   */
+  export type GlobalChatMessageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalChatMessage
+     */
+    select?: GlobalChatMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalChatMessage
+     */
+    omit?: GlobalChatMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalChatMessageInclude<ExtArgs> | null
+    /**
+     * The data needed to update a GlobalChatMessage.
+     */
+    data: XOR<GlobalChatMessageUpdateInput, GlobalChatMessageUncheckedUpdateInput>
+    /**
+     * Choose, which GlobalChatMessage to update.
+     */
+    where: GlobalChatMessageWhereUniqueInput
+  }
+
+  /**
+   * GlobalChatMessage updateMany
+   */
+  export type GlobalChatMessageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update GlobalChatMessages.
+     */
+    data: XOR<GlobalChatMessageUpdateManyMutationInput, GlobalChatMessageUncheckedUpdateManyInput>
+    /**
+     * Filter which GlobalChatMessages to update
+     */
+    where?: GlobalChatMessageWhereInput
+    /**
+     * Limit how many GlobalChatMessages to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * GlobalChatMessage updateManyAndReturn
+   */
+  export type GlobalChatMessageUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalChatMessage
+     */
+    select?: GlobalChatMessageSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalChatMessage
+     */
+    omit?: GlobalChatMessageOmit<ExtArgs> | null
+    /**
+     * The data used to update GlobalChatMessages.
+     */
+    data: XOR<GlobalChatMessageUpdateManyMutationInput, GlobalChatMessageUncheckedUpdateManyInput>
+    /**
+     * Filter which GlobalChatMessages to update
+     */
+    where?: GlobalChatMessageWhereInput
+    /**
+     * Limit how many GlobalChatMessages to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalChatMessageIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * GlobalChatMessage upsert
+   */
+  export type GlobalChatMessageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalChatMessage
+     */
+    select?: GlobalChatMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalChatMessage
+     */
+    omit?: GlobalChatMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalChatMessageInclude<ExtArgs> | null
+    /**
+     * The filter to search for the GlobalChatMessage to update in case it exists.
+     */
+    where: GlobalChatMessageWhereUniqueInput
+    /**
+     * In case the GlobalChatMessage found by the `where` argument doesn't exist, create a new GlobalChatMessage with this data.
+     */
+    create: XOR<GlobalChatMessageCreateInput, GlobalChatMessageUncheckedCreateInput>
+    /**
+     * In case the GlobalChatMessage was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<GlobalChatMessageUpdateInput, GlobalChatMessageUncheckedUpdateInput>
+  }
+
+  /**
+   * GlobalChatMessage delete
+   */
+  export type GlobalChatMessageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalChatMessage
+     */
+    select?: GlobalChatMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalChatMessage
+     */
+    omit?: GlobalChatMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalChatMessageInclude<ExtArgs> | null
+    /**
+     * Filter which GlobalChatMessage to delete.
+     */
+    where: GlobalChatMessageWhereUniqueInput
+  }
+
+  /**
+   * GlobalChatMessage deleteMany
+   */
+  export type GlobalChatMessageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GlobalChatMessages to delete
+     */
+    where?: GlobalChatMessageWhereInput
+    /**
+     * Limit how many GlobalChatMessages to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * GlobalChatMessage without action
+   */
+  export type GlobalChatMessageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlobalChatMessage
+     */
+    select?: GlobalChatMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlobalChatMessage
+     */
+    omit?: GlobalChatMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlobalChatMessageInclude<ExtArgs> | null
   }
 
 
@@ -11078,10 +12396,22 @@ export namespace Prisma {
   export const GlobalChatsScalarFieldEnum: {
     id: 'id',
     roomName: 'roomName',
+    roomImage: 'roomImage',
     memberLists: 'memberLists'
   };
 
   export type GlobalChatsScalarFieldEnum = (typeof GlobalChatsScalarFieldEnum)[keyof typeof GlobalChatsScalarFieldEnum]
+
+
+  export const GlobalChatMessageScalarFieldEnum: {
+    id: 'id',
+    roomId: 'roomId',
+    senderId: 'senderId',
+    text: 'text',
+    createdAt: 'createdAt'
+  };
+
+  export type GlobalChatMessageScalarFieldEnum = (typeof GlobalChatMessageScalarFieldEnum)[keyof typeof GlobalChatMessageScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -11202,6 +12532,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     recvMessages?: MessageListRelationFilter
     sentMessages?: MessageListRelationFilter
+    globalMessages?: GlobalChatMessageListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -11224,6 +12555,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     recvMessages?: MessageOrderByRelationAggregateInput
     sentMessages?: MessageOrderByRelationAggregateInput
+    globalMessages?: GlobalChatMessageOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -11249,6 +12581,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     recvMessages?: MessageListRelationFilter
     sentMessages?: MessageListRelationFilter
+    globalMessages?: GlobalChatMessageListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -11670,13 +13003,17 @@ export namespace Prisma {
     NOT?: GlobalChatsWhereInput | GlobalChatsWhereInput[]
     id?: StringFilter<"GlobalChats"> | string
     roomName?: StringFilter<"GlobalChats"> | string
+    roomImage?: StringNullableFilter<"GlobalChats"> | string | null
     memberLists?: StringNullableListFilter<"GlobalChats">
+    messages?: GlobalChatMessageListRelationFilter
   }
 
   export type GlobalChatsOrderByWithRelationInput = {
     id?: SortOrder
     roomName?: SortOrder
+    roomImage?: SortOrderInput | SortOrder
     memberLists?: SortOrder
+    messages?: GlobalChatMessageOrderByRelationAggregateInput
   }
 
   export type GlobalChatsWhereUniqueInput = Prisma.AtLeast<{
@@ -11685,12 +13022,15 @@ export namespace Prisma {
     AND?: GlobalChatsWhereInput | GlobalChatsWhereInput[]
     OR?: GlobalChatsWhereInput[]
     NOT?: GlobalChatsWhereInput | GlobalChatsWhereInput[]
+    roomImage?: StringNullableFilter<"GlobalChats"> | string | null
     memberLists?: StringNullableListFilter<"GlobalChats">
+    messages?: GlobalChatMessageListRelationFilter
   }, "id" | "roomName">
 
   export type GlobalChatsOrderByWithAggregationInput = {
     id?: SortOrder
     roomName?: SortOrder
+    roomImage?: SortOrderInput | SortOrder
     memberLists?: SortOrder
     _count?: GlobalChatsCountOrderByAggregateInput
     _max?: GlobalChatsMaxOrderByAggregateInput
@@ -11703,7 +13043,66 @@ export namespace Prisma {
     NOT?: GlobalChatsScalarWhereWithAggregatesInput | GlobalChatsScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"GlobalChats"> | string
     roomName?: StringWithAggregatesFilter<"GlobalChats"> | string
+    roomImage?: StringNullableWithAggregatesFilter<"GlobalChats"> | string | null
     memberLists?: StringNullableListFilter<"GlobalChats">
+  }
+
+  export type GlobalChatMessageWhereInput = {
+    AND?: GlobalChatMessageWhereInput | GlobalChatMessageWhereInput[]
+    OR?: GlobalChatMessageWhereInput[]
+    NOT?: GlobalChatMessageWhereInput | GlobalChatMessageWhereInput[]
+    id?: StringFilter<"GlobalChatMessage"> | string
+    roomId?: StringFilter<"GlobalChatMessage"> | string
+    senderId?: StringFilter<"GlobalChatMessage"> | string
+    text?: StringFilter<"GlobalChatMessage"> | string
+    createdAt?: DateTimeFilter<"GlobalChatMessage"> | Date | string
+    sender?: XOR<UserScalarRelationFilter, UserWhereInput>
+    room?: XOR<GlobalChatsScalarRelationFilter, GlobalChatsWhereInput>
+  }
+
+  export type GlobalChatMessageOrderByWithRelationInput = {
+    id?: SortOrder
+    roomId?: SortOrder
+    senderId?: SortOrder
+    text?: SortOrder
+    createdAt?: SortOrder
+    sender?: UserOrderByWithRelationInput
+    room?: GlobalChatsOrderByWithRelationInput
+  }
+
+  export type GlobalChatMessageWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: GlobalChatMessageWhereInput | GlobalChatMessageWhereInput[]
+    OR?: GlobalChatMessageWhereInput[]
+    NOT?: GlobalChatMessageWhereInput | GlobalChatMessageWhereInput[]
+    roomId?: StringFilter<"GlobalChatMessage"> | string
+    senderId?: StringFilter<"GlobalChatMessage"> | string
+    text?: StringFilter<"GlobalChatMessage"> | string
+    createdAt?: DateTimeFilter<"GlobalChatMessage"> | Date | string
+    sender?: XOR<UserScalarRelationFilter, UserWhereInput>
+    room?: XOR<GlobalChatsScalarRelationFilter, GlobalChatsWhereInput>
+  }, "id">
+
+  export type GlobalChatMessageOrderByWithAggregationInput = {
+    id?: SortOrder
+    roomId?: SortOrder
+    senderId?: SortOrder
+    text?: SortOrder
+    createdAt?: SortOrder
+    _count?: GlobalChatMessageCountOrderByAggregateInput
+    _max?: GlobalChatMessageMaxOrderByAggregateInput
+    _min?: GlobalChatMessageMinOrderByAggregateInput
+  }
+
+  export type GlobalChatMessageScalarWhereWithAggregatesInput = {
+    AND?: GlobalChatMessageScalarWhereWithAggregatesInput | GlobalChatMessageScalarWhereWithAggregatesInput[]
+    OR?: GlobalChatMessageScalarWhereWithAggregatesInput[]
+    NOT?: GlobalChatMessageScalarWhereWithAggregatesInput | GlobalChatMessageScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"GlobalChatMessage"> | string
+    roomId?: StringWithAggregatesFilter<"GlobalChatMessage"> | string
+    senderId?: StringWithAggregatesFilter<"GlobalChatMessage"> | string
+    text?: StringWithAggregatesFilter<"GlobalChatMessage"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"GlobalChatMessage"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -11726,6 +13125,7 @@ export namespace Prisma {
     createdAt?: Date | string
     recvMessages?: MessageCreateNestedManyWithoutReceiverInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    globalMessages?: GlobalChatMessageCreateNestedManyWithoutSenderInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -11748,6 +13148,7 @@ export namespace Prisma {
     createdAt?: Date | string
     recvMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    globalMessages?: GlobalChatMessageUncheckedCreateNestedManyWithoutSenderInput
   }
 
   export type UserUpdateInput = {
@@ -11770,6 +13171,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recvMessages?: MessageUpdateManyWithoutReceiverNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    globalMessages?: GlobalChatMessageUpdateManyWithoutSenderNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -11792,6 +13194,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recvMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    globalMessages?: GlobalChatMessageUncheckedUpdateManyWithoutSenderNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -12233,43 +13636,108 @@ export namespace Prisma {
   export type GlobalChatsCreateInput = {
     id?: string
     roomName: string
+    roomImage?: string | null
     memberLists?: GlobalChatsCreatememberListsInput | string[]
+    messages?: GlobalChatMessageCreateNestedManyWithoutRoomInput
   }
 
   export type GlobalChatsUncheckedCreateInput = {
     id?: string
     roomName: string
+    roomImage?: string | null
     memberLists?: GlobalChatsCreatememberListsInput | string[]
+    messages?: GlobalChatMessageUncheckedCreateNestedManyWithoutRoomInput
   }
 
   export type GlobalChatsUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     roomName?: StringFieldUpdateOperationsInput | string
+    roomImage?: NullableStringFieldUpdateOperationsInput | string | null
     memberLists?: GlobalChatsUpdatememberListsInput | string[]
+    messages?: GlobalChatMessageUpdateManyWithoutRoomNestedInput
   }
 
   export type GlobalChatsUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     roomName?: StringFieldUpdateOperationsInput | string
+    roomImage?: NullableStringFieldUpdateOperationsInput | string | null
     memberLists?: GlobalChatsUpdatememberListsInput | string[]
+    messages?: GlobalChatMessageUncheckedUpdateManyWithoutRoomNestedInput
   }
 
   export type GlobalChatsCreateManyInput = {
     id?: string
     roomName: string
+    roomImage?: string | null
     memberLists?: GlobalChatsCreatememberListsInput | string[]
   }
 
   export type GlobalChatsUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     roomName?: StringFieldUpdateOperationsInput | string
+    roomImage?: NullableStringFieldUpdateOperationsInput | string | null
     memberLists?: GlobalChatsUpdatememberListsInput | string[]
   }
 
   export type GlobalChatsUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     roomName?: StringFieldUpdateOperationsInput | string
+    roomImage?: NullableStringFieldUpdateOperationsInput | string | null
     memberLists?: GlobalChatsUpdatememberListsInput | string[]
+  }
+
+  export type GlobalChatMessageCreateInput = {
+    id?: string
+    text: string
+    createdAt?: Date | string
+    sender: UserCreateNestedOneWithoutGlobalMessagesInput
+    room: GlobalChatsCreateNestedOneWithoutMessagesInput
+  }
+
+  export type GlobalChatMessageUncheckedCreateInput = {
+    id?: string
+    roomId: string
+    senderId: string
+    text: string
+    createdAt?: Date | string
+  }
+
+  export type GlobalChatMessageUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sender?: UserUpdateOneRequiredWithoutGlobalMessagesNestedInput
+    room?: GlobalChatsUpdateOneRequiredWithoutMessagesNestedInput
+  }
+
+  export type GlobalChatMessageUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roomId?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GlobalChatMessageCreateManyInput = {
+    id?: string
+    roomId: string
+    senderId: string
+    text: string
+    createdAt?: Date | string
+  }
+
+  export type GlobalChatMessageUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GlobalChatMessageUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roomId?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -12338,12 +13806,22 @@ export namespace Prisma {
     none?: MessageWhereInput
   }
 
+  export type GlobalChatMessageListRelationFilter = {
+    every?: GlobalChatMessageWhereInput
+    some?: GlobalChatMessageWhereInput
+    none?: GlobalChatMessageWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
   }
 
   export type MessageOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type GlobalChatMessageOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -12719,17 +14197,49 @@ export namespace Prisma {
   export type GlobalChatsCountOrderByAggregateInput = {
     id?: SortOrder
     roomName?: SortOrder
+    roomImage?: SortOrder
     memberLists?: SortOrder
   }
 
   export type GlobalChatsMaxOrderByAggregateInput = {
     id?: SortOrder
     roomName?: SortOrder
+    roomImage?: SortOrder
   }
 
   export type GlobalChatsMinOrderByAggregateInput = {
     id?: SortOrder
     roomName?: SortOrder
+    roomImage?: SortOrder
+  }
+
+  export type GlobalChatsScalarRelationFilter = {
+    is?: GlobalChatsWhereInput
+    isNot?: GlobalChatsWhereInput
+  }
+
+  export type GlobalChatMessageCountOrderByAggregateInput = {
+    id?: SortOrder
+    roomId?: SortOrder
+    senderId?: SortOrder
+    text?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type GlobalChatMessageMaxOrderByAggregateInput = {
+    id?: SortOrder
+    roomId?: SortOrder
+    senderId?: SortOrder
+    text?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type GlobalChatMessageMinOrderByAggregateInput = {
+    id?: SortOrder
+    roomId?: SortOrder
+    senderId?: SortOrder
+    text?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type UserCreateinterestInput = {
@@ -12754,6 +14264,13 @@ export namespace Prisma {
     connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
   }
 
+  export type GlobalChatMessageCreateNestedManyWithoutSenderInput = {
+    create?: XOR<GlobalChatMessageCreateWithoutSenderInput, GlobalChatMessageUncheckedCreateWithoutSenderInput> | GlobalChatMessageCreateWithoutSenderInput[] | GlobalChatMessageUncheckedCreateWithoutSenderInput[]
+    connectOrCreate?: GlobalChatMessageCreateOrConnectWithoutSenderInput | GlobalChatMessageCreateOrConnectWithoutSenderInput[]
+    createMany?: GlobalChatMessageCreateManySenderInputEnvelope
+    connect?: GlobalChatMessageWhereUniqueInput | GlobalChatMessageWhereUniqueInput[]
+  }
+
   export type MessageUncheckedCreateNestedManyWithoutReceiverInput = {
     create?: XOR<MessageCreateWithoutReceiverInput, MessageUncheckedCreateWithoutReceiverInput> | MessageCreateWithoutReceiverInput[] | MessageUncheckedCreateWithoutReceiverInput[]
     connectOrCreate?: MessageCreateOrConnectWithoutReceiverInput | MessageCreateOrConnectWithoutReceiverInput[]
@@ -12766,6 +14283,13 @@ export namespace Prisma {
     connectOrCreate?: MessageCreateOrConnectWithoutSenderInput | MessageCreateOrConnectWithoutSenderInput[]
     createMany?: MessageCreateManySenderInputEnvelope
     connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  }
+
+  export type GlobalChatMessageUncheckedCreateNestedManyWithoutSenderInput = {
+    create?: XOR<GlobalChatMessageCreateWithoutSenderInput, GlobalChatMessageUncheckedCreateWithoutSenderInput> | GlobalChatMessageCreateWithoutSenderInput[] | GlobalChatMessageUncheckedCreateWithoutSenderInput[]
+    connectOrCreate?: GlobalChatMessageCreateOrConnectWithoutSenderInput | GlobalChatMessageCreateOrConnectWithoutSenderInput[]
+    createMany?: GlobalChatMessageCreateManySenderInputEnvelope
+    connect?: GlobalChatMessageWhereUniqueInput | GlobalChatMessageWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -12822,6 +14346,20 @@ export namespace Prisma {
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
   }
 
+  export type GlobalChatMessageUpdateManyWithoutSenderNestedInput = {
+    create?: XOR<GlobalChatMessageCreateWithoutSenderInput, GlobalChatMessageUncheckedCreateWithoutSenderInput> | GlobalChatMessageCreateWithoutSenderInput[] | GlobalChatMessageUncheckedCreateWithoutSenderInput[]
+    connectOrCreate?: GlobalChatMessageCreateOrConnectWithoutSenderInput | GlobalChatMessageCreateOrConnectWithoutSenderInput[]
+    upsert?: GlobalChatMessageUpsertWithWhereUniqueWithoutSenderInput | GlobalChatMessageUpsertWithWhereUniqueWithoutSenderInput[]
+    createMany?: GlobalChatMessageCreateManySenderInputEnvelope
+    set?: GlobalChatMessageWhereUniqueInput | GlobalChatMessageWhereUniqueInput[]
+    disconnect?: GlobalChatMessageWhereUniqueInput | GlobalChatMessageWhereUniqueInput[]
+    delete?: GlobalChatMessageWhereUniqueInput | GlobalChatMessageWhereUniqueInput[]
+    connect?: GlobalChatMessageWhereUniqueInput | GlobalChatMessageWhereUniqueInput[]
+    update?: GlobalChatMessageUpdateWithWhereUniqueWithoutSenderInput | GlobalChatMessageUpdateWithWhereUniqueWithoutSenderInput[]
+    updateMany?: GlobalChatMessageUpdateManyWithWhereWithoutSenderInput | GlobalChatMessageUpdateManyWithWhereWithoutSenderInput[]
+    deleteMany?: GlobalChatMessageScalarWhereInput | GlobalChatMessageScalarWhereInput[]
+  }
+
   export type MessageUncheckedUpdateManyWithoutReceiverNestedInput = {
     create?: XOR<MessageCreateWithoutReceiverInput, MessageUncheckedCreateWithoutReceiverInput> | MessageCreateWithoutReceiverInput[] | MessageUncheckedCreateWithoutReceiverInput[]
     connectOrCreate?: MessageCreateOrConnectWithoutReceiverInput | MessageCreateOrConnectWithoutReceiverInput[]
@@ -12848,6 +14386,20 @@ export namespace Prisma {
     update?: MessageUpdateWithWhereUniqueWithoutSenderInput | MessageUpdateWithWhereUniqueWithoutSenderInput[]
     updateMany?: MessageUpdateManyWithWhereWithoutSenderInput | MessageUpdateManyWithWhereWithoutSenderInput[]
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  }
+
+  export type GlobalChatMessageUncheckedUpdateManyWithoutSenderNestedInput = {
+    create?: XOR<GlobalChatMessageCreateWithoutSenderInput, GlobalChatMessageUncheckedCreateWithoutSenderInput> | GlobalChatMessageCreateWithoutSenderInput[] | GlobalChatMessageUncheckedCreateWithoutSenderInput[]
+    connectOrCreate?: GlobalChatMessageCreateOrConnectWithoutSenderInput | GlobalChatMessageCreateOrConnectWithoutSenderInput[]
+    upsert?: GlobalChatMessageUpsertWithWhereUniqueWithoutSenderInput | GlobalChatMessageUpsertWithWhereUniqueWithoutSenderInput[]
+    createMany?: GlobalChatMessageCreateManySenderInputEnvelope
+    set?: GlobalChatMessageWhereUniqueInput | GlobalChatMessageWhereUniqueInput[]
+    disconnect?: GlobalChatMessageWhereUniqueInput | GlobalChatMessageWhereUniqueInput[]
+    delete?: GlobalChatMessageWhereUniqueInput | GlobalChatMessageWhereUniqueInput[]
+    connect?: GlobalChatMessageWhereUniqueInput | GlobalChatMessageWhereUniqueInput[]
+    update?: GlobalChatMessageUpdateWithWhereUniqueWithoutSenderInput | GlobalChatMessageUpdateWithWhereUniqueWithoutSenderInput[]
+    updateMany?: GlobalChatMessageUpdateManyWithWhereWithoutSenderInput | GlobalChatMessageUpdateManyWithWhereWithoutSenderInput[]
+    deleteMany?: GlobalChatMessageScalarWhereInput | GlobalChatMessageScalarWhereInput[]
   }
 
   export type NullableBoolFieldUpdateOperationsInput = {
@@ -12916,9 +14468,79 @@ export namespace Prisma {
     set: string[]
   }
 
+  export type GlobalChatMessageCreateNestedManyWithoutRoomInput = {
+    create?: XOR<GlobalChatMessageCreateWithoutRoomInput, GlobalChatMessageUncheckedCreateWithoutRoomInput> | GlobalChatMessageCreateWithoutRoomInput[] | GlobalChatMessageUncheckedCreateWithoutRoomInput[]
+    connectOrCreate?: GlobalChatMessageCreateOrConnectWithoutRoomInput | GlobalChatMessageCreateOrConnectWithoutRoomInput[]
+    createMany?: GlobalChatMessageCreateManyRoomInputEnvelope
+    connect?: GlobalChatMessageWhereUniqueInput | GlobalChatMessageWhereUniqueInput[]
+  }
+
+  export type GlobalChatMessageUncheckedCreateNestedManyWithoutRoomInput = {
+    create?: XOR<GlobalChatMessageCreateWithoutRoomInput, GlobalChatMessageUncheckedCreateWithoutRoomInput> | GlobalChatMessageCreateWithoutRoomInput[] | GlobalChatMessageUncheckedCreateWithoutRoomInput[]
+    connectOrCreate?: GlobalChatMessageCreateOrConnectWithoutRoomInput | GlobalChatMessageCreateOrConnectWithoutRoomInput[]
+    createMany?: GlobalChatMessageCreateManyRoomInputEnvelope
+    connect?: GlobalChatMessageWhereUniqueInput | GlobalChatMessageWhereUniqueInput[]
+  }
+
   export type GlobalChatsUpdatememberListsInput = {
     set?: string[]
     push?: string | string[]
+  }
+
+  export type GlobalChatMessageUpdateManyWithoutRoomNestedInput = {
+    create?: XOR<GlobalChatMessageCreateWithoutRoomInput, GlobalChatMessageUncheckedCreateWithoutRoomInput> | GlobalChatMessageCreateWithoutRoomInput[] | GlobalChatMessageUncheckedCreateWithoutRoomInput[]
+    connectOrCreate?: GlobalChatMessageCreateOrConnectWithoutRoomInput | GlobalChatMessageCreateOrConnectWithoutRoomInput[]
+    upsert?: GlobalChatMessageUpsertWithWhereUniqueWithoutRoomInput | GlobalChatMessageUpsertWithWhereUniqueWithoutRoomInput[]
+    createMany?: GlobalChatMessageCreateManyRoomInputEnvelope
+    set?: GlobalChatMessageWhereUniqueInput | GlobalChatMessageWhereUniqueInput[]
+    disconnect?: GlobalChatMessageWhereUniqueInput | GlobalChatMessageWhereUniqueInput[]
+    delete?: GlobalChatMessageWhereUniqueInput | GlobalChatMessageWhereUniqueInput[]
+    connect?: GlobalChatMessageWhereUniqueInput | GlobalChatMessageWhereUniqueInput[]
+    update?: GlobalChatMessageUpdateWithWhereUniqueWithoutRoomInput | GlobalChatMessageUpdateWithWhereUniqueWithoutRoomInput[]
+    updateMany?: GlobalChatMessageUpdateManyWithWhereWithoutRoomInput | GlobalChatMessageUpdateManyWithWhereWithoutRoomInput[]
+    deleteMany?: GlobalChatMessageScalarWhereInput | GlobalChatMessageScalarWhereInput[]
+  }
+
+  export type GlobalChatMessageUncheckedUpdateManyWithoutRoomNestedInput = {
+    create?: XOR<GlobalChatMessageCreateWithoutRoomInput, GlobalChatMessageUncheckedCreateWithoutRoomInput> | GlobalChatMessageCreateWithoutRoomInput[] | GlobalChatMessageUncheckedCreateWithoutRoomInput[]
+    connectOrCreate?: GlobalChatMessageCreateOrConnectWithoutRoomInput | GlobalChatMessageCreateOrConnectWithoutRoomInput[]
+    upsert?: GlobalChatMessageUpsertWithWhereUniqueWithoutRoomInput | GlobalChatMessageUpsertWithWhereUniqueWithoutRoomInput[]
+    createMany?: GlobalChatMessageCreateManyRoomInputEnvelope
+    set?: GlobalChatMessageWhereUniqueInput | GlobalChatMessageWhereUniqueInput[]
+    disconnect?: GlobalChatMessageWhereUniqueInput | GlobalChatMessageWhereUniqueInput[]
+    delete?: GlobalChatMessageWhereUniqueInput | GlobalChatMessageWhereUniqueInput[]
+    connect?: GlobalChatMessageWhereUniqueInput | GlobalChatMessageWhereUniqueInput[]
+    update?: GlobalChatMessageUpdateWithWhereUniqueWithoutRoomInput | GlobalChatMessageUpdateWithWhereUniqueWithoutRoomInput[]
+    updateMany?: GlobalChatMessageUpdateManyWithWhereWithoutRoomInput | GlobalChatMessageUpdateManyWithWhereWithoutRoomInput[]
+    deleteMany?: GlobalChatMessageScalarWhereInput | GlobalChatMessageScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutGlobalMessagesInput = {
+    create?: XOR<UserCreateWithoutGlobalMessagesInput, UserUncheckedCreateWithoutGlobalMessagesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutGlobalMessagesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type GlobalChatsCreateNestedOneWithoutMessagesInput = {
+    create?: XOR<GlobalChatsCreateWithoutMessagesInput, GlobalChatsUncheckedCreateWithoutMessagesInput>
+    connectOrCreate?: GlobalChatsCreateOrConnectWithoutMessagesInput
+    connect?: GlobalChatsWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutGlobalMessagesNestedInput = {
+    create?: XOR<UserCreateWithoutGlobalMessagesInput, UserUncheckedCreateWithoutGlobalMessagesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutGlobalMessagesInput
+    upsert?: UserUpsertWithoutGlobalMessagesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutGlobalMessagesInput, UserUpdateWithoutGlobalMessagesInput>, UserUncheckedUpdateWithoutGlobalMessagesInput>
+  }
+
+  export type GlobalChatsUpdateOneRequiredWithoutMessagesNestedInput = {
+    create?: XOR<GlobalChatsCreateWithoutMessagesInput, GlobalChatsUncheckedCreateWithoutMessagesInput>
+    connectOrCreate?: GlobalChatsCreateOrConnectWithoutMessagesInput
+    upsert?: GlobalChatsUpsertWithoutMessagesInput
+    connect?: GlobalChatsWhereUniqueInput
+    update?: XOR<XOR<GlobalChatsUpdateToOneWithWhereWithoutMessagesInput, GlobalChatsUpdateWithoutMessagesInput>, GlobalChatsUncheckedUpdateWithoutMessagesInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -13160,6 +14782,30 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type GlobalChatMessageCreateWithoutSenderInput = {
+    id?: string
+    text: string
+    createdAt?: Date | string
+    room: GlobalChatsCreateNestedOneWithoutMessagesInput
+  }
+
+  export type GlobalChatMessageUncheckedCreateWithoutSenderInput = {
+    id?: string
+    roomId: string
+    text: string
+    createdAt?: Date | string
+  }
+
+  export type GlobalChatMessageCreateOrConnectWithoutSenderInput = {
+    where: GlobalChatMessageWhereUniqueInput
+    create: XOR<GlobalChatMessageCreateWithoutSenderInput, GlobalChatMessageUncheckedCreateWithoutSenderInput>
+  }
+
+  export type GlobalChatMessageCreateManySenderInputEnvelope = {
+    data: GlobalChatMessageCreateManySenderInput | GlobalChatMessageCreateManySenderInput[]
+    skipDuplicates?: boolean
+  }
+
   export type MessageUpsertWithWhereUniqueWithoutReceiverInput = {
     where: MessageWhereUniqueInput
     update: XOR<MessageUpdateWithoutReceiverInput, MessageUncheckedUpdateWithoutReceiverInput>
@@ -13204,6 +14850,33 @@ export namespace Prisma {
     data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyWithoutSenderInput>
   }
 
+  export type GlobalChatMessageUpsertWithWhereUniqueWithoutSenderInput = {
+    where: GlobalChatMessageWhereUniqueInput
+    update: XOR<GlobalChatMessageUpdateWithoutSenderInput, GlobalChatMessageUncheckedUpdateWithoutSenderInput>
+    create: XOR<GlobalChatMessageCreateWithoutSenderInput, GlobalChatMessageUncheckedCreateWithoutSenderInput>
+  }
+
+  export type GlobalChatMessageUpdateWithWhereUniqueWithoutSenderInput = {
+    where: GlobalChatMessageWhereUniqueInput
+    data: XOR<GlobalChatMessageUpdateWithoutSenderInput, GlobalChatMessageUncheckedUpdateWithoutSenderInput>
+  }
+
+  export type GlobalChatMessageUpdateManyWithWhereWithoutSenderInput = {
+    where: GlobalChatMessageScalarWhereInput
+    data: XOR<GlobalChatMessageUpdateManyMutationInput, GlobalChatMessageUncheckedUpdateManyWithoutSenderInput>
+  }
+
+  export type GlobalChatMessageScalarWhereInput = {
+    AND?: GlobalChatMessageScalarWhereInput | GlobalChatMessageScalarWhereInput[]
+    OR?: GlobalChatMessageScalarWhereInput[]
+    NOT?: GlobalChatMessageScalarWhereInput | GlobalChatMessageScalarWhereInput[]
+    id?: StringFilter<"GlobalChatMessage"> | string
+    roomId?: StringFilter<"GlobalChatMessage"> | string
+    senderId?: StringFilter<"GlobalChatMessage"> | string
+    text?: StringFilter<"GlobalChatMessage"> | string
+    createdAt?: DateTimeFilter<"GlobalChatMessage"> | Date | string
+  }
+
   export type UserCreateWithoutRecvMessagesInput = {
     id?: string
     fullName: string
@@ -13223,6 +14896,7 @@ export namespace Prisma {
     facebook?: string | null
     createdAt?: Date | string
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    globalMessages?: GlobalChatMessageCreateNestedManyWithoutSenderInput
   }
 
   export type UserUncheckedCreateWithoutRecvMessagesInput = {
@@ -13244,6 +14918,7 @@ export namespace Prisma {
     facebook?: string | null
     createdAt?: Date | string
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    globalMessages?: GlobalChatMessageUncheckedCreateNestedManyWithoutSenderInput
   }
 
   export type UserCreateOrConnectWithoutRecvMessagesInput = {
@@ -13270,6 +14945,7 @@ export namespace Prisma {
     facebook?: string | null
     createdAt?: Date | string
     recvMessages?: MessageCreateNestedManyWithoutReceiverInput
+    globalMessages?: GlobalChatMessageCreateNestedManyWithoutSenderInput
   }
 
   export type UserUncheckedCreateWithoutSentMessagesInput = {
@@ -13291,6 +14967,7 @@ export namespace Prisma {
     facebook?: string | null
     createdAt?: Date | string
     recvMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
+    globalMessages?: GlobalChatMessageUncheckedCreateNestedManyWithoutSenderInput
   }
 
   export type UserCreateOrConnectWithoutSentMessagesInput = {
@@ -13328,6 +15005,7 @@ export namespace Prisma {
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    globalMessages?: GlobalChatMessageUpdateManyWithoutSenderNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRecvMessagesInput = {
@@ -13349,6 +15027,7 @@ export namespace Prisma {
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    globalMessages?: GlobalChatMessageUncheckedUpdateManyWithoutSenderNestedInput
   }
 
   export type UserUpsertWithoutSentMessagesInput = {
@@ -13381,6 +15060,7 @@ export namespace Prisma {
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recvMessages?: MessageUpdateManyWithoutReceiverNestedInput
+    globalMessages?: GlobalChatMessageUpdateManyWithoutSenderNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSentMessagesInput = {
@@ -13402,6 +15082,195 @@ export namespace Prisma {
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recvMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
+    globalMessages?: GlobalChatMessageUncheckedUpdateManyWithoutSenderNestedInput
+  }
+
+  export type GlobalChatMessageCreateWithoutRoomInput = {
+    id?: string
+    text: string
+    createdAt?: Date | string
+    sender: UserCreateNestedOneWithoutGlobalMessagesInput
+  }
+
+  export type GlobalChatMessageUncheckedCreateWithoutRoomInput = {
+    id?: string
+    senderId: string
+    text: string
+    createdAt?: Date | string
+  }
+
+  export type GlobalChatMessageCreateOrConnectWithoutRoomInput = {
+    where: GlobalChatMessageWhereUniqueInput
+    create: XOR<GlobalChatMessageCreateWithoutRoomInput, GlobalChatMessageUncheckedCreateWithoutRoomInput>
+  }
+
+  export type GlobalChatMessageCreateManyRoomInputEnvelope = {
+    data: GlobalChatMessageCreateManyRoomInput | GlobalChatMessageCreateManyRoomInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GlobalChatMessageUpsertWithWhereUniqueWithoutRoomInput = {
+    where: GlobalChatMessageWhereUniqueInput
+    update: XOR<GlobalChatMessageUpdateWithoutRoomInput, GlobalChatMessageUncheckedUpdateWithoutRoomInput>
+    create: XOR<GlobalChatMessageCreateWithoutRoomInput, GlobalChatMessageUncheckedCreateWithoutRoomInput>
+  }
+
+  export type GlobalChatMessageUpdateWithWhereUniqueWithoutRoomInput = {
+    where: GlobalChatMessageWhereUniqueInput
+    data: XOR<GlobalChatMessageUpdateWithoutRoomInput, GlobalChatMessageUncheckedUpdateWithoutRoomInput>
+  }
+
+  export type GlobalChatMessageUpdateManyWithWhereWithoutRoomInput = {
+    where: GlobalChatMessageScalarWhereInput
+    data: XOR<GlobalChatMessageUpdateManyMutationInput, GlobalChatMessageUncheckedUpdateManyWithoutRoomInput>
+  }
+
+  export type UserCreateWithoutGlobalMessagesInput = {
+    id?: string
+    fullName: string
+    email: string
+    password?: string | null
+    googleId?: string | null
+    bio?: string | null
+    avatar?: string | null
+    birthday?: Date | string | null
+    gender?: string | null
+    mood?: string | null
+    avatar2?: string | null
+    purpose?: string | null
+    interest?: UserCreateinterestInput | string[]
+    images?: UserCreateimagesInput | string[]
+    instagram?: string | null
+    facebook?: string | null
+    createdAt?: Date | string
+    recvMessages?: MessageCreateNestedManyWithoutReceiverInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+  }
+
+  export type UserUncheckedCreateWithoutGlobalMessagesInput = {
+    id?: string
+    fullName: string
+    email: string
+    password?: string | null
+    googleId?: string | null
+    bio?: string | null
+    avatar?: string | null
+    birthday?: Date | string | null
+    gender?: string | null
+    mood?: string | null
+    avatar2?: string | null
+    purpose?: string | null
+    interest?: UserCreateinterestInput | string[]
+    images?: UserCreateimagesInput | string[]
+    instagram?: string | null
+    facebook?: string | null
+    createdAt?: Date | string
+    recvMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+  }
+
+  export type UserCreateOrConnectWithoutGlobalMessagesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutGlobalMessagesInput, UserUncheckedCreateWithoutGlobalMessagesInput>
+  }
+
+  export type GlobalChatsCreateWithoutMessagesInput = {
+    id?: string
+    roomName: string
+    roomImage?: string | null
+    memberLists?: GlobalChatsCreatememberListsInput | string[]
+  }
+
+  export type GlobalChatsUncheckedCreateWithoutMessagesInput = {
+    id?: string
+    roomName: string
+    roomImage?: string | null
+    memberLists?: GlobalChatsCreatememberListsInput | string[]
+  }
+
+  export type GlobalChatsCreateOrConnectWithoutMessagesInput = {
+    where: GlobalChatsWhereUniqueInput
+    create: XOR<GlobalChatsCreateWithoutMessagesInput, GlobalChatsUncheckedCreateWithoutMessagesInput>
+  }
+
+  export type UserUpsertWithoutGlobalMessagesInput = {
+    update: XOR<UserUpdateWithoutGlobalMessagesInput, UserUncheckedUpdateWithoutGlobalMessagesInput>
+    create: XOR<UserCreateWithoutGlobalMessagesInput, UserUncheckedCreateWithoutGlobalMessagesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutGlobalMessagesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutGlobalMessagesInput, UserUncheckedUpdateWithoutGlobalMessagesInput>
+  }
+
+  export type UserUpdateWithoutGlobalMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    mood?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
+    purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: UserUpdateinterestInput | string[]
+    images?: UserUpdateimagesInput | string[]
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    recvMessages?: MessageUpdateManyWithoutReceiverNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutGlobalMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    mood?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
+    purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: UserUpdateinterestInput | string[]
+    images?: UserUpdateimagesInput | string[]
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    recvMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+  }
+
+  export type GlobalChatsUpsertWithoutMessagesInput = {
+    update: XOR<GlobalChatsUpdateWithoutMessagesInput, GlobalChatsUncheckedUpdateWithoutMessagesInput>
+    create: XOR<GlobalChatsCreateWithoutMessagesInput, GlobalChatsUncheckedCreateWithoutMessagesInput>
+    where?: GlobalChatsWhereInput
+  }
+
+  export type GlobalChatsUpdateToOneWithWhereWithoutMessagesInput = {
+    where?: GlobalChatsWhereInput
+    data: XOR<GlobalChatsUpdateWithoutMessagesInput, GlobalChatsUncheckedUpdateWithoutMessagesInput>
+  }
+
+  export type GlobalChatsUpdateWithoutMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roomName?: StringFieldUpdateOperationsInput | string
+    roomImage?: NullableStringFieldUpdateOperationsInput | string | null
+    memberLists?: GlobalChatsUpdatememberListsInput | string[]
+  }
+
+  export type GlobalChatsUncheckedUpdateWithoutMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roomName?: StringFieldUpdateOperationsInput | string
+    roomImage?: NullableStringFieldUpdateOperationsInput | string | null
+    memberLists?: GlobalChatsUpdatememberListsInput | string[]
   }
 
   export type MessageCreateManyReceiverInput = {
@@ -13418,6 +15287,13 @@ export namespace Prisma {
     text: string
     createdAt?: Date | string
     seen?: boolean
+  }
+
+  export type GlobalChatMessageCreateManySenderInput = {
+    id?: string
+    roomId: string
+    text: string
+    createdAt?: Date | string
   }
 
   export type MessageUpdateWithoutReceiverInput = {
@@ -13466,6 +15342,55 @@ export namespace Prisma {
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     seen?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type GlobalChatMessageUpdateWithoutSenderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    room?: GlobalChatsUpdateOneRequiredWithoutMessagesNestedInput
+  }
+
+  export type GlobalChatMessageUncheckedUpdateWithoutSenderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roomId?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GlobalChatMessageUncheckedUpdateManyWithoutSenderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roomId?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GlobalChatMessageCreateManyRoomInput = {
+    id?: string
+    senderId: string
+    text: string
+    createdAt?: Date | string
+  }
+
+  export type GlobalChatMessageUpdateWithoutRoomInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sender?: UserUpdateOneRequiredWithoutGlobalMessagesNestedInput
+  }
+
+  export type GlobalChatMessageUncheckedUpdateWithoutRoomInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GlobalChatMessageUncheckedUpdateManyWithoutRoomInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

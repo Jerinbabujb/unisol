@@ -6,6 +6,8 @@ import userRouter from "./routes/userRoutes.js";
 import messageRouter from "./routes/messageRoutes.js";
 import { Server } from "socket.io";
 import gamesRouter from "./routes/gamesRoutes.js";
+import prisma from "./config/prisma.js";
+import { text } from "stream/consumers";
 
 const app=express();
 const server= http.createServer(app);
@@ -88,6 +90,25 @@ socket.on("music-rejected", ({ to }) => {
       console.log("❌ RECEIVER OFFLINE:", to);
     }
   });
+
+
+  /* ---------------- GROUP CHAT  ---------------- */
+
+  socket.on('join-room',(roomid)=>{
+    socket.join(roomid);
+    console.log("user joined room",roomid);
+  });
+  socket.on("send_room_message",async ({roomId,senderId,text})=>{
+    const message= await prisma.globalChatMessage.create({
+      data:{
+        roomId,
+        senderId,
+        text
+      }
+    });
+    io.to(roomId).emit("new_room_message",message);
+  })
+
 });
 
 

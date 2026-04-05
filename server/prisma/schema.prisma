@@ -30,6 +30,7 @@ model User {
   createdAt    DateTime  @default(now())
   recvMessages Message[] @relation("received")
   sentMessages Message[] @relation("sent")
+   globalMessages GlobalChatMessage[] @relation("UserGlobalMessages")
 
 }
 model privacy{
@@ -101,5 +102,18 @@ model Scoring{
 model GlobalChats{
   id     String @id @default(uuid())
   roomName  String @unique
+  roomImage  String?
   memberLists  String[] @default([])
+  messages    GlobalChatMessage[]
+}
+
+
+model GlobalChatMessage {
+  id        String   @id @default(uuid())
+  roomId    String
+  senderId  String
+  text      String
+  createdAt DateTime @default(now())
+  sender    User        @relation("UserGlobalMessages", fields: [senderId], references: [id])
+  room      GlobalChats @relation(fields: [roomId], references: [id])
 }

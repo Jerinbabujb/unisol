@@ -1,6 +1,6 @@
 import e from "express";
 import { protectRoute } from "../middleware/auth.js";
-import { allSongs, connectionRequest, freindRequestCheck, getMessages, getUserForSidebar, getUsers, globalRoom, globalRoomJoin, markMessageAsSeen, privacy, privacyCheck, privacyToggle, requestCheck, sendMessage } from "../controllers/messageController.js";
+import { allSongs, connectionRequest, freindRequestCheck, getMessages, getRoomMessages, getUserForSidebar, getUsers, globalRoom, globalRoomJoin, globalRoomMembers, globalRoomSendMessage, markMessageAsSeen, privacy, privacyCheck, privacyToggle, requestCheck, sendMessage, userGlobalRoomExists } from "../controllers/messageController.js";
 
 
 const messageRouter=e.Router();
@@ -12,6 +12,10 @@ messageRouter.get("/freind-request",protectRoute,freindRequestCheck);
 messageRouter.post("/request",protectRoute,connectionRequest);
 messageRouter.get("/global-rooms",protectRoute,globalRoom);
 messageRouter.post("/joining",protectRoute,globalRoomJoin);
+messageRouter.get('/exists',protectRoute,userGlobalRoomExists);
+messageRouter.post('/members-lists',protectRoute,globalRoomMembers);
+messageRouter.post('/global-send',protectRoute,globalRoomSendMessage);
+messageRouter.post('/get-messages',protectRoute,getRoomMessages);
 messageRouter.get("/:id",protectRoute,getMessages);
 messageRouter.put("/mark/:id",protectRoute,markMessageAsSeen);
 messageRouter.post("/send/:id",protectRoute,sendMessage);
