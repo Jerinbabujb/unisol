@@ -63,6 +63,16 @@ export type GlobalChats = $Result.DefaultSelection<Prisma.$GlobalChatsPayload>
  * 
  */
 export type GlobalChatMessage = $Result.DefaultSelection<Prisma.$GlobalChatMessagePayload>
+/**
+ * Model PrivateRoom
+ * 
+ */
+export type PrivateRoom = $Result.DefaultSelection<Prisma.$PrivateRoomPayload>
+/**
+ * Model PrivateRoomMessage
+ * 
+ */
+export type PrivateRoomMessage = $Result.DefaultSelection<Prisma.$PrivateRoomMessagePayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -284,6 +294,26 @@ export class PrismaClient<
     * ```
     */
   get globalChatMessage(): Prisma.GlobalChatMessageDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.privateRoom`: Exposes CRUD operations for the **PrivateRoom** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PrivateRooms
+    * const privateRooms = await prisma.privateRoom.findMany()
+    * ```
+    */
+  get privateRoom(): Prisma.PrivateRoomDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.privateRoomMessage`: Exposes CRUD operations for the **PrivateRoomMessage** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PrivateRoomMessages
+    * const privateRoomMessages = await prisma.privateRoomMessage.findMany()
+    * ```
+    */
+  get privateRoomMessage(): Prisma.PrivateRoomMessageDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -727,7 +757,9 @@ export namespace Prisma {
     EmojiCharades: 'EmojiCharades',
     Scoring: 'Scoring',
     GlobalChats: 'GlobalChats',
-    GlobalChatMessage: 'GlobalChatMessage'
+    GlobalChatMessage: 'GlobalChatMessage',
+    PrivateRoom: 'PrivateRoom',
+    PrivateRoomMessage: 'PrivateRoomMessage'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -743,7 +775,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "privacy" | "song" | "message" | "connection" | "games" | "emojiCharades" | "scoring" | "globalChats" | "globalChatMessage"
+      modelProps: "user" | "privacy" | "song" | "message" | "connection" | "games" | "emojiCharades" | "scoring" | "globalChats" | "globalChatMessage" | "privateRoom" | "privateRoomMessage"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1487,6 +1519,154 @@ export namespace Prisma {
           }
         }
       }
+      PrivateRoom: {
+        payload: Prisma.$PrivateRoomPayload<ExtArgs>
+        fields: Prisma.PrivateRoomFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PrivateRoomFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrivateRoomPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PrivateRoomFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrivateRoomPayload>
+          }
+          findFirst: {
+            args: Prisma.PrivateRoomFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrivateRoomPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PrivateRoomFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrivateRoomPayload>
+          }
+          findMany: {
+            args: Prisma.PrivateRoomFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrivateRoomPayload>[]
+          }
+          create: {
+            args: Prisma.PrivateRoomCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrivateRoomPayload>
+          }
+          createMany: {
+            args: Prisma.PrivateRoomCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PrivateRoomCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrivateRoomPayload>[]
+          }
+          delete: {
+            args: Prisma.PrivateRoomDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrivateRoomPayload>
+          }
+          update: {
+            args: Prisma.PrivateRoomUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrivateRoomPayload>
+          }
+          deleteMany: {
+            args: Prisma.PrivateRoomDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PrivateRoomUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PrivateRoomUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrivateRoomPayload>[]
+          }
+          upsert: {
+            args: Prisma.PrivateRoomUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrivateRoomPayload>
+          }
+          aggregate: {
+            args: Prisma.PrivateRoomAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePrivateRoom>
+          }
+          groupBy: {
+            args: Prisma.PrivateRoomGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PrivateRoomGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PrivateRoomCountArgs<ExtArgs>
+            result: $Utils.Optional<PrivateRoomCountAggregateOutputType> | number
+          }
+        }
+      }
+      PrivateRoomMessage: {
+        payload: Prisma.$PrivateRoomMessagePayload<ExtArgs>
+        fields: Prisma.PrivateRoomMessageFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PrivateRoomMessageFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrivateRoomMessagePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PrivateRoomMessageFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrivateRoomMessagePayload>
+          }
+          findFirst: {
+            args: Prisma.PrivateRoomMessageFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrivateRoomMessagePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PrivateRoomMessageFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrivateRoomMessagePayload>
+          }
+          findMany: {
+            args: Prisma.PrivateRoomMessageFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrivateRoomMessagePayload>[]
+          }
+          create: {
+            args: Prisma.PrivateRoomMessageCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrivateRoomMessagePayload>
+          }
+          createMany: {
+            args: Prisma.PrivateRoomMessageCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PrivateRoomMessageCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrivateRoomMessagePayload>[]
+          }
+          delete: {
+            args: Prisma.PrivateRoomMessageDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrivateRoomMessagePayload>
+          }
+          update: {
+            args: Prisma.PrivateRoomMessageUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrivateRoomMessagePayload>
+          }
+          deleteMany: {
+            args: Prisma.PrivateRoomMessageDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PrivateRoomMessageUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PrivateRoomMessageUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrivateRoomMessagePayload>[]
+          }
+          upsert: {
+            args: Prisma.PrivateRoomMessageUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrivateRoomMessagePayload>
+          }
+          aggregate: {
+            args: Prisma.PrivateRoomMessageAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePrivateRoomMessage>
+          }
+          groupBy: {
+            args: Prisma.PrivateRoomMessageGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PrivateRoomMessageGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PrivateRoomMessageCountArgs<ExtArgs>
+            result: $Utils.Optional<PrivateRoomMessageCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1605,6 +1785,8 @@ export namespace Prisma {
     scoring?: ScoringOmit
     globalChats?: GlobalChatsOmit
     globalChatMessage?: GlobalChatMessageOmit
+    privateRoom?: PrivateRoomOmit
+    privateRoomMessage?: PrivateRoomMessageOmit
   }
 
   /* Types for Logging */
@@ -1688,12 +1870,14 @@ export namespace Prisma {
     recvMessages: number
     sentMessages: number
     globalMessages: number
+    privateRoomMessages: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     recvMessages?: boolean | UserCountOutputTypeCountRecvMessagesArgs
     sentMessages?: boolean | UserCountOutputTypeCountSentMessagesArgs
     globalMessages?: boolean | UserCountOutputTypeCountGlobalMessagesArgs
+    privateRoomMessages?: boolean | UserCountOutputTypeCountPrivateRoomMessagesArgs
   }
 
   // Custom InputTypes
@@ -1728,6 +1912,13 @@ export namespace Prisma {
     where?: GlobalChatMessageWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountPrivateRoomMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PrivateRoomMessageWhereInput
+  }
+
 
   /**
    * Count Type GlobalChatsCountOutputType
@@ -1757,6 +1948,37 @@ export namespace Prisma {
    */
   export type GlobalChatsCountOutputTypeCountMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: GlobalChatMessageWhereInput
+  }
+
+
+  /**
+   * Count Type PrivateRoomCountOutputType
+   */
+
+  export type PrivateRoomCountOutputType = {
+    messages: number
+  }
+
+  export type PrivateRoomCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    messages?: boolean | PrivateRoomCountOutputTypeCountMessagesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PrivateRoomCountOutputType without action
+   */
+  export type PrivateRoomCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PrivateRoomCountOutputType
+     */
+    select?: PrivateRoomCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PrivateRoomCountOutputType without action
+   */
+  export type PrivateRoomCountOutputTypeCountMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PrivateRoomMessageWhereInput
   }
 
 
@@ -2019,6 +2241,7 @@ export namespace Prisma {
     recvMessages?: boolean | User$recvMessagesArgs<ExtArgs>
     sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
     globalMessages?: boolean | User$globalMessagesArgs<ExtArgs>
+    privateRoomMessages?: boolean | User$privateRoomMessagesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2087,6 +2310,7 @@ export namespace Prisma {
     recvMessages?: boolean | User$recvMessagesArgs<ExtArgs>
     sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
     globalMessages?: boolean | User$globalMessagesArgs<ExtArgs>
+    privateRoomMessages?: boolean | User$privateRoomMessagesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2098,6 +2322,7 @@ export namespace Prisma {
       recvMessages: Prisma.$MessagePayload<ExtArgs>[]
       sentMessages: Prisma.$MessagePayload<ExtArgs>[]
       globalMessages: Prisma.$GlobalChatMessagePayload<ExtArgs>[]
+      privateRoomMessages: Prisma.$PrivateRoomMessagePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2514,6 +2739,7 @@ export namespace Prisma {
     recvMessages<T extends User$recvMessagesArgs<ExtArgs> = {}>(args?: Subset<T, User$recvMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sentMessages<T extends User$sentMessagesArgs<ExtArgs> = {}>(args?: Subset<T, User$sentMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     globalMessages<T extends User$globalMessagesArgs<ExtArgs> = {}>(args?: Subset<T, User$globalMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GlobalChatMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    privateRoomMessages<T extends User$privateRoomMessagesArgs<ExtArgs> = {}>(args?: Subset<T, User$privateRoomMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PrivateRoomMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3022,6 +3248,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: GlobalChatMessageScalarFieldEnum | GlobalChatMessageScalarFieldEnum[]
+  }
+
+  /**
+   * User.privateRoomMessages
+   */
+  export type User$privateRoomMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PrivateRoomMessage
+     */
+    select?: PrivateRoomMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PrivateRoomMessage
+     */
+    omit?: PrivateRoomMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrivateRoomMessageInclude<ExtArgs> | null
+    where?: PrivateRoomMessageWhereInput
+    orderBy?: PrivateRoomMessageOrderByWithRelationInput | PrivateRoomMessageOrderByWithRelationInput[]
+    cursor?: PrivateRoomMessageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PrivateRoomMessageScalarFieldEnum | PrivateRoomMessageScalarFieldEnum[]
   }
 
   /**
@@ -12282,6 +12532,2174 @@ export namespace Prisma {
 
 
   /**
+   * Model PrivateRoom
+   */
+
+  export type AggregatePrivateRoom = {
+    _count: PrivateRoomCountAggregateOutputType | null
+    _min: PrivateRoomMinAggregateOutputType | null
+    _max: PrivateRoomMaxAggregateOutputType | null
+  }
+
+  export type PrivateRoomMinAggregateOutputType = {
+    id: string | null
+    createrId: string | null
+    roomName: string | null
+    roomImage: string | null
+    category: string | null
+    description: string | null
+  }
+
+  export type PrivateRoomMaxAggregateOutputType = {
+    id: string | null
+    createrId: string | null
+    roomName: string | null
+    roomImage: string | null
+    category: string | null
+    description: string | null
+  }
+
+  export type PrivateRoomCountAggregateOutputType = {
+    id: number
+    createrId: number
+    roomName: number
+    roomImage: number
+    category: number
+    description: number
+    memberLists: number
+    _all: number
+  }
+
+
+  export type PrivateRoomMinAggregateInputType = {
+    id?: true
+    createrId?: true
+    roomName?: true
+    roomImage?: true
+    category?: true
+    description?: true
+  }
+
+  export type PrivateRoomMaxAggregateInputType = {
+    id?: true
+    createrId?: true
+    roomName?: true
+    roomImage?: true
+    category?: true
+    description?: true
+  }
+
+  export type PrivateRoomCountAggregateInputType = {
+    id?: true
+    createrId?: true
+    roomName?: true
+    roomImage?: true
+    category?: true
+    description?: true
+    memberLists?: true
+    _all?: true
+  }
+
+  export type PrivateRoomAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PrivateRoom to aggregate.
+     */
+    where?: PrivateRoomWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PrivateRooms to fetch.
+     */
+    orderBy?: PrivateRoomOrderByWithRelationInput | PrivateRoomOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PrivateRoomWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PrivateRooms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PrivateRooms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PrivateRooms
+    **/
+    _count?: true | PrivateRoomCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PrivateRoomMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PrivateRoomMaxAggregateInputType
+  }
+
+  export type GetPrivateRoomAggregateType<T extends PrivateRoomAggregateArgs> = {
+        [P in keyof T & keyof AggregatePrivateRoom]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePrivateRoom[P]>
+      : GetScalarType<T[P], AggregatePrivateRoom[P]>
+  }
+
+
+
+
+  export type PrivateRoomGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PrivateRoomWhereInput
+    orderBy?: PrivateRoomOrderByWithAggregationInput | PrivateRoomOrderByWithAggregationInput[]
+    by: PrivateRoomScalarFieldEnum[] | PrivateRoomScalarFieldEnum
+    having?: PrivateRoomScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PrivateRoomCountAggregateInputType | true
+    _min?: PrivateRoomMinAggregateInputType
+    _max?: PrivateRoomMaxAggregateInputType
+  }
+
+  export type PrivateRoomGroupByOutputType = {
+    id: string
+    createrId: string
+    roomName: string
+    roomImage: string | null
+    category: string | null
+    description: string | null
+    memberLists: string[]
+    _count: PrivateRoomCountAggregateOutputType | null
+    _min: PrivateRoomMinAggregateOutputType | null
+    _max: PrivateRoomMaxAggregateOutputType | null
+  }
+
+  type GetPrivateRoomGroupByPayload<T extends PrivateRoomGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PrivateRoomGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PrivateRoomGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PrivateRoomGroupByOutputType[P]>
+            : GetScalarType<T[P], PrivateRoomGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PrivateRoomSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createrId?: boolean
+    roomName?: boolean
+    roomImage?: boolean
+    category?: boolean
+    description?: boolean
+    memberLists?: boolean
+    messages?: boolean | PrivateRoom$messagesArgs<ExtArgs>
+    _count?: boolean | PrivateRoomCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["privateRoom"]>
+
+  export type PrivateRoomSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createrId?: boolean
+    roomName?: boolean
+    roomImage?: boolean
+    category?: boolean
+    description?: boolean
+    memberLists?: boolean
+  }, ExtArgs["result"]["privateRoom"]>
+
+  export type PrivateRoomSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createrId?: boolean
+    roomName?: boolean
+    roomImage?: boolean
+    category?: boolean
+    description?: boolean
+    memberLists?: boolean
+  }, ExtArgs["result"]["privateRoom"]>
+
+  export type PrivateRoomSelectScalar = {
+    id?: boolean
+    createrId?: boolean
+    roomName?: boolean
+    roomImage?: boolean
+    category?: boolean
+    description?: boolean
+    memberLists?: boolean
+  }
+
+  export type PrivateRoomOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createrId" | "roomName" | "roomImage" | "category" | "description" | "memberLists", ExtArgs["result"]["privateRoom"]>
+  export type PrivateRoomInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    messages?: boolean | PrivateRoom$messagesArgs<ExtArgs>
+    _count?: boolean | PrivateRoomCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PrivateRoomIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type PrivateRoomIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $PrivateRoomPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PrivateRoom"
+    objects: {
+      messages: Prisma.$PrivateRoomMessagePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      createrId: string
+      roomName: string
+      roomImage: string | null
+      category: string | null
+      description: string | null
+      memberLists: string[]
+    }, ExtArgs["result"]["privateRoom"]>
+    composites: {}
+  }
+
+  type PrivateRoomGetPayload<S extends boolean | null | undefined | PrivateRoomDefaultArgs> = $Result.GetResult<Prisma.$PrivateRoomPayload, S>
+
+  type PrivateRoomCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PrivateRoomFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PrivateRoomCountAggregateInputType | true
+    }
+
+  export interface PrivateRoomDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PrivateRoom'], meta: { name: 'PrivateRoom' } }
+    /**
+     * Find zero or one PrivateRoom that matches the filter.
+     * @param {PrivateRoomFindUniqueArgs} args - Arguments to find a PrivateRoom
+     * @example
+     * // Get one PrivateRoom
+     * const privateRoom = await prisma.privateRoom.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PrivateRoomFindUniqueArgs>(args: SelectSubset<T, PrivateRoomFindUniqueArgs<ExtArgs>>): Prisma__PrivateRoomClient<$Result.GetResult<Prisma.$PrivateRoomPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PrivateRoom that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PrivateRoomFindUniqueOrThrowArgs} args - Arguments to find a PrivateRoom
+     * @example
+     * // Get one PrivateRoom
+     * const privateRoom = await prisma.privateRoom.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PrivateRoomFindUniqueOrThrowArgs>(args: SelectSubset<T, PrivateRoomFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PrivateRoomClient<$Result.GetResult<Prisma.$PrivateRoomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PrivateRoom that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PrivateRoomFindFirstArgs} args - Arguments to find a PrivateRoom
+     * @example
+     * // Get one PrivateRoom
+     * const privateRoom = await prisma.privateRoom.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PrivateRoomFindFirstArgs>(args?: SelectSubset<T, PrivateRoomFindFirstArgs<ExtArgs>>): Prisma__PrivateRoomClient<$Result.GetResult<Prisma.$PrivateRoomPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PrivateRoom that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PrivateRoomFindFirstOrThrowArgs} args - Arguments to find a PrivateRoom
+     * @example
+     * // Get one PrivateRoom
+     * const privateRoom = await prisma.privateRoom.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PrivateRoomFindFirstOrThrowArgs>(args?: SelectSubset<T, PrivateRoomFindFirstOrThrowArgs<ExtArgs>>): Prisma__PrivateRoomClient<$Result.GetResult<Prisma.$PrivateRoomPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PrivateRooms that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PrivateRoomFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PrivateRooms
+     * const privateRooms = await prisma.privateRoom.findMany()
+     * 
+     * // Get first 10 PrivateRooms
+     * const privateRooms = await prisma.privateRoom.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const privateRoomWithIdOnly = await prisma.privateRoom.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PrivateRoomFindManyArgs>(args?: SelectSubset<T, PrivateRoomFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PrivateRoomPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PrivateRoom.
+     * @param {PrivateRoomCreateArgs} args - Arguments to create a PrivateRoom.
+     * @example
+     * // Create one PrivateRoom
+     * const PrivateRoom = await prisma.privateRoom.create({
+     *   data: {
+     *     // ... data to create a PrivateRoom
+     *   }
+     * })
+     * 
+     */
+    create<T extends PrivateRoomCreateArgs>(args: SelectSubset<T, PrivateRoomCreateArgs<ExtArgs>>): Prisma__PrivateRoomClient<$Result.GetResult<Prisma.$PrivateRoomPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PrivateRooms.
+     * @param {PrivateRoomCreateManyArgs} args - Arguments to create many PrivateRooms.
+     * @example
+     * // Create many PrivateRooms
+     * const privateRoom = await prisma.privateRoom.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PrivateRoomCreateManyArgs>(args?: SelectSubset<T, PrivateRoomCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PrivateRooms and returns the data saved in the database.
+     * @param {PrivateRoomCreateManyAndReturnArgs} args - Arguments to create many PrivateRooms.
+     * @example
+     * // Create many PrivateRooms
+     * const privateRoom = await prisma.privateRoom.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PrivateRooms and only return the `id`
+     * const privateRoomWithIdOnly = await prisma.privateRoom.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PrivateRoomCreateManyAndReturnArgs>(args?: SelectSubset<T, PrivateRoomCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PrivateRoomPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PrivateRoom.
+     * @param {PrivateRoomDeleteArgs} args - Arguments to delete one PrivateRoom.
+     * @example
+     * // Delete one PrivateRoom
+     * const PrivateRoom = await prisma.privateRoom.delete({
+     *   where: {
+     *     // ... filter to delete one PrivateRoom
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PrivateRoomDeleteArgs>(args: SelectSubset<T, PrivateRoomDeleteArgs<ExtArgs>>): Prisma__PrivateRoomClient<$Result.GetResult<Prisma.$PrivateRoomPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PrivateRoom.
+     * @param {PrivateRoomUpdateArgs} args - Arguments to update one PrivateRoom.
+     * @example
+     * // Update one PrivateRoom
+     * const privateRoom = await prisma.privateRoom.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PrivateRoomUpdateArgs>(args: SelectSubset<T, PrivateRoomUpdateArgs<ExtArgs>>): Prisma__PrivateRoomClient<$Result.GetResult<Prisma.$PrivateRoomPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PrivateRooms.
+     * @param {PrivateRoomDeleteManyArgs} args - Arguments to filter PrivateRooms to delete.
+     * @example
+     * // Delete a few PrivateRooms
+     * const { count } = await prisma.privateRoom.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PrivateRoomDeleteManyArgs>(args?: SelectSubset<T, PrivateRoomDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PrivateRooms.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PrivateRoomUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PrivateRooms
+     * const privateRoom = await prisma.privateRoom.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PrivateRoomUpdateManyArgs>(args: SelectSubset<T, PrivateRoomUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PrivateRooms and returns the data updated in the database.
+     * @param {PrivateRoomUpdateManyAndReturnArgs} args - Arguments to update many PrivateRooms.
+     * @example
+     * // Update many PrivateRooms
+     * const privateRoom = await prisma.privateRoom.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PrivateRooms and only return the `id`
+     * const privateRoomWithIdOnly = await prisma.privateRoom.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PrivateRoomUpdateManyAndReturnArgs>(args: SelectSubset<T, PrivateRoomUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PrivateRoomPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PrivateRoom.
+     * @param {PrivateRoomUpsertArgs} args - Arguments to update or create a PrivateRoom.
+     * @example
+     * // Update or create a PrivateRoom
+     * const privateRoom = await prisma.privateRoom.upsert({
+     *   create: {
+     *     // ... data to create a PrivateRoom
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PrivateRoom we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PrivateRoomUpsertArgs>(args: SelectSubset<T, PrivateRoomUpsertArgs<ExtArgs>>): Prisma__PrivateRoomClient<$Result.GetResult<Prisma.$PrivateRoomPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PrivateRooms.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PrivateRoomCountArgs} args - Arguments to filter PrivateRooms to count.
+     * @example
+     * // Count the number of PrivateRooms
+     * const count = await prisma.privateRoom.count({
+     *   where: {
+     *     // ... the filter for the PrivateRooms we want to count
+     *   }
+     * })
+    **/
+    count<T extends PrivateRoomCountArgs>(
+      args?: Subset<T, PrivateRoomCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PrivateRoomCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PrivateRoom.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PrivateRoomAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PrivateRoomAggregateArgs>(args: Subset<T, PrivateRoomAggregateArgs>): Prisma.PrismaPromise<GetPrivateRoomAggregateType<T>>
+
+    /**
+     * Group by PrivateRoom.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PrivateRoomGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PrivateRoomGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PrivateRoomGroupByArgs['orderBy'] }
+        : { orderBy?: PrivateRoomGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PrivateRoomGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPrivateRoomGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PrivateRoom model
+   */
+  readonly fields: PrivateRoomFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PrivateRoom.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PrivateRoomClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    messages<T extends PrivateRoom$messagesArgs<ExtArgs> = {}>(args?: Subset<T, PrivateRoom$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PrivateRoomMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PrivateRoom model
+   */
+  interface PrivateRoomFieldRefs {
+    readonly id: FieldRef<"PrivateRoom", 'String'>
+    readonly createrId: FieldRef<"PrivateRoom", 'String'>
+    readonly roomName: FieldRef<"PrivateRoom", 'String'>
+    readonly roomImage: FieldRef<"PrivateRoom", 'String'>
+    readonly category: FieldRef<"PrivateRoom", 'String'>
+    readonly description: FieldRef<"PrivateRoom", 'String'>
+    readonly memberLists: FieldRef<"PrivateRoom", 'String[]'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PrivateRoom findUnique
+   */
+  export type PrivateRoomFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PrivateRoom
+     */
+    select?: PrivateRoomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PrivateRoom
+     */
+    omit?: PrivateRoomOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrivateRoomInclude<ExtArgs> | null
+    /**
+     * Filter, which PrivateRoom to fetch.
+     */
+    where: PrivateRoomWhereUniqueInput
+  }
+
+  /**
+   * PrivateRoom findUniqueOrThrow
+   */
+  export type PrivateRoomFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PrivateRoom
+     */
+    select?: PrivateRoomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PrivateRoom
+     */
+    omit?: PrivateRoomOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrivateRoomInclude<ExtArgs> | null
+    /**
+     * Filter, which PrivateRoom to fetch.
+     */
+    where: PrivateRoomWhereUniqueInput
+  }
+
+  /**
+   * PrivateRoom findFirst
+   */
+  export type PrivateRoomFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PrivateRoom
+     */
+    select?: PrivateRoomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PrivateRoom
+     */
+    omit?: PrivateRoomOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrivateRoomInclude<ExtArgs> | null
+    /**
+     * Filter, which PrivateRoom to fetch.
+     */
+    where?: PrivateRoomWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PrivateRooms to fetch.
+     */
+    orderBy?: PrivateRoomOrderByWithRelationInput | PrivateRoomOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PrivateRooms.
+     */
+    cursor?: PrivateRoomWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PrivateRooms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PrivateRooms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PrivateRooms.
+     */
+    distinct?: PrivateRoomScalarFieldEnum | PrivateRoomScalarFieldEnum[]
+  }
+
+  /**
+   * PrivateRoom findFirstOrThrow
+   */
+  export type PrivateRoomFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PrivateRoom
+     */
+    select?: PrivateRoomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PrivateRoom
+     */
+    omit?: PrivateRoomOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrivateRoomInclude<ExtArgs> | null
+    /**
+     * Filter, which PrivateRoom to fetch.
+     */
+    where?: PrivateRoomWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PrivateRooms to fetch.
+     */
+    orderBy?: PrivateRoomOrderByWithRelationInput | PrivateRoomOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PrivateRooms.
+     */
+    cursor?: PrivateRoomWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PrivateRooms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PrivateRooms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PrivateRooms.
+     */
+    distinct?: PrivateRoomScalarFieldEnum | PrivateRoomScalarFieldEnum[]
+  }
+
+  /**
+   * PrivateRoom findMany
+   */
+  export type PrivateRoomFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PrivateRoom
+     */
+    select?: PrivateRoomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PrivateRoom
+     */
+    omit?: PrivateRoomOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrivateRoomInclude<ExtArgs> | null
+    /**
+     * Filter, which PrivateRooms to fetch.
+     */
+    where?: PrivateRoomWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PrivateRooms to fetch.
+     */
+    orderBy?: PrivateRoomOrderByWithRelationInput | PrivateRoomOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PrivateRooms.
+     */
+    cursor?: PrivateRoomWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PrivateRooms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PrivateRooms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PrivateRooms.
+     */
+    distinct?: PrivateRoomScalarFieldEnum | PrivateRoomScalarFieldEnum[]
+  }
+
+  /**
+   * PrivateRoom create
+   */
+  export type PrivateRoomCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PrivateRoom
+     */
+    select?: PrivateRoomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PrivateRoom
+     */
+    omit?: PrivateRoomOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrivateRoomInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PrivateRoom.
+     */
+    data: XOR<PrivateRoomCreateInput, PrivateRoomUncheckedCreateInput>
+  }
+
+  /**
+   * PrivateRoom createMany
+   */
+  export type PrivateRoomCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PrivateRooms.
+     */
+    data: PrivateRoomCreateManyInput | PrivateRoomCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PrivateRoom createManyAndReturn
+   */
+  export type PrivateRoomCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PrivateRoom
+     */
+    select?: PrivateRoomSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PrivateRoom
+     */
+    omit?: PrivateRoomOmit<ExtArgs> | null
+    /**
+     * The data used to create many PrivateRooms.
+     */
+    data: PrivateRoomCreateManyInput | PrivateRoomCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PrivateRoom update
+   */
+  export type PrivateRoomUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PrivateRoom
+     */
+    select?: PrivateRoomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PrivateRoom
+     */
+    omit?: PrivateRoomOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrivateRoomInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PrivateRoom.
+     */
+    data: XOR<PrivateRoomUpdateInput, PrivateRoomUncheckedUpdateInput>
+    /**
+     * Choose, which PrivateRoom to update.
+     */
+    where: PrivateRoomWhereUniqueInput
+  }
+
+  /**
+   * PrivateRoom updateMany
+   */
+  export type PrivateRoomUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PrivateRooms.
+     */
+    data: XOR<PrivateRoomUpdateManyMutationInput, PrivateRoomUncheckedUpdateManyInput>
+    /**
+     * Filter which PrivateRooms to update
+     */
+    where?: PrivateRoomWhereInput
+    /**
+     * Limit how many PrivateRooms to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PrivateRoom updateManyAndReturn
+   */
+  export type PrivateRoomUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PrivateRoom
+     */
+    select?: PrivateRoomSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PrivateRoom
+     */
+    omit?: PrivateRoomOmit<ExtArgs> | null
+    /**
+     * The data used to update PrivateRooms.
+     */
+    data: XOR<PrivateRoomUpdateManyMutationInput, PrivateRoomUncheckedUpdateManyInput>
+    /**
+     * Filter which PrivateRooms to update
+     */
+    where?: PrivateRoomWhereInput
+    /**
+     * Limit how many PrivateRooms to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PrivateRoom upsert
+   */
+  export type PrivateRoomUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PrivateRoom
+     */
+    select?: PrivateRoomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PrivateRoom
+     */
+    omit?: PrivateRoomOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrivateRoomInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PrivateRoom to update in case it exists.
+     */
+    where: PrivateRoomWhereUniqueInput
+    /**
+     * In case the PrivateRoom found by the `where` argument doesn't exist, create a new PrivateRoom with this data.
+     */
+    create: XOR<PrivateRoomCreateInput, PrivateRoomUncheckedCreateInput>
+    /**
+     * In case the PrivateRoom was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PrivateRoomUpdateInput, PrivateRoomUncheckedUpdateInput>
+  }
+
+  /**
+   * PrivateRoom delete
+   */
+  export type PrivateRoomDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PrivateRoom
+     */
+    select?: PrivateRoomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PrivateRoom
+     */
+    omit?: PrivateRoomOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrivateRoomInclude<ExtArgs> | null
+    /**
+     * Filter which PrivateRoom to delete.
+     */
+    where: PrivateRoomWhereUniqueInput
+  }
+
+  /**
+   * PrivateRoom deleteMany
+   */
+  export type PrivateRoomDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PrivateRooms to delete
+     */
+    where?: PrivateRoomWhereInput
+    /**
+     * Limit how many PrivateRooms to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PrivateRoom.messages
+   */
+  export type PrivateRoom$messagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PrivateRoomMessage
+     */
+    select?: PrivateRoomMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PrivateRoomMessage
+     */
+    omit?: PrivateRoomMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrivateRoomMessageInclude<ExtArgs> | null
+    where?: PrivateRoomMessageWhereInput
+    orderBy?: PrivateRoomMessageOrderByWithRelationInput | PrivateRoomMessageOrderByWithRelationInput[]
+    cursor?: PrivateRoomMessageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PrivateRoomMessageScalarFieldEnum | PrivateRoomMessageScalarFieldEnum[]
+  }
+
+  /**
+   * PrivateRoom without action
+   */
+  export type PrivateRoomDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PrivateRoom
+     */
+    select?: PrivateRoomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PrivateRoom
+     */
+    omit?: PrivateRoomOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrivateRoomInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PrivateRoomMessage
+   */
+
+  export type AggregatePrivateRoomMessage = {
+    _count: PrivateRoomMessageCountAggregateOutputType | null
+    _min: PrivateRoomMessageMinAggregateOutputType | null
+    _max: PrivateRoomMessageMaxAggregateOutputType | null
+  }
+
+  export type PrivateRoomMessageMinAggregateOutputType = {
+    id: string | null
+    roomId: string | null
+    senderId: string | null
+    text: string | null
+    createdAt: Date | null
+  }
+
+  export type PrivateRoomMessageMaxAggregateOutputType = {
+    id: string | null
+    roomId: string | null
+    senderId: string | null
+    text: string | null
+    createdAt: Date | null
+  }
+
+  export type PrivateRoomMessageCountAggregateOutputType = {
+    id: number
+    roomId: number
+    senderId: number
+    text: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type PrivateRoomMessageMinAggregateInputType = {
+    id?: true
+    roomId?: true
+    senderId?: true
+    text?: true
+    createdAt?: true
+  }
+
+  export type PrivateRoomMessageMaxAggregateInputType = {
+    id?: true
+    roomId?: true
+    senderId?: true
+    text?: true
+    createdAt?: true
+  }
+
+  export type PrivateRoomMessageCountAggregateInputType = {
+    id?: true
+    roomId?: true
+    senderId?: true
+    text?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type PrivateRoomMessageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PrivateRoomMessage to aggregate.
+     */
+    where?: PrivateRoomMessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PrivateRoomMessages to fetch.
+     */
+    orderBy?: PrivateRoomMessageOrderByWithRelationInput | PrivateRoomMessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PrivateRoomMessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PrivateRoomMessages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PrivateRoomMessages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PrivateRoomMessages
+    **/
+    _count?: true | PrivateRoomMessageCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PrivateRoomMessageMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PrivateRoomMessageMaxAggregateInputType
+  }
+
+  export type GetPrivateRoomMessageAggregateType<T extends PrivateRoomMessageAggregateArgs> = {
+        [P in keyof T & keyof AggregatePrivateRoomMessage]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePrivateRoomMessage[P]>
+      : GetScalarType<T[P], AggregatePrivateRoomMessage[P]>
+  }
+
+
+
+
+  export type PrivateRoomMessageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PrivateRoomMessageWhereInput
+    orderBy?: PrivateRoomMessageOrderByWithAggregationInput | PrivateRoomMessageOrderByWithAggregationInput[]
+    by: PrivateRoomMessageScalarFieldEnum[] | PrivateRoomMessageScalarFieldEnum
+    having?: PrivateRoomMessageScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PrivateRoomMessageCountAggregateInputType | true
+    _min?: PrivateRoomMessageMinAggregateInputType
+    _max?: PrivateRoomMessageMaxAggregateInputType
+  }
+
+  export type PrivateRoomMessageGroupByOutputType = {
+    id: string
+    roomId: string
+    senderId: string
+    text: string
+    createdAt: Date
+    _count: PrivateRoomMessageCountAggregateOutputType | null
+    _min: PrivateRoomMessageMinAggregateOutputType | null
+    _max: PrivateRoomMessageMaxAggregateOutputType | null
+  }
+
+  type GetPrivateRoomMessageGroupByPayload<T extends PrivateRoomMessageGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PrivateRoomMessageGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PrivateRoomMessageGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PrivateRoomMessageGroupByOutputType[P]>
+            : GetScalarType<T[P], PrivateRoomMessageGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PrivateRoomMessageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    roomId?: boolean
+    senderId?: boolean
+    text?: boolean
+    createdAt?: boolean
+    sender?: boolean | UserDefaultArgs<ExtArgs>
+    room?: boolean | PrivateRoomDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["privateRoomMessage"]>
+
+  export type PrivateRoomMessageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    roomId?: boolean
+    senderId?: boolean
+    text?: boolean
+    createdAt?: boolean
+    sender?: boolean | UserDefaultArgs<ExtArgs>
+    room?: boolean | PrivateRoomDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["privateRoomMessage"]>
+
+  export type PrivateRoomMessageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    roomId?: boolean
+    senderId?: boolean
+    text?: boolean
+    createdAt?: boolean
+    sender?: boolean | UserDefaultArgs<ExtArgs>
+    room?: boolean | PrivateRoomDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["privateRoomMessage"]>
+
+  export type PrivateRoomMessageSelectScalar = {
+    id?: boolean
+    roomId?: boolean
+    senderId?: boolean
+    text?: boolean
+    createdAt?: boolean
+  }
+
+  export type PrivateRoomMessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "roomId" | "senderId" | "text" | "createdAt", ExtArgs["result"]["privateRoomMessage"]>
+  export type PrivateRoomMessageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sender?: boolean | UserDefaultArgs<ExtArgs>
+    room?: boolean | PrivateRoomDefaultArgs<ExtArgs>
+  }
+  export type PrivateRoomMessageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sender?: boolean | UserDefaultArgs<ExtArgs>
+    room?: boolean | PrivateRoomDefaultArgs<ExtArgs>
+  }
+  export type PrivateRoomMessageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sender?: boolean | UserDefaultArgs<ExtArgs>
+    room?: boolean | PrivateRoomDefaultArgs<ExtArgs>
+  }
+
+  export type $PrivateRoomMessagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PrivateRoomMessage"
+    objects: {
+      sender: Prisma.$UserPayload<ExtArgs>
+      room: Prisma.$PrivateRoomPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      roomId: string
+      senderId: string
+      text: string
+      createdAt: Date
+    }, ExtArgs["result"]["privateRoomMessage"]>
+    composites: {}
+  }
+
+  type PrivateRoomMessageGetPayload<S extends boolean | null | undefined | PrivateRoomMessageDefaultArgs> = $Result.GetResult<Prisma.$PrivateRoomMessagePayload, S>
+
+  type PrivateRoomMessageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PrivateRoomMessageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PrivateRoomMessageCountAggregateInputType | true
+    }
+
+  export interface PrivateRoomMessageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PrivateRoomMessage'], meta: { name: 'PrivateRoomMessage' } }
+    /**
+     * Find zero or one PrivateRoomMessage that matches the filter.
+     * @param {PrivateRoomMessageFindUniqueArgs} args - Arguments to find a PrivateRoomMessage
+     * @example
+     * // Get one PrivateRoomMessage
+     * const privateRoomMessage = await prisma.privateRoomMessage.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PrivateRoomMessageFindUniqueArgs>(args: SelectSubset<T, PrivateRoomMessageFindUniqueArgs<ExtArgs>>): Prisma__PrivateRoomMessageClient<$Result.GetResult<Prisma.$PrivateRoomMessagePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PrivateRoomMessage that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PrivateRoomMessageFindUniqueOrThrowArgs} args - Arguments to find a PrivateRoomMessage
+     * @example
+     * // Get one PrivateRoomMessage
+     * const privateRoomMessage = await prisma.privateRoomMessage.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PrivateRoomMessageFindUniqueOrThrowArgs>(args: SelectSubset<T, PrivateRoomMessageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PrivateRoomMessageClient<$Result.GetResult<Prisma.$PrivateRoomMessagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PrivateRoomMessage that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PrivateRoomMessageFindFirstArgs} args - Arguments to find a PrivateRoomMessage
+     * @example
+     * // Get one PrivateRoomMessage
+     * const privateRoomMessage = await prisma.privateRoomMessage.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PrivateRoomMessageFindFirstArgs>(args?: SelectSubset<T, PrivateRoomMessageFindFirstArgs<ExtArgs>>): Prisma__PrivateRoomMessageClient<$Result.GetResult<Prisma.$PrivateRoomMessagePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PrivateRoomMessage that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PrivateRoomMessageFindFirstOrThrowArgs} args - Arguments to find a PrivateRoomMessage
+     * @example
+     * // Get one PrivateRoomMessage
+     * const privateRoomMessage = await prisma.privateRoomMessage.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PrivateRoomMessageFindFirstOrThrowArgs>(args?: SelectSubset<T, PrivateRoomMessageFindFirstOrThrowArgs<ExtArgs>>): Prisma__PrivateRoomMessageClient<$Result.GetResult<Prisma.$PrivateRoomMessagePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PrivateRoomMessages that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PrivateRoomMessageFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PrivateRoomMessages
+     * const privateRoomMessages = await prisma.privateRoomMessage.findMany()
+     * 
+     * // Get first 10 PrivateRoomMessages
+     * const privateRoomMessages = await prisma.privateRoomMessage.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const privateRoomMessageWithIdOnly = await prisma.privateRoomMessage.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PrivateRoomMessageFindManyArgs>(args?: SelectSubset<T, PrivateRoomMessageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PrivateRoomMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PrivateRoomMessage.
+     * @param {PrivateRoomMessageCreateArgs} args - Arguments to create a PrivateRoomMessage.
+     * @example
+     * // Create one PrivateRoomMessage
+     * const PrivateRoomMessage = await prisma.privateRoomMessage.create({
+     *   data: {
+     *     // ... data to create a PrivateRoomMessage
+     *   }
+     * })
+     * 
+     */
+    create<T extends PrivateRoomMessageCreateArgs>(args: SelectSubset<T, PrivateRoomMessageCreateArgs<ExtArgs>>): Prisma__PrivateRoomMessageClient<$Result.GetResult<Prisma.$PrivateRoomMessagePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PrivateRoomMessages.
+     * @param {PrivateRoomMessageCreateManyArgs} args - Arguments to create many PrivateRoomMessages.
+     * @example
+     * // Create many PrivateRoomMessages
+     * const privateRoomMessage = await prisma.privateRoomMessage.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PrivateRoomMessageCreateManyArgs>(args?: SelectSubset<T, PrivateRoomMessageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PrivateRoomMessages and returns the data saved in the database.
+     * @param {PrivateRoomMessageCreateManyAndReturnArgs} args - Arguments to create many PrivateRoomMessages.
+     * @example
+     * // Create many PrivateRoomMessages
+     * const privateRoomMessage = await prisma.privateRoomMessage.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PrivateRoomMessages and only return the `id`
+     * const privateRoomMessageWithIdOnly = await prisma.privateRoomMessage.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PrivateRoomMessageCreateManyAndReturnArgs>(args?: SelectSubset<T, PrivateRoomMessageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PrivateRoomMessagePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PrivateRoomMessage.
+     * @param {PrivateRoomMessageDeleteArgs} args - Arguments to delete one PrivateRoomMessage.
+     * @example
+     * // Delete one PrivateRoomMessage
+     * const PrivateRoomMessage = await prisma.privateRoomMessage.delete({
+     *   where: {
+     *     // ... filter to delete one PrivateRoomMessage
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PrivateRoomMessageDeleteArgs>(args: SelectSubset<T, PrivateRoomMessageDeleteArgs<ExtArgs>>): Prisma__PrivateRoomMessageClient<$Result.GetResult<Prisma.$PrivateRoomMessagePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PrivateRoomMessage.
+     * @param {PrivateRoomMessageUpdateArgs} args - Arguments to update one PrivateRoomMessage.
+     * @example
+     * // Update one PrivateRoomMessage
+     * const privateRoomMessage = await prisma.privateRoomMessage.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PrivateRoomMessageUpdateArgs>(args: SelectSubset<T, PrivateRoomMessageUpdateArgs<ExtArgs>>): Prisma__PrivateRoomMessageClient<$Result.GetResult<Prisma.$PrivateRoomMessagePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PrivateRoomMessages.
+     * @param {PrivateRoomMessageDeleteManyArgs} args - Arguments to filter PrivateRoomMessages to delete.
+     * @example
+     * // Delete a few PrivateRoomMessages
+     * const { count } = await prisma.privateRoomMessage.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PrivateRoomMessageDeleteManyArgs>(args?: SelectSubset<T, PrivateRoomMessageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PrivateRoomMessages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PrivateRoomMessageUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PrivateRoomMessages
+     * const privateRoomMessage = await prisma.privateRoomMessage.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PrivateRoomMessageUpdateManyArgs>(args: SelectSubset<T, PrivateRoomMessageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PrivateRoomMessages and returns the data updated in the database.
+     * @param {PrivateRoomMessageUpdateManyAndReturnArgs} args - Arguments to update many PrivateRoomMessages.
+     * @example
+     * // Update many PrivateRoomMessages
+     * const privateRoomMessage = await prisma.privateRoomMessage.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PrivateRoomMessages and only return the `id`
+     * const privateRoomMessageWithIdOnly = await prisma.privateRoomMessage.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PrivateRoomMessageUpdateManyAndReturnArgs>(args: SelectSubset<T, PrivateRoomMessageUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PrivateRoomMessagePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PrivateRoomMessage.
+     * @param {PrivateRoomMessageUpsertArgs} args - Arguments to update or create a PrivateRoomMessage.
+     * @example
+     * // Update or create a PrivateRoomMessage
+     * const privateRoomMessage = await prisma.privateRoomMessage.upsert({
+     *   create: {
+     *     // ... data to create a PrivateRoomMessage
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PrivateRoomMessage we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PrivateRoomMessageUpsertArgs>(args: SelectSubset<T, PrivateRoomMessageUpsertArgs<ExtArgs>>): Prisma__PrivateRoomMessageClient<$Result.GetResult<Prisma.$PrivateRoomMessagePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PrivateRoomMessages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PrivateRoomMessageCountArgs} args - Arguments to filter PrivateRoomMessages to count.
+     * @example
+     * // Count the number of PrivateRoomMessages
+     * const count = await prisma.privateRoomMessage.count({
+     *   where: {
+     *     // ... the filter for the PrivateRoomMessages we want to count
+     *   }
+     * })
+    **/
+    count<T extends PrivateRoomMessageCountArgs>(
+      args?: Subset<T, PrivateRoomMessageCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PrivateRoomMessageCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PrivateRoomMessage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PrivateRoomMessageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PrivateRoomMessageAggregateArgs>(args: Subset<T, PrivateRoomMessageAggregateArgs>): Prisma.PrismaPromise<GetPrivateRoomMessageAggregateType<T>>
+
+    /**
+     * Group by PrivateRoomMessage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PrivateRoomMessageGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PrivateRoomMessageGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PrivateRoomMessageGroupByArgs['orderBy'] }
+        : { orderBy?: PrivateRoomMessageGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PrivateRoomMessageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPrivateRoomMessageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PrivateRoomMessage model
+   */
+  readonly fields: PrivateRoomMessageFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PrivateRoomMessage.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PrivateRoomMessageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    sender<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    room<T extends PrivateRoomDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PrivateRoomDefaultArgs<ExtArgs>>): Prisma__PrivateRoomClient<$Result.GetResult<Prisma.$PrivateRoomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PrivateRoomMessage model
+   */
+  interface PrivateRoomMessageFieldRefs {
+    readonly id: FieldRef<"PrivateRoomMessage", 'String'>
+    readonly roomId: FieldRef<"PrivateRoomMessage", 'String'>
+    readonly senderId: FieldRef<"PrivateRoomMessage", 'String'>
+    readonly text: FieldRef<"PrivateRoomMessage", 'String'>
+    readonly createdAt: FieldRef<"PrivateRoomMessage", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PrivateRoomMessage findUnique
+   */
+  export type PrivateRoomMessageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PrivateRoomMessage
+     */
+    select?: PrivateRoomMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PrivateRoomMessage
+     */
+    omit?: PrivateRoomMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrivateRoomMessageInclude<ExtArgs> | null
+    /**
+     * Filter, which PrivateRoomMessage to fetch.
+     */
+    where: PrivateRoomMessageWhereUniqueInput
+  }
+
+  /**
+   * PrivateRoomMessage findUniqueOrThrow
+   */
+  export type PrivateRoomMessageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PrivateRoomMessage
+     */
+    select?: PrivateRoomMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PrivateRoomMessage
+     */
+    omit?: PrivateRoomMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrivateRoomMessageInclude<ExtArgs> | null
+    /**
+     * Filter, which PrivateRoomMessage to fetch.
+     */
+    where: PrivateRoomMessageWhereUniqueInput
+  }
+
+  /**
+   * PrivateRoomMessage findFirst
+   */
+  export type PrivateRoomMessageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PrivateRoomMessage
+     */
+    select?: PrivateRoomMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PrivateRoomMessage
+     */
+    omit?: PrivateRoomMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrivateRoomMessageInclude<ExtArgs> | null
+    /**
+     * Filter, which PrivateRoomMessage to fetch.
+     */
+    where?: PrivateRoomMessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PrivateRoomMessages to fetch.
+     */
+    orderBy?: PrivateRoomMessageOrderByWithRelationInput | PrivateRoomMessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PrivateRoomMessages.
+     */
+    cursor?: PrivateRoomMessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PrivateRoomMessages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PrivateRoomMessages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PrivateRoomMessages.
+     */
+    distinct?: PrivateRoomMessageScalarFieldEnum | PrivateRoomMessageScalarFieldEnum[]
+  }
+
+  /**
+   * PrivateRoomMessage findFirstOrThrow
+   */
+  export type PrivateRoomMessageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PrivateRoomMessage
+     */
+    select?: PrivateRoomMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PrivateRoomMessage
+     */
+    omit?: PrivateRoomMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrivateRoomMessageInclude<ExtArgs> | null
+    /**
+     * Filter, which PrivateRoomMessage to fetch.
+     */
+    where?: PrivateRoomMessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PrivateRoomMessages to fetch.
+     */
+    orderBy?: PrivateRoomMessageOrderByWithRelationInput | PrivateRoomMessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PrivateRoomMessages.
+     */
+    cursor?: PrivateRoomMessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PrivateRoomMessages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PrivateRoomMessages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PrivateRoomMessages.
+     */
+    distinct?: PrivateRoomMessageScalarFieldEnum | PrivateRoomMessageScalarFieldEnum[]
+  }
+
+  /**
+   * PrivateRoomMessage findMany
+   */
+  export type PrivateRoomMessageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PrivateRoomMessage
+     */
+    select?: PrivateRoomMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PrivateRoomMessage
+     */
+    omit?: PrivateRoomMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrivateRoomMessageInclude<ExtArgs> | null
+    /**
+     * Filter, which PrivateRoomMessages to fetch.
+     */
+    where?: PrivateRoomMessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PrivateRoomMessages to fetch.
+     */
+    orderBy?: PrivateRoomMessageOrderByWithRelationInput | PrivateRoomMessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PrivateRoomMessages.
+     */
+    cursor?: PrivateRoomMessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PrivateRoomMessages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PrivateRoomMessages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PrivateRoomMessages.
+     */
+    distinct?: PrivateRoomMessageScalarFieldEnum | PrivateRoomMessageScalarFieldEnum[]
+  }
+
+  /**
+   * PrivateRoomMessage create
+   */
+  export type PrivateRoomMessageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PrivateRoomMessage
+     */
+    select?: PrivateRoomMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PrivateRoomMessage
+     */
+    omit?: PrivateRoomMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrivateRoomMessageInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PrivateRoomMessage.
+     */
+    data: XOR<PrivateRoomMessageCreateInput, PrivateRoomMessageUncheckedCreateInput>
+  }
+
+  /**
+   * PrivateRoomMessage createMany
+   */
+  export type PrivateRoomMessageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PrivateRoomMessages.
+     */
+    data: PrivateRoomMessageCreateManyInput | PrivateRoomMessageCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PrivateRoomMessage createManyAndReturn
+   */
+  export type PrivateRoomMessageCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PrivateRoomMessage
+     */
+    select?: PrivateRoomMessageSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PrivateRoomMessage
+     */
+    omit?: PrivateRoomMessageOmit<ExtArgs> | null
+    /**
+     * The data used to create many PrivateRoomMessages.
+     */
+    data: PrivateRoomMessageCreateManyInput | PrivateRoomMessageCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrivateRoomMessageIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PrivateRoomMessage update
+   */
+  export type PrivateRoomMessageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PrivateRoomMessage
+     */
+    select?: PrivateRoomMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PrivateRoomMessage
+     */
+    omit?: PrivateRoomMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrivateRoomMessageInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PrivateRoomMessage.
+     */
+    data: XOR<PrivateRoomMessageUpdateInput, PrivateRoomMessageUncheckedUpdateInput>
+    /**
+     * Choose, which PrivateRoomMessage to update.
+     */
+    where: PrivateRoomMessageWhereUniqueInput
+  }
+
+  /**
+   * PrivateRoomMessage updateMany
+   */
+  export type PrivateRoomMessageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PrivateRoomMessages.
+     */
+    data: XOR<PrivateRoomMessageUpdateManyMutationInput, PrivateRoomMessageUncheckedUpdateManyInput>
+    /**
+     * Filter which PrivateRoomMessages to update
+     */
+    where?: PrivateRoomMessageWhereInput
+    /**
+     * Limit how many PrivateRoomMessages to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PrivateRoomMessage updateManyAndReturn
+   */
+  export type PrivateRoomMessageUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PrivateRoomMessage
+     */
+    select?: PrivateRoomMessageSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PrivateRoomMessage
+     */
+    omit?: PrivateRoomMessageOmit<ExtArgs> | null
+    /**
+     * The data used to update PrivateRoomMessages.
+     */
+    data: XOR<PrivateRoomMessageUpdateManyMutationInput, PrivateRoomMessageUncheckedUpdateManyInput>
+    /**
+     * Filter which PrivateRoomMessages to update
+     */
+    where?: PrivateRoomMessageWhereInput
+    /**
+     * Limit how many PrivateRoomMessages to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrivateRoomMessageIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PrivateRoomMessage upsert
+   */
+  export type PrivateRoomMessageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PrivateRoomMessage
+     */
+    select?: PrivateRoomMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PrivateRoomMessage
+     */
+    omit?: PrivateRoomMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrivateRoomMessageInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PrivateRoomMessage to update in case it exists.
+     */
+    where: PrivateRoomMessageWhereUniqueInput
+    /**
+     * In case the PrivateRoomMessage found by the `where` argument doesn't exist, create a new PrivateRoomMessage with this data.
+     */
+    create: XOR<PrivateRoomMessageCreateInput, PrivateRoomMessageUncheckedCreateInput>
+    /**
+     * In case the PrivateRoomMessage was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PrivateRoomMessageUpdateInput, PrivateRoomMessageUncheckedUpdateInput>
+  }
+
+  /**
+   * PrivateRoomMessage delete
+   */
+  export type PrivateRoomMessageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PrivateRoomMessage
+     */
+    select?: PrivateRoomMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PrivateRoomMessage
+     */
+    omit?: PrivateRoomMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrivateRoomMessageInclude<ExtArgs> | null
+    /**
+     * Filter which PrivateRoomMessage to delete.
+     */
+    where: PrivateRoomMessageWhereUniqueInput
+  }
+
+  /**
+   * PrivateRoomMessage deleteMany
+   */
+  export type PrivateRoomMessageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PrivateRoomMessages to delete
+     */
+    where?: PrivateRoomMessageWhereInput
+    /**
+     * Limit how many PrivateRoomMessages to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PrivateRoomMessage without action
+   */
+  export type PrivateRoomMessageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PrivateRoomMessage
+     */
+    select?: PrivateRoomMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PrivateRoomMessage
+     */
+    omit?: PrivateRoomMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrivateRoomMessageInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -12414,6 +14832,30 @@ export namespace Prisma {
   export type GlobalChatMessageScalarFieldEnum = (typeof GlobalChatMessageScalarFieldEnum)[keyof typeof GlobalChatMessageScalarFieldEnum]
 
 
+  export const PrivateRoomScalarFieldEnum: {
+    id: 'id',
+    createrId: 'createrId',
+    roomName: 'roomName',
+    roomImage: 'roomImage',
+    category: 'category',
+    description: 'description',
+    memberLists: 'memberLists'
+  };
+
+  export type PrivateRoomScalarFieldEnum = (typeof PrivateRoomScalarFieldEnum)[keyof typeof PrivateRoomScalarFieldEnum]
+
+
+  export const PrivateRoomMessageScalarFieldEnum: {
+    id: 'id',
+    roomId: 'roomId',
+    senderId: 'senderId',
+    text: 'text',
+    createdAt: 'createdAt'
+  };
+
+  export type PrivateRoomMessageScalarFieldEnum = (typeof PrivateRoomMessageScalarFieldEnum)[keyof typeof PrivateRoomMessageScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -12533,6 +14975,7 @@ export namespace Prisma {
     recvMessages?: MessageListRelationFilter
     sentMessages?: MessageListRelationFilter
     globalMessages?: GlobalChatMessageListRelationFilter
+    privateRoomMessages?: PrivateRoomMessageListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -12556,6 +14999,7 @@ export namespace Prisma {
     recvMessages?: MessageOrderByRelationAggregateInput
     sentMessages?: MessageOrderByRelationAggregateInput
     globalMessages?: GlobalChatMessageOrderByRelationAggregateInput
+    privateRoomMessages?: PrivateRoomMessageOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -12582,6 +15026,7 @@ export namespace Prisma {
     recvMessages?: MessageListRelationFilter
     sentMessages?: MessageListRelationFilter
     globalMessages?: GlobalChatMessageListRelationFilter
+    privateRoomMessages?: PrivateRoomMessageListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -13105,6 +15550,129 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"GlobalChatMessage"> | Date | string
   }
 
+  export type PrivateRoomWhereInput = {
+    AND?: PrivateRoomWhereInput | PrivateRoomWhereInput[]
+    OR?: PrivateRoomWhereInput[]
+    NOT?: PrivateRoomWhereInput | PrivateRoomWhereInput[]
+    id?: StringFilter<"PrivateRoom"> | string
+    createrId?: StringFilter<"PrivateRoom"> | string
+    roomName?: StringFilter<"PrivateRoom"> | string
+    roomImage?: StringNullableFilter<"PrivateRoom"> | string | null
+    category?: StringNullableFilter<"PrivateRoom"> | string | null
+    description?: StringNullableFilter<"PrivateRoom"> | string | null
+    memberLists?: StringNullableListFilter<"PrivateRoom">
+    messages?: PrivateRoomMessageListRelationFilter
+  }
+
+  export type PrivateRoomOrderByWithRelationInput = {
+    id?: SortOrder
+    createrId?: SortOrder
+    roomName?: SortOrder
+    roomImage?: SortOrderInput | SortOrder
+    category?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    memberLists?: SortOrder
+    messages?: PrivateRoomMessageOrderByRelationAggregateInput
+  }
+
+  export type PrivateRoomWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    roomName?: string
+    AND?: PrivateRoomWhereInput | PrivateRoomWhereInput[]
+    OR?: PrivateRoomWhereInput[]
+    NOT?: PrivateRoomWhereInput | PrivateRoomWhereInput[]
+    createrId?: StringFilter<"PrivateRoom"> | string
+    roomImage?: StringNullableFilter<"PrivateRoom"> | string | null
+    category?: StringNullableFilter<"PrivateRoom"> | string | null
+    description?: StringNullableFilter<"PrivateRoom"> | string | null
+    memberLists?: StringNullableListFilter<"PrivateRoom">
+    messages?: PrivateRoomMessageListRelationFilter
+  }, "id" | "roomName">
+
+  export type PrivateRoomOrderByWithAggregationInput = {
+    id?: SortOrder
+    createrId?: SortOrder
+    roomName?: SortOrder
+    roomImage?: SortOrderInput | SortOrder
+    category?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    memberLists?: SortOrder
+    _count?: PrivateRoomCountOrderByAggregateInput
+    _max?: PrivateRoomMaxOrderByAggregateInput
+    _min?: PrivateRoomMinOrderByAggregateInput
+  }
+
+  export type PrivateRoomScalarWhereWithAggregatesInput = {
+    AND?: PrivateRoomScalarWhereWithAggregatesInput | PrivateRoomScalarWhereWithAggregatesInput[]
+    OR?: PrivateRoomScalarWhereWithAggregatesInput[]
+    NOT?: PrivateRoomScalarWhereWithAggregatesInput | PrivateRoomScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PrivateRoom"> | string
+    createrId?: StringWithAggregatesFilter<"PrivateRoom"> | string
+    roomName?: StringWithAggregatesFilter<"PrivateRoom"> | string
+    roomImage?: StringNullableWithAggregatesFilter<"PrivateRoom"> | string | null
+    category?: StringNullableWithAggregatesFilter<"PrivateRoom"> | string | null
+    description?: StringNullableWithAggregatesFilter<"PrivateRoom"> | string | null
+    memberLists?: StringNullableListFilter<"PrivateRoom">
+  }
+
+  export type PrivateRoomMessageWhereInput = {
+    AND?: PrivateRoomMessageWhereInput | PrivateRoomMessageWhereInput[]
+    OR?: PrivateRoomMessageWhereInput[]
+    NOT?: PrivateRoomMessageWhereInput | PrivateRoomMessageWhereInput[]
+    id?: StringFilter<"PrivateRoomMessage"> | string
+    roomId?: StringFilter<"PrivateRoomMessage"> | string
+    senderId?: StringFilter<"PrivateRoomMessage"> | string
+    text?: StringFilter<"PrivateRoomMessage"> | string
+    createdAt?: DateTimeFilter<"PrivateRoomMessage"> | Date | string
+    sender?: XOR<UserScalarRelationFilter, UserWhereInput>
+    room?: XOR<PrivateRoomScalarRelationFilter, PrivateRoomWhereInput>
+  }
+
+  export type PrivateRoomMessageOrderByWithRelationInput = {
+    id?: SortOrder
+    roomId?: SortOrder
+    senderId?: SortOrder
+    text?: SortOrder
+    createdAt?: SortOrder
+    sender?: UserOrderByWithRelationInput
+    room?: PrivateRoomOrderByWithRelationInput
+  }
+
+  export type PrivateRoomMessageWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PrivateRoomMessageWhereInput | PrivateRoomMessageWhereInput[]
+    OR?: PrivateRoomMessageWhereInput[]
+    NOT?: PrivateRoomMessageWhereInput | PrivateRoomMessageWhereInput[]
+    roomId?: StringFilter<"PrivateRoomMessage"> | string
+    senderId?: StringFilter<"PrivateRoomMessage"> | string
+    text?: StringFilter<"PrivateRoomMessage"> | string
+    createdAt?: DateTimeFilter<"PrivateRoomMessage"> | Date | string
+    sender?: XOR<UserScalarRelationFilter, UserWhereInput>
+    room?: XOR<PrivateRoomScalarRelationFilter, PrivateRoomWhereInput>
+  }, "id">
+
+  export type PrivateRoomMessageOrderByWithAggregationInput = {
+    id?: SortOrder
+    roomId?: SortOrder
+    senderId?: SortOrder
+    text?: SortOrder
+    createdAt?: SortOrder
+    _count?: PrivateRoomMessageCountOrderByAggregateInput
+    _max?: PrivateRoomMessageMaxOrderByAggregateInput
+    _min?: PrivateRoomMessageMinOrderByAggregateInput
+  }
+
+  export type PrivateRoomMessageScalarWhereWithAggregatesInput = {
+    AND?: PrivateRoomMessageScalarWhereWithAggregatesInput | PrivateRoomMessageScalarWhereWithAggregatesInput[]
+    OR?: PrivateRoomMessageScalarWhereWithAggregatesInput[]
+    NOT?: PrivateRoomMessageScalarWhereWithAggregatesInput | PrivateRoomMessageScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PrivateRoomMessage"> | string
+    roomId?: StringWithAggregatesFilter<"PrivateRoomMessage"> | string
+    senderId?: StringWithAggregatesFilter<"PrivateRoomMessage"> | string
+    text?: StringWithAggregatesFilter<"PrivateRoomMessage"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"PrivateRoomMessage"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     fullName: string
@@ -13126,6 +15694,7 @@ export namespace Prisma {
     recvMessages?: MessageCreateNestedManyWithoutReceiverInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
     globalMessages?: GlobalChatMessageCreateNestedManyWithoutSenderInput
+    privateRoomMessages?: PrivateRoomMessageCreateNestedManyWithoutSenderInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -13149,6 +15718,7 @@ export namespace Prisma {
     recvMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     globalMessages?: GlobalChatMessageUncheckedCreateNestedManyWithoutSenderInput
+    privateRoomMessages?: PrivateRoomMessageUncheckedCreateNestedManyWithoutSenderInput
   }
 
   export type UserUpdateInput = {
@@ -13172,6 +15742,7 @@ export namespace Prisma {
     recvMessages?: MessageUpdateManyWithoutReceiverNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
     globalMessages?: GlobalChatMessageUpdateManyWithoutSenderNestedInput
+    privateRoomMessages?: PrivateRoomMessageUpdateManyWithoutSenderNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -13195,6 +15766,7 @@ export namespace Prisma {
     recvMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     globalMessages?: GlobalChatMessageUncheckedUpdateManyWithoutSenderNestedInput
+    privateRoomMessages?: PrivateRoomMessageUncheckedUpdateManyWithoutSenderNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -13740,6 +16312,134 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type PrivateRoomCreateInput = {
+    id?: string
+    createrId: string
+    roomName: string
+    roomImage?: string | null
+    category?: string | null
+    description?: string | null
+    memberLists?: PrivateRoomCreatememberListsInput | string[]
+    messages?: PrivateRoomMessageCreateNestedManyWithoutRoomInput
+  }
+
+  export type PrivateRoomUncheckedCreateInput = {
+    id?: string
+    createrId: string
+    roomName: string
+    roomImage?: string | null
+    category?: string | null
+    description?: string | null
+    memberLists?: PrivateRoomCreatememberListsInput | string[]
+    messages?: PrivateRoomMessageUncheckedCreateNestedManyWithoutRoomInput
+  }
+
+  export type PrivateRoomUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createrId?: StringFieldUpdateOperationsInput | string
+    roomName?: StringFieldUpdateOperationsInput | string
+    roomImage?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    memberLists?: PrivateRoomUpdatememberListsInput | string[]
+    messages?: PrivateRoomMessageUpdateManyWithoutRoomNestedInput
+  }
+
+  export type PrivateRoomUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createrId?: StringFieldUpdateOperationsInput | string
+    roomName?: StringFieldUpdateOperationsInput | string
+    roomImage?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    memberLists?: PrivateRoomUpdatememberListsInput | string[]
+    messages?: PrivateRoomMessageUncheckedUpdateManyWithoutRoomNestedInput
+  }
+
+  export type PrivateRoomCreateManyInput = {
+    id?: string
+    createrId: string
+    roomName: string
+    roomImage?: string | null
+    category?: string | null
+    description?: string | null
+    memberLists?: PrivateRoomCreatememberListsInput | string[]
+  }
+
+  export type PrivateRoomUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createrId?: StringFieldUpdateOperationsInput | string
+    roomName?: StringFieldUpdateOperationsInput | string
+    roomImage?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    memberLists?: PrivateRoomUpdatememberListsInput | string[]
+  }
+
+  export type PrivateRoomUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createrId?: StringFieldUpdateOperationsInput | string
+    roomName?: StringFieldUpdateOperationsInput | string
+    roomImage?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    memberLists?: PrivateRoomUpdatememberListsInput | string[]
+  }
+
+  export type PrivateRoomMessageCreateInput = {
+    id?: string
+    text: string
+    createdAt?: Date | string
+    sender: UserCreateNestedOneWithoutPrivateRoomMessagesInput
+    room: PrivateRoomCreateNestedOneWithoutMessagesInput
+  }
+
+  export type PrivateRoomMessageUncheckedCreateInput = {
+    id?: string
+    roomId: string
+    senderId: string
+    text: string
+    createdAt?: Date | string
+  }
+
+  export type PrivateRoomMessageUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sender?: UserUpdateOneRequiredWithoutPrivateRoomMessagesNestedInput
+    room?: PrivateRoomUpdateOneRequiredWithoutMessagesNestedInput
+  }
+
+  export type PrivateRoomMessageUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roomId?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PrivateRoomMessageCreateManyInput = {
+    id?: string
+    roomId: string
+    senderId: string
+    text: string
+    createdAt?: Date | string
+  }
+
+  export type PrivateRoomMessageUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PrivateRoomMessageUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roomId?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -13812,6 +16512,12 @@ export namespace Prisma {
     none?: GlobalChatMessageWhereInput
   }
 
+  export type PrivateRoomMessageListRelationFilter = {
+    every?: PrivateRoomMessageWhereInput
+    some?: PrivateRoomMessageWhereInput
+    none?: PrivateRoomMessageWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -13822,6 +16528,10 @@ export namespace Prisma {
   }
 
   export type GlobalChatMessageOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PrivateRoomMessageOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -14242,6 +16952,63 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
+  export type PrivateRoomCountOrderByAggregateInput = {
+    id?: SortOrder
+    createrId?: SortOrder
+    roomName?: SortOrder
+    roomImage?: SortOrder
+    category?: SortOrder
+    description?: SortOrder
+    memberLists?: SortOrder
+  }
+
+  export type PrivateRoomMaxOrderByAggregateInput = {
+    id?: SortOrder
+    createrId?: SortOrder
+    roomName?: SortOrder
+    roomImage?: SortOrder
+    category?: SortOrder
+    description?: SortOrder
+  }
+
+  export type PrivateRoomMinOrderByAggregateInput = {
+    id?: SortOrder
+    createrId?: SortOrder
+    roomName?: SortOrder
+    roomImage?: SortOrder
+    category?: SortOrder
+    description?: SortOrder
+  }
+
+  export type PrivateRoomScalarRelationFilter = {
+    is?: PrivateRoomWhereInput
+    isNot?: PrivateRoomWhereInput
+  }
+
+  export type PrivateRoomMessageCountOrderByAggregateInput = {
+    id?: SortOrder
+    roomId?: SortOrder
+    senderId?: SortOrder
+    text?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PrivateRoomMessageMaxOrderByAggregateInput = {
+    id?: SortOrder
+    roomId?: SortOrder
+    senderId?: SortOrder
+    text?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PrivateRoomMessageMinOrderByAggregateInput = {
+    id?: SortOrder
+    roomId?: SortOrder
+    senderId?: SortOrder
+    text?: SortOrder
+    createdAt?: SortOrder
+  }
+
   export type UserCreateinterestInput = {
     set: string[]
   }
@@ -14271,6 +17038,13 @@ export namespace Prisma {
     connect?: GlobalChatMessageWhereUniqueInput | GlobalChatMessageWhereUniqueInput[]
   }
 
+  export type PrivateRoomMessageCreateNestedManyWithoutSenderInput = {
+    create?: XOR<PrivateRoomMessageCreateWithoutSenderInput, PrivateRoomMessageUncheckedCreateWithoutSenderInput> | PrivateRoomMessageCreateWithoutSenderInput[] | PrivateRoomMessageUncheckedCreateWithoutSenderInput[]
+    connectOrCreate?: PrivateRoomMessageCreateOrConnectWithoutSenderInput | PrivateRoomMessageCreateOrConnectWithoutSenderInput[]
+    createMany?: PrivateRoomMessageCreateManySenderInputEnvelope
+    connect?: PrivateRoomMessageWhereUniqueInput | PrivateRoomMessageWhereUniqueInput[]
+  }
+
   export type MessageUncheckedCreateNestedManyWithoutReceiverInput = {
     create?: XOR<MessageCreateWithoutReceiverInput, MessageUncheckedCreateWithoutReceiverInput> | MessageCreateWithoutReceiverInput[] | MessageUncheckedCreateWithoutReceiverInput[]
     connectOrCreate?: MessageCreateOrConnectWithoutReceiverInput | MessageCreateOrConnectWithoutReceiverInput[]
@@ -14290,6 +17064,13 @@ export namespace Prisma {
     connectOrCreate?: GlobalChatMessageCreateOrConnectWithoutSenderInput | GlobalChatMessageCreateOrConnectWithoutSenderInput[]
     createMany?: GlobalChatMessageCreateManySenderInputEnvelope
     connect?: GlobalChatMessageWhereUniqueInput | GlobalChatMessageWhereUniqueInput[]
+  }
+
+  export type PrivateRoomMessageUncheckedCreateNestedManyWithoutSenderInput = {
+    create?: XOR<PrivateRoomMessageCreateWithoutSenderInput, PrivateRoomMessageUncheckedCreateWithoutSenderInput> | PrivateRoomMessageCreateWithoutSenderInput[] | PrivateRoomMessageUncheckedCreateWithoutSenderInput[]
+    connectOrCreate?: PrivateRoomMessageCreateOrConnectWithoutSenderInput | PrivateRoomMessageCreateOrConnectWithoutSenderInput[]
+    createMany?: PrivateRoomMessageCreateManySenderInputEnvelope
+    connect?: PrivateRoomMessageWhereUniqueInput | PrivateRoomMessageWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -14360,6 +17141,20 @@ export namespace Prisma {
     deleteMany?: GlobalChatMessageScalarWhereInput | GlobalChatMessageScalarWhereInput[]
   }
 
+  export type PrivateRoomMessageUpdateManyWithoutSenderNestedInput = {
+    create?: XOR<PrivateRoomMessageCreateWithoutSenderInput, PrivateRoomMessageUncheckedCreateWithoutSenderInput> | PrivateRoomMessageCreateWithoutSenderInput[] | PrivateRoomMessageUncheckedCreateWithoutSenderInput[]
+    connectOrCreate?: PrivateRoomMessageCreateOrConnectWithoutSenderInput | PrivateRoomMessageCreateOrConnectWithoutSenderInput[]
+    upsert?: PrivateRoomMessageUpsertWithWhereUniqueWithoutSenderInput | PrivateRoomMessageUpsertWithWhereUniqueWithoutSenderInput[]
+    createMany?: PrivateRoomMessageCreateManySenderInputEnvelope
+    set?: PrivateRoomMessageWhereUniqueInput | PrivateRoomMessageWhereUniqueInput[]
+    disconnect?: PrivateRoomMessageWhereUniqueInput | PrivateRoomMessageWhereUniqueInput[]
+    delete?: PrivateRoomMessageWhereUniqueInput | PrivateRoomMessageWhereUniqueInput[]
+    connect?: PrivateRoomMessageWhereUniqueInput | PrivateRoomMessageWhereUniqueInput[]
+    update?: PrivateRoomMessageUpdateWithWhereUniqueWithoutSenderInput | PrivateRoomMessageUpdateWithWhereUniqueWithoutSenderInput[]
+    updateMany?: PrivateRoomMessageUpdateManyWithWhereWithoutSenderInput | PrivateRoomMessageUpdateManyWithWhereWithoutSenderInput[]
+    deleteMany?: PrivateRoomMessageScalarWhereInput | PrivateRoomMessageScalarWhereInput[]
+  }
+
   export type MessageUncheckedUpdateManyWithoutReceiverNestedInput = {
     create?: XOR<MessageCreateWithoutReceiverInput, MessageUncheckedCreateWithoutReceiverInput> | MessageCreateWithoutReceiverInput[] | MessageUncheckedCreateWithoutReceiverInput[]
     connectOrCreate?: MessageCreateOrConnectWithoutReceiverInput | MessageCreateOrConnectWithoutReceiverInput[]
@@ -14400,6 +17195,20 @@ export namespace Prisma {
     update?: GlobalChatMessageUpdateWithWhereUniqueWithoutSenderInput | GlobalChatMessageUpdateWithWhereUniqueWithoutSenderInput[]
     updateMany?: GlobalChatMessageUpdateManyWithWhereWithoutSenderInput | GlobalChatMessageUpdateManyWithWhereWithoutSenderInput[]
     deleteMany?: GlobalChatMessageScalarWhereInput | GlobalChatMessageScalarWhereInput[]
+  }
+
+  export type PrivateRoomMessageUncheckedUpdateManyWithoutSenderNestedInput = {
+    create?: XOR<PrivateRoomMessageCreateWithoutSenderInput, PrivateRoomMessageUncheckedCreateWithoutSenderInput> | PrivateRoomMessageCreateWithoutSenderInput[] | PrivateRoomMessageUncheckedCreateWithoutSenderInput[]
+    connectOrCreate?: PrivateRoomMessageCreateOrConnectWithoutSenderInput | PrivateRoomMessageCreateOrConnectWithoutSenderInput[]
+    upsert?: PrivateRoomMessageUpsertWithWhereUniqueWithoutSenderInput | PrivateRoomMessageUpsertWithWhereUniqueWithoutSenderInput[]
+    createMany?: PrivateRoomMessageCreateManySenderInputEnvelope
+    set?: PrivateRoomMessageWhereUniqueInput | PrivateRoomMessageWhereUniqueInput[]
+    disconnect?: PrivateRoomMessageWhereUniqueInput | PrivateRoomMessageWhereUniqueInput[]
+    delete?: PrivateRoomMessageWhereUniqueInput | PrivateRoomMessageWhereUniqueInput[]
+    connect?: PrivateRoomMessageWhereUniqueInput | PrivateRoomMessageWhereUniqueInput[]
+    update?: PrivateRoomMessageUpdateWithWhereUniqueWithoutSenderInput | PrivateRoomMessageUpdateWithWhereUniqueWithoutSenderInput[]
+    updateMany?: PrivateRoomMessageUpdateManyWithWhereWithoutSenderInput | PrivateRoomMessageUpdateManyWithWhereWithoutSenderInput[]
+    deleteMany?: PrivateRoomMessageScalarWhereInput | PrivateRoomMessageScalarWhereInput[]
   }
 
   export type NullableBoolFieldUpdateOperationsInput = {
@@ -14541,6 +17350,85 @@ export namespace Prisma {
     upsert?: GlobalChatsUpsertWithoutMessagesInput
     connect?: GlobalChatsWhereUniqueInput
     update?: XOR<XOR<GlobalChatsUpdateToOneWithWhereWithoutMessagesInput, GlobalChatsUpdateWithoutMessagesInput>, GlobalChatsUncheckedUpdateWithoutMessagesInput>
+  }
+
+  export type PrivateRoomCreatememberListsInput = {
+    set: string[]
+  }
+
+  export type PrivateRoomMessageCreateNestedManyWithoutRoomInput = {
+    create?: XOR<PrivateRoomMessageCreateWithoutRoomInput, PrivateRoomMessageUncheckedCreateWithoutRoomInput> | PrivateRoomMessageCreateWithoutRoomInput[] | PrivateRoomMessageUncheckedCreateWithoutRoomInput[]
+    connectOrCreate?: PrivateRoomMessageCreateOrConnectWithoutRoomInput | PrivateRoomMessageCreateOrConnectWithoutRoomInput[]
+    createMany?: PrivateRoomMessageCreateManyRoomInputEnvelope
+    connect?: PrivateRoomMessageWhereUniqueInput | PrivateRoomMessageWhereUniqueInput[]
+  }
+
+  export type PrivateRoomMessageUncheckedCreateNestedManyWithoutRoomInput = {
+    create?: XOR<PrivateRoomMessageCreateWithoutRoomInput, PrivateRoomMessageUncheckedCreateWithoutRoomInput> | PrivateRoomMessageCreateWithoutRoomInput[] | PrivateRoomMessageUncheckedCreateWithoutRoomInput[]
+    connectOrCreate?: PrivateRoomMessageCreateOrConnectWithoutRoomInput | PrivateRoomMessageCreateOrConnectWithoutRoomInput[]
+    createMany?: PrivateRoomMessageCreateManyRoomInputEnvelope
+    connect?: PrivateRoomMessageWhereUniqueInput | PrivateRoomMessageWhereUniqueInput[]
+  }
+
+  export type PrivateRoomUpdatememberListsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type PrivateRoomMessageUpdateManyWithoutRoomNestedInput = {
+    create?: XOR<PrivateRoomMessageCreateWithoutRoomInput, PrivateRoomMessageUncheckedCreateWithoutRoomInput> | PrivateRoomMessageCreateWithoutRoomInput[] | PrivateRoomMessageUncheckedCreateWithoutRoomInput[]
+    connectOrCreate?: PrivateRoomMessageCreateOrConnectWithoutRoomInput | PrivateRoomMessageCreateOrConnectWithoutRoomInput[]
+    upsert?: PrivateRoomMessageUpsertWithWhereUniqueWithoutRoomInput | PrivateRoomMessageUpsertWithWhereUniqueWithoutRoomInput[]
+    createMany?: PrivateRoomMessageCreateManyRoomInputEnvelope
+    set?: PrivateRoomMessageWhereUniqueInput | PrivateRoomMessageWhereUniqueInput[]
+    disconnect?: PrivateRoomMessageWhereUniqueInput | PrivateRoomMessageWhereUniqueInput[]
+    delete?: PrivateRoomMessageWhereUniqueInput | PrivateRoomMessageWhereUniqueInput[]
+    connect?: PrivateRoomMessageWhereUniqueInput | PrivateRoomMessageWhereUniqueInput[]
+    update?: PrivateRoomMessageUpdateWithWhereUniqueWithoutRoomInput | PrivateRoomMessageUpdateWithWhereUniqueWithoutRoomInput[]
+    updateMany?: PrivateRoomMessageUpdateManyWithWhereWithoutRoomInput | PrivateRoomMessageUpdateManyWithWhereWithoutRoomInput[]
+    deleteMany?: PrivateRoomMessageScalarWhereInput | PrivateRoomMessageScalarWhereInput[]
+  }
+
+  export type PrivateRoomMessageUncheckedUpdateManyWithoutRoomNestedInput = {
+    create?: XOR<PrivateRoomMessageCreateWithoutRoomInput, PrivateRoomMessageUncheckedCreateWithoutRoomInput> | PrivateRoomMessageCreateWithoutRoomInput[] | PrivateRoomMessageUncheckedCreateWithoutRoomInput[]
+    connectOrCreate?: PrivateRoomMessageCreateOrConnectWithoutRoomInput | PrivateRoomMessageCreateOrConnectWithoutRoomInput[]
+    upsert?: PrivateRoomMessageUpsertWithWhereUniqueWithoutRoomInput | PrivateRoomMessageUpsertWithWhereUniqueWithoutRoomInput[]
+    createMany?: PrivateRoomMessageCreateManyRoomInputEnvelope
+    set?: PrivateRoomMessageWhereUniqueInput | PrivateRoomMessageWhereUniqueInput[]
+    disconnect?: PrivateRoomMessageWhereUniqueInput | PrivateRoomMessageWhereUniqueInput[]
+    delete?: PrivateRoomMessageWhereUniqueInput | PrivateRoomMessageWhereUniqueInput[]
+    connect?: PrivateRoomMessageWhereUniqueInput | PrivateRoomMessageWhereUniqueInput[]
+    update?: PrivateRoomMessageUpdateWithWhereUniqueWithoutRoomInput | PrivateRoomMessageUpdateWithWhereUniqueWithoutRoomInput[]
+    updateMany?: PrivateRoomMessageUpdateManyWithWhereWithoutRoomInput | PrivateRoomMessageUpdateManyWithWhereWithoutRoomInput[]
+    deleteMany?: PrivateRoomMessageScalarWhereInput | PrivateRoomMessageScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutPrivateRoomMessagesInput = {
+    create?: XOR<UserCreateWithoutPrivateRoomMessagesInput, UserUncheckedCreateWithoutPrivateRoomMessagesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPrivateRoomMessagesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type PrivateRoomCreateNestedOneWithoutMessagesInput = {
+    create?: XOR<PrivateRoomCreateWithoutMessagesInput, PrivateRoomUncheckedCreateWithoutMessagesInput>
+    connectOrCreate?: PrivateRoomCreateOrConnectWithoutMessagesInput
+    connect?: PrivateRoomWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutPrivateRoomMessagesNestedInput = {
+    create?: XOR<UserCreateWithoutPrivateRoomMessagesInput, UserUncheckedCreateWithoutPrivateRoomMessagesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPrivateRoomMessagesInput
+    upsert?: UserUpsertWithoutPrivateRoomMessagesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPrivateRoomMessagesInput, UserUpdateWithoutPrivateRoomMessagesInput>, UserUncheckedUpdateWithoutPrivateRoomMessagesInput>
+  }
+
+  export type PrivateRoomUpdateOneRequiredWithoutMessagesNestedInput = {
+    create?: XOR<PrivateRoomCreateWithoutMessagesInput, PrivateRoomUncheckedCreateWithoutMessagesInput>
+    connectOrCreate?: PrivateRoomCreateOrConnectWithoutMessagesInput
+    upsert?: PrivateRoomUpsertWithoutMessagesInput
+    connect?: PrivateRoomWhereUniqueInput
+    update?: XOR<XOR<PrivateRoomUpdateToOneWithWhereWithoutMessagesInput, PrivateRoomUpdateWithoutMessagesInput>, PrivateRoomUncheckedUpdateWithoutMessagesInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -14806,6 +17694,30 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type PrivateRoomMessageCreateWithoutSenderInput = {
+    id?: string
+    text: string
+    createdAt?: Date | string
+    room: PrivateRoomCreateNestedOneWithoutMessagesInput
+  }
+
+  export type PrivateRoomMessageUncheckedCreateWithoutSenderInput = {
+    id?: string
+    roomId: string
+    text: string
+    createdAt?: Date | string
+  }
+
+  export type PrivateRoomMessageCreateOrConnectWithoutSenderInput = {
+    where: PrivateRoomMessageWhereUniqueInput
+    create: XOR<PrivateRoomMessageCreateWithoutSenderInput, PrivateRoomMessageUncheckedCreateWithoutSenderInput>
+  }
+
+  export type PrivateRoomMessageCreateManySenderInputEnvelope = {
+    data: PrivateRoomMessageCreateManySenderInput | PrivateRoomMessageCreateManySenderInput[]
+    skipDuplicates?: boolean
+  }
+
   export type MessageUpsertWithWhereUniqueWithoutReceiverInput = {
     where: MessageWhereUniqueInput
     update: XOR<MessageUpdateWithoutReceiverInput, MessageUncheckedUpdateWithoutReceiverInput>
@@ -14877,6 +17789,33 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"GlobalChatMessage"> | Date | string
   }
 
+  export type PrivateRoomMessageUpsertWithWhereUniqueWithoutSenderInput = {
+    where: PrivateRoomMessageWhereUniqueInput
+    update: XOR<PrivateRoomMessageUpdateWithoutSenderInput, PrivateRoomMessageUncheckedUpdateWithoutSenderInput>
+    create: XOR<PrivateRoomMessageCreateWithoutSenderInput, PrivateRoomMessageUncheckedCreateWithoutSenderInput>
+  }
+
+  export type PrivateRoomMessageUpdateWithWhereUniqueWithoutSenderInput = {
+    where: PrivateRoomMessageWhereUniqueInput
+    data: XOR<PrivateRoomMessageUpdateWithoutSenderInput, PrivateRoomMessageUncheckedUpdateWithoutSenderInput>
+  }
+
+  export type PrivateRoomMessageUpdateManyWithWhereWithoutSenderInput = {
+    where: PrivateRoomMessageScalarWhereInput
+    data: XOR<PrivateRoomMessageUpdateManyMutationInput, PrivateRoomMessageUncheckedUpdateManyWithoutSenderInput>
+  }
+
+  export type PrivateRoomMessageScalarWhereInput = {
+    AND?: PrivateRoomMessageScalarWhereInput | PrivateRoomMessageScalarWhereInput[]
+    OR?: PrivateRoomMessageScalarWhereInput[]
+    NOT?: PrivateRoomMessageScalarWhereInput | PrivateRoomMessageScalarWhereInput[]
+    id?: StringFilter<"PrivateRoomMessage"> | string
+    roomId?: StringFilter<"PrivateRoomMessage"> | string
+    senderId?: StringFilter<"PrivateRoomMessage"> | string
+    text?: StringFilter<"PrivateRoomMessage"> | string
+    createdAt?: DateTimeFilter<"PrivateRoomMessage"> | Date | string
+  }
+
   export type UserCreateWithoutRecvMessagesInput = {
     id?: string
     fullName: string
@@ -14897,6 +17836,7 @@ export namespace Prisma {
     createdAt?: Date | string
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
     globalMessages?: GlobalChatMessageCreateNestedManyWithoutSenderInput
+    privateRoomMessages?: PrivateRoomMessageCreateNestedManyWithoutSenderInput
   }
 
   export type UserUncheckedCreateWithoutRecvMessagesInput = {
@@ -14919,6 +17859,7 @@ export namespace Prisma {
     createdAt?: Date | string
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     globalMessages?: GlobalChatMessageUncheckedCreateNestedManyWithoutSenderInput
+    privateRoomMessages?: PrivateRoomMessageUncheckedCreateNestedManyWithoutSenderInput
   }
 
   export type UserCreateOrConnectWithoutRecvMessagesInput = {
@@ -14946,6 +17887,7 @@ export namespace Prisma {
     createdAt?: Date | string
     recvMessages?: MessageCreateNestedManyWithoutReceiverInput
     globalMessages?: GlobalChatMessageCreateNestedManyWithoutSenderInput
+    privateRoomMessages?: PrivateRoomMessageCreateNestedManyWithoutSenderInput
   }
 
   export type UserUncheckedCreateWithoutSentMessagesInput = {
@@ -14968,6 +17910,7 @@ export namespace Prisma {
     createdAt?: Date | string
     recvMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
     globalMessages?: GlobalChatMessageUncheckedCreateNestedManyWithoutSenderInput
+    privateRoomMessages?: PrivateRoomMessageUncheckedCreateNestedManyWithoutSenderInput
   }
 
   export type UserCreateOrConnectWithoutSentMessagesInput = {
@@ -15006,6 +17949,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
     globalMessages?: GlobalChatMessageUpdateManyWithoutSenderNestedInput
+    privateRoomMessages?: PrivateRoomMessageUpdateManyWithoutSenderNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRecvMessagesInput = {
@@ -15028,6 +17972,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     globalMessages?: GlobalChatMessageUncheckedUpdateManyWithoutSenderNestedInput
+    privateRoomMessages?: PrivateRoomMessageUncheckedUpdateManyWithoutSenderNestedInput
   }
 
   export type UserUpsertWithoutSentMessagesInput = {
@@ -15061,6 +18006,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recvMessages?: MessageUpdateManyWithoutReceiverNestedInput
     globalMessages?: GlobalChatMessageUpdateManyWithoutSenderNestedInput
+    privateRoomMessages?: PrivateRoomMessageUpdateManyWithoutSenderNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSentMessagesInput = {
@@ -15083,6 +18029,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recvMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
     globalMessages?: GlobalChatMessageUncheckedUpdateManyWithoutSenderNestedInput
+    privateRoomMessages?: PrivateRoomMessageUncheckedUpdateManyWithoutSenderNestedInput
   }
 
   export type GlobalChatMessageCreateWithoutRoomInput = {
@@ -15145,6 +18092,7 @@ export namespace Prisma {
     createdAt?: Date | string
     recvMessages?: MessageCreateNestedManyWithoutReceiverInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    privateRoomMessages?: PrivateRoomMessageCreateNestedManyWithoutSenderInput
   }
 
   export type UserUncheckedCreateWithoutGlobalMessagesInput = {
@@ -15167,6 +18115,7 @@ export namespace Prisma {
     createdAt?: Date | string
     recvMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    privateRoomMessages?: PrivateRoomMessageUncheckedCreateNestedManyWithoutSenderInput
   }
 
   export type UserCreateOrConnectWithoutGlobalMessagesInput = {
@@ -15224,6 +18173,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recvMessages?: MessageUpdateManyWithoutReceiverNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    privateRoomMessages?: PrivateRoomMessageUpdateManyWithoutSenderNestedInput
   }
 
   export type UserUncheckedUpdateWithoutGlobalMessagesInput = {
@@ -15246,6 +18196,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recvMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    privateRoomMessages?: PrivateRoomMessageUncheckedUpdateManyWithoutSenderNestedInput
   }
 
   export type GlobalChatsUpsertWithoutMessagesInput = {
@@ -15273,6 +18224,210 @@ export namespace Prisma {
     memberLists?: GlobalChatsUpdatememberListsInput | string[]
   }
 
+  export type PrivateRoomMessageCreateWithoutRoomInput = {
+    id?: string
+    text: string
+    createdAt?: Date | string
+    sender: UserCreateNestedOneWithoutPrivateRoomMessagesInput
+  }
+
+  export type PrivateRoomMessageUncheckedCreateWithoutRoomInput = {
+    id?: string
+    senderId: string
+    text: string
+    createdAt?: Date | string
+  }
+
+  export type PrivateRoomMessageCreateOrConnectWithoutRoomInput = {
+    where: PrivateRoomMessageWhereUniqueInput
+    create: XOR<PrivateRoomMessageCreateWithoutRoomInput, PrivateRoomMessageUncheckedCreateWithoutRoomInput>
+  }
+
+  export type PrivateRoomMessageCreateManyRoomInputEnvelope = {
+    data: PrivateRoomMessageCreateManyRoomInput | PrivateRoomMessageCreateManyRoomInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PrivateRoomMessageUpsertWithWhereUniqueWithoutRoomInput = {
+    where: PrivateRoomMessageWhereUniqueInput
+    update: XOR<PrivateRoomMessageUpdateWithoutRoomInput, PrivateRoomMessageUncheckedUpdateWithoutRoomInput>
+    create: XOR<PrivateRoomMessageCreateWithoutRoomInput, PrivateRoomMessageUncheckedCreateWithoutRoomInput>
+  }
+
+  export type PrivateRoomMessageUpdateWithWhereUniqueWithoutRoomInput = {
+    where: PrivateRoomMessageWhereUniqueInput
+    data: XOR<PrivateRoomMessageUpdateWithoutRoomInput, PrivateRoomMessageUncheckedUpdateWithoutRoomInput>
+  }
+
+  export type PrivateRoomMessageUpdateManyWithWhereWithoutRoomInput = {
+    where: PrivateRoomMessageScalarWhereInput
+    data: XOR<PrivateRoomMessageUpdateManyMutationInput, PrivateRoomMessageUncheckedUpdateManyWithoutRoomInput>
+  }
+
+  export type UserCreateWithoutPrivateRoomMessagesInput = {
+    id?: string
+    fullName: string
+    email: string
+    password?: string | null
+    googleId?: string | null
+    bio?: string | null
+    avatar?: string | null
+    birthday?: Date | string | null
+    gender?: string | null
+    mood?: string | null
+    avatar2?: string | null
+    purpose?: string | null
+    interest?: UserCreateinterestInput | string[]
+    images?: UserCreateimagesInput | string[]
+    instagram?: string | null
+    facebook?: string | null
+    createdAt?: Date | string
+    recvMessages?: MessageCreateNestedManyWithoutReceiverInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    globalMessages?: GlobalChatMessageCreateNestedManyWithoutSenderInput
+  }
+
+  export type UserUncheckedCreateWithoutPrivateRoomMessagesInput = {
+    id?: string
+    fullName: string
+    email: string
+    password?: string | null
+    googleId?: string | null
+    bio?: string | null
+    avatar?: string | null
+    birthday?: Date | string | null
+    gender?: string | null
+    mood?: string | null
+    avatar2?: string | null
+    purpose?: string | null
+    interest?: UserCreateinterestInput | string[]
+    images?: UserCreateimagesInput | string[]
+    instagram?: string | null
+    facebook?: string | null
+    createdAt?: Date | string
+    recvMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    globalMessages?: GlobalChatMessageUncheckedCreateNestedManyWithoutSenderInput
+  }
+
+  export type UserCreateOrConnectWithoutPrivateRoomMessagesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutPrivateRoomMessagesInput, UserUncheckedCreateWithoutPrivateRoomMessagesInput>
+  }
+
+  export type PrivateRoomCreateWithoutMessagesInput = {
+    id?: string
+    createrId: string
+    roomName: string
+    roomImage?: string | null
+    category?: string | null
+    description?: string | null
+    memberLists?: PrivateRoomCreatememberListsInput | string[]
+  }
+
+  export type PrivateRoomUncheckedCreateWithoutMessagesInput = {
+    id?: string
+    createrId: string
+    roomName: string
+    roomImage?: string | null
+    category?: string | null
+    description?: string | null
+    memberLists?: PrivateRoomCreatememberListsInput | string[]
+  }
+
+  export type PrivateRoomCreateOrConnectWithoutMessagesInput = {
+    where: PrivateRoomWhereUniqueInput
+    create: XOR<PrivateRoomCreateWithoutMessagesInput, PrivateRoomUncheckedCreateWithoutMessagesInput>
+  }
+
+  export type UserUpsertWithoutPrivateRoomMessagesInput = {
+    update: XOR<UserUpdateWithoutPrivateRoomMessagesInput, UserUncheckedUpdateWithoutPrivateRoomMessagesInput>
+    create: XOR<UserCreateWithoutPrivateRoomMessagesInput, UserUncheckedCreateWithoutPrivateRoomMessagesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutPrivateRoomMessagesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutPrivateRoomMessagesInput, UserUncheckedUpdateWithoutPrivateRoomMessagesInput>
+  }
+
+  export type UserUpdateWithoutPrivateRoomMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    mood?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
+    purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: UserUpdateinterestInput | string[]
+    images?: UserUpdateimagesInput | string[]
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    recvMessages?: MessageUpdateManyWithoutReceiverNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    globalMessages?: GlobalChatMessageUpdateManyWithoutSenderNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutPrivateRoomMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    mood?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
+    purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: UserUpdateinterestInput | string[]
+    images?: UserUpdateimagesInput | string[]
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    recvMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    globalMessages?: GlobalChatMessageUncheckedUpdateManyWithoutSenderNestedInput
+  }
+
+  export type PrivateRoomUpsertWithoutMessagesInput = {
+    update: XOR<PrivateRoomUpdateWithoutMessagesInput, PrivateRoomUncheckedUpdateWithoutMessagesInput>
+    create: XOR<PrivateRoomCreateWithoutMessagesInput, PrivateRoomUncheckedCreateWithoutMessagesInput>
+    where?: PrivateRoomWhereInput
+  }
+
+  export type PrivateRoomUpdateToOneWithWhereWithoutMessagesInput = {
+    where?: PrivateRoomWhereInput
+    data: XOR<PrivateRoomUpdateWithoutMessagesInput, PrivateRoomUncheckedUpdateWithoutMessagesInput>
+  }
+
+  export type PrivateRoomUpdateWithoutMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createrId?: StringFieldUpdateOperationsInput | string
+    roomName?: StringFieldUpdateOperationsInput | string
+    roomImage?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    memberLists?: PrivateRoomUpdatememberListsInput | string[]
+  }
+
+  export type PrivateRoomUncheckedUpdateWithoutMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createrId?: StringFieldUpdateOperationsInput | string
+    roomName?: StringFieldUpdateOperationsInput | string
+    roomImage?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    memberLists?: PrivateRoomUpdatememberListsInput | string[]
+  }
+
   export type MessageCreateManyReceiverInput = {
     id?: string
     senderId: string
@@ -15290,6 +18445,13 @@ export namespace Prisma {
   }
 
   export type GlobalChatMessageCreateManySenderInput = {
+    id?: string
+    roomId: string
+    text: string
+    createdAt?: Date | string
+  }
+
+  export type PrivateRoomMessageCreateManySenderInput = {
     id?: string
     roomId: string
     text: string
@@ -15365,6 +18527,27 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type PrivateRoomMessageUpdateWithoutSenderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    room?: PrivateRoomUpdateOneRequiredWithoutMessagesNestedInput
+  }
+
+  export type PrivateRoomMessageUncheckedUpdateWithoutSenderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roomId?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PrivateRoomMessageUncheckedUpdateManyWithoutSenderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roomId?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type GlobalChatMessageCreateManyRoomInput = {
     id?: string
     senderId: string
@@ -15387,6 +18570,34 @@ export namespace Prisma {
   }
 
   export type GlobalChatMessageUncheckedUpdateManyWithoutRoomInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PrivateRoomMessageCreateManyRoomInput = {
+    id?: string
+    senderId: string
+    text: string
+    createdAt?: Date | string
+  }
+
+  export type PrivateRoomMessageUpdateWithoutRoomInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sender?: UserUpdateOneRequiredWithoutPrivateRoomMessagesNestedInput
+  }
+
+  export type PrivateRoomMessageUncheckedUpdateWithoutRoomInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PrivateRoomMessageUncheckedUpdateManyWithoutRoomInput = {
     id?: StringFieldUpdateOperationsInput | string
     senderId?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string

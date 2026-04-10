@@ -10,27 +10,28 @@ datasource db {
 }
 
 model User {
-  id             String                                 @id @default(uuid())
-  fullName       String
-  email          String                                 @unique
-  password       String?
-  googleId       String?
-  bio            String?
-  avatar         String?
-  birthday       DateTime?
-  location       Unsupported("geography(Point, 4326)")?
-  gender         String?
-  mood           String?
-  avatar2        String?
-  purpose        String?
-  interest       String[]                               @default([])
-  images         String[]                               @default([])
-  instagram      String?
-  facebook       String?
-  createdAt      DateTime                               @default(now())
-  recvMessages   Message[]                              @relation("received")
-  sentMessages   Message[]                              @relation("sent")
-  globalMessages GlobalChatMessage[]                    @relation("UserGlobalMessages")
+  id                  String                                 @id @default(uuid())
+  fullName            String
+  email               String                                 @unique
+  password            String?
+  googleId            String?
+  bio                 String?
+  avatar              String?
+  birthday            DateTime?
+  location            Unsupported("geography(Point, 4326)")?
+  gender              String?
+  mood                String?
+  avatar2             String?
+  purpose             String?
+  interest            String[]                               @default([])
+  images              String[]                               @default([])
+  instagram           String?
+  facebook            String?
+  createdAt           DateTime                               @default(now())
+  recvMessages        Message[]                              @relation("received")
+  sentMessages        Message[]                              @relation("sent")
+  globalMessages      GlobalChatMessage[]                    @relation("UserGlobalMessages")
+  privateRoomMessages PrivateRoomMessage[]                   @relation("UserPrivateRoomMessages")
 }
 
 model privacy {
@@ -111,4 +112,25 @@ model GlobalChatMessage {
   createdAt DateTime    @default(now())
   sender    User        @relation("UserGlobalMessages", fields: [senderId], references: [id])
   room      GlobalChats @relation(fields: [roomId], references: [id])
+}
+
+model PrivateRoom {
+  id          String               @id @default(uuid())
+  createrId   String
+  roomName    String               @unique
+  roomImage   String?
+  category    String?
+  description String?
+  memberLists String[]             @default([])
+  messages    PrivateRoomMessage[]
+}
+
+model PrivateRoomMessage {
+  id        String      @id @default(uuid())
+  roomId    String
+  senderId  String
+  text      String
+  createdAt DateTime    @default(now())
+  sender    User        @relation("UserPrivateRoomMessages", fields: [senderId], references: [id])
+  room      PrivateRoom @relation(fields: [roomId], references: [id])
 }

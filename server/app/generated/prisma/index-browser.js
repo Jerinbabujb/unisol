@@ -209,6 +209,24 @@ exports.Prisma.GlobalChatMessageScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.PrivateRoomScalarFieldEnum = {
+  id: 'id',
+  createrId: 'createrId',
+  roomName: 'roomName',
+  roomImage: 'roomImage',
+  category: 'category',
+  description: 'description',
+  memberLists: 'memberLists'
+};
+
+exports.Prisma.PrivateRoomMessageScalarFieldEnum = {
+  id: 'id',
+  roomId: 'roomId',
+  senderId: 'senderId',
+  text: 'text',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -235,7 +253,9 @@ exports.Prisma.ModelName = {
   EmojiCharades: 'EmojiCharades',
   Scoring: 'Scoring',
   GlobalChats: 'GlobalChats',
-  GlobalChatMessage: 'GlobalChatMessage'
+  GlobalChatMessage: 'GlobalChatMessage',
+  PrivateRoom: 'PrivateRoom',
+  PrivateRoomMessage: 'PrivateRoomMessage'
 };
 
 /**

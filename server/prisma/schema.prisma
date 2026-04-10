@@ -31,6 +31,7 @@ model User {
   recvMessages Message[] @relation("received")
   sentMessages Message[] @relation("sent")
    globalMessages GlobalChatMessage[] @relation("UserGlobalMessages")
+   privateRoomMessages PrivateRoomMessage[] @relation("UserPrivateRoomMessages")
 
 }
 model privacy{
@@ -116,4 +117,27 @@ model GlobalChatMessage {
   createdAt DateTime @default(now())
   sender    User        @relation("UserGlobalMessages", fields: [senderId], references: [id])
   room      GlobalChats @relation(fields: [roomId], references: [id])
+}
+
+
+model PrivateRoom{
+  id     String @id @default(uuid())
+  createrId String
+  roomName  String @unique
+  roomImage  String?
+  category String?
+  description String?
+  memberLists  String[] @default([])
+  messages    PrivateRoomMessage[]
+}
+
+
+model PrivateRoomMessage {
+  id        String   @id @default(uuid())
+  roomId    String
+  senderId  String
+  text      String
+  createdAt DateTime @default(now())
+  sender    User        @relation("UserPrivateRoomMessages", fields: [senderId], references: [id])
+  room      PrivateRoom @relation(fields: [roomId], references: [id])
 }

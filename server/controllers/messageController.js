@@ -7,25 +7,25 @@ import { io, userSocketMap } from "../server.js";
 export const getUsers = async (req, res) => {
   try {
     const userId = req.user.id;
-   
+
     // 1. Get all users except logged-in user
     const users = await prisma.user.findMany({
       where: {
-        id: { not:userId }
+        id: { not: userId }
       },
       select: {
         id: true,
         fullName: true,
         avatar: true,
         bio: true,
-        mood:true,
-        instagram:true,
-        facebook:true,
-        interest:true,
-        images:true
+        mood: true,
+        instagram: true,
+        facebook: true,
+        interest: true,
+        images: true
       }
     });
-    
+
     res.json({
       success: true,
       users,
@@ -43,37 +43,37 @@ export const getUsers = async (req, res) => {
 export const getUserForSidebar = async (req, res) => {
   try {
     const userId = req.user.id;
-    const getUsers= await prisma.connection.findMany({
-      where:{
-        OR:[
-          {senderId:userId},
-          {receiverId:userId}
+    const getUsers = await prisma.connection.findMany({
+      where: {
+        OR: [
+          { senderId: userId },
+          { receiverId: userId }
         ]
-        
+
       },
-      select:{
-          senderId:true,
-          receiverId:true
-        }
+      select: {
+        senderId: true,
+        receiverId: true
+      }
     });
-    const ids=getUsers.map(id=>
-      id.senderId===userId?id.receiverId:id.senderId
+    const ids = getUsers.map(id =>
+      id.senderId === userId ? id.receiverId : id.senderId
     );
     // 1. Get all users except logged-in user
     const users = await prisma.user.findMany({
       where: {
-        id: { in:ids }
+        id: { in: ids }
       },
       select: {
         id: true,
         fullName: true,
         avatar: true,
         bio: true,
-        mood:true,
-        instagram:true,
-        facebook:true,
-        interest:true,
-        images:true
+        mood: true,
+        instagram: true,
+        facebook: true,
+        interest: true,
+        images: true
       }
     });
 
@@ -112,19 +112,19 @@ export const getUserForSidebar = async (req, res) => {
 };
 
 
-export const allSongs = async (req,res) => {
-  try{
-    const songs= await prisma.song.findMany({
-      select:{
-      id:true,
-      song_name:true,
-      song_url:true,
-      duration:true
+export const allSongs = async (req, res) => {
+  try {
+    const songs = await prisma.song.findMany({
+      select: {
+        id: true,
+        song_name: true,
+        song_url: true,
+        duration: true
       },
     })
-   res.status(200).json({ success: true, songs: songs || [] });
+    res.status(200).json({ success: true, songs: songs || [] });
   }
-  catch(error){
+  catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
 };
@@ -184,14 +184,14 @@ export const connectionRequest = async (req, res) => {
 
     // 1. Match your variable names exactly to your schema fields
     const senderId = req.user.id;
-    let {id} = req.body;
-    const receiverId=id;
-    console.log("req.body",req.body);
-    let {status} = req.body;
+    let { id } = req.body;
+    const receiverId = id;
+    console.log("req.body", req.body);
+    let { status } = req.body;
     console.log(senderId);
     console.log("backedn :", status);
-    let updateStatus=null;
-    let request=null;
+    let updateStatus = null;
+    let request = null;
     // 2. Check for existing request
     const existingRequest = await prisma.connection.findFirst({
       where: {
@@ -203,67 +203,67 @@ export const connectionRequest = async (req, res) => {
     const connectionId = existingRequest?.id
 
     if (existingRequest) {
-      updateStatus=await prisma.connection.update({
-        where: {id:connectionId},
-        data:{
-        status:status
+      updateStatus = await prisma.connection.update({
+        where: { id: connectionId },
+        data: {
+          status: status
         }
       })
     }
-   else{
-    
+    else {
 
-    // 3. Create the record
-    request = await prisma.connection.create({
-      data: {
-        senderId: senderId,
-        receiverId: receiverId,
-        status: status
-      }
-    });
-  }
 
-    res.json({ success: true, request, updateStatus});
+      // 3. Create the record
+      request = await prisma.connection.create({
+        data: {
+          senderId: senderId,
+          receiverId: receiverId,
+          status: status
+        }
+      });
+    }
+
+    res.json({ success: true, request, updateStatus });
   } catch (error) {
     // CRITICAL: This will print the actual error to your terminal
-    console.error("PRISMA ERROR:", error); 
+    console.error("PRISMA ERROR:", error);
     res.status(500).json({ success: false, message: error.message });
   }
 };
 
-export const requestCheck = async(req,res) =>{
-  try{
-    const senderId= req.user.id;
+export const requestCheck = async (req, res) => {
+  try {
+    const senderId = req.user.id;
     const receiverId = req.params.id;
     const request = await prisma.connection.findFirst({
-      where:{
-        OR:[
+      where: {
+        OR: [
           { senderId: senderId, receiverId: receiverId },
           { senderId: receiverId, receiverId: senderId }
         ]
       }
     });
-    if(request){
-      console.log("recevierID",request.receiverId);
-      return res.json({success:true, recerverId:request.receiverId, senderId:request.senderId, request})
+    if (request) {
+      console.log("recevierID", request.receiverId);
+      return res.json({ success: true, recerverId: request.receiverId, senderId: request.senderId, request })
     }
   }
   catch (error) {
     // CRITICAL: This will print the actual error to your terminal
-    console.error("PRISMA ERROR:", error); 
+    console.error("PRISMA ERROR:", error);
     res.status(500).json({ success: false, message: error.message });
   }
 }
 
-export const freindRequestCheck = async(req,res) =>{
-  try{
-    const senderId= req.user.id;
+export const freindRequestCheck = async (req, res) => {
+  try {
+    const senderId = req.user.id;
 
-     const friendRequest = await prisma.connection.findMany({
-      where:{
-  receiverId:senderId,
-  status:"pending"
-},
+    const friendRequest = await prisma.connection.findMany({
+      where: {
+        receiverId: senderId,
+        status: "pending"
+      },
       select: {
         id: true,
         senderId: true,
@@ -271,24 +271,24 @@ export const freindRequestCheck = async(req,res) =>{
         status: true
       }
     });
-    
-      const senders= friendRequest.map(req=>req.senderId);
 
-      const user=await prisma.user.findMany({
-        where:{
-          id:{in:senders}
-        },
-        select:{
-          avatar:true,
-          fullName:true
-        }
-      })
-      return res.json({success:true, friendRequest, user})
-    
+    const senders = friendRequest.map(req => req.senderId);
+
+    const user = await prisma.user.findMany({
+      where: {
+        id: { in: senders }
+      },
+      select: {
+        avatar: true,
+        fullName: true
+      }
+    })
+    return res.json({ success: true, friendRequest, user })
+
   }
   catch (error) {
     // CRITICAL: This will print the actual error to your terminal
-    console.error("PRISMA ERROR:", error); 
+    console.error("PRISMA ERROR:", error);
     res.status(500).json({ success: false, message: error.message });
   }
 }
@@ -326,198 +326,198 @@ export const sendMessage = async (req, res) => {
   }
 };
 
-export const privacy=async(req,res)=>{
-    try{
-        const {field,state}=req.body;
-        const senderId=req.user.id;
-        const receiverId= req.params.id;
-        const privacy= await prisma.privacy.upsert({
-            where:{
-                senderId_receiverId:{senderId,receiverId}
-            },
-            update:{
-              [field]:state
-            },
-            create:{
-              senderId,
-              receiverId,
-              [field]:state,
-              instagramPreference: field === "instagramPreference" ? state : false,
-    facebookPreference: field === "facebookPreference" ? state : false
-            }
-          });
+export const privacy = async (req, res) => {
+  try {
+    const { field, state } = req.body;
+    const senderId = req.user.id;
+    const receiverId = req.params.id;
+    const privacy = await prisma.privacy.upsert({
+      where: {
+        senderId_receiverId: { senderId, receiverId }
+      },
+      update: {
+        [field]: state
+      },
+      create: {
+        senderId,
+        receiverId,
+        [field]: state,
+        instagramPreference: field === "instagramPreference" ? state : false,
+        facebookPreference: field === "facebookPreference" ? state : false
+      }
+    });
 
-            res.json({success:true,privacy})
+    res.json({ success: true, privacy })
+  }
+
+  catch (error) {
+    console.error("UPDATE ERROR:", error);
+    res.json({ success: false, message: error.message });
+  }
+}
+
+export const privacyCheck = async (req, res) => {
+  try {
+    const senderId = req.user.id;
+    const receiverId = req.params.id;
+    const privacyCheck = await prisma.privacy.findUnique({
+      where: {
+        senderId_receiverId: { senderId: receiverId, receiverId: senderId }
+      },
+      select: {
+        senderId: true,
+        receiverId: true,
+        instagramPreference: true,
+        facebookPreference: true
+      }
+    })
+    res.json({ success: true, privacyCheck, senderId, receiverId })
+  }
+  catch (error) {
+    console.error("UPDATE ERROR:", error);
+    res.json({ success: false, message: error.message });
+  }
+}
+export const privacyToggle = async (req, res) => {
+  try {
+    const senderId = req.user.id;
+    const receiverId = req.params.id;
+    const privacyToggle = await prisma.privacy.findUnique({
+      where: {
+        senderId_receiverId: { senderId, receiverId }
+      },
+      select: {
+        senderId: true,
+        receiverId: true,
+        instagramPreference: true,
+        facebookPreference: true
+      }
+    })
+    res.json({ success: true, privacyToggle, senderId, receiverId })
+  }
+  catch (error) {
+    console.error("UPDATE ERROR:", error);
+    res.json({ success: false, message: error.message });
+  }
+}
+
+
+export const globalRoom = async (req, res) => {
+  try {
+    const globalRoomLists = await prisma.GlobalChats.findMany({
+      select: {
+        id: true,
+        roomName: true,
+        memberLists: true,
+        roomImage: true
+      }
+    });
+    res.json({ success: true, globalRoomLists });
+  }
+  catch (error) {
+    console.error("UPDATE ERROR:", error);
+    res.json({ success: false, message: error.message });
+  }
+}
+
+export const globalRoomJoin = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { room } = req.body;
+    const join = await prisma.GlobalChats.update({
+      where: {
+        roomName: room
+      },
+      data: {
+        memberLists: {
+          push: userId
         }
-    
-    catch (error) {
-        console.error("UPDATE ERROR:", error);
-        res.json({ success: false, message: error.message });
-    }
-}
-
-export const privacyCheck=async(req,res)=>{
-  try{
-    const senderId=req.user.id;
-    const receiverId=req.params.id;
-    const privacyCheck= await prisma.privacy.findUnique({
-      where:{
-        senderId_receiverId:{senderId:receiverId,receiverId:senderId}
-      },
-      select:{
-        senderId:true,
-        receiverId:true,
-        instagramPreference:true,
-        facebookPreference:true
       }
     })
-    res.json({success:true,privacyCheck,senderId,receiverId})
+
+
+
+    res.json({ success: true, join });
   }
   catch (error) {
-        console.error("UPDATE ERROR:", error);
-        res.json({ success: false, message: error.message });
-    }
+    console.error("UPDATE ERROR:", error);
+    res.json({ success: false, message: error.message });
+  }
 }
-export const privacyToggle=async(req,res)=>{
-  try{
-    const senderId=req.user.id;
-    const receiverId=req.params.id;
-    const privacyToggle= await prisma.privacy.findUnique({
-      where:{
-        senderId_receiverId:{senderId,receiverId}
+
+export const userGlobalRoomExists = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    console.log("userId", userId);
+    const exists = await prisma.GlobalChats.findMany({
+      where: {
+        memberLists: { has: userId }
       },
-      select:{
-        senderId:true,
-        receiverId:true,
-        instagramPreference:true,
-        facebookPreference:true
-      }
-    })
-    res.json({success:true,privacyToggle,senderId,receiverId})
-  }
-  catch (error) {
-        console.error("UPDATE ERROR:", error);
-        res.json({ success: false, message: error.message });
-    }
-}
-
-
-export const globalRoom=async(req,res)=>{
-  try{
-    const globalRoomLists=await prisma.GlobalChats.findMany({
-      select:{
-        id:true,
-        roomName:true,
-        memberLists:true,
-        roomImage:true
+      select: {
+        id: true,
+        roomName: true,
+        roomImage: true
       }
     });
-    res.json({success:true,globalRoomLists});
+    console.log("user exists?", exists);
+    res.json({ success: true, exists });
   }
   catch (error) {
-        console.error("UPDATE ERROR:", error);
-        res.json({ success: false, message: error.message });
-    }
-}
-
-export const globalRoomJoin=async(req,res)=>{
-  try{
-    const userId=req.user.id;
-    const {room}= req.body;
-    const join= await prisma.GlobalChats.update({
-      where:{
-        roomName:room
-      },
-      data:{
-        memberLists:{
-          push:userId
-        }
-      }
-    })
-
-    
-
-    res.json({success:true,join});
+    console.error("UPDATE ERROR:", error);
+    res.json({ success: false, message: error.message });
   }
-   catch (error) {
-        console.error("UPDATE ERROR:", error);
-        res.json({ success: false, message: error.message });
-    }
-}
-
-export const userGlobalRoomExists=async(req,res)=>{
-  try{
-    const userId=req.user.id;
-    console.log("userId",userId);
-    const exists= await prisma.GlobalChats.findMany({
-      where:{
-        memberLists:{has:userId}
-      },
-      select:{
-        id:true,
-        roomName:true,
-        roomImage:true
-      }
-    });
-    console.log("user exists?",exists);
-    res.json({success:true,exists});
-  }
-   catch (error) {
-        console.error("UPDATE ERROR:", error);
-        res.json({ success: false, message: error.message });
-    }
 }
 
 
-export const globalRoomMembers=async(req,res)=>{
-  try{
-    const{room}= req.body;
-    const globalRoomMembers=await prisma.GlobalChats.findUnique({
-      where:{
-        roomName:room
+export const globalRoomMembers = async (req, res) => {
+  try {
+    const { room } = req.body;
+    const globalRoomMembers = await prisma.GlobalChats.findUnique({
+      where: {
+        roomName: room
       },
-      select:{
-        id:true,
-        memberLists:true
+      select: {
+        id: true,
+        memberLists: true
       }
     });
 
-    const members= await prisma.user.findMany({
-      where:{
-        id:{in:globalRoomMembers.memberLists}
+    const members = await prisma.user.findMany({
+      where: {
+        id: { in: globalRoomMembers.memberLists }
       },
-      select:{
-        id:true,
-        fullName:true,
-        avatar:true
+      select: {
+        id: true,
+        fullName: true,
+        avatar: true
       }
     })
-    res.json({success:true,globalRoomMembers,members});
+    res.json({ success: true, globalRoomMembers, members });
   }
   catch (error) {
-        console.error("UPDATE ERROR:", error);
-        res.json({ success: false, message: error.message });
-    }
+    console.error("UPDATE ERROR:", error);
+    res.json({ success: false, message: error.message });
+  }
 }
 
-export const globalRoomSendMessage=async(req,res)=>{
-  try{
-  const senderId=req.user.id;
-  const {text}= req.body
-  const {currentRoom} =req.body
-  const sendMessage=await prisma.GlobalChatMessage.create({
-    data:{
-      text,
-      room:{connect:{id:currentRoom}},
-      sender:{connect:{id:senderId}}
-    }
-  });
-  res.json({success:true,sendMessage});
-}
-catch (error) {
-        console.error("UPDATE ERROR:", error);
-        res.json({ success: false, message: error.message });
-    }
+export const globalRoomSendMessage = async (req, res) => {
+  try {
+    const senderId = req.user.id;
+    const { text } = req.body
+    const { currentRoom } = req.body
+    const sendMessage = await prisma.GlobalChatMessage.create({
+      data: {
+        text,
+        room: { connect: { id: currentRoom } },
+        sender: { connect: { id: senderId } }
+      }
+    });
+    res.json({ success: true, sendMessage });
+  }
+  catch (error) {
+    console.error("UPDATE ERROR:", error);
+    res.json({ success: false, message: error.message });
+  }
 }
 
 
@@ -534,18 +534,18 @@ export const getRoomMessages = async (req, res) => {
         id: true,
         text: true,
         senderId: true,
-        createdAt:true,
-        sender:{
-          select:{
-            id:true,
-            fullName:true,
-            avatar:true
+        createdAt: true,
+        sender: {
+          select: {
+            id: true,
+            fullName: true,
+            avatar: true
           }
         }
       },
     });
 
-    const user=await prisma.User.findFirst
+    const user = await prisma.User.findFirst
 
     res.json({ success: true, messages });
   } catch (error) {
@@ -553,3 +553,86 @@ export const getRoomMessages = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
+
+export const createRoom = async (req, res) => {
+  try {
+    const senderId = req.user.id;
+    const { roomName, roomImage, category, description } = req.body;
+    let room_image = null;
+    if (roomImage) {
+      const image = await cloudinary.uploader.upload(roomImage);
+      room_image = image.secure_url;
+    }
+    const room = await prisma.PrivateRoom.create({
+      data: {
+        roomName,
+        createrId: senderId,
+        roomImage,
+        category,
+        description,
+        memberLists: {
+          set: [senderId]
+        }
+      }
+    });
+    res.json({ success: true, room });
+  }
+  catch (error) {
+    console.error("UPDATE ERROR:", error);
+    res.json({ success: false, message: error.message });
+  }
+}
+
+export const getprivateRoom = async (req, res) => {
+  try {
+    const senderId = req.user.id;
+    const privateRoom = await prisma.PrivateRoom.findMany({
+      where: {
+        memberLists: { has: senderId }
+      },
+      select: {
+        id: true,
+        roomName: true,
+        roomImage: true
+      }
+    });
+    console.log("privateRoom", privateRoom);
+    res.json({ success: true, privateRoom });
+  }
+  catch (error) {
+    console.error("UPDATE ERROR:", error);
+    res.json({ success: false, message: error.message });
+  }
+}
+
+
+export const privateRoomMembers = async (req, res) => {
+  try {
+    const { room } = req.body;
+    const privateRoomMembers = await prisma.PrivateRoom.findUnique({
+      where: {
+        roomName: room
+      },
+      select: {
+        id: true,
+        memberLists: true
+      }
+    });
+    const members = await prisma.user.findMany({
+      where: {
+        id: { in: privateRoomMembers.memberLists }
+      },
+      select: {
+        id: true,
+        fullName: true,
+        avatar: true
+      }
+    })
+    res.json({ success: true, privateRoomMembers, members });
+  }
+  catch (error) {
+    console.error("UPDATE ERROR:", error);
+    res.json({ success: false, message: error.message });
+  }
+}
