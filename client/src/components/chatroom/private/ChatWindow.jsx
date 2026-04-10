@@ -13,7 +13,7 @@ import { GameContext } from "../../../../context/GameContext";
 import assets from "../../../assets";
 
 
-const GlobalChatWindow = () => {
+const PrivateChatWindow = () => {
   const { roomName } = useParams();
   const { selectedUser, setSelectedUser, getMessages, sendMessage, getSongs, song, currentRoom,
     roomMessages,
@@ -171,8 +171,8 @@ const GlobalChatWindow = () => {
               <div className="flex flex-col max-w-[75%]">
                 <div
                   className={`px-4 py-2 text-sm rounded-2xl shadow-sm break-words ${isMine
-                      ? "bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-br-none"
-                      : "bg-white text-gray-800 border rounded-bl-none"
+                    ? "bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-br-none"
+                    : "bg-white text-gray-800 border rounded-bl-none"
                     }`}
                 >
                   {msg.text}
@@ -313,4 +313,4 @@ const GlobalChatWindow = () => {
     </div>
   );
 };
-export default GlobalChatWindow;
+export default PrivateChatWindow;

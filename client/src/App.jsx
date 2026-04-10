@@ -14,6 +14,8 @@ import GroupsLists from './components/chatroom/global/GroupLists';
 import ChatWindow from './components/chat/ChatWindow';
 import GlobalChatWindow from './components/chatroom/global/ChatWindow';
 import GlobalSideBar from './components/chatroom/global/SideBar';
+import CreateRoom from './components/chatroom/private/CreateRoom';
+import PrivateChatWindow from './components/chatroom/private/ChatWindow';
 
 const App = () => {
   const { authUser, isCheckingAuth } = useContext(AuthContext);
@@ -30,21 +32,23 @@ const App = () => {
     <div className="bg-[url('./assets/bgImage.svg')] bg-cover bg-no-repeat">
       <BrowserRouter>
         <Toaster />
-        
+
         {/* GLOBAL MODAL: This allows the user to receive calls on ANY page */}
-        {authUser && <IncomingCallModal/>} 
+        {authUser && <IncomingCallModal />}
 
         <Routes>
-          <Route path='/' element={authUser ? <HomePage/> : <Navigate to="/login" />} />
+          <Route path='/' element={authUser ? <HomePage /> : <Navigate to="/login" />} />
           <Route path='/login' element={!authUser ? <LoginPage /> : <Navigate to="/" />} />
           <Route path='/profile' element={authUser ? <ProfilePage /> : <Navigate to="/login" />} />
-          <Route path='/user-profile' element={authUser? <SelectedUserProfilePage/>: <Navigate to='login'/>}/>
-          <Route path='/messages' element={authUser ? <ChatPage/> : <Navigate to="/login" />} />
-          <Route path='/friend-request' element={authUser? <FriendRequests/>:<Navigate to="/login"/>}/>
-          <Route path='/Emoji Charades' element={authUser? <EmojiCharades/>:<Navigate to="/login"/>}/>
-          <Route path='/global-room-lists' element={authUser? <GroupsLists/>:<Navigate to="/login"/>}/>
-          <Route path='/global-room/:roomName' element={authUser? <GlobalChatWindow/>:<Navigate to='/login'/>}/>
-          <Route path='/:room/profile' element={authUser? <GlobalSideBar/>:<Navigate to='/login'/>}/>
+          <Route path='/user-profile' element={authUser ? <SelectedUserProfilePage /> : <Navigate to='login' />} />
+          <Route path='/messages' element={authUser ? <ChatPage /> : <Navigate to="/login" />} />
+          <Route path='/friend-request' element={authUser ? <FriendRequests /> : <Navigate to="/login" />} />
+          <Route path='/Emoji Charades' element={authUser ? <EmojiCharades /> : <Navigate to="/login" />} />
+          <Route path='/global-room-lists' element={authUser ? <GroupsLists /> : <Navigate to="/login" />} />
+          <Route path='/create-room' element={authUser ? <CreateRoom /> : <Navigate to='/login' />} />
+          <Route path='/private-room/:roomName' element={authUser ? <PrivateChatWindow /> : <Navigate to='/login' />} />
+          <Route path='/global-room/:roomName' element={authUser ? <GlobalChatWindow /> : <Navigate to='/login' />} />
+          <Route path='/:room/profile' element={authUser ? <GlobalSideBar /> : <Navigate to='/login' />} />
         </Routes>
       </BrowserRouter>
     </div>
