@@ -118,6 +118,7 @@ model PrivateRoom {
   id          String               @id @default(uuid())
   createrId   String
   roomName    String               @unique
+  inviteToken String               @unique
   roomImage   String?
   category    String?
   description String?

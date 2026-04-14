@@ -12545,6 +12545,7 @@ export namespace Prisma {
     id: string | null
     createrId: string | null
     roomName: string | null
+    inviteToken: string | null
     roomImage: string | null
     category: string | null
     description: string | null
@@ -12554,6 +12555,7 @@ export namespace Prisma {
     id: string | null
     createrId: string | null
     roomName: string | null
+    inviteToken: string | null
     roomImage: string | null
     category: string | null
     description: string | null
@@ -12563,6 +12565,7 @@ export namespace Prisma {
     id: number
     createrId: number
     roomName: number
+    inviteToken: number
     roomImage: number
     category: number
     description: number
@@ -12575,6 +12578,7 @@ export namespace Prisma {
     id?: true
     createrId?: true
     roomName?: true
+    inviteToken?: true
     roomImage?: true
     category?: true
     description?: true
@@ -12584,6 +12588,7 @@ export namespace Prisma {
     id?: true
     createrId?: true
     roomName?: true
+    inviteToken?: true
     roomImage?: true
     category?: true
     description?: true
@@ -12593,6 +12598,7 @@ export namespace Prisma {
     id?: true
     createrId?: true
     roomName?: true
+    inviteToken?: true
     roomImage?: true
     category?: true
     description?: true
@@ -12676,6 +12682,7 @@ export namespace Prisma {
     id: string
     createrId: string
     roomName: string
+    inviteToken: string
     roomImage: string | null
     category: string | null
     description: string | null
@@ -12703,6 +12710,7 @@ export namespace Prisma {
     id?: boolean
     createrId?: boolean
     roomName?: boolean
+    inviteToken?: boolean
     roomImage?: boolean
     category?: boolean
     description?: boolean
@@ -12715,6 +12723,7 @@ export namespace Prisma {
     id?: boolean
     createrId?: boolean
     roomName?: boolean
+    inviteToken?: boolean
     roomImage?: boolean
     category?: boolean
     description?: boolean
@@ -12725,6 +12734,7 @@ export namespace Prisma {
     id?: boolean
     createrId?: boolean
     roomName?: boolean
+    inviteToken?: boolean
     roomImage?: boolean
     category?: boolean
     description?: boolean
@@ -12735,13 +12745,14 @@ export namespace Prisma {
     id?: boolean
     createrId?: boolean
     roomName?: boolean
+    inviteToken?: boolean
     roomImage?: boolean
     category?: boolean
     description?: boolean
     memberLists?: boolean
   }
 
-  export type PrivateRoomOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createrId" | "roomName" | "roomImage" | "category" | "description" | "memberLists", ExtArgs["result"]["privateRoom"]>
+  export type PrivateRoomOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createrId" | "roomName" | "inviteToken" | "roomImage" | "category" | "description" | "memberLists", ExtArgs["result"]["privateRoom"]>
   export type PrivateRoomInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     messages?: boolean | PrivateRoom$messagesArgs<ExtArgs>
     _count?: boolean | PrivateRoomCountOutputTypeDefaultArgs<ExtArgs>
@@ -12758,6 +12769,7 @@ export namespace Prisma {
       id: string
       createrId: string
       roomName: string
+      inviteToken: string
       roomImage: string | null
       category: string | null
       description: string | null
@@ -13189,6 +13201,7 @@ export namespace Prisma {
     readonly id: FieldRef<"PrivateRoom", 'String'>
     readonly createrId: FieldRef<"PrivateRoom", 'String'>
     readonly roomName: FieldRef<"PrivateRoom", 'String'>
+    readonly inviteToken: FieldRef<"PrivateRoom", 'String'>
     readonly roomImage: FieldRef<"PrivateRoom", 'String'>
     readonly category: FieldRef<"PrivateRoom", 'String'>
     readonly description: FieldRef<"PrivateRoom", 'String'>
@@ -14836,6 +14849,7 @@ export namespace Prisma {
     id: 'id',
     createrId: 'createrId',
     roomName: 'roomName',
+    inviteToken: 'inviteToken',
     roomImage: 'roomImage',
     category: 'category',
     description: 'description',
@@ -15557,6 +15571,7 @@ export namespace Prisma {
     id?: StringFilter<"PrivateRoom"> | string
     createrId?: StringFilter<"PrivateRoom"> | string
     roomName?: StringFilter<"PrivateRoom"> | string
+    inviteToken?: StringFilter<"PrivateRoom"> | string
     roomImage?: StringNullableFilter<"PrivateRoom"> | string | null
     category?: StringNullableFilter<"PrivateRoom"> | string | null
     description?: StringNullableFilter<"PrivateRoom"> | string | null
@@ -15568,6 +15583,7 @@ export namespace Prisma {
     id?: SortOrder
     createrId?: SortOrder
     roomName?: SortOrder
+    inviteToken?: SortOrder
     roomImage?: SortOrderInput | SortOrder
     category?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
@@ -15578,6 +15594,7 @@ export namespace Prisma {
   export type PrivateRoomWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     roomName?: string
+    inviteToken?: string
     AND?: PrivateRoomWhereInput | PrivateRoomWhereInput[]
     OR?: PrivateRoomWhereInput[]
     NOT?: PrivateRoomWhereInput | PrivateRoomWhereInput[]
@@ -15587,12 +15604,13 @@ export namespace Prisma {
     description?: StringNullableFilter<"PrivateRoom"> | string | null
     memberLists?: StringNullableListFilter<"PrivateRoom">
     messages?: PrivateRoomMessageListRelationFilter
-  }, "id" | "roomName">
+  }, "id" | "roomName" | "inviteToken">
 
   export type PrivateRoomOrderByWithAggregationInput = {
     id?: SortOrder
     createrId?: SortOrder
     roomName?: SortOrder
+    inviteToken?: SortOrder
     roomImage?: SortOrderInput | SortOrder
     category?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
@@ -15609,6 +15627,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"PrivateRoom"> | string
     createrId?: StringWithAggregatesFilter<"PrivateRoom"> | string
     roomName?: StringWithAggregatesFilter<"PrivateRoom"> | string
+    inviteToken?: StringWithAggregatesFilter<"PrivateRoom"> | string
     roomImage?: StringNullableWithAggregatesFilter<"PrivateRoom"> | string | null
     category?: StringNullableWithAggregatesFilter<"PrivateRoom"> | string | null
     description?: StringNullableWithAggregatesFilter<"PrivateRoom"> | string | null
@@ -16316,6 +16335,7 @@ export namespace Prisma {
     id?: string
     createrId: string
     roomName: string
+    inviteToken: string
     roomImage?: string | null
     category?: string | null
     description?: string | null
@@ -16327,6 +16347,7 @@ export namespace Prisma {
     id?: string
     createrId: string
     roomName: string
+    inviteToken: string
     roomImage?: string | null
     category?: string | null
     description?: string | null
@@ -16338,6 +16359,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createrId?: StringFieldUpdateOperationsInput | string
     roomName?: StringFieldUpdateOperationsInput | string
+    inviteToken?: StringFieldUpdateOperationsInput | string
     roomImage?: NullableStringFieldUpdateOperationsInput | string | null
     category?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16349,6 +16371,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createrId?: StringFieldUpdateOperationsInput | string
     roomName?: StringFieldUpdateOperationsInput | string
+    inviteToken?: StringFieldUpdateOperationsInput | string
     roomImage?: NullableStringFieldUpdateOperationsInput | string | null
     category?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16360,6 +16383,7 @@ export namespace Prisma {
     id?: string
     createrId: string
     roomName: string
+    inviteToken: string
     roomImage?: string | null
     category?: string | null
     description?: string | null
@@ -16370,6 +16394,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createrId?: StringFieldUpdateOperationsInput | string
     roomName?: StringFieldUpdateOperationsInput | string
+    inviteToken?: StringFieldUpdateOperationsInput | string
     roomImage?: NullableStringFieldUpdateOperationsInput | string | null
     category?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16380,6 +16405,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createrId?: StringFieldUpdateOperationsInput | string
     roomName?: StringFieldUpdateOperationsInput | string
+    inviteToken?: StringFieldUpdateOperationsInput | string
     roomImage?: NullableStringFieldUpdateOperationsInput | string | null
     category?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16956,6 +16982,7 @@ export namespace Prisma {
     id?: SortOrder
     createrId?: SortOrder
     roomName?: SortOrder
+    inviteToken?: SortOrder
     roomImage?: SortOrder
     category?: SortOrder
     description?: SortOrder
@@ -16966,6 +16993,7 @@ export namespace Prisma {
     id?: SortOrder
     createrId?: SortOrder
     roomName?: SortOrder
+    inviteToken?: SortOrder
     roomImage?: SortOrder
     category?: SortOrder
     description?: SortOrder
@@ -16975,6 +17003,7 @@ export namespace Prisma {
     id?: SortOrder
     createrId?: SortOrder
     roomName?: SortOrder
+    inviteToken?: SortOrder
     roomImage?: SortOrder
     category?: SortOrder
     description?: SortOrder
@@ -18319,6 +18348,7 @@ export namespace Prisma {
     id?: string
     createrId: string
     roomName: string
+    inviteToken: string
     roomImage?: string | null
     category?: string | null
     description?: string | null
@@ -18329,6 +18359,7 @@ export namespace Prisma {
     id?: string
     createrId: string
     roomName: string
+    inviteToken: string
     roomImage?: string | null
     category?: string | null
     description?: string | null
@@ -18412,6 +18443,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createrId?: StringFieldUpdateOperationsInput | string
     roomName?: StringFieldUpdateOperationsInput | string
+    inviteToken?: StringFieldUpdateOperationsInput | string
     roomImage?: NullableStringFieldUpdateOperationsInput | string | null
     category?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18422,6 +18454,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createrId?: StringFieldUpdateOperationsInput | string
     roomName?: StringFieldUpdateOperationsInput | string
+    inviteToken?: StringFieldUpdateOperationsInput | string
     roomImage?: NullableStringFieldUpdateOperationsInput | string | null
     category?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null

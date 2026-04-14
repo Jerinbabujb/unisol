@@ -1,5 +1,6 @@
 import { connect } from "mongoose";
 import prisma from "../config/prisma.js";
+import { v4 as uuidv4 } from "uuid";
 import cloudinary from "../lib/cloudinary.js";
 
 import { io, userSocketMap } from "../server.js";
@@ -564,6 +565,7 @@ export const createRoom = async (req, res) => {
       const image = await cloudinary.uploader.upload(roomImage);
       room_image = image.secure_url;
     }
+    const inviteToken = uuidv4();
     const room = await prisma.PrivateRoom.create({
       data: {
         roomName,
@@ -573,7 +575,8 @@ export const createRoom = async (req, res) => {
         description,
         memberLists: {
           set: [senderId]
-        }
+        },
+        inviteToken
       }
     });
     res.json({ success: true, room });
@@ -594,7 +597,8 @@ export const getprivateRoom = async (req, res) => {
       select: {
         id: true,
         roomName: true,
-        roomImage: true
+        roomImage: true,
+        inviteToken: true
       }
     });
     console.log("privateRoom", privateRoom);
@@ -606,13 +610,63 @@ export const getprivateRoom = async (req, res) => {
   }
 }
 
+export const privateRoomInvite = async (req, res) => {
+  try {
+    const senderId = req.user.id;
+    const { currentRoom } = req.body;
+    const privateRoom = await prisma.PrivateRoom.findFirst({
+      where: {
+        id: currentRoom
+      },
+      select: {
+        id: true,
+        inviteToken: true
+      }
+    });
+    res.json({ success: true, privateRoom });
+  }
+  catch (error) {
+    console.error("UPDATE ERROR:", error);
+    res.json({ success: false, message: error.message });
+  }
+}
+
+export const joinPrivateRoom = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { inviteToken } = req.body;
+    const privateRoom = await prisma.PrivateRoom.findFirst({
+      where: {
+        inviteToken: inviteToken
+      }
+    });
+    if (!privateRoom) {
+      return res.json({ success: false, message: "Invalid invite token" });
+    }
+    const join = await prisma.PrivateRoom.update({
+      where: {
+        id: privateRoom.id
+      },
+      data: {
+        memberLists: {
+          push: userId
+        }
+      }
+    });
+    res.json({ success: true, join });
+  }
+  catch (error) {
+    console.error("UPDATE ERROR:", error);
+    res.json({ success: false, message: error.message });
+  }
+}
 
 export const privateRoomMembers = async (req, res) => {
   try {
-    const { room } = req.body;
-    const privateRoomMembers = await prisma.PrivateRoom.findUnique({
+    const { currentRoom } = req.body;
+    const privateRoomMembers = await prisma.PrivateRoom.findFirst({
       where: {
-        roomName: room
+        id: currentRoom
       },
       select: {
         id: true,
@@ -628,7 +682,8 @@ export const privateRoomMembers = async (req, res) => {
         fullName: true,
         avatar: true
       }
-    })
+    });
+
     res.json({ success: true, privateRoomMembers, members });
   }
   catch (error) {
@@ -636,3 +691,56 @@ export const privateRoomMembers = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 }
+
+export const privateRoomSendMessage = async (req, res) => {
+  try {
+    const senderId = req.user.id;
+    const { text } = req.body
+    const { currentRoom } = req.body
+    const sendMessage = await prisma.PrivateRoomMessage.create({
+      data: {
+        text,
+        room: { connect: { id: currentRoom } },
+        sender: { connect: { id: senderId } }
+      }
+    });
+    res.json({ success: true, sendMessage });
+  }
+  catch (error) {
+    console.error("UPDATE ERROR:", error);
+    res.json({ success: false, message: error.message });
+  }
+}
+
+export const getPrivateRoomMessages = async (req, res) => {
+  try {
+    const myId = req.user.id;
+    const { currentRoom } = req.body;
+
+    const messages = await prisma.PrivateRoomMessage.findMany({
+      where: {
+        roomId: currentRoom,
+      },
+      select: {
+        id: true,
+        text: true,
+        senderId: true,
+        createdAt: true,
+        sender: {
+          select: {
+            id: true,
+            fullName: true,
+            avatar: true
+          }
+        }
+      },
+    });
+
+    const user = await prisma.User.findFirst
+
+    res.json({ success: true, messages });
+  } catch (error) {
+    console.error("GET ROOM MESSAGES ERROR:", error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+};

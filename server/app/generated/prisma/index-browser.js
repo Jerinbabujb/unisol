@@ -213,6 +213,7 @@ exports.Prisma.PrivateRoomScalarFieldEnum = {
   id: 'id',
   createrId: 'createrId',
   roomName: 'roomName',
+  inviteToken: 'inviteToken',
   roomImage: 'roomImage',
   category: 'category',
   description: 'description',
