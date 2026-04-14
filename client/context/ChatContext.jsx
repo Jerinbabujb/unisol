@@ -375,6 +375,31 @@ export const ChatProvider = ({ children }) => {
     }
   }
 
+  const privateRoomInvite = async () => {
+    try {
+      const { data } = await axios.post('/api/messages/private-room-invite', { currentRoom });
+      if (data.success) {
+        console.log("private room invite", data.privateRoom);
+        setPrivateRoom(data.privateRoom);
+      }
+    }
+    catch (error) {
+      toast.error(error.message);
+    }
+  }
+
+  const joinPrivateRoom = async (inviteToken) => {
+    try {
+      const { data } = await axios.post('/api/messages/join-private-room', { inviteToken });
+      if (data.success) {
+        console.log("joined private room successfully", data.join);
+      }
+    }
+    catch (error) {
+      toast.error(error.message);
+    }
+  }
+
   const privateRoomMembers = async () => {
     try {
       const { data } = await axios.post('/api/messages/private-room-members', { currentRoom });
@@ -388,6 +413,32 @@ export const ChatProvider = ({ children }) => {
     }
   }
 
+
+  const privateRoomSendMessage = async (text) => {
+    try {
+      const { data } = await axios.post(`/api/messages/private-room-send`, { text, currentRoom });
+
+      if (data.success) {
+        setMessages((prevMessages) => [...prevMessages, data.newMessage]);
+      } else {
+        toast.error(data.message || "Failed to send message");
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  const getPrivateRoomMessages = async () => {
+    try {
+      const { data } = await axios.post('/api/messages/get-private-room-messages', { currentRoom })
+      if (data.success) {
+        setMessages(data.messages);
+      }
+    }
+    catch (error) {
+      toast.error(error.message);
+    }
+  }
 
   useEffect(() => {
     if (!authUser) return;
@@ -455,7 +506,11 @@ export const ChatProvider = ({ children }) => {
     getPrivateRoom,
     privateRoom,
     privateMembers,
-    privateRoomMembers
+    privateRoomMembers,
+    privateRoomSendMessage,
+    getPrivateRoomMessages,
+    joinPrivateRoom,
+    privateRoomInvite
   }
   return (
 

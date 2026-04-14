@@ -16,6 +16,8 @@ import GlobalChatWindow from './components/chatroom/global/ChatWindow';
 import GlobalSideBar from './components/chatroom/global/SideBar';
 import CreateRoom from './components/chatroom/private/CreateRoom';
 import PrivateChatWindow from './components/chatroom/private/ChatWindow';
+import PrivateRoomSideBar from './components/chatroom/private/SideBar';
+import JoinRoom from './components/chatroom/private/JoinRoom';
 
 const App = () => {
   const { authUser, isCheckingAuth } = useContext(AuthContext);
@@ -46,7 +48,9 @@ const App = () => {
           <Route path='/Emoji Charades' element={authUser ? <EmojiCharades /> : <Navigate to="/login" />} />
           <Route path='/global-room-lists' element={authUser ? <GroupsLists /> : <Navigate to="/login" />} />
           <Route path='/create-room' element={authUser ? <CreateRoom /> : <Navigate to='/login' />} />
+          <Route path='/join-private-room/:inviteToken' element={authUser ? <JoinRoom /> : <Navigate to='/login' />} />
           <Route path='/private-room/:roomName' element={authUser ? <PrivateChatWindow /> : <Navigate to='/login' />} />
+          <Route path='/private-room/:roomName/profile' element={authUser ? <PrivateRoomSideBar /> : <Navigate to='/login' />} />
           <Route path='/global-room/:roomName' element={authUser ? <GlobalChatWindow /> : <Navigate to='/login' />} />
           <Route path='/:room/profile' element={authUser ? <GlobalSideBar /> : <Navigate to='/login' />} />
         </Routes>

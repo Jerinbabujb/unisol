@@ -17,7 +17,7 @@ const PrivateChatWindow = () => {
   const { roomName } = useParams();
   const { selectedUser, setSelectedUser, getMessages, sendMessage, getSongs, song, currentRoom,
     roomMessages,
-    sendRoomMessage, globalSendMessage, messages, getRoomMessages } = useContext(ChatContext);
+    sendRoomMessage, globalSendMessage, messages, getRoomMessages, privateRoomSendMessage, getPrivateRoomMessages } = useContext(ChatContext);
   const { authUser, onlineUsers } = useContext(AuthContext);
   const {
     audioRef,
@@ -62,7 +62,6 @@ const PrivateChatWindow = () => {
   useEffect(() => {
     getSongs();
     getGames();
-    getRoomMessages();
   }, [])
 
   // Auto-scroll to bottom whenever messages change
@@ -73,8 +72,8 @@ const PrivateChatWindow = () => {
   }, [messages]);
 
   useEffect(() => {
-    getRoomMessages()
-  }, [getRoomMessages]);
+    getPrivateRoomMessages();
+  }, [getPrivateRoomMessages]);
 
   const handleBack = () => {
     navigate('/global-room-lists');
@@ -83,7 +82,7 @@ const PrivateChatWindow = () => {
   const handleSendMessage = async (e) => {
     e.preventDefault();
     if (input.trim() === "") return;
-    await globalSendMessage(input.trim());
+    await privateRoomSendMessage(input.trim());
     setInput('');
   };
 
@@ -110,7 +109,7 @@ const PrivateChatWindow = () => {
   };
 
   const goToProfile = (roomName) => {
-    navigate(`/${roomName}/profile`)
+    navigate(`/private-room/${roomName}/profile`)
   }
 
 
