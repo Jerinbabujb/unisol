@@ -23,7 +23,6 @@ const PrivateRoomSideBar = () => {
     navigate(`/private-room/${roomName}`);
   };
 
-  // ✅ Safe link (prevents undefined crash)
   const inviteLink = privateRoom?.inviteToken
     ? `${window.location.origin}/join-private-room/${privateRoom.inviteToken}`
     : "";
@@ -88,8 +87,8 @@ const PrivateRoomSideBar = () => {
               onClick={handleCopy}
               disabled={!inviteLink}
               className={`px-3 py-1.5 text-xs rounded-lg transition ${copied
-                  ? "bg-green-500 text-white"
-                  : "bg-indigo-500 text-white hover:bg-indigo-600"
+                ? "bg-green-500 text-white"
+                : "bg-indigo-500 text-white hover:bg-indigo-600"
                 }`}
             >
               {copied ? "Copied!" : "Copy"}
