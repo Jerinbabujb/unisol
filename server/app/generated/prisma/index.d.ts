@@ -2002,16 +2002,31 @@ export namespace Prisma {
     email: string | null
     password: string | null
     googleId: string | null
+    mobileNumber: string | null
     bio: string | null
     avatar: string | null
+    avatar2: string | null
     birthday: Date | null
     gender: string | null
+    horoscope: string | null
     mood: string | null
-    avatar2: string | null
     purpose: string | null
+    intentions: string | null
+    experienceLevel: string | null
+    status: string | null
+    attachmentStyle: string | null
+    beliefSystem: string | null
+    mbtiType: string | null
+    uiTheme: string | null
     instagram: string | null
     facebook: string | null
+    isOnline: boolean | null
+    lastSeen: Date | null
+    profileCompleted: boolean | null
+    isVerified: boolean | null
+    emailVerified: boolean | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -2020,16 +2035,31 @@ export namespace Prisma {
     email: string | null
     password: string | null
     googleId: string | null
+    mobileNumber: string | null
     bio: string | null
     avatar: string | null
+    avatar2: string | null
     birthday: Date | null
     gender: string | null
+    horoscope: string | null
     mood: string | null
-    avatar2: string | null
     purpose: string | null
+    intentions: string | null
+    experienceLevel: string | null
+    status: string | null
+    attachmentStyle: string | null
+    beliefSystem: string | null
+    mbtiType: string | null
+    uiTheme: string | null
     instagram: string | null
     facebook: string | null
+    isOnline: boolean | null
+    lastSeen: Date | null
+    profileCompleted: boolean | null
+    isVerified: boolean | null
+    emailVerified: boolean | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -2038,18 +2068,37 @@ export namespace Prisma {
     email: number
     password: number
     googleId: number
+    mobileNumber: number
     bio: number
     avatar: number
+    avatar2: number
+    images: number
     birthday: number
     gender: number
+    horoscope: number
     mood: number
-    avatar2: number
     purpose: number
+    intentions: number
+    experienceLevel: number
+    preferredMatch: number
+    primaryNeurotype: number
+    status: number
+    attachmentStyle: number
+    beliefSystem: number
+    mbtiType: number
     interest: number
-    images: number
+    topArtists: number
+    favoriteGenres: number
+    uiTheme: number
     instagram: number
     facebook: number
+    isOnline: number
+    lastSeen: number
+    profileCompleted: number
+    isVerified: number
+    emailVerified: number
     createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -2060,16 +2109,31 @@ export namespace Prisma {
     email?: true
     password?: true
     googleId?: true
+    mobileNumber?: true
     bio?: true
     avatar?: true
+    avatar2?: true
     birthday?: true
     gender?: true
+    horoscope?: true
     mood?: true
-    avatar2?: true
     purpose?: true
+    intentions?: true
+    experienceLevel?: true
+    status?: true
+    attachmentStyle?: true
+    beliefSystem?: true
+    mbtiType?: true
+    uiTheme?: true
     instagram?: true
     facebook?: true
+    isOnline?: true
+    lastSeen?: true
+    profileCompleted?: true
+    isVerified?: true
+    emailVerified?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -2078,16 +2142,31 @@ export namespace Prisma {
     email?: true
     password?: true
     googleId?: true
+    mobileNumber?: true
     bio?: true
     avatar?: true
+    avatar2?: true
     birthday?: true
     gender?: true
+    horoscope?: true
     mood?: true
-    avatar2?: true
     purpose?: true
+    intentions?: true
+    experienceLevel?: true
+    status?: true
+    attachmentStyle?: true
+    beliefSystem?: true
+    mbtiType?: true
+    uiTheme?: true
     instagram?: true
     facebook?: true
+    isOnline?: true
+    lastSeen?: true
+    profileCompleted?: true
+    isVerified?: true
+    emailVerified?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -2096,18 +2175,37 @@ export namespace Prisma {
     email?: true
     password?: true
     googleId?: true
+    mobileNumber?: true
     bio?: true
     avatar?: true
+    avatar2?: true
+    images?: true
     birthday?: true
     gender?: true
+    horoscope?: true
     mood?: true
-    avatar2?: true
     purpose?: true
+    intentions?: true
+    experienceLevel?: true
+    preferredMatch?: true
+    primaryNeurotype?: true
+    status?: true
+    attachmentStyle?: true
+    beliefSystem?: true
+    mbtiType?: true
     interest?: true
-    images?: true
+    topArtists?: true
+    favoriteGenres?: true
+    uiTheme?: true
     instagram?: true
     facebook?: true
+    isOnline?: true
+    lastSeen?: true
+    profileCompleted?: true
+    isVerified?: true
+    emailVerified?: true
     createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -2189,18 +2287,37 @@ export namespace Prisma {
     email: string
     password: string | null
     googleId: string | null
+    mobileNumber: string | null
     bio: string | null
     avatar: string | null
+    avatar2: string | null
+    images: string[]
     birthday: Date | null
     gender: string | null
+    horoscope: string | null
     mood: string | null
-    avatar2: string | null
     purpose: string | null
+    intentions: string | null
+    experienceLevel: string | null
+    preferredMatch: string[]
+    primaryNeurotype: string[]
+    status: string | null
+    attachmentStyle: string | null
+    beliefSystem: string | null
+    mbtiType: string | null
     interest: string[]
-    images: string[]
+    topArtists: string[]
+    favoriteGenres: string[]
+    uiTheme: string | null
     instagram: string | null
     facebook: string | null
+    isOnline: boolean
+    lastSeen: Date | null
+    profileCompleted: boolean
+    isVerified: boolean
+    emailVerified: boolean
     createdAt: Date
+    updatedAt: Date
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -2226,18 +2343,37 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     googleId?: boolean
+    mobileNumber?: boolean
     bio?: boolean
     avatar?: boolean
+    avatar2?: boolean
+    images?: boolean
     birthday?: boolean
     gender?: boolean
+    horoscope?: boolean
     mood?: boolean
-    avatar2?: boolean
     purpose?: boolean
+    intentions?: boolean
+    experienceLevel?: boolean
+    preferredMatch?: boolean
+    primaryNeurotype?: boolean
+    status?: boolean
+    attachmentStyle?: boolean
+    beliefSystem?: boolean
+    mbtiType?: boolean
     interest?: boolean
-    images?: boolean
+    topArtists?: boolean
+    favoriteGenres?: boolean
+    uiTheme?: boolean
     instagram?: boolean
     facebook?: boolean
+    isOnline?: boolean
+    lastSeen?: boolean
+    profileCompleted?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     recvMessages?: boolean | User$recvMessagesArgs<ExtArgs>
     sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
     globalMessages?: boolean | User$globalMessagesArgs<ExtArgs>
@@ -2251,18 +2387,37 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     googleId?: boolean
+    mobileNumber?: boolean
     bio?: boolean
     avatar?: boolean
+    avatar2?: boolean
+    images?: boolean
     birthday?: boolean
     gender?: boolean
+    horoscope?: boolean
     mood?: boolean
-    avatar2?: boolean
     purpose?: boolean
+    intentions?: boolean
+    experienceLevel?: boolean
+    preferredMatch?: boolean
+    primaryNeurotype?: boolean
+    status?: boolean
+    attachmentStyle?: boolean
+    beliefSystem?: boolean
+    mbtiType?: boolean
     interest?: boolean
-    images?: boolean
+    topArtists?: boolean
+    favoriteGenres?: boolean
+    uiTheme?: boolean
     instagram?: boolean
     facebook?: boolean
+    isOnline?: boolean
+    lastSeen?: boolean
+    profileCompleted?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2271,18 +2426,37 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     googleId?: boolean
+    mobileNumber?: boolean
     bio?: boolean
     avatar?: boolean
+    avatar2?: boolean
+    images?: boolean
     birthday?: boolean
     gender?: boolean
+    horoscope?: boolean
     mood?: boolean
-    avatar2?: boolean
     purpose?: boolean
+    intentions?: boolean
+    experienceLevel?: boolean
+    preferredMatch?: boolean
+    primaryNeurotype?: boolean
+    status?: boolean
+    attachmentStyle?: boolean
+    beliefSystem?: boolean
+    mbtiType?: boolean
     interest?: boolean
-    images?: boolean
+    topArtists?: boolean
+    favoriteGenres?: boolean
+    uiTheme?: boolean
     instagram?: boolean
     facebook?: boolean
+    isOnline?: boolean
+    lastSeen?: boolean
+    profileCompleted?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -2291,21 +2465,40 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     googleId?: boolean
+    mobileNumber?: boolean
     bio?: boolean
     avatar?: boolean
+    avatar2?: boolean
+    images?: boolean
     birthday?: boolean
     gender?: boolean
+    horoscope?: boolean
     mood?: boolean
-    avatar2?: boolean
     purpose?: boolean
+    intentions?: boolean
+    experienceLevel?: boolean
+    preferredMatch?: boolean
+    primaryNeurotype?: boolean
+    status?: boolean
+    attachmentStyle?: boolean
+    beliefSystem?: boolean
+    mbtiType?: boolean
     interest?: boolean
-    images?: boolean
+    topArtists?: boolean
+    favoriteGenres?: boolean
+    uiTheme?: boolean
     instagram?: boolean
     facebook?: boolean
+    isOnline?: boolean
+    lastSeen?: boolean
+    profileCompleted?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "email" | "password" | "googleId" | "bio" | "avatar" | "birthday" | "gender" | "mood" | "avatar2" | "purpose" | "interest" | "images" | "instagram" | "facebook" | "createdAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "email" | "password" | "googleId" | "mobileNumber" | "bio" | "avatar" | "avatar2" | "images" | "birthday" | "gender" | "horoscope" | "mood" | "purpose" | "intentions" | "experienceLevel" | "preferredMatch" | "primaryNeurotype" | "status" | "attachmentStyle" | "beliefSystem" | "mbtiType" | "interest" | "topArtists" | "favoriteGenres" | "uiTheme" | "instagram" | "facebook" | "isOnline" | "lastSeen" | "profileCompleted" | "isVerified" | "emailVerified" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     recvMessages?: boolean | User$recvMessagesArgs<ExtArgs>
     sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
@@ -2330,18 +2523,37 @@ export namespace Prisma {
       email: string
       password: string | null
       googleId: string | null
+      mobileNumber: string | null
       bio: string | null
       avatar: string | null
+      avatar2: string | null
+      images: string[]
       birthday: Date | null
       gender: string | null
+      horoscope: string | null
       mood: string | null
-      avatar2: string | null
       purpose: string | null
+      intentions: string | null
+      experienceLevel: string | null
+      preferredMatch: string[]
+      primaryNeurotype: string[]
+      status: string | null
+      attachmentStyle: string | null
+      beliefSystem: string | null
+      mbtiType: string | null
       interest: string[]
-      images: string[]
+      topArtists: string[]
+      favoriteGenres: string[]
+      uiTheme: string | null
       instagram: string | null
       facebook: string | null
+      isOnline: boolean
+      lastSeen: Date | null
+      profileCompleted: boolean
+      isVerified: boolean
+      emailVerified: boolean
       createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -2774,18 +2986,37 @@ export namespace Prisma {
     readonly email: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
     readonly googleId: FieldRef<"User", 'String'>
+    readonly mobileNumber: FieldRef<"User", 'String'>
     readonly bio: FieldRef<"User", 'String'>
     readonly avatar: FieldRef<"User", 'String'>
+    readonly avatar2: FieldRef<"User", 'String'>
+    readonly images: FieldRef<"User", 'String[]'>
     readonly birthday: FieldRef<"User", 'DateTime'>
     readonly gender: FieldRef<"User", 'String'>
+    readonly horoscope: FieldRef<"User", 'String'>
     readonly mood: FieldRef<"User", 'String'>
-    readonly avatar2: FieldRef<"User", 'String'>
     readonly purpose: FieldRef<"User", 'String'>
+    readonly intentions: FieldRef<"User", 'String'>
+    readonly experienceLevel: FieldRef<"User", 'String'>
+    readonly preferredMatch: FieldRef<"User", 'String[]'>
+    readonly primaryNeurotype: FieldRef<"User", 'String[]'>
+    readonly status: FieldRef<"User", 'String'>
+    readonly attachmentStyle: FieldRef<"User", 'String'>
+    readonly beliefSystem: FieldRef<"User", 'String'>
+    readonly mbtiType: FieldRef<"User", 'String'>
     readonly interest: FieldRef<"User", 'String[]'>
-    readonly images: FieldRef<"User", 'String[]'>
+    readonly topArtists: FieldRef<"User", 'String[]'>
+    readonly favoriteGenres: FieldRef<"User", 'String[]'>
+    readonly uiTheme: FieldRef<"User", 'String'>
     readonly instagram: FieldRef<"User", 'String'>
     readonly facebook: FieldRef<"User", 'String'>
+    readonly isOnline: FieldRef<"User", 'Boolean'>
+    readonly lastSeen: FieldRef<"User", 'DateTime'>
+    readonly profileCompleted: FieldRef<"User", 'Boolean'>
+    readonly isVerified: FieldRef<"User", 'Boolean'>
+    readonly emailVerified: FieldRef<"User", 'Boolean'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
+    readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
     
 
@@ -14732,18 +14963,37 @@ export namespace Prisma {
     email: 'email',
     password: 'password',
     googleId: 'googleId',
+    mobileNumber: 'mobileNumber',
     bio: 'bio',
     avatar: 'avatar',
+    avatar2: 'avatar2',
+    images: 'images',
     birthday: 'birthday',
     gender: 'gender',
+    horoscope: 'horoscope',
     mood: 'mood',
-    avatar2: 'avatar2',
     purpose: 'purpose',
+    intentions: 'intentions',
+    experienceLevel: 'experienceLevel',
+    preferredMatch: 'preferredMatch',
+    primaryNeurotype: 'primaryNeurotype',
+    status: 'status',
+    attachmentStyle: 'attachmentStyle',
+    beliefSystem: 'beliefSystem',
+    mbtiType: 'mbtiType',
     interest: 'interest',
-    images: 'images',
+    topArtists: 'topArtists',
+    favoriteGenres: 'favoriteGenres',
+    uiTheme: 'uiTheme',
     instagram: 'instagram',
     facebook: 'facebook',
-    createdAt: 'createdAt'
+    isOnline: 'isOnline',
+    lastSeen: 'lastSeen',
+    profileCompleted: 'profileCompleted',
+    isVerified: 'isVerified',
+    emailVerified: 'emailVerified',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -14974,18 +15224,37 @@ export namespace Prisma {
     email?: StringFilter<"User"> | string
     password?: StringNullableFilter<"User"> | string | null
     googleId?: StringNullableFilter<"User"> | string | null
+    mobileNumber?: StringNullableFilter<"User"> | string | null
     bio?: StringNullableFilter<"User"> | string | null
     avatar?: StringNullableFilter<"User"> | string | null
+    avatar2?: StringNullableFilter<"User"> | string | null
+    images?: StringNullableListFilter<"User">
     birthday?: DateTimeNullableFilter<"User"> | Date | string | null
     gender?: StringNullableFilter<"User"> | string | null
+    horoscope?: StringNullableFilter<"User"> | string | null
     mood?: StringNullableFilter<"User"> | string | null
-    avatar2?: StringNullableFilter<"User"> | string | null
     purpose?: StringNullableFilter<"User"> | string | null
+    intentions?: StringNullableFilter<"User"> | string | null
+    experienceLevel?: StringNullableFilter<"User"> | string | null
+    preferredMatch?: StringNullableListFilter<"User">
+    primaryNeurotype?: StringNullableListFilter<"User">
+    status?: StringNullableFilter<"User"> | string | null
+    attachmentStyle?: StringNullableFilter<"User"> | string | null
+    beliefSystem?: StringNullableFilter<"User"> | string | null
+    mbtiType?: StringNullableFilter<"User"> | string | null
     interest?: StringNullableListFilter<"User">
-    images?: StringNullableListFilter<"User">
+    topArtists?: StringNullableListFilter<"User">
+    favoriteGenres?: StringNullableListFilter<"User">
+    uiTheme?: StringNullableFilter<"User"> | string | null
     instagram?: StringNullableFilter<"User"> | string | null
     facebook?: StringNullableFilter<"User"> | string | null
+    isOnline?: BoolFilter<"User"> | boolean
+    lastSeen?: DateTimeNullableFilter<"User"> | Date | string | null
+    profileCompleted?: BoolFilter<"User"> | boolean
+    isVerified?: BoolFilter<"User"> | boolean
+    emailVerified?: BoolFilter<"User"> | boolean
     createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
     recvMessages?: MessageListRelationFilter
     sentMessages?: MessageListRelationFilter
     globalMessages?: GlobalChatMessageListRelationFilter
@@ -14998,18 +15267,37 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrderInput | SortOrder
     googleId?: SortOrderInput | SortOrder
+    mobileNumber?: SortOrderInput | SortOrder
     bio?: SortOrderInput | SortOrder
     avatar?: SortOrderInput | SortOrder
+    avatar2?: SortOrderInput | SortOrder
+    images?: SortOrder
     birthday?: SortOrderInput | SortOrder
     gender?: SortOrderInput | SortOrder
+    horoscope?: SortOrderInput | SortOrder
     mood?: SortOrderInput | SortOrder
-    avatar2?: SortOrderInput | SortOrder
     purpose?: SortOrderInput | SortOrder
+    intentions?: SortOrderInput | SortOrder
+    experienceLevel?: SortOrderInput | SortOrder
+    preferredMatch?: SortOrder
+    primaryNeurotype?: SortOrder
+    status?: SortOrderInput | SortOrder
+    attachmentStyle?: SortOrderInput | SortOrder
+    beliefSystem?: SortOrderInput | SortOrder
+    mbtiType?: SortOrderInput | SortOrder
     interest?: SortOrder
-    images?: SortOrder
+    topArtists?: SortOrder
+    favoriteGenres?: SortOrder
+    uiTheme?: SortOrderInput | SortOrder
     instagram?: SortOrderInput | SortOrder
     facebook?: SortOrderInput | SortOrder
+    isOnline?: SortOrder
+    lastSeen?: SortOrderInput | SortOrder
+    profileCompleted?: SortOrder
+    isVerified?: SortOrder
+    emailVerified?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     recvMessages?: MessageOrderByRelationAggregateInput
     sentMessages?: MessageOrderByRelationAggregateInput
     globalMessages?: GlobalChatMessageOrderByRelationAggregateInput
@@ -15025,18 +15313,37 @@ export namespace Prisma {
     fullName?: StringFilter<"User"> | string
     password?: StringNullableFilter<"User"> | string | null
     googleId?: StringNullableFilter<"User"> | string | null
+    mobileNumber?: StringNullableFilter<"User"> | string | null
     bio?: StringNullableFilter<"User"> | string | null
     avatar?: StringNullableFilter<"User"> | string | null
+    avatar2?: StringNullableFilter<"User"> | string | null
+    images?: StringNullableListFilter<"User">
     birthday?: DateTimeNullableFilter<"User"> | Date | string | null
     gender?: StringNullableFilter<"User"> | string | null
+    horoscope?: StringNullableFilter<"User"> | string | null
     mood?: StringNullableFilter<"User"> | string | null
-    avatar2?: StringNullableFilter<"User"> | string | null
     purpose?: StringNullableFilter<"User"> | string | null
+    intentions?: StringNullableFilter<"User"> | string | null
+    experienceLevel?: StringNullableFilter<"User"> | string | null
+    preferredMatch?: StringNullableListFilter<"User">
+    primaryNeurotype?: StringNullableListFilter<"User">
+    status?: StringNullableFilter<"User"> | string | null
+    attachmentStyle?: StringNullableFilter<"User"> | string | null
+    beliefSystem?: StringNullableFilter<"User"> | string | null
+    mbtiType?: StringNullableFilter<"User"> | string | null
     interest?: StringNullableListFilter<"User">
-    images?: StringNullableListFilter<"User">
+    topArtists?: StringNullableListFilter<"User">
+    favoriteGenres?: StringNullableListFilter<"User">
+    uiTheme?: StringNullableFilter<"User"> | string | null
     instagram?: StringNullableFilter<"User"> | string | null
     facebook?: StringNullableFilter<"User"> | string | null
+    isOnline?: BoolFilter<"User"> | boolean
+    lastSeen?: DateTimeNullableFilter<"User"> | Date | string | null
+    profileCompleted?: BoolFilter<"User"> | boolean
+    isVerified?: BoolFilter<"User"> | boolean
+    emailVerified?: BoolFilter<"User"> | boolean
     createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
     recvMessages?: MessageListRelationFilter
     sentMessages?: MessageListRelationFilter
     globalMessages?: GlobalChatMessageListRelationFilter
@@ -15049,18 +15356,37 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrderInput | SortOrder
     googleId?: SortOrderInput | SortOrder
+    mobileNumber?: SortOrderInput | SortOrder
     bio?: SortOrderInput | SortOrder
     avatar?: SortOrderInput | SortOrder
+    avatar2?: SortOrderInput | SortOrder
+    images?: SortOrder
     birthday?: SortOrderInput | SortOrder
     gender?: SortOrderInput | SortOrder
+    horoscope?: SortOrderInput | SortOrder
     mood?: SortOrderInput | SortOrder
-    avatar2?: SortOrderInput | SortOrder
     purpose?: SortOrderInput | SortOrder
+    intentions?: SortOrderInput | SortOrder
+    experienceLevel?: SortOrderInput | SortOrder
+    preferredMatch?: SortOrder
+    primaryNeurotype?: SortOrder
+    status?: SortOrderInput | SortOrder
+    attachmentStyle?: SortOrderInput | SortOrder
+    beliefSystem?: SortOrderInput | SortOrder
+    mbtiType?: SortOrderInput | SortOrder
     interest?: SortOrder
-    images?: SortOrder
+    topArtists?: SortOrder
+    favoriteGenres?: SortOrder
+    uiTheme?: SortOrderInput | SortOrder
     instagram?: SortOrderInput | SortOrder
     facebook?: SortOrderInput | SortOrder
+    isOnline?: SortOrder
+    lastSeen?: SortOrderInput | SortOrder
+    profileCompleted?: SortOrder
+    isVerified?: SortOrder
+    emailVerified?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -15075,18 +15401,37 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"User"> | string
     password?: StringNullableWithAggregatesFilter<"User"> | string | null
     googleId?: StringNullableWithAggregatesFilter<"User"> | string | null
+    mobileNumber?: StringNullableWithAggregatesFilter<"User"> | string | null
     bio?: StringNullableWithAggregatesFilter<"User"> | string | null
     avatar?: StringNullableWithAggregatesFilter<"User"> | string | null
+    avatar2?: StringNullableWithAggregatesFilter<"User"> | string | null
+    images?: StringNullableListFilter<"User">
     birthday?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     gender?: StringNullableWithAggregatesFilter<"User"> | string | null
+    horoscope?: StringNullableWithAggregatesFilter<"User"> | string | null
     mood?: StringNullableWithAggregatesFilter<"User"> | string | null
-    avatar2?: StringNullableWithAggregatesFilter<"User"> | string | null
     purpose?: StringNullableWithAggregatesFilter<"User"> | string | null
+    intentions?: StringNullableWithAggregatesFilter<"User"> | string | null
+    experienceLevel?: StringNullableWithAggregatesFilter<"User"> | string | null
+    preferredMatch?: StringNullableListFilter<"User">
+    primaryNeurotype?: StringNullableListFilter<"User">
+    status?: StringNullableWithAggregatesFilter<"User"> | string | null
+    attachmentStyle?: StringNullableWithAggregatesFilter<"User"> | string | null
+    beliefSystem?: StringNullableWithAggregatesFilter<"User"> | string | null
+    mbtiType?: StringNullableWithAggregatesFilter<"User"> | string | null
     interest?: StringNullableListFilter<"User">
-    images?: StringNullableListFilter<"User">
+    topArtists?: StringNullableListFilter<"User">
+    favoriteGenres?: StringNullableListFilter<"User">
+    uiTheme?: StringNullableWithAggregatesFilter<"User"> | string | null
     instagram?: StringNullableWithAggregatesFilter<"User"> | string | null
     facebook?: StringNullableWithAggregatesFilter<"User"> | string | null
+    isOnline?: BoolWithAggregatesFilter<"User"> | boolean
+    lastSeen?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    profileCompleted?: BoolWithAggregatesFilter<"User"> | boolean
+    isVerified?: BoolWithAggregatesFilter<"User"> | boolean
+    emailVerified?: BoolWithAggregatesFilter<"User"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
   export type privacyWhereInput = {
@@ -15698,18 +16043,37 @@ export namespace Prisma {
     email: string
     password?: string | null
     googleId?: string | null
+    mobileNumber?: string | null
     bio?: string | null
     avatar?: string | null
+    avatar2?: string | null
+    images?: UserCreateimagesInput | string[]
     birthday?: Date | string | null
     gender?: string | null
+    horoscope?: string | null
     mood?: string | null
-    avatar2?: string | null
     purpose?: string | null
+    intentions?: string | null
+    experienceLevel?: string | null
+    preferredMatch?: UserCreatepreferredMatchInput | string[]
+    primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
+    status?: string | null
+    attachmentStyle?: string | null
+    beliefSystem?: string | null
+    mbtiType?: string | null
     interest?: UserCreateinterestInput | string[]
-    images?: UserCreateimagesInput | string[]
+    topArtists?: UserCreatetopArtistsInput | string[]
+    favoriteGenres?: UserCreatefavoriteGenresInput | string[]
+    uiTheme?: string | null
     instagram?: string | null
     facebook?: string | null
+    isOnline?: boolean
+    lastSeen?: Date | string | null
+    profileCompleted?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
     recvMessages?: MessageCreateNestedManyWithoutReceiverInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
     globalMessages?: GlobalChatMessageCreateNestedManyWithoutSenderInput
@@ -15722,18 +16086,37 @@ export namespace Prisma {
     email: string
     password?: string | null
     googleId?: string | null
+    mobileNumber?: string | null
     bio?: string | null
     avatar?: string | null
+    avatar2?: string | null
+    images?: UserCreateimagesInput | string[]
     birthday?: Date | string | null
     gender?: string | null
+    horoscope?: string | null
     mood?: string | null
-    avatar2?: string | null
     purpose?: string | null
+    intentions?: string | null
+    experienceLevel?: string | null
+    preferredMatch?: UserCreatepreferredMatchInput | string[]
+    primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
+    status?: string | null
+    attachmentStyle?: string | null
+    beliefSystem?: string | null
+    mbtiType?: string | null
     interest?: UserCreateinterestInput | string[]
-    images?: UserCreateimagesInput | string[]
+    topArtists?: UserCreatetopArtistsInput | string[]
+    favoriteGenres?: UserCreatefavoriteGenresInput | string[]
+    uiTheme?: string | null
     instagram?: string | null
     facebook?: string | null
+    isOnline?: boolean
+    lastSeen?: Date | string | null
+    profileCompleted?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
     recvMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     globalMessages?: GlobalChatMessageUncheckedCreateNestedManyWithoutSenderInput
@@ -15746,18 +16129,37 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
+    images?: UserUpdateimagesInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
+    horoscope?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    intentions?: NullableStringFieldUpdateOperationsInput | string | null
+    experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    beliefSystem?: NullableStringFieldUpdateOperationsInput | string | null
+    mbtiType?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
-    images?: UserUpdateimagesInput | string[]
+    topArtists?: UserUpdatetopArtistsInput | string[]
+    favoriteGenres?: UserUpdatefavoriteGenresInput | string[]
+    uiTheme?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profileCompleted?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recvMessages?: MessageUpdateManyWithoutReceiverNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
     globalMessages?: GlobalChatMessageUpdateManyWithoutSenderNestedInput
@@ -15770,18 +16172,37 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
+    images?: UserUpdateimagesInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
+    horoscope?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    intentions?: NullableStringFieldUpdateOperationsInput | string | null
+    experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    beliefSystem?: NullableStringFieldUpdateOperationsInput | string | null
+    mbtiType?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
-    images?: UserUpdateimagesInput | string[]
+    topArtists?: UserUpdatetopArtistsInput | string[]
+    favoriteGenres?: UserUpdatefavoriteGenresInput | string[]
+    uiTheme?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profileCompleted?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recvMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     globalMessages?: GlobalChatMessageUncheckedUpdateManyWithoutSenderNestedInput
@@ -15794,18 +16215,37 @@ export namespace Prisma {
     email: string
     password?: string | null
     googleId?: string | null
+    mobileNumber?: string | null
     bio?: string | null
     avatar?: string | null
+    avatar2?: string | null
+    images?: UserCreateimagesInput | string[]
     birthday?: Date | string | null
     gender?: string | null
+    horoscope?: string | null
     mood?: string | null
-    avatar2?: string | null
     purpose?: string | null
+    intentions?: string | null
+    experienceLevel?: string | null
+    preferredMatch?: UserCreatepreferredMatchInput | string[]
+    primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
+    status?: string | null
+    attachmentStyle?: string | null
+    beliefSystem?: string | null
+    mbtiType?: string | null
     interest?: UserCreateinterestInput | string[]
-    images?: UserCreateimagesInput | string[]
+    topArtists?: UserCreatetopArtistsInput | string[]
+    favoriteGenres?: UserCreatefavoriteGenresInput | string[]
+    uiTheme?: string | null
     instagram?: string | null
     facebook?: string | null
+    isOnline?: boolean
+    lastSeen?: Date | string | null
+    profileCompleted?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type UserUpdateManyMutationInput = {
@@ -15814,18 +16254,37 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
+    images?: UserUpdateimagesInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
+    horoscope?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    intentions?: NullableStringFieldUpdateOperationsInput | string | null
+    experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    beliefSystem?: NullableStringFieldUpdateOperationsInput | string | null
+    mbtiType?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
-    images?: UserUpdateimagesInput | string[]
+    topArtists?: UserUpdatetopArtistsInput | string[]
+    favoriteGenres?: UserUpdatefavoriteGenresInput | string[]
+    uiTheme?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profileCompleted?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -15834,18 +16293,37 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
+    images?: UserUpdateimagesInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
+    horoscope?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    intentions?: NullableStringFieldUpdateOperationsInput | string | null
+    experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    beliefSystem?: NullableStringFieldUpdateOperationsInput | string | null
+    mbtiType?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
-    images?: UserUpdateimagesInput | string[]
+    topArtists?: UserUpdatetopArtistsInput | string[]
+    favoriteGenres?: UserUpdatefavoriteGenresInput | string[]
+    uiTheme?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profileCompleted?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type privacyCreateInput = {
@@ -16496,6 +16974,14 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type DateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -16507,12 +16993,9 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
-  export type StringNullableListFilter<$PrismaModel = never> = {
-    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    has?: string | StringFieldRefInput<$PrismaModel> | null
-    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
-    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
-    isEmpty?: boolean
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -16567,18 +17050,37 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     googleId?: SortOrder
+    mobileNumber?: SortOrder
     bio?: SortOrder
     avatar?: SortOrder
+    avatar2?: SortOrder
+    images?: SortOrder
     birthday?: SortOrder
     gender?: SortOrder
+    horoscope?: SortOrder
     mood?: SortOrder
-    avatar2?: SortOrder
     purpose?: SortOrder
+    intentions?: SortOrder
+    experienceLevel?: SortOrder
+    preferredMatch?: SortOrder
+    primaryNeurotype?: SortOrder
+    status?: SortOrder
+    attachmentStyle?: SortOrder
+    beliefSystem?: SortOrder
+    mbtiType?: SortOrder
     interest?: SortOrder
-    images?: SortOrder
+    topArtists?: SortOrder
+    favoriteGenres?: SortOrder
+    uiTheme?: SortOrder
     instagram?: SortOrder
     facebook?: SortOrder
+    isOnline?: SortOrder
+    lastSeen?: SortOrder
+    profileCompleted?: SortOrder
+    isVerified?: SortOrder
+    emailVerified?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -16587,16 +17089,31 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     googleId?: SortOrder
+    mobileNumber?: SortOrder
     bio?: SortOrder
     avatar?: SortOrder
+    avatar2?: SortOrder
     birthday?: SortOrder
     gender?: SortOrder
+    horoscope?: SortOrder
     mood?: SortOrder
-    avatar2?: SortOrder
     purpose?: SortOrder
+    intentions?: SortOrder
+    experienceLevel?: SortOrder
+    status?: SortOrder
+    attachmentStyle?: SortOrder
+    beliefSystem?: SortOrder
+    mbtiType?: SortOrder
+    uiTheme?: SortOrder
     instagram?: SortOrder
     facebook?: SortOrder
+    isOnline?: SortOrder
+    lastSeen?: SortOrder
+    profileCompleted?: SortOrder
+    isVerified?: SortOrder
+    emailVerified?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -16605,16 +17122,31 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     googleId?: SortOrder
+    mobileNumber?: SortOrder
     bio?: SortOrder
     avatar?: SortOrder
+    avatar2?: SortOrder
     birthday?: SortOrder
     gender?: SortOrder
+    horoscope?: SortOrder
     mood?: SortOrder
-    avatar2?: SortOrder
     purpose?: SortOrder
+    intentions?: SortOrder
+    experienceLevel?: SortOrder
+    status?: SortOrder
+    attachmentStyle?: SortOrder
+    beliefSystem?: SortOrder
+    mbtiType?: SortOrder
+    uiTheme?: SortOrder
     instagram?: SortOrder
     facebook?: SortOrder
+    isOnline?: SortOrder
+    lastSeen?: SortOrder
+    profileCompleted?: SortOrder
+    isVerified?: SortOrder
+    emailVerified?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -16665,6 +17197,14 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -16779,11 +17319,6 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
@@ -16814,14 +17349,6 @@ export namespace Prisma {
     text?: SortOrder
     createdAt?: SortOrder
     seen?: SortOrder
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type connectionSenderIdReceiverIdCompoundUniqueInput = {
@@ -17038,11 +17565,27 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
+  export type UserCreateimagesInput = {
+    set: string[]
+  }
+
+  export type UserCreatepreferredMatchInput = {
+    set: string[]
+  }
+
+  export type UserCreateprimaryNeurotypeInput = {
+    set: string[]
+  }
+
   export type UserCreateinterestInput = {
     set: string[]
   }
 
-  export type UserCreateimagesInput = {
+  export type UserCreatetopArtistsInput = {
+    set: string[]
+  }
+
+  export type UserCreatefavoriteGenresInput = {
     set: string[]
   }
 
@@ -17110,8 +17653,23 @@ export namespace Prisma {
     set?: string | null
   }
 
+  export type UserUpdateimagesInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
+  }
+
+  export type UserUpdatepreferredMatchInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type UserUpdateprimaryNeurotypeInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type UserUpdateinterestInput = {
@@ -17119,9 +17677,18 @@ export namespace Prisma {
     push?: string | string[]
   }
 
-  export type UserUpdateimagesInput = {
+  export type UserUpdatetopArtistsInput = {
     set?: string[]
     push?: string | string[]
+  }
+
+  export type UserUpdatefavoriteGenresInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -17262,10 +17829,6 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutSentMessagesInput, UserUncheckedCreateWithoutSentMessagesInput>
     connectOrCreate?: UserCreateOrConnectWithoutSentMessagesInput
     connect?: UserWhereUniqueInput
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type UserUpdateOneRequiredWithoutRecvMessagesNestedInput = {
@@ -17499,6 +18062,11 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -17580,6 +18148,14 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -17632,19 +18208,6 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type MessageCreateWithoutReceiverInput = {
@@ -17851,18 +18414,37 @@ export namespace Prisma {
     email: string
     password?: string | null
     googleId?: string | null
+    mobileNumber?: string | null
     bio?: string | null
     avatar?: string | null
+    avatar2?: string | null
+    images?: UserCreateimagesInput | string[]
     birthday?: Date | string | null
     gender?: string | null
+    horoscope?: string | null
     mood?: string | null
-    avatar2?: string | null
     purpose?: string | null
+    intentions?: string | null
+    experienceLevel?: string | null
+    preferredMatch?: UserCreatepreferredMatchInput | string[]
+    primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
+    status?: string | null
+    attachmentStyle?: string | null
+    beliefSystem?: string | null
+    mbtiType?: string | null
     interest?: UserCreateinterestInput | string[]
-    images?: UserCreateimagesInput | string[]
+    topArtists?: UserCreatetopArtistsInput | string[]
+    favoriteGenres?: UserCreatefavoriteGenresInput | string[]
+    uiTheme?: string | null
     instagram?: string | null
     facebook?: string | null
+    isOnline?: boolean
+    lastSeen?: Date | string | null
+    profileCompleted?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
     globalMessages?: GlobalChatMessageCreateNestedManyWithoutSenderInput
     privateRoomMessages?: PrivateRoomMessageCreateNestedManyWithoutSenderInput
@@ -17874,18 +18456,37 @@ export namespace Prisma {
     email: string
     password?: string | null
     googleId?: string | null
+    mobileNumber?: string | null
     bio?: string | null
     avatar?: string | null
+    avatar2?: string | null
+    images?: UserCreateimagesInput | string[]
     birthday?: Date | string | null
     gender?: string | null
+    horoscope?: string | null
     mood?: string | null
-    avatar2?: string | null
     purpose?: string | null
+    intentions?: string | null
+    experienceLevel?: string | null
+    preferredMatch?: UserCreatepreferredMatchInput | string[]
+    primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
+    status?: string | null
+    attachmentStyle?: string | null
+    beliefSystem?: string | null
+    mbtiType?: string | null
     interest?: UserCreateinterestInput | string[]
-    images?: UserCreateimagesInput | string[]
+    topArtists?: UserCreatetopArtistsInput | string[]
+    favoriteGenres?: UserCreatefavoriteGenresInput | string[]
+    uiTheme?: string | null
     instagram?: string | null
     facebook?: string | null
+    isOnline?: boolean
+    lastSeen?: Date | string | null
+    profileCompleted?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     globalMessages?: GlobalChatMessageUncheckedCreateNestedManyWithoutSenderInput
     privateRoomMessages?: PrivateRoomMessageUncheckedCreateNestedManyWithoutSenderInput
@@ -17902,18 +18503,37 @@ export namespace Prisma {
     email: string
     password?: string | null
     googleId?: string | null
+    mobileNumber?: string | null
     bio?: string | null
     avatar?: string | null
+    avatar2?: string | null
+    images?: UserCreateimagesInput | string[]
     birthday?: Date | string | null
     gender?: string | null
+    horoscope?: string | null
     mood?: string | null
-    avatar2?: string | null
     purpose?: string | null
+    intentions?: string | null
+    experienceLevel?: string | null
+    preferredMatch?: UserCreatepreferredMatchInput | string[]
+    primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
+    status?: string | null
+    attachmentStyle?: string | null
+    beliefSystem?: string | null
+    mbtiType?: string | null
     interest?: UserCreateinterestInput | string[]
-    images?: UserCreateimagesInput | string[]
+    topArtists?: UserCreatetopArtistsInput | string[]
+    favoriteGenres?: UserCreatefavoriteGenresInput | string[]
+    uiTheme?: string | null
     instagram?: string | null
     facebook?: string | null
+    isOnline?: boolean
+    lastSeen?: Date | string | null
+    profileCompleted?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
     recvMessages?: MessageCreateNestedManyWithoutReceiverInput
     globalMessages?: GlobalChatMessageCreateNestedManyWithoutSenderInput
     privateRoomMessages?: PrivateRoomMessageCreateNestedManyWithoutSenderInput
@@ -17925,18 +18545,37 @@ export namespace Prisma {
     email: string
     password?: string | null
     googleId?: string | null
+    mobileNumber?: string | null
     bio?: string | null
     avatar?: string | null
+    avatar2?: string | null
+    images?: UserCreateimagesInput | string[]
     birthday?: Date | string | null
     gender?: string | null
+    horoscope?: string | null
     mood?: string | null
-    avatar2?: string | null
     purpose?: string | null
+    intentions?: string | null
+    experienceLevel?: string | null
+    preferredMatch?: UserCreatepreferredMatchInput | string[]
+    primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
+    status?: string | null
+    attachmentStyle?: string | null
+    beliefSystem?: string | null
+    mbtiType?: string | null
     interest?: UserCreateinterestInput | string[]
-    images?: UserCreateimagesInput | string[]
+    topArtists?: UserCreatetopArtistsInput | string[]
+    favoriteGenres?: UserCreatefavoriteGenresInput | string[]
+    uiTheme?: string | null
     instagram?: string | null
     facebook?: string | null
+    isOnline?: boolean
+    lastSeen?: Date | string | null
+    profileCompleted?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
     recvMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
     globalMessages?: GlobalChatMessageUncheckedCreateNestedManyWithoutSenderInput
     privateRoomMessages?: PrivateRoomMessageUncheckedCreateNestedManyWithoutSenderInput
@@ -17964,18 +18603,37 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
+    images?: UserUpdateimagesInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
+    horoscope?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    intentions?: NullableStringFieldUpdateOperationsInput | string | null
+    experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    beliefSystem?: NullableStringFieldUpdateOperationsInput | string | null
+    mbtiType?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
-    images?: UserUpdateimagesInput | string[]
+    topArtists?: UserUpdatetopArtistsInput | string[]
+    favoriteGenres?: UserUpdatefavoriteGenresInput | string[]
+    uiTheme?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profileCompleted?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
     globalMessages?: GlobalChatMessageUpdateManyWithoutSenderNestedInput
     privateRoomMessages?: PrivateRoomMessageUpdateManyWithoutSenderNestedInput
@@ -17987,18 +18645,37 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
+    images?: UserUpdateimagesInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
+    horoscope?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    intentions?: NullableStringFieldUpdateOperationsInput | string | null
+    experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    beliefSystem?: NullableStringFieldUpdateOperationsInput | string | null
+    mbtiType?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
-    images?: UserUpdateimagesInput | string[]
+    topArtists?: UserUpdatetopArtistsInput | string[]
+    favoriteGenres?: UserUpdatefavoriteGenresInput | string[]
+    uiTheme?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profileCompleted?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     globalMessages?: GlobalChatMessageUncheckedUpdateManyWithoutSenderNestedInput
     privateRoomMessages?: PrivateRoomMessageUncheckedUpdateManyWithoutSenderNestedInput
@@ -18021,18 +18698,37 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
+    images?: UserUpdateimagesInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
+    horoscope?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    intentions?: NullableStringFieldUpdateOperationsInput | string | null
+    experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    beliefSystem?: NullableStringFieldUpdateOperationsInput | string | null
+    mbtiType?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
-    images?: UserUpdateimagesInput | string[]
+    topArtists?: UserUpdatetopArtistsInput | string[]
+    favoriteGenres?: UserUpdatefavoriteGenresInput | string[]
+    uiTheme?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profileCompleted?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recvMessages?: MessageUpdateManyWithoutReceiverNestedInput
     globalMessages?: GlobalChatMessageUpdateManyWithoutSenderNestedInput
     privateRoomMessages?: PrivateRoomMessageUpdateManyWithoutSenderNestedInput
@@ -18044,18 +18740,37 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
+    images?: UserUpdateimagesInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
+    horoscope?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    intentions?: NullableStringFieldUpdateOperationsInput | string | null
+    experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    beliefSystem?: NullableStringFieldUpdateOperationsInput | string | null
+    mbtiType?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
-    images?: UserUpdateimagesInput | string[]
+    topArtists?: UserUpdatetopArtistsInput | string[]
+    favoriteGenres?: UserUpdatefavoriteGenresInput | string[]
+    uiTheme?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profileCompleted?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recvMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
     globalMessages?: GlobalChatMessageUncheckedUpdateManyWithoutSenderNestedInput
     privateRoomMessages?: PrivateRoomMessageUncheckedUpdateManyWithoutSenderNestedInput
@@ -18107,18 +18822,37 @@ export namespace Prisma {
     email: string
     password?: string | null
     googleId?: string | null
+    mobileNumber?: string | null
     bio?: string | null
     avatar?: string | null
+    avatar2?: string | null
+    images?: UserCreateimagesInput | string[]
     birthday?: Date | string | null
     gender?: string | null
+    horoscope?: string | null
     mood?: string | null
-    avatar2?: string | null
     purpose?: string | null
+    intentions?: string | null
+    experienceLevel?: string | null
+    preferredMatch?: UserCreatepreferredMatchInput | string[]
+    primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
+    status?: string | null
+    attachmentStyle?: string | null
+    beliefSystem?: string | null
+    mbtiType?: string | null
     interest?: UserCreateinterestInput | string[]
-    images?: UserCreateimagesInput | string[]
+    topArtists?: UserCreatetopArtistsInput | string[]
+    favoriteGenres?: UserCreatefavoriteGenresInput | string[]
+    uiTheme?: string | null
     instagram?: string | null
     facebook?: string | null
+    isOnline?: boolean
+    lastSeen?: Date | string | null
+    profileCompleted?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
     recvMessages?: MessageCreateNestedManyWithoutReceiverInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
     privateRoomMessages?: PrivateRoomMessageCreateNestedManyWithoutSenderInput
@@ -18130,18 +18864,37 @@ export namespace Prisma {
     email: string
     password?: string | null
     googleId?: string | null
+    mobileNumber?: string | null
     bio?: string | null
     avatar?: string | null
+    avatar2?: string | null
+    images?: UserCreateimagesInput | string[]
     birthday?: Date | string | null
     gender?: string | null
+    horoscope?: string | null
     mood?: string | null
-    avatar2?: string | null
     purpose?: string | null
+    intentions?: string | null
+    experienceLevel?: string | null
+    preferredMatch?: UserCreatepreferredMatchInput | string[]
+    primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
+    status?: string | null
+    attachmentStyle?: string | null
+    beliefSystem?: string | null
+    mbtiType?: string | null
     interest?: UserCreateinterestInput | string[]
-    images?: UserCreateimagesInput | string[]
+    topArtists?: UserCreatetopArtistsInput | string[]
+    favoriteGenres?: UserCreatefavoriteGenresInput | string[]
+    uiTheme?: string | null
     instagram?: string | null
     facebook?: string | null
+    isOnline?: boolean
+    lastSeen?: Date | string | null
+    profileCompleted?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
     recvMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     privateRoomMessages?: PrivateRoomMessageUncheckedCreateNestedManyWithoutSenderInput
@@ -18188,18 +18941,37 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
+    images?: UserUpdateimagesInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
+    horoscope?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    intentions?: NullableStringFieldUpdateOperationsInput | string | null
+    experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    beliefSystem?: NullableStringFieldUpdateOperationsInput | string | null
+    mbtiType?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
-    images?: UserUpdateimagesInput | string[]
+    topArtists?: UserUpdatetopArtistsInput | string[]
+    favoriteGenres?: UserUpdatefavoriteGenresInput | string[]
+    uiTheme?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profileCompleted?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recvMessages?: MessageUpdateManyWithoutReceiverNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
     privateRoomMessages?: PrivateRoomMessageUpdateManyWithoutSenderNestedInput
@@ -18211,18 +18983,37 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
+    images?: UserUpdateimagesInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
+    horoscope?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    intentions?: NullableStringFieldUpdateOperationsInput | string | null
+    experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    beliefSystem?: NullableStringFieldUpdateOperationsInput | string | null
+    mbtiType?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
-    images?: UserUpdateimagesInput | string[]
+    topArtists?: UserUpdatetopArtistsInput | string[]
+    favoriteGenres?: UserUpdatefavoriteGenresInput | string[]
+    uiTheme?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profileCompleted?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recvMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     privateRoomMessages?: PrivateRoomMessageUncheckedUpdateManyWithoutSenderNestedInput
@@ -18299,18 +19090,37 @@ export namespace Prisma {
     email: string
     password?: string | null
     googleId?: string | null
+    mobileNumber?: string | null
     bio?: string | null
     avatar?: string | null
+    avatar2?: string | null
+    images?: UserCreateimagesInput | string[]
     birthday?: Date | string | null
     gender?: string | null
+    horoscope?: string | null
     mood?: string | null
-    avatar2?: string | null
     purpose?: string | null
+    intentions?: string | null
+    experienceLevel?: string | null
+    preferredMatch?: UserCreatepreferredMatchInput | string[]
+    primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
+    status?: string | null
+    attachmentStyle?: string | null
+    beliefSystem?: string | null
+    mbtiType?: string | null
     interest?: UserCreateinterestInput | string[]
-    images?: UserCreateimagesInput | string[]
+    topArtists?: UserCreatetopArtistsInput | string[]
+    favoriteGenres?: UserCreatefavoriteGenresInput | string[]
+    uiTheme?: string | null
     instagram?: string | null
     facebook?: string | null
+    isOnline?: boolean
+    lastSeen?: Date | string | null
+    profileCompleted?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
     recvMessages?: MessageCreateNestedManyWithoutReceiverInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
     globalMessages?: GlobalChatMessageCreateNestedManyWithoutSenderInput
@@ -18322,18 +19132,37 @@ export namespace Prisma {
     email: string
     password?: string | null
     googleId?: string | null
+    mobileNumber?: string | null
     bio?: string | null
     avatar?: string | null
+    avatar2?: string | null
+    images?: UserCreateimagesInput | string[]
     birthday?: Date | string | null
     gender?: string | null
+    horoscope?: string | null
     mood?: string | null
-    avatar2?: string | null
     purpose?: string | null
+    intentions?: string | null
+    experienceLevel?: string | null
+    preferredMatch?: UserCreatepreferredMatchInput | string[]
+    primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
+    status?: string | null
+    attachmentStyle?: string | null
+    beliefSystem?: string | null
+    mbtiType?: string | null
     interest?: UserCreateinterestInput | string[]
-    images?: UserCreateimagesInput | string[]
+    topArtists?: UserCreatetopArtistsInput | string[]
+    favoriteGenres?: UserCreatefavoriteGenresInput | string[]
+    uiTheme?: string | null
     instagram?: string | null
     facebook?: string | null
+    isOnline?: boolean
+    lastSeen?: Date | string | null
+    profileCompleted?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
     recvMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     globalMessages?: GlobalChatMessageUncheckedCreateNestedManyWithoutSenderInput
@@ -18388,18 +19217,37 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
+    images?: UserUpdateimagesInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
+    horoscope?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    intentions?: NullableStringFieldUpdateOperationsInput | string | null
+    experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    beliefSystem?: NullableStringFieldUpdateOperationsInput | string | null
+    mbtiType?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
-    images?: UserUpdateimagesInput | string[]
+    topArtists?: UserUpdatetopArtistsInput | string[]
+    favoriteGenres?: UserUpdatefavoriteGenresInput | string[]
+    uiTheme?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profileCompleted?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recvMessages?: MessageUpdateManyWithoutReceiverNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
     globalMessages?: GlobalChatMessageUpdateManyWithoutSenderNestedInput
@@ -18411,18 +19259,37 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
+    images?: UserUpdateimagesInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
+    horoscope?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    intentions?: NullableStringFieldUpdateOperationsInput | string | null
+    experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    beliefSystem?: NullableStringFieldUpdateOperationsInput | string | null
+    mbtiType?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
-    images?: UserUpdateimagesInput | string[]
+    topArtists?: UserUpdatetopArtistsInput | string[]
+    favoriteGenres?: UserUpdatefavoriteGenresInput | string[]
+    uiTheme?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profileCompleted?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recvMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     globalMessages?: GlobalChatMessageUncheckedUpdateManyWithoutSenderNestedInput

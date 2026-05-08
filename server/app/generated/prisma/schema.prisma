@@ -10,28 +10,74 @@ datasource db {
 }
 
 model User {
-  id                  String                                 @id @default(uuid())
-  fullName            String
-  email               String                                 @unique
-  password            String?
-  googleId            String?
-  bio                 String?
-  avatar              String?
-  birthday            DateTime?
-  location            Unsupported("geography(Point, 4326)")?
-  gender              String?
-  mood                String?
-  avatar2             String?
-  purpose             String?
-  interest            String[]                               @default([])
-  images              String[]                               @default([])
-  instagram           String?
-  facebook            String?
-  createdAt           DateTime                               @default(now())
-  recvMessages        Message[]                              @relation("received")
-  sentMessages        Message[]                              @relation("sent")
-  globalMessages      GlobalChatMessage[]                    @relation("UserGlobalMessages")
-  privateRoomMessages PrivateRoomMessage[]                   @relation("UserPrivateRoomMessages")
+  id String @id @default(uuid())
+
+  // Basic Info
+  fullName     String
+  email        String  @unique
+  password     String?
+  googleId     String?
+  mobileNumber String?
+
+  // Profile
+  bio     String?
+  avatar  String?
+  avatar2 String?
+  images  String[] @default([])
+
+  // Personal Details
+  birthday  DateTime?
+  gender    String?
+  horoscope String?
+  mood      String?
+  purpose   String?
+
+  // Dating / Matching
+  intentions      String?
+  experienceLevel String?
+  preferredMatch  String[] @default([])
+
+  // Neurodivergent Preferences
+  primaryNeurotype String[] @default([])
+  status           String?
+  attachmentStyle  String?
+  beliefSystem     String?
+  mbtiType         String?
+
+  // Interests
+  interest       String[] @default([])
+  topArtists     String[] @default([])
+  favoriteGenres String[] @default([])
+
+  // UI / App
+  uiTheme String?
+
+  // Socials
+  instagram String?
+  facebook  String?
+
+  // Location
+  location Unsupported("geography(Point, 4326)")?
+
+  // Activity
+  isOnline         Boolean   @default(false)
+  lastSeen         DateTime?
+  profileCompleted Boolean   @default(false)
+
+  // Verification
+  isVerified    Boolean @default(false)
+  emailVerified Boolean @default(false)
+
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  // Messages
+  recvMessages Message[] @relation("received")
+  sentMessages Message[] @relation("sent")
+
+  globalMessages      GlobalChatMessage[]  @relation("UserGlobalMessages")
+  privateRoomMessages PrivateRoomMessage[] @relation("UserPrivateRoomMessages")
 }
 
 model privacy {
