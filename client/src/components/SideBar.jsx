@@ -4,14 +4,13 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { ChatContext } from '../../context/ChatContext';
 
-const SideBar = ({ onFriendRequest }) => {
-  const { unseenMessages, users, requestData, freindRequestCheck } = useContext(ChatContext);
-  const { authUser, logout, checkAuth } = useContext(AuthContext);
+const SideBar = () => {
+  const { unseenMessages, requestData, freindRequestCheck } = useContext(ChatContext);
+  const { authUser, logout } = useContext(AuthContext);
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Calculate total unseen messages
   const totalUnseen = Object.values(unseenMessages || {}).reduce((a, b) => a + b, 0);
 
   useEffect(() => {
@@ -29,58 +28,46 @@ const SideBar = ({ onFriendRequest }) => {
   ];
 
   return (
-    <div className="flex h-full w-full flex-col bg-white p-6 text-gray-600 overflow-y-auto custom-scrollbar">
+    <div className="group fixed left-4 top-4 bottom-4 z-50 flex flex-col bg-white/80 backdrop-blur-2xl border border-white/60 shadow-[0_8px_32px_-8px_rgba(93,50,137,0.15)] rounded-[32px] overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] w-[88px] hover:w-[280px]">
 
-      {/* Logo */}
-      <div className="mb-10 flex items-center gap-3 px-2">
-        <img src={assets.logo} alt='Unisoul Logo' className="w-9 h-9 rounded-xl bg-[#F8F5FB] p-1 object-contain" />
-        <h1 className="text-xl font-black text-[#5D3289] tracking-tight">UNISOUL</h1>
+      {/* Logo Area */}
+      <div className="pt-8 pb-6 flex items-center px-6 whitespace-nowrap">
+        <img src={assets.logo} alt='Unisoul Logo' className="w-10 h-10 min-w-[40px] rounded-xl bg-gradient-to-tr from-[#5D3289] to-[#9b6bcc] p-1.5 object-contain shadow-md transition-transform duration-300 group-hover:rotate-12" />
+        <h1 className="text-2xl font-black text-[#5D3289] tracking-tight ml-4 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100">
+          UNISOUL
+        </h1>
       </div>
 
-      {/* User Profile Snippet */}
-      {authUser && (
-        <div className="mb-8 flex items-center gap-3 bg-[#F8F5FB]/50 border border-[#F4F0F9] p-3 rounded-2xl transition-all hover:bg-[#F8F5FB]">
-          <img
-            src={authUser?.avatar}
-            className="h-10 w-10 rounded-full object-cover border-2 border-white shadow-sm"
-            alt="User"
-          />
-          <div className="flex flex-col min-w-0">
-            <p className="text-sm font-bold text-gray-900 truncate">
-              {authUser?.fullName || "Elena Gomez"}
-            </p>
-            <p className="text-[10px] font-bold text-[#5D3289] tracking-wide uppercase mt-0.5">
-              Premium Member
-            </p>
-          </div>
-        </div>
-      )}
-
       {/* Navigation Menu */}
-      <nav className="flex flex-col gap-1.5">
+      <nav className="flex flex-col gap-2 px-4 mt-4 flex-1">
         {menuItems.map((item) => {
           const isActive = location.pathname === item.path;
           return (
             <div
               key={item.name}
               onClick={() => navigate(item.path)}
-              className={`flex cursor-pointer items-center justify-between rounded-2xl py-3.5 px-4 transition-all duration-200 group ${isActive
-                  ? 'bg-[#F8F5FB] text-[#5D3289] shadow-[0_2px_10px_-4px_rgba(93,50,137,0.2)]'
-                  : 'hover:bg-gray-50/80 text-gray-500 hover:text-gray-800'
+              className={`flex items-center rounded-2xl cursor-pointer transition-all duration-300 relative overflow-hidden ${isActive
+                  ? 'bg-[#5D3289] text-white shadow-md'
+                  : 'hover:bg-purple-50 text-gray-500 hover:text-[#5D3289]'
                 }`}
             >
-              <div className="flex items-center gap-3.5">
-                <span className={`text-xl transition-transform duration-200 ${isActive ? 'scale-110' : 'group-hover:scale-110'}`}>
+              <div className="flex items-center justify-center w-[56px] h-[56px] min-w-[56px] relative z-10">
+                <span className={`text-2xl transition-transform duration-300 ${isActive ? 'scale-110' : 'group-hover:scale-110'}`}>
                   {item.icon}
                 </span>
-                <span className={`text-sm ${isActive ? 'font-bold' : 'font-semibold'}`}>
-                  {item.name}
-                </span>
+                {/* Minimal dot badge for collapsed state */}
+                {item.badge > 0 && (
+                  <span className={`absolute top-3 right-3 w-2.5 h-2.5 rounded-full border-2 border-white transition-opacity duration-300 ${isActive ? 'bg-white' : 'bg-red-500'} group-hover:opacity-0`}></span>
+                )}
               </div>
 
-              {/* Badge */}
+              <span className={`text-sm whitespace-nowrap font-bold opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 relative z-10 flex-1`}>
+                {item.name}
+              </span>
+
+              {/* Full badge for expanded state */}
               {item.badge > 0 && (
-                <span className="bg-[#5D3289] text-[10px] font-bold text-white px-2 py-0.5 rounded-full shadow-sm">
+                <span className={`mr-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-150 text-[10px] font-bold px-2 py-1 rounded-full ${isActive ? 'bg-white/20 text-white' : 'bg-[#5D3289] text-white'}`}>
                   {item.badge}
                 </span>
               )}
@@ -89,35 +76,43 @@ const SideBar = ({ onFriendRequest }) => {
         })}
       </nav>
 
-      <div className="mt-auto flex flex-col gap-4 pt-8">
+      <div className="mt-auto px-4 pb-6 flex flex-col gap-4 whitespace-nowrap">
 
-        {/* Boost Profile Card */}
-        <div className="rounded-[20px] bg-gradient-to-br from-[#4B2471] via-[#5D3289] to-[#7B52AB] p-5 text-white shadow-lg shadow-[#5D3289]/20 relative overflow-hidden group cursor-pointer">
-          {/* Decorative background circle */}
-          <div className="absolute -top-6 -right-6 w-24 h-24 bg-white opacity-10 rounded-full blur-xl group-hover:scale-150 transition-transform duration-500"></div>
-
-          <div className="relative z-10">
+        {/* Boost Profile (Hidden when collapsed, fades in) */}
+        <div className="opacity-0 h-0 group-hover:h-auto group-hover:opacity-100 transition-all duration-500 overflow-hidden">
+          <div className="rounded-[20px] bg-gradient-to-br from-[#1A0B2E] to-[#5D3289] p-4 text-white shadow-lg relative cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all mx-2 mb-2">
+            <div className="absolute -top-6 -right-6 w-20 h-20 bg-white opacity-10 rounded-full blur-xl"></div>
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-sm">⚡</span>
-              <h4 className="text-xs font-bold tracking-wide">Boost Profile</h4>
+              <span className="text-lg">⚡</span>
+              <h4 className="text-xs font-bold">Boost Profile</h4>
             </div>
-            <p className="mt-1 text-[11px] text-purple-100 font-medium">Get 10x more visibility</p>
-            <button className="mt-4 w-full rounded-xl bg-white/15 py-2.5 text-[11px] font-bold tracking-wide hover:bg-white/25 backdrop-blur-md transition-colors border border-white/10 shadow-inner">
-              Upgrade Now
-            </button>
+            <p className="text-[10px] text-purple-200">10x more visibility</p>
           </div>
         </div>
 
-        {/* Logout Button */}
-        <button
-          onClick={() => logout()}
-          className="w-full flex justify-center items-center gap-2 rounded-2xl bg-gray-50 py-3.5 text-xs font-bold text-gray-400 hover:bg-red-50 hover:text-red-500 transition-all active:scale-[0.98]"
-        >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
-          </svg>
-          Logout Session
-        </button>
+        {/* User Profile Snippet (Click to logout or go to profile) */}
+        {authUser && (
+          <div
+            onClick={() => logout()}
+            className="flex items-center rounded-2xl p-2 cursor-pointer transition-all duration-300 hover:bg-red-50 group/user border border-transparent hover:border-red-100"
+            title="Click to logout"
+          >
+            <img
+              src={authUser?.avatar || assets.logo}
+              className="h-10 w-10 min-w-[40px] rounded-full object-cover border-2 border-white shadow-sm"
+              alt="User"
+            />
+            <div className="flex flex-col ml-3 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 flex-1">
+              <p className="text-sm font-bold text-gray-900 truncate group-hover/user:text-red-600 transition-colors">
+                {authUser?.fullName || "Elena Gomez"}
+              </p>
+              <p className="text-[10px] font-bold text-gray-400 group-hover/user:text-red-400 flex items-center gap-1 transition-colors">
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                Logout
+              </p>
+            </div>
+          </div>
+        )}
       </div>
 
     </div>
