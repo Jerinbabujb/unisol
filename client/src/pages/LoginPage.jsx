@@ -223,9 +223,10 @@ const LoginPage = () => {
       <div className='w-full max-w-6xl bg-white rounded-[48px] shadow-[0_40px_80px_-15px_rgba(93,50,137,0.1)] flex overflow-hidden min-h-[720px] border border-gray-50 z-10'>
 
         {/* Left Side: Visual Experience */}
+
         <div className='hidden lg:flex lg:w-5/12 relative overflow-hidden'>
           <img
-            src='https://images.unsplash.com/photo-1516589174184-c685266d4af4?auto=format&fit=crop&q=80&w=1000'
+            src={step === 1 ? './assets/hero1.jpg' : step === 2 ? './assets/hero2.jpg' : step === 3 ? './assets/hero3.jpg' : './assets/hero1.jpg'}
             alt='Hero Connection'
             className='absolute inset-0 w-full h-full object-cover transition-transform duration-[10s] hover:scale-105'
           />
