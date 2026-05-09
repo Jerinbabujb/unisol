@@ -5,35 +5,23 @@ import cloudinary from "../lib/cloudinary.js";
 
 import { io, userSocketMap } from "../server.js";
 
+import { getMatchesForUser } from '../services/matchmaking.js';
+
 export const getUsers = async (req, res) => {
   try {
     const userId = req.user.id;
 
-    // 1. Get all users except logged-in user
-    const users = await prisma.user.findMany({
-      where: {
-        id: { not: userId }
-      },
-      select: {
-        id: true,
-        fullName: true,
-        avatar: true,
-        bio: true,
-        mood: true,
-        instagram: true,
-        facebook: true,
-        interest: true,
-        images: true
-      }
-    });
+    // Call the AI Matchmaking Engine instead of fetching everyone
+    // The '20' is the limit of matches to return
+    const matchedUsers = await getMatchesForUser(userId, 20);
 
     res.json({
       success: true,
-      users,
+      users: matchedUsers, // Keep the key as 'users' so your frontend doesn't break!
     });
 
   } catch (error) {
-    console.error(error);
+    console.error("Error fetching matched users:", error);
     res.status(500).json({
       success: false,
       message: error.message

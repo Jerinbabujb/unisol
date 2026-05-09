@@ -28,6 +28,7 @@ const LoginPage = () => {
     mobileNumber: '',
     primaryNeurotype: [],
     status: '',
+    prefferGender: '',
     preferredMatch: [],
     mbtiType: '',
     attachmentStyle: '',
@@ -169,6 +170,7 @@ const LoginPage = () => {
       beliefSystem: '',
       intentions: '',
       experienceLevel: '',
+      prefferGender: '',
       topArtists: [],
       favoriteGenres: [],
       uiTheme: '',
@@ -485,6 +487,17 @@ const LoginPage = () => {
                       }
                       setFormData({ ...formData, preferredMatch: updated });
                     }}
+                  />
+                  <SelectField
+                    label='Prefferred Gender'
+                    name='prefferGender'
+                    value={formData.prefferGender}
+                    onChange={handleChange}
+                    options={[
+                      'Male',
+                      'Female',
+                      'Other',
+                    ]}
                   />
 
                   <div className="grid grid-cols-2 gap-4">

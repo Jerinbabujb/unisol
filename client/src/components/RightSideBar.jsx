@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import assets from '../assets';
+import { ChatContext } from '../../context/ChatContext';
+import { useNavigate } from 'react-router-dom';
 
 const RightSideBar = () => {
+  const { users, allUsers, setSelectedUser } = useContext(ChatContext);
+  const navigate = useNavigate()
+  useEffect(() => {
+    allUsers();
+  }, []);
+  const gotoProfile = async (user) => {
+    await setSelectedUser(user);
+    navigate('/user-profile');
+  }
   return (
     <div className="flex h-full w-full flex-col gap-8 bg-white px-6 py-8 text-gray-900 overflow-y-auto border-l border-[#F4F0F9]">
 
@@ -36,17 +47,17 @@ const RightSideBar = () => {
       <section className="flex-1">
         <h3 className="mb-4 text-lg font-bold tracking-tight">New Matches</h3>
         <div className="space-y-4">
-          {['Sarah', 'Michael', 'Jessica'].map((name, i) => (
-            <div key={i} className="flex items-center gap-4 p-3 rounded-2xl bg-white border border-[#F4F0F9] hover:border-[#5D3289]/30 hover:shadow-md cursor-pointer transition-all group">
+          {users.slice(0, 3).map((user) => (
+            <div key={user.id} className="flex items-center gap-4 p-3 rounded-2xl bg-white border border-[#F4F0F9] hover:border-[#5D3289]/30 hover:shadow-md cursor-pointer transition-all group">
               <div className="relative">
-                <img src={assets.avatar_icon} className="h-12 w-12 rounded-full object-cover" alt={name} />
-                <span className="absolute top-0 right-0 w-3 h-3 bg-red-500 border-2 border-white rounded-full"></span>
+                <img onClick={() => gotoProfile(user)} src={user.avatar ? user.avatar : assets.logo} className="h-12 w-12 rounded-full object-cover" alt={user.fullName} />
+                {/* <span className="absolute top-0 right-0 w-3 h-3 bg-red-500 border-2 border-white rounded-full"></span> */}
               </div>
               <div className="flex-1 min-w-0">
-                <h4 className="text-sm font-bold text-gray-900 group-hover:text-[#5D3289] transition-colors">{name}</h4>
-                <p className="text-xs text-gray-400 truncate">Matched 2 hours ago</p>
+                <h4 className="text-sm font-bold text-gray-900 group-hover:text-[#5D3289] transition-colors">{user.fullName}</h4>
+                <p className="text-xs text-gray-400 truncate">{user.match_percentage}% Match</p>
               </div>
-              <button className="w-8 h-8 rounded-full bg-purple-50 text-[#5D3289] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
+              <button onClick={() => gotoProfile(user)} className="w-8 h-8 rounded-full bg-purple-50 text-[#5D3289] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" /></svg>
               </button>
             </div>

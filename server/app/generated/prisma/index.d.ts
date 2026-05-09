@@ -2011,6 +2011,7 @@ export namespace Prisma {
     horoscope: string | null
     mood: string | null
     purpose: string | null
+    prefferGender: string | null
     intentions: string | null
     experienceLevel: string | null
     status: string | null
@@ -2044,6 +2045,7 @@ export namespace Prisma {
     horoscope: string | null
     mood: string | null
     purpose: string | null
+    prefferGender: string | null
     intentions: string | null
     experienceLevel: string | null
     status: string | null
@@ -2078,6 +2080,7 @@ export namespace Prisma {
     horoscope: number
     mood: number
     purpose: number
+    prefferGender: number
     intentions: number
     experienceLevel: number
     preferredMatch: number
@@ -2118,6 +2121,7 @@ export namespace Prisma {
     horoscope?: true
     mood?: true
     purpose?: true
+    prefferGender?: true
     intentions?: true
     experienceLevel?: true
     status?: true
@@ -2151,6 +2155,7 @@ export namespace Prisma {
     horoscope?: true
     mood?: true
     purpose?: true
+    prefferGender?: true
     intentions?: true
     experienceLevel?: true
     status?: true
@@ -2185,6 +2190,7 @@ export namespace Prisma {
     horoscope?: true
     mood?: true
     purpose?: true
+    prefferGender?: true
     intentions?: true
     experienceLevel?: true
     preferredMatch?: true
@@ -2297,6 +2303,7 @@ export namespace Prisma {
     horoscope: string | null
     mood: string | null
     purpose: string | null
+    prefferGender: string | null
     intentions: string | null
     experienceLevel: string | null
     preferredMatch: string[]
@@ -2353,6 +2360,7 @@ export namespace Prisma {
     horoscope?: boolean
     mood?: boolean
     purpose?: boolean
+    prefferGender?: boolean
     intentions?: boolean
     experienceLevel?: boolean
     preferredMatch?: boolean
@@ -2397,6 +2405,7 @@ export namespace Prisma {
     horoscope?: boolean
     mood?: boolean
     purpose?: boolean
+    prefferGender?: boolean
     intentions?: boolean
     experienceLevel?: boolean
     preferredMatch?: boolean
@@ -2436,6 +2445,7 @@ export namespace Prisma {
     horoscope?: boolean
     mood?: boolean
     purpose?: boolean
+    prefferGender?: boolean
     intentions?: boolean
     experienceLevel?: boolean
     preferredMatch?: boolean
@@ -2475,6 +2485,7 @@ export namespace Prisma {
     horoscope?: boolean
     mood?: boolean
     purpose?: boolean
+    prefferGender?: boolean
     intentions?: boolean
     experienceLevel?: boolean
     preferredMatch?: boolean
@@ -2498,7 +2509,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "email" | "password" | "googleId" | "mobileNumber" | "bio" | "avatar" | "avatar2" | "images" | "birthday" | "gender" | "horoscope" | "mood" | "purpose" | "intentions" | "experienceLevel" | "preferredMatch" | "primaryNeurotype" | "status" | "attachmentStyle" | "beliefSystem" | "mbtiType" | "interest" | "topArtists" | "favoriteGenres" | "uiTheme" | "instagram" | "facebook" | "isOnline" | "lastSeen" | "profileCompleted" | "isVerified" | "emailVerified" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "email" | "password" | "googleId" | "mobileNumber" | "bio" | "avatar" | "avatar2" | "images" | "birthday" | "gender" | "horoscope" | "mood" | "purpose" | "prefferGender" | "intentions" | "experienceLevel" | "preferredMatch" | "primaryNeurotype" | "status" | "attachmentStyle" | "beliefSystem" | "mbtiType" | "interest" | "topArtists" | "favoriteGenres" | "uiTheme" | "instagram" | "facebook" | "isOnline" | "lastSeen" | "profileCompleted" | "isVerified" | "emailVerified" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     recvMessages?: boolean | User$recvMessagesArgs<ExtArgs>
     sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
@@ -2533,6 +2544,7 @@ export namespace Prisma {
       horoscope: string | null
       mood: string | null
       purpose: string | null
+      prefferGender: string | null
       intentions: string | null
       experienceLevel: string | null
       preferredMatch: string[]
@@ -2996,6 +3008,7 @@ export namespace Prisma {
     readonly horoscope: FieldRef<"User", 'String'>
     readonly mood: FieldRef<"User", 'String'>
     readonly purpose: FieldRef<"User", 'String'>
+    readonly prefferGender: FieldRef<"User", 'String'>
     readonly intentions: FieldRef<"User", 'String'>
     readonly experienceLevel: FieldRef<"User", 'String'>
     readonly preferredMatch: FieldRef<"User", 'String[]'>
@@ -14973,6 +14986,7 @@ export namespace Prisma {
     horoscope: 'horoscope',
     mood: 'mood',
     purpose: 'purpose',
+    prefferGender: 'prefferGender',
     intentions: 'intentions',
     experienceLevel: 'experienceLevel',
     preferredMatch: 'preferredMatch',
@@ -15234,6 +15248,7 @@ export namespace Prisma {
     horoscope?: StringNullableFilter<"User"> | string | null
     mood?: StringNullableFilter<"User"> | string | null
     purpose?: StringNullableFilter<"User"> | string | null
+    prefferGender?: StringNullableFilter<"User"> | string | null
     intentions?: StringNullableFilter<"User"> | string | null
     experienceLevel?: StringNullableFilter<"User"> | string | null
     preferredMatch?: StringNullableListFilter<"User">
@@ -15277,6 +15292,7 @@ export namespace Prisma {
     horoscope?: SortOrderInput | SortOrder
     mood?: SortOrderInput | SortOrder
     purpose?: SortOrderInput | SortOrder
+    prefferGender?: SortOrderInput | SortOrder
     intentions?: SortOrderInput | SortOrder
     experienceLevel?: SortOrderInput | SortOrder
     preferredMatch?: SortOrder
@@ -15323,6 +15339,7 @@ export namespace Prisma {
     horoscope?: StringNullableFilter<"User"> | string | null
     mood?: StringNullableFilter<"User"> | string | null
     purpose?: StringNullableFilter<"User"> | string | null
+    prefferGender?: StringNullableFilter<"User"> | string | null
     intentions?: StringNullableFilter<"User"> | string | null
     experienceLevel?: StringNullableFilter<"User"> | string | null
     preferredMatch?: StringNullableListFilter<"User">
@@ -15366,6 +15383,7 @@ export namespace Prisma {
     horoscope?: SortOrderInput | SortOrder
     mood?: SortOrderInput | SortOrder
     purpose?: SortOrderInput | SortOrder
+    prefferGender?: SortOrderInput | SortOrder
     intentions?: SortOrderInput | SortOrder
     experienceLevel?: SortOrderInput | SortOrder
     preferredMatch?: SortOrder
@@ -15411,6 +15429,7 @@ export namespace Prisma {
     horoscope?: StringNullableWithAggregatesFilter<"User"> | string | null
     mood?: StringNullableWithAggregatesFilter<"User"> | string | null
     purpose?: StringNullableWithAggregatesFilter<"User"> | string | null
+    prefferGender?: StringNullableWithAggregatesFilter<"User"> | string | null
     intentions?: StringNullableWithAggregatesFilter<"User"> | string | null
     experienceLevel?: StringNullableWithAggregatesFilter<"User"> | string | null
     preferredMatch?: StringNullableListFilter<"User">
@@ -16053,6 +16072,7 @@ export namespace Prisma {
     horoscope?: string | null
     mood?: string | null
     purpose?: string | null
+    prefferGender?: string | null
     intentions?: string | null
     experienceLevel?: string | null
     preferredMatch?: UserCreatepreferredMatchInput | string[]
@@ -16096,6 +16116,7 @@ export namespace Prisma {
     horoscope?: string | null
     mood?: string | null
     purpose?: string | null
+    prefferGender?: string | null
     intentions?: string | null
     experienceLevel?: string | null
     preferredMatch?: UserCreatepreferredMatchInput | string[]
@@ -16139,6 +16160,7 @@ export namespace Prisma {
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    prefferGender?: NullableStringFieldUpdateOperationsInput | string | null
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
     experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
     preferredMatch?: UserUpdatepreferredMatchInput | string[]
@@ -16182,6 +16204,7 @@ export namespace Prisma {
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    prefferGender?: NullableStringFieldUpdateOperationsInput | string | null
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
     experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
     preferredMatch?: UserUpdatepreferredMatchInput | string[]
@@ -16225,6 +16248,7 @@ export namespace Prisma {
     horoscope?: string | null
     mood?: string | null
     purpose?: string | null
+    prefferGender?: string | null
     intentions?: string | null
     experienceLevel?: string | null
     preferredMatch?: UserCreatepreferredMatchInput | string[]
@@ -16264,6 +16288,7 @@ export namespace Prisma {
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    prefferGender?: NullableStringFieldUpdateOperationsInput | string | null
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
     experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
     preferredMatch?: UserUpdatepreferredMatchInput | string[]
@@ -16303,6 +16328,7 @@ export namespace Prisma {
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    prefferGender?: NullableStringFieldUpdateOperationsInput | string | null
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
     experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
     preferredMatch?: UserUpdatepreferredMatchInput | string[]
@@ -17060,6 +17086,7 @@ export namespace Prisma {
     horoscope?: SortOrder
     mood?: SortOrder
     purpose?: SortOrder
+    prefferGender?: SortOrder
     intentions?: SortOrder
     experienceLevel?: SortOrder
     preferredMatch?: SortOrder
@@ -17098,6 +17125,7 @@ export namespace Prisma {
     horoscope?: SortOrder
     mood?: SortOrder
     purpose?: SortOrder
+    prefferGender?: SortOrder
     intentions?: SortOrder
     experienceLevel?: SortOrder
     status?: SortOrder
@@ -17131,6 +17159,7 @@ export namespace Prisma {
     horoscope?: SortOrder
     mood?: SortOrder
     purpose?: SortOrder
+    prefferGender?: SortOrder
     intentions?: SortOrder
     experienceLevel?: SortOrder
     status?: SortOrder
@@ -18424,6 +18453,7 @@ export namespace Prisma {
     horoscope?: string | null
     mood?: string | null
     purpose?: string | null
+    prefferGender?: string | null
     intentions?: string | null
     experienceLevel?: string | null
     preferredMatch?: UserCreatepreferredMatchInput | string[]
@@ -18466,6 +18496,7 @@ export namespace Prisma {
     horoscope?: string | null
     mood?: string | null
     purpose?: string | null
+    prefferGender?: string | null
     intentions?: string | null
     experienceLevel?: string | null
     preferredMatch?: UserCreatepreferredMatchInput | string[]
@@ -18513,6 +18544,7 @@ export namespace Prisma {
     horoscope?: string | null
     mood?: string | null
     purpose?: string | null
+    prefferGender?: string | null
     intentions?: string | null
     experienceLevel?: string | null
     preferredMatch?: UserCreatepreferredMatchInput | string[]
@@ -18555,6 +18587,7 @@ export namespace Prisma {
     horoscope?: string | null
     mood?: string | null
     purpose?: string | null
+    prefferGender?: string | null
     intentions?: string | null
     experienceLevel?: string | null
     preferredMatch?: UserCreatepreferredMatchInput | string[]
@@ -18613,6 +18646,7 @@ export namespace Prisma {
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    prefferGender?: NullableStringFieldUpdateOperationsInput | string | null
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
     experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
     preferredMatch?: UserUpdatepreferredMatchInput | string[]
@@ -18655,6 +18689,7 @@ export namespace Prisma {
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    prefferGender?: NullableStringFieldUpdateOperationsInput | string | null
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
     experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
     preferredMatch?: UserUpdatepreferredMatchInput | string[]
@@ -18708,6 +18743,7 @@ export namespace Prisma {
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    prefferGender?: NullableStringFieldUpdateOperationsInput | string | null
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
     experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
     preferredMatch?: UserUpdatepreferredMatchInput | string[]
@@ -18750,6 +18786,7 @@ export namespace Prisma {
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    prefferGender?: NullableStringFieldUpdateOperationsInput | string | null
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
     experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
     preferredMatch?: UserUpdatepreferredMatchInput | string[]
@@ -18832,6 +18869,7 @@ export namespace Prisma {
     horoscope?: string | null
     mood?: string | null
     purpose?: string | null
+    prefferGender?: string | null
     intentions?: string | null
     experienceLevel?: string | null
     preferredMatch?: UserCreatepreferredMatchInput | string[]
@@ -18874,6 +18912,7 @@ export namespace Prisma {
     horoscope?: string | null
     mood?: string | null
     purpose?: string | null
+    prefferGender?: string | null
     intentions?: string | null
     experienceLevel?: string | null
     preferredMatch?: UserCreatepreferredMatchInput | string[]
@@ -18951,6 +18990,7 @@ export namespace Prisma {
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    prefferGender?: NullableStringFieldUpdateOperationsInput | string | null
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
     experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
     preferredMatch?: UserUpdatepreferredMatchInput | string[]
@@ -18993,6 +19033,7 @@ export namespace Prisma {
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    prefferGender?: NullableStringFieldUpdateOperationsInput | string | null
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
     experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
     preferredMatch?: UserUpdatepreferredMatchInput | string[]
@@ -19100,6 +19141,7 @@ export namespace Prisma {
     horoscope?: string | null
     mood?: string | null
     purpose?: string | null
+    prefferGender?: string | null
     intentions?: string | null
     experienceLevel?: string | null
     preferredMatch?: UserCreatepreferredMatchInput | string[]
@@ -19142,6 +19184,7 @@ export namespace Prisma {
     horoscope?: string | null
     mood?: string | null
     purpose?: string | null
+    prefferGender?: string | null
     intentions?: string | null
     experienceLevel?: string | null
     preferredMatch?: UserCreatepreferredMatchInput | string[]
@@ -19227,6 +19270,7 @@ export namespace Prisma {
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    prefferGender?: NullableStringFieldUpdateOperationsInput | string | null
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
     experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
     preferredMatch?: UserUpdatepreferredMatchInput | string[]
@@ -19269,6 +19313,7 @@ export namespace Prisma {
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
     mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    prefferGender?: NullableStringFieldUpdateOperationsInput | string | null
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
     experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
     preferredMatch?: UserUpdatepreferredMatchInput | string[]

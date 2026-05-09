@@ -136,6 +136,7 @@ exports.Prisma.UserScalarFieldEnum = {
   horoscope: 'horoscope',
   mood: 'mood',
   purpose: 'purpose',
+  prefferGender: 'prefferGender',
   intentions: 'intentions',
   experienceLevel: 'experienceLevel',
   preferredMatch: 'preferredMatch',

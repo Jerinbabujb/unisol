@@ -6,7 +6,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  extensions = [postgis]
+  extensions = [postgis, vector]
 }
 
 model User {
@@ -33,6 +33,7 @@ model User {
   purpose           String?
 
   // Dating / Matching
+  prefferGender     String?  
   intentions        String?
   experienceLevel   String?
   preferredMatch    String[]  @default([])
@@ -67,6 +68,8 @@ model User {
   // Verification
   isVerified        Boolean   @default(false)
   emailVerified     Boolean   @default(false)
+
+  embedding        Unsupported("vector(384)")?
 
   // Timestamps
   createdAt         DateTime  @default(now())
