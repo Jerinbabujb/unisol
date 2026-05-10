@@ -4,15 +4,22 @@ import { ChatContext } from '../../context/ChatContext';
 import { useNavigate } from 'react-router-dom';
 
 const RightSideBar = () => {
-  const { users, allUsers, setSelectedUser } = useContext(ChatContext);
-  const navigate = useNavigate()
+  const { users, allUsers, setSelectedUser, freindRequestCheck, requestData } = useContext(ChatContext);
+  const navigate = useNavigate();
+
   useEffect(() => {
     allUsers();
-  }, []);
+    freindRequestCheck();
+  }, []); // Consolidated your two useEffects since they both run on mount
+
   const gotoProfile = async (user) => {
     await setSelectedUser(user);
     navigate('/user-profile');
-  }
+  };
+
+  // Safely get the number of likes
+  const likesCount = requestData?.user?.length || 0;
+
   return (
     <div className="flex h-full w-full flex-col gap-8 bg-white px-6 py-8 text-gray-900 overflow-y-auto border-l border-[#F4F0F9]">
 
@@ -20,38 +27,48 @@ const RightSideBar = () => {
       <section>
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-lg font-bold tracking-tight">Likes You</h3>
-          <span className="bg-[#5D3289] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">5 New</span>
+          {/* Dynamic Badge */}
+          <span className={`${likesCount > 0 ? 'bg-[#5D3289]' : 'bg-gray-300'} text-white text-[10px] font-bold px-2 py-0.5 rounded-full transition-colors`}>
+            {likesCount} New
+          </span>
         </div>
 
-        {/* Horizontal scroll for blurred profiles */}
-        <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
-          {[1, 2, 3, 4].map((item) => (
-            <div key={item} className="flex flex-col items-center gap-2 cursor-pointer group">
-              <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-[#5D3289]/20 p-0.5">
-                {/* Blur effect to mimic dating apps premium teaser */}
-                <div className="w-full h-full rounded-full overflow-hidden relative">
-                  <img src={assets.avatar_icon} alt="Blurred user" className="w-full h-full object-cover blur-sm group-hover:blur-none transition-all duration-500" />
-                  <div className="absolute inset-0 bg-[#5D3289]/10"></div>
+        {/* Conditional Rendering: Check if there are no likes */}
+        {likesCount === 0 ? (
+          <div className="flex flex-col items-center justify-center py-8 px-4 text-center bg-gradient-to-b from-purple-50/50 to-white rounded-2xl border border-[#F4F0F9]">
+            <span className="text-2xl mb-2 opacity-80">✨</span>
+            <p className="text-sm font-bold text-gray-700">The universe is taking its time</p>
+            <p className="text-xs text-gray-400 mt-1">Your next great connection is just around the corner. Keep exploring!</p>
+          </div>
+        ) : (
+          /* Horizontal scroll for blurred profiles */
+          <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+            {requestData?.user?.map((item, index) => (
+              <div key={item.id || index} className="flex flex-col items-center gap-2 cursor-pointer group">
+                <div onClick={() => gotoProfile(item)} className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-[#5D3289]/20 p-0.5">
+                  <div className="w-full h-full rounded-full overflow-hidden relative">
+                    <img src={item.avatar ? item.avatar : assets.logo} alt="Blurred user" className="w-full h-full object-cover blur-sm group-hover:blur-none transition-all duration-500" />
+                    <div className="absolute inset-0 bg-[#5D3289]/10"></div>
+                  </div>
+                  <div className="absolute -bottom-1 -right-1 bg-white rounded-full p-1 shadow-sm">
+                    <span className="flex w-4 h-4 bg-[#5D3289] rounded-full items-center justify-center text-[8px] text-white">💜</span>
+                  </div>
                 </div>
-                <div className="absolute -bottom-1 -right-1 bg-white rounded-full p-1 shadow-sm">
-                  <span className="flex w-4 h-4 bg-[#5D3289] rounded-full items-center justify-center text-[8px] text-white">💜</span>
-                </div>
+                <span className="text-xs font-bold text-gray-400 group-hover:text-[#5D3289]">See who</span>
               </div>
-              <span className="text-xs font-bold text-gray-400 group-hover:text-[#5D3289]">See who</span>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* New Matches */}
       <section className="flex-1">
         <h3 className="mb-4 text-lg font-bold tracking-tight">New Matches</h3>
         <div className="space-y-4">
-          {users.slice(0, 3).map((user) => (
+          {users?.slice(0, 3)?.map((user) => (
             <div key={user.id} className="flex items-center gap-4 p-3 rounded-2xl bg-white border border-[#F4F0F9] hover:border-[#5D3289]/30 hover:shadow-md cursor-pointer transition-all group">
               <div className="relative">
                 <img onClick={() => gotoProfile(user)} src={user.avatar ? user.avatar : assets.logo} className="h-12 w-12 rounded-full object-cover" alt={user.fullName} />
-                {/* <span className="absolute top-0 right-0 w-3 h-3 bg-red-500 border-2 border-white rounded-full"></span> */}
               </div>
               <div className="flex-1 min-w-0">
                 <h4 className="text-sm font-bold text-gray-900 group-hover:text-[#5D3289] transition-colors">{user.fullName}</h4>

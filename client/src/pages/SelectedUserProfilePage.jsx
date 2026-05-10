@@ -17,10 +17,9 @@ const SelectedUserProfilePage = () => {
   const [index, setIndex] = useState(-1);
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!selectedUser?.id) navigate('/');
-  }, []);
+  // useEffect(() => {
+  //   if (!selectedUser?.id) navigate('/');
+  // }, [selectedUser]);
 
   const handleBack = () => {
     navigate("/");
@@ -28,7 +27,7 @@ const SelectedUserProfilePage = () => {
 
   const handleSendRequest = (newStatus) => {
     console.log(newStatus);
-    sendRequest(newStatus);
+    sendRequest(newStatus, selectedUser?.id);
   };
 
   useEffect(() => {

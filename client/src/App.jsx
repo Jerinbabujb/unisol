@@ -42,7 +42,7 @@ const App = () => {
           <Route path='/' element={authUser ? <HomePage /> : <Navigate to="/login" />} />
           <Route path='/login' element={!authUser ? <LoginPage /> : <Navigate to="/" />} />
           <Route path='/profile' element={authUser ? <ProfilePage /> : <Navigate to="/login" />} />
-          <Route path='/user-profile' element={authUser ? <SelectedUserProfilePage /> : <Navigate to='login' />} />
+          <Route path='/user-profile/' element={authUser ? <SelectedUserProfilePage /> : <Navigate to='login' />} />
           <Route path='/messages' element={authUser ? <ChatPage /> : <Navigate to="/login" />} />
           <Route path='/friend-request' element={authUser ? <FriendRequests /> : <Navigate to="/login" />} />
           <Route path='/Emoji Charades' element={authUser ? <EmojiCharades /> : <Navigate to="/login" />} />
