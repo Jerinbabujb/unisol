@@ -22,11 +22,11 @@ const Navbar = () => {
 
       {/* Navigation Links - Hidden on Mobile */}
       <div className="hidden md:flex gap-8 text-sm font-semibold text-gray-400 h-full">
-        <a href="#" className="flex items-center h-full hover:text-[#5D3289] transition-colors">
+        <a href="/" className="flex items-center h-full hover:text-[#5D3289] transition-colors">
           Discover
         </a>
-        <a href="#" className="flex items-center h-full hover:text-[#5D3289] transition-colors">
-          Matches
+        <a href="/global-room-lists" className="flex items-center h-full hover:text-[#5D3289] transition-colors">
+          Chat Room
         </a>
         {/* Active State Example */}
         <a href="#" className="flex items-center h-full border-b-2 border-[#5D3289] text-[#5D3289]">
