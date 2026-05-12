@@ -22,9 +22,9 @@ const SideBar = () => {
     { name: 'Messages', icon: '💬', path: '/messages', badge: totalUnseen > 0 ? totalUnseen : null },
     { name: 'Chat-Rooms', icon: '🗣️', path: '/global-room-lists', badge: null },
     { name: 'Requests', icon: '💜', path: '/friend-request', badge: requestData?.friendRequest?.length },
-    { name: 'Games', icon: '🎮', path: '#', badge: null },
+    // { name: 'Games', icon: '🎮', path: '#', badge: null },
     { name: 'Profile', icon: '👤', path: '/profile', badge: null },
-    { name: 'Settings', icon: '⚙️', path: '/settings', badge: null },
+    // { name: 'Settings', icon: '⚙️', path: '/settings', badge: null },
   ];
 
   return (
@@ -47,8 +47,8 @@ const SideBar = () => {
               key={item.name}
               onClick={() => navigate(item.path)}
               className={`flex items-center rounded-2xl cursor-pointer transition-all duration-300 relative overflow-hidden ${isActive
-                  ? 'bg-[#5D3289] text-white shadow-md'
-                  : 'hover:bg-purple-50 text-gray-500 hover:text-[#5D3289]'
+                ? 'bg-[#5D3289] text-white shadow-md'
+                : 'hover:bg-purple-50 text-gray-500 hover:text-[#5D3289]'
                 }`}
             >
               <div className="flex items-center justify-center w-[56px] h-[56px] min-w-[56px] relative z-10">
