@@ -75,7 +75,7 @@ const SelectedUserProfilePage = () => {
           {/* Back Button */}
           <button
             onClick={handleBack}
-            className="absolute left-0 p-3 rounded-full bg-white border border-[#F4F0F9] text-gray-400 hover:text-[#5D3289] hover:bg-[#F8F5FB] transition-all shadow-sm active:scale-95"
+            className="absolute left-0 p-3 rounded-full bg-white border border-[#F4F0F9] text-gray-400 hover:text-[#5D3289] hover:bg-[#F8F5FB] transition-all shadow-sm active:scale-95 cursor-pointer"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" />
@@ -120,7 +120,7 @@ const SelectedUserProfilePage = () => {
                 <button
                   type="button"
                   onClick={() => { /* Navigate to chat logic here */ }}
-                  className="w-full mt-2 px-8 py-3.5 rounded-2xl bg-[#5D3289] text-white font-bold hover:bg-[#4B2471] transition-all shadow-[0_8px_20px_-8px_rgba(93,50,137,0.5)] active:scale-[0.98] flex justify-center items-center gap-2"
+                  className="w-full mt-2 px-8 py-3.5 rounded-2xl bg-[#5D3289] text-white font-bold hover:bg-[#4B2471] transition-all shadow-[0_8px_20px_-8px_rgba(93,50,137,0.5)] active:scale-[0.98] flex justify-center items-center gap-2 cursor-pointer"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
                   Send Message
@@ -147,7 +147,7 @@ const SelectedUserProfilePage = () => {
                         setStatus('rejected');
                         handleSendRequest('rejected');
                       }}
-                      className="flex-1 bg-white border border-gray-200 text-gray-500 hover:bg-red-50 hover:text-red-500 hover:border-red-200 py-3.5 rounded-2xl font-bold transition-all active:scale-[0.98] flex items-center justify-center gap-2"
+                      className="flex-1 bg-white border border-gray-200 text-gray-500 hover:bg-red-50 hover:text-red-500 hover:border-red-200 py-3.5 rounded-2xl font-bold transition-all active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer"
                     >
                       Decline
                     </button>
@@ -164,7 +164,7 @@ const SelectedUserProfilePage = () => {
                     setStatus("pending");
                   }}
                   disabled={checkSend === authUser.id}
-                  className={`w-full mt-2 px-8 py-3.5 rounded-2xl font-bold transition-all flex justify-center items-center gap-2 
+                  className={`w-full mt-2 px-8 py-3.5 rounded-2xl font-bold transition-all flex justify-center items-center gap-2 cursor-pointer
                     ${checkSend === authUser.id
                       ? "bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200"
                       : "bg-[#5D3289] text-white shadow-[0_8px_20px_-8px_rgba(93,50,137,0.5)] hover:bg-[#4B2471] active:scale-[0.98]"

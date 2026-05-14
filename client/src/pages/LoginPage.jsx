@@ -212,7 +212,7 @@ const LoginPage = () => {
 
           <button
             onClick={toggleState}
-            className='px-7 py-2.5 border border-gray-200 rounded-full font-bold text-gray-700 hover:border-[#7B52AB] hover:text-[#5D3289] transition-all bg-white shadow-sm active:scale-95'
+            className='px-7 py-2.5 border border-gray-200 rounded-full font-bold text-gray-700 hover:border-[#7B52AB] hover:text-[#5D3289] transition-all bg-white shadow-sm active:scale-95 cursor-pointer'
           >
             {currentState === 'Sign Up' ? 'Log In' : 'Join Now'}
           </button>
@@ -309,7 +309,7 @@ const LoginPage = () => {
                 <button
                   type='button'
                   onClick={handleGoogleSignIn}
-                  className='flex items-center justify-center gap-3 w-full py-3.5 border border-gray-200 rounded-2xl font-bold text-gray-600 hover:bg-gray-50 hover:border-gray-300 transition-all active:scale-[0.98]'
+                  className='flex items-center justify-center gap-3 w-full py-3.5 border border-gray-200 rounded-2xl font-bold text-gray-600 hover:bg-gray-50 hover:border-gray-300 transition-all active:scale-[0.98] cursor-pointer'
                 >
                   <img
                     src='https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg'
@@ -573,7 +573,7 @@ const LoginPage = () => {
             <button
               type='submit'
               disabled={loading}
-              className={`mt-4 py-4 w-full ${BRAND_BG} text-white rounded-2xl font-bold text-base shadow-[0_16px_32px_-8px_rgba(93,50,137,0.4)] hover:bg-[#4B2471] hover:-translate-y-0.5 transition-all active:scale-[0.98] disabled:opacity-70 disabled:hover:translate-y-0`}
+              className={`mt-4 py-4 w-full ${BRAND_BG} text-white rounded-2xl font-bold text-base shadow-[0_16px_32px_-8px_rgba(93,50,137,0.4)] hover:bg-[#4B2471] hover:-translate-y-0.5 transition-all active:scale-[0.98] disabled:opacity-70 disabled:hover:translate-y-0 cursor-pointer`}
             >
               {loading
                 ? 'Processing...'

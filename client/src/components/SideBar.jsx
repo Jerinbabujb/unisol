@@ -24,7 +24,7 @@ const SideBar = () => {
     { name: 'Requests', icon: '💜', path: '/friend-request', badge: requestData?.friendRequest?.length },
     // { name: 'Games', icon: '🎮', path: '#', badge: null },
     { name: 'Profile', icon: '👤', path: '/profile', badge: null },
-    // { name: 'Settings', icon: '⚙️', path: '/settings', badge: null },
+    { name: 'Settings', icon: '⚙️', path: '/settings', badge: null },
   ];
 
   return (

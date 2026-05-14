@@ -73,7 +73,7 @@ const ProfilePage = () => {
         {/* Back Button */}
         <button
           onClick={handleBack}
-          className="absolute left-0 p-3 rounded-full bg-white border border-[#F4F0F9] text-gray-400 hover:text-[#5D3289] hover:bg-[#F8F5FB] transition-all shadow-sm active:scale-95"
+          className="absolute left-0 p-3 rounded-full bg-white border border-[#F4F0F9] text-gray-400 hover:text-[#5D3289] hover:bg-[#F8F5FB] transition-all shadow-sm active:scale-95 cursor-pointer"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" />
@@ -147,7 +147,7 @@ const ProfilePage = () => {
                   {/* Delete Button */}
                   <button
                     onClick={() => removeImage(i)}
-                    className="absolute top-1.5 right-1.5 bg-black/50 backdrop-blur-md text-white w-6 h-6 flex items-center justify-center rounded-full text-xs opacity-0 group-hover:opacity-100 hover:bg-red-500 transition-all duration-200"
+                    className="absolute top-1.5 right-1.5 bg-black/50 backdrop-blur-md text-white w-6 h-6 flex items-center justify-center rounded-full text-xs opacity-0 group-hover:opacity-100 hover:bg-red-500 transition-all duration-200 cursor-pointer"
                     type="button"
                   >
                     <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -292,7 +292,7 @@ const ProfilePage = () => {
                   item.trim() && (
                     <div key={index} className="bg-white border border-[#EAE2F3] text-[#5D3289] px-4 py-2 rounded-full flex items-center gap-2 text-xs font-bold shadow-sm group hover:border-[#5D3289] transition-colors">
                       {item}
-                      <button type="button" onClick={() => removeInteresets(index)} className="cursor-pointer text-gray-400 hover:text-red-500 transition-colors ml-1">
+                      <button type="button" onClick={() => removeInteresets(index)} className="cursor-pointer text-gray-400 hover:text-red-500 transition-colors ml-1 cursor-pointer">
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                       </button>
                     </div>
@@ -303,7 +303,7 @@ const ProfilePage = () => {
                   <button
                     type="button"
                     onClick={() => setInterestsButton(true)}
-                    className="border-2 border-dashed border-gray-200 text-gray-400 hover:text-[#5D3289] hover:border-[#5D3289]/40 hover:bg-[#F8F5FB] px-5 py-2 rounded-full text-xs font-bold transition-all"
+                    className="border-2 border-dashed border-gray-200 text-gray-400 hover:text-[#5D3289] hover:border-[#5D3289]/40 hover:bg-[#F8F5FB] px-5 py-2 rounded-full text-xs font-bold transition-all cursor-pointer"
                   >
                     + Add Interest
                   </button>
@@ -320,7 +320,7 @@ const ProfilePage = () => {
                     <button
                       type="button"
                       onClick={() => setInterestsButton(false)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 bg-[#5D3289] text-white p-1.5 rounded-lg hover:bg-[#4B2471] transition-colors"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 bg-[#5D3289] text-white p-1.5 rounded-lg hover:bg-[#4B2471] transition-colors cursor-pointer"
                     >
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
                     </button>
@@ -335,13 +335,13 @@ const ProfilePage = () => {
             <button
               onClick={() => navigate('/')}
               type="button"
-              className="w-full sm:w-auto text-gray-400 font-bold hover:text-gray-800 px-6 py-3.5 rounded-full hover:bg-gray-50 transition-colors"
+              className="w-full sm:w-auto text-gray-400 font-bold hover:text-gray-800 px-6 py-3.5 rounded-full hover:bg-gray-50 transition-colors cursor-pointer"
             >
               Discard Changes
             </button>
             <button
               type="submit"
-              className="w-full sm:w-auto bg-[#5D3289] text-white px-10 py-3.5 rounded-2xl font-bold shadow-[0_8px_20px_-8px_rgba(93,50,137,0.5)] hover:bg-[#4B2471] hover:-translate-y-0.5 active:scale-95 transition-all"
+              className="w-full sm:w-auto bg-[#5D3289] text-white px-10 py-3.5 rounded-2xl font-bold shadow-[0_8px_20px_-8px_rgba(93,50,137,0.5)] hover:bg-[#4B2471] hover:-translate-y-0.5 active:scale-95 transition-all cursor-pointer"
             >
               Save Profile
             </button>

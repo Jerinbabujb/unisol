@@ -74,7 +74,7 @@ const RightSideBar = () => {
                 <h4 className="text-sm font-bold text-gray-900 group-hover:text-[#5D3289] transition-colors">{user.fullName}</h4>
                 <p className="text-xs text-gray-400 truncate">{user.match_percentage}% Match</p>
               </div>
-              <button onClick={() => gotoProfile(user)} className="w-8 h-8 rounded-full bg-purple-50 text-[#5D3289] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
+              <button onClick={() => gotoProfile(user)} className="w-8 h-8 rounded-full bg-purple-50 text-[#5D3289] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all cursor-pointer">
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" /></svg>
               </button>
             </div>

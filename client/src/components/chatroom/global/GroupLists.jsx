@@ -205,7 +205,7 @@ const GroupsLists = () => {
                         ) : (
                           <button
                             onClick={() => joiningRoom(room.roomName, room.id)}
-                            className="px-3 py-1.5 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 text-white text-xs font-semibold"
+                            className="px-3 py-1.5 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 text-white text-xs font-semibold cursor-pointer"
                           >
                             Join
                           </button>
