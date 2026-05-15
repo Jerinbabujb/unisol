@@ -18,12 +18,24 @@ export const protectRoute = async (req, res, next) => {
         fullName: true,
         email: true,
         avatar: true,
-        bio:true,
-        mood:true,
-        instagram:true,
-        facebook:true,
-        interest:true,
-        images:true
+        bio: true,
+        mood: true,
+        instagram: true,
+        facebook: true,
+        interest: true,
+        images: true,
+
+        // 🔥 NEW FIELDS ADDED HERE
+        gender: true,
+        prefferGender: true,
+        horoscope: true,
+        mbtiType: true,
+        attachmentStyle: true,
+        humanDesign: true,
+        loveLanguages: true,
+        primaryNeurotype: true,
+        topArtists: true,
+        favoriteGenres: true
       },
     });
 
@@ -32,7 +44,9 @@ export const protectRoute = async (req, res, next) => {
     }
 
     // ✅ Attach user info to request
-    req.user = { id: user.id, fullName: user.fullName, email: user.email, avatar:user.avatar, bio:user.bio, mood:user.mood, instagram:user.instagram, facebook:user.facebook, interest:user.interest, images:user.images };
+    // Since we used 'select' above to filter out sensitive data (like passwords),
+    // we can safely pass the entire 'user' object here without writing it all out manually.
+    req.user = user;
 
     next();
   } catch (error) {

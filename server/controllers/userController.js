@@ -11,7 +11,9 @@ export const signup = async (req, res) => {
         email, fullName, password, bio, birthday, gender, interest, googleId, avatar,
         mobileNumber, horoscope, primaryNeurotype, status, preferredMatch, mbtiType,
         attachmentStyle, beliefSystem, intentions, experienceLevel, topArtists,
-        favoriteGenres, uiTheme, prefferGender
+        favoriteGenres, uiTheme, prefferGender, pronouns,
+        // 🔥 NEW FIELDS ADDED HERE
+        mood, instagram, facebook, images
     } = req.body;
 
     try {
@@ -27,12 +29,19 @@ export const signup = async (req, res) => {
             hashedPassword = await bcrypt.hash(password, salt);
         }
 
-        // Convert interests safely
+        // Convert interests safely (from multi-select or comma string)
         let interestsArray = [];
         if (Array.isArray(interest)) {
             interestsArray = interest;
         } else if (typeof interest === "string") {
             interestsArray = interest.split(",").map((item) => item.trim()).filter(Boolean);
+        }
+
+        // Convert image gallery safely
+        // If frontend sends array of objects [{src: '...'}], extract just the strings
+        let finalImages = [];
+        if (Array.isArray(images)) {
+            finalImages = images.map(img => (typeof img === 'object' ? img.src : img));
         }
 
         // UPSERT USER
@@ -42,6 +51,7 @@ export const signup = async (req, res) => {
                 googleId: googleId || undefined,
                 bio: bio || undefined,
                 gender: gender || undefined,
+                pronouns: pronouns || undefined,
                 mobileNumber: mobileNumber || undefined,
                 horoscope: horoscope || undefined,
                 primaryNeurotype: primaryNeurotype || undefined,
@@ -59,15 +69,43 @@ export const signup = async (req, res) => {
                 birthday: birthday ? new Date(birthday) : undefined,
                 interest: interestsArray,
                 prefferGender: prefferGender || undefined,
+                // 🔥 NEW FIELDS IN UPDATE
+                mood: mood || undefined,
+                instagram: instagram || undefined,
+                facebook: facebook || undefined,
+                images: finalImages.length > 0 ? finalImages : undefined,
                 profileCompleted: true,
             },
             create: {
-                email, fullName, password: hashedPassword, googleId, bio, gender, mobileNumber,
-                horoscope, birthday: birthday ? new Date(birthday) : null, interest: interestsArray,
-                primaryNeurotype: primaryNeurotype || [], preferredMatch: preferredMatch || [],
-                topArtists: topArtists || [], favoriteGenres: favoriteGenres || [], status, mbtiType,
-                attachmentStyle, beliefSystem, intentions, experienceLevel, uiTheme, avatar,
+                email,
+                fullName,
+                password: hashedPassword,
+                googleId,
+                bio,
+                pronouns,
+                gender,
+                mobileNumber,
+                horoscope,
+                birthday: birthday ? new Date(birthday) : null,
+                interest: interestsArray,
+                primaryNeurotype: primaryNeurotype || [],
+                preferredMatch: preferredMatch || [],
+                topArtists: topArtists || [],
+                favoriteGenres: favoriteGenres || [],
+                status,
+                mbtiType,
+                attachmentStyle,
+                beliefSystem,
+                intentions,
+                experienceLevel,
+                uiTheme,
+                avatar,
                 prefferGender: prefferGender || undefined,
+                // 🔥 NEW FIELDS IN CREATE
+                mood: mood || null,
+                instagram: instagram || null,
+                facebook: facebook || null,
+                images: finalImages,
                 profileCompleted: true,
             },
         });
@@ -76,7 +114,6 @@ export const signup = async (req, res) => {
         const token = generateToken(user.id);
 
         // 🔥 MATCHMAKING TRIGGER: Generate the vector embedding in the background
-        // We don't await this so the user gets logged in instantly
         updateUserEmbedding(user.id).catch(err => console.error("Embedding Generation Error:", err));
 
         res.json({
@@ -91,7 +128,6 @@ export const signup = async (req, res) => {
         res.status(500).json({ success: false, error: "Internal server error" });
     }
 };
-
 export const login = async (req, res) => {
     try {
         const { email, password, googleId } = req.body;
@@ -125,17 +161,26 @@ export const checkAuth = (req, res) => {
     }
 };
 
+
+
 export const updateProfile = async (req, res) => {
     try {
-        const { fullName, avatar, bio, mood, instagram, facebook, interest, images } = req.body;
+        const {
+            fullName, avatar, bio, mood, instagram, facebook, interest, images,
+            // 🔥 NEW PSYCHOLOGY & IDENTITY FIELDS
+            mbtiType, attachmentStyle, beliefSystem, horoscope, topArtists, loveLanguages
+        } = req.body;
+
         const userId = req.user.id;
 
+        // 1. Process Main Avatar
         let profilePicUrl = avatar;
         if (avatar && avatar.startsWith('data:image')) {
             const upload = await cloudinary.uploader.upload(avatar);
             profilePicUrl = upload.secure_url;
         }
 
+        // 2. Process Gallery Images
         let uploadedImages = [];
         if (Array.isArray(images)) {
             for (const img of images) {
@@ -149,6 +194,7 @@ export const updateProfile = async (req, res) => {
             }
         }
 
+        // 3. Update Database
         const updatedUser = await prisma.user.update({
             where: { id: userId },
             data: {
@@ -158,8 +204,16 @@ export const updateProfile = async (req, res) => {
                 avatar: profilePicUrl,
                 instagram,
                 facebook,
-                interest: interest,
-                images: uploadedImages
+                images: uploadedImages,
+                // Ensure arrays default to empty if undefined
+                interest: interest || [],
+                topArtists: topArtists || [],
+                loveLanguages: loveLanguages || [],
+                // Strings
+                mbtiType: mbtiType || null,
+                attachmentStyle: attachmentStyle || null,
+                beliefSystem: beliefSystem || null,
+                horoscope: horoscope || null,
             },
         });
 

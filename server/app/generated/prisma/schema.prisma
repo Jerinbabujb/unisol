@@ -19,17 +19,19 @@ model User {
   googleId     String?
   mobileNumber String?
 
-  // Profile
-  bio     String?
-  avatar  String?
-  avatar2 String?
-  images  String[] @default([])
+  // Profile & Socials (Updated for ProfilePage)
+  bio       String?
+  avatar    String?
+  images    String[] @default([]) // For the Photo Gallery
+  mood      String? // For the "Set Mood" feature
+  instagram String? // For Social Links
+  facebook  String? // For Social Links
+  interest  String[] @default([]) // For Interests & Vibes
 
   // Personal Details
   birthday  DateTime?
   gender    String?
   horoscope String?
-  mood      String?
   purpose   String?
 
   // Dating / Matching
@@ -45,17 +47,12 @@ model User {
   beliefSystem     String?
   mbtiType         String?
 
-  // Interests
-  interest       String[] @default([])
+  // Spotify / Music
   topArtists     String[] @default([])
   favoriteGenres String[] @default([])
 
   // UI / App
   uiTheme String?
-
-  // Socials
-  instagram String?
-  facebook  String?
 
   // Location
   location Unsupported("geography(Point, 4326)")?
@@ -75,12 +72,57 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 
-  // Messages
+  // --- RELATIONS ---
+
+  // Messaging
   recvMessages Message[] @relation("received")
   sentMessages Message[] @relation("sent")
 
+  // Friend Requests (For FriendRequests Page)
+  sentRequests     FriendRequest[] @relation("sentRequests")
+  receivedRequests FriendRequest[] @relation("receivedRequests")
+
+  // Group Chats (For GroupsLists Page)
   globalMessages      GlobalChatMessage[]  @relation("UserGlobalMessages")
   privateRoomMessages PrivateRoomMessage[] @relation("UserPrivateRoomMessages")
+
+  // To track which rooms a user has joined
+  joinedRooms RoomMember[]
+
+  // Personality Results (JSON for flexibility)
+  attachmentResults Json? // { avoidant: 20, anxious: 70, secure: 10 }
+  loveLanguages     String[] // ["Physical Touch", "Quality Time"]
+  humanDesign       String? // "Projector"
+
+  // To track if they've taken the tests
+  testsCompleted String[] @default([]) // ["mbti", "attachment"]
+}
+
+// Support model for Connection Requests
+model FriendRequest {
+  id         String   @id @default(uuid())
+  senderId   String
+  receiverId String
+  status     String   @default("pending") // "pending", "accepted", "rejected"
+  createdAt  DateTime @default(now())
+
+  sender   User @relation("sentRequests", fields: [senderId], references: [id])
+  receiver User @relation("receivedRequests", fields: [receiverId], references: [id])
+
+  @@unique([senderId, receiverId])
+}
+
+// Support model for Group Memberships
+model RoomMember {
+  id       String   @id @default(uuid())
+  userId   String
+  roomId   String
+  role     String   @default("member") // "admin", "member"
+  joinedAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+  // Assuming you have a Room model for globalRoom/privateRoom
+  // room   Room     @relation(fields: [roomId], references: [id])
 }
 
 model privacy {

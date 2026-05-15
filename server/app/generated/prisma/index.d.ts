@@ -19,6 +19,16 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
+ * Model FriendRequest
+ * 
+ */
+export type FriendRequest = $Result.DefaultSelection<Prisma.$FriendRequestPayload>
+/**
+ * Model RoomMember
+ * 
+ */
+export type RoomMember = $Result.DefaultSelection<Prisma.$RoomMemberPayload>
+/**
  * Model privacy
  * 
  */
@@ -204,6 +214,26 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.friendRequest`: Exposes CRUD operations for the **FriendRequest** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FriendRequests
+    * const friendRequests = await prisma.friendRequest.findMany()
+    * ```
+    */
+  get friendRequest(): Prisma.FriendRequestDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.roomMember`: Exposes CRUD operations for the **RoomMember** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more RoomMembers
+    * const roomMembers = await prisma.roomMember.findMany()
+    * ```
+    */
+  get roomMember(): Prisma.RoomMemberDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.privacy`: Exposes CRUD operations for the **privacy** model.
@@ -749,6 +779,8 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
+    FriendRequest: 'FriendRequest',
+    RoomMember: 'RoomMember',
     privacy: 'privacy',
     song: 'song',
     Message: 'Message',
@@ -775,7 +807,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "privacy" | "song" | "message" | "connection" | "games" | "emojiCharades" | "scoring" | "globalChats" | "globalChatMessage" | "privateRoom" | "privateRoomMessage"
+      modelProps: "user" | "friendRequest" | "roomMember" | "privacy" | "song" | "message" | "connection" | "games" | "emojiCharades" | "scoring" | "globalChats" | "globalChatMessage" | "privateRoom" | "privateRoomMessage"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -850,6 +882,154 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      FriendRequest: {
+        payload: Prisma.$FriendRequestPayload<ExtArgs>
+        fields: Prisma.FriendRequestFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FriendRequestFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FriendRequestPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FriendRequestFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FriendRequestPayload>
+          }
+          findFirst: {
+            args: Prisma.FriendRequestFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FriendRequestPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FriendRequestFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FriendRequestPayload>
+          }
+          findMany: {
+            args: Prisma.FriendRequestFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FriendRequestPayload>[]
+          }
+          create: {
+            args: Prisma.FriendRequestCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FriendRequestPayload>
+          }
+          createMany: {
+            args: Prisma.FriendRequestCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FriendRequestCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FriendRequestPayload>[]
+          }
+          delete: {
+            args: Prisma.FriendRequestDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FriendRequestPayload>
+          }
+          update: {
+            args: Prisma.FriendRequestUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FriendRequestPayload>
+          }
+          deleteMany: {
+            args: Prisma.FriendRequestDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FriendRequestUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FriendRequestUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FriendRequestPayload>[]
+          }
+          upsert: {
+            args: Prisma.FriendRequestUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FriendRequestPayload>
+          }
+          aggregate: {
+            args: Prisma.FriendRequestAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFriendRequest>
+          }
+          groupBy: {
+            args: Prisma.FriendRequestGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FriendRequestGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FriendRequestCountArgs<ExtArgs>
+            result: $Utils.Optional<FriendRequestCountAggregateOutputType> | number
+          }
+        }
+      }
+      RoomMember: {
+        payload: Prisma.$RoomMemberPayload<ExtArgs>
+        fields: Prisma.RoomMemberFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RoomMemberFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoomMemberPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RoomMemberFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoomMemberPayload>
+          }
+          findFirst: {
+            args: Prisma.RoomMemberFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoomMemberPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RoomMemberFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoomMemberPayload>
+          }
+          findMany: {
+            args: Prisma.RoomMemberFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoomMemberPayload>[]
+          }
+          create: {
+            args: Prisma.RoomMemberCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoomMemberPayload>
+          }
+          createMany: {
+            args: Prisma.RoomMemberCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RoomMemberCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoomMemberPayload>[]
+          }
+          delete: {
+            args: Prisma.RoomMemberDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoomMemberPayload>
+          }
+          update: {
+            args: Prisma.RoomMemberUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoomMemberPayload>
+          }
+          deleteMany: {
+            args: Prisma.RoomMemberDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RoomMemberUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.RoomMemberUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoomMemberPayload>[]
+          }
+          upsert: {
+            args: Prisma.RoomMemberUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoomMemberPayload>
+          }
+          aggregate: {
+            args: Prisma.RoomMemberAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRoomMember>
+          }
+          groupBy: {
+            args: Prisma.RoomMemberGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RoomMemberGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RoomMemberCountArgs<ExtArgs>
+            result: $Utils.Optional<RoomMemberCountAggregateOutputType> | number
           }
         }
       }
@@ -1776,6 +1956,8 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
+    friendRequest?: FriendRequestOmit
+    roomMember?: RoomMemberOmit
     privacy?: privacyOmit
     song?: songOmit
     message?: MessageOmit
@@ -1869,15 +2051,21 @@ export namespace Prisma {
   export type UserCountOutputType = {
     recvMessages: number
     sentMessages: number
+    sentRequests: number
+    receivedRequests: number
     globalMessages: number
     privateRoomMessages: number
+    joinedRooms: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     recvMessages?: boolean | UserCountOutputTypeCountRecvMessagesArgs
     sentMessages?: boolean | UserCountOutputTypeCountSentMessagesArgs
+    sentRequests?: boolean | UserCountOutputTypeCountSentRequestsArgs
+    receivedRequests?: boolean | UserCountOutputTypeCountReceivedRequestsArgs
     globalMessages?: boolean | UserCountOutputTypeCountGlobalMessagesArgs
     privateRoomMessages?: boolean | UserCountOutputTypeCountPrivateRoomMessagesArgs
+    joinedRooms?: boolean | UserCountOutputTypeCountJoinedRoomsArgs
   }
 
   // Custom InputTypes
@@ -1908,6 +2096,20 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
+  export type UserCountOutputTypeCountSentRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FriendRequestWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountReceivedRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FriendRequestWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
   export type UserCountOutputTypeCountGlobalMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: GlobalChatMessageWhereInput
   }
@@ -1917,6 +2119,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountPrivateRoomMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PrivateRoomMessageWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountJoinedRoomsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RoomMemberWhereInput
   }
 
 
@@ -2005,11 +2214,12 @@ export namespace Prisma {
     mobileNumber: string | null
     bio: string | null
     avatar: string | null
-    avatar2: string | null
+    mood: string | null
+    instagram: string | null
+    facebook: string | null
     birthday: Date | null
     gender: string | null
     horoscope: string | null
-    mood: string | null
     purpose: string | null
     prefferGender: string | null
     intentions: string | null
@@ -2019,8 +2229,6 @@ export namespace Prisma {
     beliefSystem: string | null
     mbtiType: string | null
     uiTheme: string | null
-    instagram: string | null
-    facebook: string | null
     isOnline: boolean | null
     lastSeen: Date | null
     profileCompleted: boolean | null
@@ -2028,6 +2236,7 @@ export namespace Prisma {
     emailVerified: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
+    humanDesign: string | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -2039,11 +2248,12 @@ export namespace Prisma {
     mobileNumber: string | null
     bio: string | null
     avatar: string | null
-    avatar2: string | null
+    mood: string | null
+    instagram: string | null
+    facebook: string | null
     birthday: Date | null
     gender: string | null
     horoscope: string | null
-    mood: string | null
     purpose: string | null
     prefferGender: string | null
     intentions: string | null
@@ -2053,8 +2263,6 @@ export namespace Prisma {
     beliefSystem: string | null
     mbtiType: string | null
     uiTheme: string | null
-    instagram: string | null
-    facebook: string | null
     isOnline: boolean | null
     lastSeen: Date | null
     profileCompleted: boolean | null
@@ -2062,6 +2270,7 @@ export namespace Prisma {
     emailVerified: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
+    humanDesign: string | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -2073,12 +2282,14 @@ export namespace Prisma {
     mobileNumber: number
     bio: number
     avatar: number
-    avatar2: number
     images: number
+    mood: number
+    instagram: number
+    facebook: number
+    interest: number
     birthday: number
     gender: number
     horoscope: number
-    mood: number
     purpose: number
     prefferGender: number
     intentions: number
@@ -2089,12 +2300,9 @@ export namespace Prisma {
     attachmentStyle: number
     beliefSystem: number
     mbtiType: number
-    interest: number
     topArtists: number
     favoriteGenres: number
     uiTheme: number
-    instagram: number
-    facebook: number
     isOnline: number
     lastSeen: number
     profileCompleted: number
@@ -2102,6 +2310,10 @@ export namespace Prisma {
     emailVerified: number
     createdAt: number
     updatedAt: number
+    attachmentResults: number
+    loveLanguages: number
+    humanDesign: number
+    testsCompleted: number
     _all: number
   }
 
@@ -2115,11 +2327,12 @@ export namespace Prisma {
     mobileNumber?: true
     bio?: true
     avatar?: true
-    avatar2?: true
+    mood?: true
+    instagram?: true
+    facebook?: true
     birthday?: true
     gender?: true
     horoscope?: true
-    mood?: true
     purpose?: true
     prefferGender?: true
     intentions?: true
@@ -2129,8 +2342,6 @@ export namespace Prisma {
     beliefSystem?: true
     mbtiType?: true
     uiTheme?: true
-    instagram?: true
-    facebook?: true
     isOnline?: true
     lastSeen?: true
     profileCompleted?: true
@@ -2138,6 +2349,7 @@ export namespace Prisma {
     emailVerified?: true
     createdAt?: true
     updatedAt?: true
+    humanDesign?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -2149,11 +2361,12 @@ export namespace Prisma {
     mobileNumber?: true
     bio?: true
     avatar?: true
-    avatar2?: true
+    mood?: true
+    instagram?: true
+    facebook?: true
     birthday?: true
     gender?: true
     horoscope?: true
-    mood?: true
     purpose?: true
     prefferGender?: true
     intentions?: true
@@ -2163,8 +2376,6 @@ export namespace Prisma {
     beliefSystem?: true
     mbtiType?: true
     uiTheme?: true
-    instagram?: true
-    facebook?: true
     isOnline?: true
     lastSeen?: true
     profileCompleted?: true
@@ -2172,6 +2383,7 @@ export namespace Prisma {
     emailVerified?: true
     createdAt?: true
     updatedAt?: true
+    humanDesign?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -2183,12 +2395,14 @@ export namespace Prisma {
     mobileNumber?: true
     bio?: true
     avatar?: true
-    avatar2?: true
     images?: true
+    mood?: true
+    instagram?: true
+    facebook?: true
+    interest?: true
     birthday?: true
     gender?: true
     horoscope?: true
-    mood?: true
     purpose?: true
     prefferGender?: true
     intentions?: true
@@ -2199,12 +2413,9 @@ export namespace Prisma {
     attachmentStyle?: true
     beliefSystem?: true
     mbtiType?: true
-    interest?: true
     topArtists?: true
     favoriteGenres?: true
     uiTheme?: true
-    instagram?: true
-    facebook?: true
     isOnline?: true
     lastSeen?: true
     profileCompleted?: true
@@ -2212,6 +2423,10 @@ export namespace Prisma {
     emailVerified?: true
     createdAt?: true
     updatedAt?: true
+    attachmentResults?: true
+    loveLanguages?: true
+    humanDesign?: true
+    testsCompleted?: true
     _all?: true
   }
 
@@ -2296,12 +2511,14 @@ export namespace Prisma {
     mobileNumber: string | null
     bio: string | null
     avatar: string | null
-    avatar2: string | null
     images: string[]
+    mood: string | null
+    instagram: string | null
+    facebook: string | null
+    interest: string[]
     birthday: Date | null
     gender: string | null
     horoscope: string | null
-    mood: string | null
     purpose: string | null
     prefferGender: string | null
     intentions: string | null
@@ -2312,12 +2529,9 @@ export namespace Prisma {
     attachmentStyle: string | null
     beliefSystem: string | null
     mbtiType: string | null
-    interest: string[]
     topArtists: string[]
     favoriteGenres: string[]
     uiTheme: string | null
-    instagram: string | null
-    facebook: string | null
     isOnline: boolean
     lastSeen: Date | null
     profileCompleted: boolean
@@ -2325,6 +2539,10 @@ export namespace Prisma {
     emailVerified: boolean
     createdAt: Date
     updatedAt: Date
+    attachmentResults: JsonValue | null
+    loveLanguages: string[]
+    humanDesign: string | null
+    testsCompleted: string[]
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -2353,12 +2571,14 @@ export namespace Prisma {
     mobileNumber?: boolean
     bio?: boolean
     avatar?: boolean
-    avatar2?: boolean
     images?: boolean
+    mood?: boolean
+    instagram?: boolean
+    facebook?: boolean
+    interest?: boolean
     birthday?: boolean
     gender?: boolean
     horoscope?: boolean
-    mood?: boolean
     purpose?: boolean
     prefferGender?: boolean
     intentions?: boolean
@@ -2369,12 +2589,9 @@ export namespace Prisma {
     attachmentStyle?: boolean
     beliefSystem?: boolean
     mbtiType?: boolean
-    interest?: boolean
     topArtists?: boolean
     favoriteGenres?: boolean
     uiTheme?: boolean
-    instagram?: boolean
-    facebook?: boolean
     isOnline?: boolean
     lastSeen?: boolean
     profileCompleted?: boolean
@@ -2382,10 +2599,17 @@ export namespace Prisma {
     emailVerified?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    attachmentResults?: boolean
+    loveLanguages?: boolean
+    humanDesign?: boolean
+    testsCompleted?: boolean
     recvMessages?: boolean | User$recvMessagesArgs<ExtArgs>
     sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
+    sentRequests?: boolean | User$sentRequestsArgs<ExtArgs>
+    receivedRequests?: boolean | User$receivedRequestsArgs<ExtArgs>
     globalMessages?: boolean | User$globalMessagesArgs<ExtArgs>
     privateRoomMessages?: boolean | User$privateRoomMessagesArgs<ExtArgs>
+    joinedRooms?: boolean | User$joinedRoomsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2398,12 +2622,14 @@ export namespace Prisma {
     mobileNumber?: boolean
     bio?: boolean
     avatar?: boolean
-    avatar2?: boolean
     images?: boolean
+    mood?: boolean
+    instagram?: boolean
+    facebook?: boolean
+    interest?: boolean
     birthday?: boolean
     gender?: boolean
     horoscope?: boolean
-    mood?: boolean
     purpose?: boolean
     prefferGender?: boolean
     intentions?: boolean
@@ -2414,12 +2640,9 @@ export namespace Prisma {
     attachmentStyle?: boolean
     beliefSystem?: boolean
     mbtiType?: boolean
-    interest?: boolean
     topArtists?: boolean
     favoriteGenres?: boolean
     uiTheme?: boolean
-    instagram?: boolean
-    facebook?: boolean
     isOnline?: boolean
     lastSeen?: boolean
     profileCompleted?: boolean
@@ -2427,6 +2650,10 @@ export namespace Prisma {
     emailVerified?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    attachmentResults?: boolean
+    loveLanguages?: boolean
+    humanDesign?: boolean
+    testsCompleted?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2438,12 +2665,14 @@ export namespace Prisma {
     mobileNumber?: boolean
     bio?: boolean
     avatar?: boolean
-    avatar2?: boolean
     images?: boolean
+    mood?: boolean
+    instagram?: boolean
+    facebook?: boolean
+    interest?: boolean
     birthday?: boolean
     gender?: boolean
     horoscope?: boolean
-    mood?: boolean
     purpose?: boolean
     prefferGender?: boolean
     intentions?: boolean
@@ -2454,12 +2683,9 @@ export namespace Prisma {
     attachmentStyle?: boolean
     beliefSystem?: boolean
     mbtiType?: boolean
-    interest?: boolean
     topArtists?: boolean
     favoriteGenres?: boolean
     uiTheme?: boolean
-    instagram?: boolean
-    facebook?: boolean
     isOnline?: boolean
     lastSeen?: boolean
     profileCompleted?: boolean
@@ -2467,6 +2693,10 @@ export namespace Prisma {
     emailVerified?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    attachmentResults?: boolean
+    loveLanguages?: boolean
+    humanDesign?: boolean
+    testsCompleted?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -2478,12 +2708,14 @@ export namespace Prisma {
     mobileNumber?: boolean
     bio?: boolean
     avatar?: boolean
-    avatar2?: boolean
     images?: boolean
+    mood?: boolean
+    instagram?: boolean
+    facebook?: boolean
+    interest?: boolean
     birthday?: boolean
     gender?: boolean
     horoscope?: boolean
-    mood?: boolean
     purpose?: boolean
     prefferGender?: boolean
     intentions?: boolean
@@ -2494,12 +2726,9 @@ export namespace Prisma {
     attachmentStyle?: boolean
     beliefSystem?: boolean
     mbtiType?: boolean
-    interest?: boolean
     topArtists?: boolean
     favoriteGenres?: boolean
     uiTheme?: boolean
-    instagram?: boolean
-    facebook?: boolean
     isOnline?: boolean
     lastSeen?: boolean
     profileCompleted?: boolean
@@ -2507,14 +2736,21 @@ export namespace Prisma {
     emailVerified?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    attachmentResults?: boolean
+    loveLanguages?: boolean
+    humanDesign?: boolean
+    testsCompleted?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "email" | "password" | "googleId" | "mobileNumber" | "bio" | "avatar" | "avatar2" | "images" | "birthday" | "gender" | "horoscope" | "mood" | "purpose" | "prefferGender" | "intentions" | "experienceLevel" | "preferredMatch" | "primaryNeurotype" | "status" | "attachmentStyle" | "beliefSystem" | "mbtiType" | "interest" | "topArtists" | "favoriteGenres" | "uiTheme" | "instagram" | "facebook" | "isOnline" | "lastSeen" | "profileCompleted" | "isVerified" | "emailVerified" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "email" | "password" | "googleId" | "mobileNumber" | "bio" | "avatar" | "images" | "mood" | "instagram" | "facebook" | "interest" | "birthday" | "gender" | "horoscope" | "purpose" | "prefferGender" | "intentions" | "experienceLevel" | "preferredMatch" | "primaryNeurotype" | "status" | "attachmentStyle" | "beliefSystem" | "mbtiType" | "topArtists" | "favoriteGenres" | "uiTheme" | "isOnline" | "lastSeen" | "profileCompleted" | "isVerified" | "emailVerified" | "createdAt" | "updatedAt" | "attachmentResults" | "loveLanguages" | "humanDesign" | "testsCompleted", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     recvMessages?: boolean | User$recvMessagesArgs<ExtArgs>
     sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
+    sentRequests?: boolean | User$sentRequestsArgs<ExtArgs>
+    receivedRequests?: boolean | User$receivedRequestsArgs<ExtArgs>
     globalMessages?: boolean | User$globalMessagesArgs<ExtArgs>
     privateRoomMessages?: boolean | User$privateRoomMessagesArgs<ExtArgs>
+    joinedRooms?: boolean | User$joinedRoomsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2525,8 +2761,11 @@ export namespace Prisma {
     objects: {
       recvMessages: Prisma.$MessagePayload<ExtArgs>[]
       sentMessages: Prisma.$MessagePayload<ExtArgs>[]
+      sentRequests: Prisma.$FriendRequestPayload<ExtArgs>[]
+      receivedRequests: Prisma.$FriendRequestPayload<ExtArgs>[]
       globalMessages: Prisma.$GlobalChatMessagePayload<ExtArgs>[]
       privateRoomMessages: Prisma.$PrivateRoomMessagePayload<ExtArgs>[]
+      joinedRooms: Prisma.$RoomMemberPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2537,12 +2776,14 @@ export namespace Prisma {
       mobileNumber: string | null
       bio: string | null
       avatar: string | null
-      avatar2: string | null
       images: string[]
+      mood: string | null
+      instagram: string | null
+      facebook: string | null
+      interest: string[]
       birthday: Date | null
       gender: string | null
       horoscope: string | null
-      mood: string | null
       purpose: string | null
       prefferGender: string | null
       intentions: string | null
@@ -2553,12 +2794,9 @@ export namespace Prisma {
       attachmentStyle: string | null
       beliefSystem: string | null
       mbtiType: string | null
-      interest: string[]
       topArtists: string[]
       favoriteGenres: string[]
       uiTheme: string | null
-      instagram: string | null
-      facebook: string | null
       isOnline: boolean
       lastSeen: Date | null
       profileCompleted: boolean
@@ -2566,6 +2804,10 @@ export namespace Prisma {
       emailVerified: boolean
       createdAt: Date
       updatedAt: Date
+      attachmentResults: Prisma.JsonValue | null
+      loveLanguages: string[]
+      humanDesign: string | null
+      testsCompleted: string[]
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -2962,8 +3204,11 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     recvMessages<T extends User$recvMessagesArgs<ExtArgs> = {}>(args?: Subset<T, User$recvMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sentMessages<T extends User$sentMessagesArgs<ExtArgs> = {}>(args?: Subset<T, User$sentMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    sentRequests<T extends User$sentRequestsArgs<ExtArgs> = {}>(args?: Subset<T, User$sentRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FriendRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    receivedRequests<T extends User$receivedRequestsArgs<ExtArgs> = {}>(args?: Subset<T, User$receivedRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FriendRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     globalMessages<T extends User$globalMessagesArgs<ExtArgs> = {}>(args?: Subset<T, User$globalMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GlobalChatMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     privateRoomMessages<T extends User$privateRoomMessagesArgs<ExtArgs> = {}>(args?: Subset<T, User$privateRoomMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PrivateRoomMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    joinedRooms<T extends User$joinedRoomsArgs<ExtArgs> = {}>(args?: Subset<T, User$joinedRoomsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoomMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3001,12 +3246,14 @@ export namespace Prisma {
     readonly mobileNumber: FieldRef<"User", 'String'>
     readonly bio: FieldRef<"User", 'String'>
     readonly avatar: FieldRef<"User", 'String'>
-    readonly avatar2: FieldRef<"User", 'String'>
     readonly images: FieldRef<"User", 'String[]'>
+    readonly mood: FieldRef<"User", 'String'>
+    readonly instagram: FieldRef<"User", 'String'>
+    readonly facebook: FieldRef<"User", 'String'>
+    readonly interest: FieldRef<"User", 'String[]'>
     readonly birthday: FieldRef<"User", 'DateTime'>
     readonly gender: FieldRef<"User", 'String'>
     readonly horoscope: FieldRef<"User", 'String'>
-    readonly mood: FieldRef<"User", 'String'>
     readonly purpose: FieldRef<"User", 'String'>
     readonly prefferGender: FieldRef<"User", 'String'>
     readonly intentions: FieldRef<"User", 'String'>
@@ -3017,12 +3264,9 @@ export namespace Prisma {
     readonly attachmentStyle: FieldRef<"User", 'String'>
     readonly beliefSystem: FieldRef<"User", 'String'>
     readonly mbtiType: FieldRef<"User", 'String'>
-    readonly interest: FieldRef<"User", 'String[]'>
     readonly topArtists: FieldRef<"User", 'String[]'>
     readonly favoriteGenres: FieldRef<"User", 'String[]'>
     readonly uiTheme: FieldRef<"User", 'String'>
-    readonly instagram: FieldRef<"User", 'String'>
-    readonly facebook: FieldRef<"User", 'String'>
     readonly isOnline: FieldRef<"User", 'Boolean'>
     readonly lastSeen: FieldRef<"User", 'DateTime'>
     readonly profileCompleted: FieldRef<"User", 'Boolean'>
@@ -3030,6 +3274,10 @@ export namespace Prisma {
     readonly emailVerified: FieldRef<"User", 'Boolean'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
+    readonly attachmentResults: FieldRef<"User", 'Json'>
+    readonly loveLanguages: FieldRef<"User", 'String[]'>
+    readonly humanDesign: FieldRef<"User", 'String'>
+    readonly testsCompleted: FieldRef<"User", 'String[]'>
   }
     
 
@@ -3471,6 +3719,54 @@ export namespace Prisma {
   }
 
   /**
+   * User.sentRequests
+   */
+  export type User$sentRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FriendRequest
+     */
+    select?: FriendRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FriendRequest
+     */
+    omit?: FriendRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FriendRequestInclude<ExtArgs> | null
+    where?: FriendRequestWhereInput
+    orderBy?: FriendRequestOrderByWithRelationInput | FriendRequestOrderByWithRelationInput[]
+    cursor?: FriendRequestWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FriendRequestScalarFieldEnum | FriendRequestScalarFieldEnum[]
+  }
+
+  /**
+   * User.receivedRequests
+   */
+  export type User$receivedRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FriendRequest
+     */
+    select?: FriendRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FriendRequest
+     */
+    omit?: FriendRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FriendRequestInclude<ExtArgs> | null
+    where?: FriendRequestWhereInput
+    orderBy?: FriendRequestOrderByWithRelationInput | FriendRequestOrderByWithRelationInput[]
+    cursor?: FriendRequestWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FriendRequestScalarFieldEnum | FriendRequestScalarFieldEnum[]
+  }
+
+  /**
    * User.globalMessages
    */
   export type User$globalMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3519,6 +3815,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.joinedRooms
+   */
+  export type User$joinedRoomsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoomMember
+     */
+    select?: RoomMemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoomMember
+     */
+    omit?: RoomMemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoomMemberInclude<ExtArgs> | null
+    where?: RoomMemberWhereInput
+    orderBy?: RoomMemberOrderByWithRelationInput | RoomMemberOrderByWithRelationInput[]
+    cursor?: RoomMemberWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RoomMemberScalarFieldEnum | RoomMemberScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3534,6 +3854,2140 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model FriendRequest
+   */
+
+  export type AggregateFriendRequest = {
+    _count: FriendRequestCountAggregateOutputType | null
+    _min: FriendRequestMinAggregateOutputType | null
+    _max: FriendRequestMaxAggregateOutputType | null
+  }
+
+  export type FriendRequestMinAggregateOutputType = {
+    id: string | null
+    senderId: string | null
+    receiverId: string | null
+    status: string | null
+    createdAt: Date | null
+  }
+
+  export type FriendRequestMaxAggregateOutputType = {
+    id: string | null
+    senderId: string | null
+    receiverId: string | null
+    status: string | null
+    createdAt: Date | null
+  }
+
+  export type FriendRequestCountAggregateOutputType = {
+    id: number
+    senderId: number
+    receiverId: number
+    status: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type FriendRequestMinAggregateInputType = {
+    id?: true
+    senderId?: true
+    receiverId?: true
+    status?: true
+    createdAt?: true
+  }
+
+  export type FriendRequestMaxAggregateInputType = {
+    id?: true
+    senderId?: true
+    receiverId?: true
+    status?: true
+    createdAt?: true
+  }
+
+  export type FriendRequestCountAggregateInputType = {
+    id?: true
+    senderId?: true
+    receiverId?: true
+    status?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type FriendRequestAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FriendRequest to aggregate.
+     */
+    where?: FriendRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FriendRequests to fetch.
+     */
+    orderBy?: FriendRequestOrderByWithRelationInput | FriendRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FriendRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FriendRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FriendRequests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FriendRequests
+    **/
+    _count?: true | FriendRequestCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FriendRequestMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FriendRequestMaxAggregateInputType
+  }
+
+  export type GetFriendRequestAggregateType<T extends FriendRequestAggregateArgs> = {
+        [P in keyof T & keyof AggregateFriendRequest]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFriendRequest[P]>
+      : GetScalarType<T[P], AggregateFriendRequest[P]>
+  }
+
+
+
+
+  export type FriendRequestGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FriendRequestWhereInput
+    orderBy?: FriendRequestOrderByWithAggregationInput | FriendRequestOrderByWithAggregationInput[]
+    by: FriendRequestScalarFieldEnum[] | FriendRequestScalarFieldEnum
+    having?: FriendRequestScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FriendRequestCountAggregateInputType | true
+    _min?: FriendRequestMinAggregateInputType
+    _max?: FriendRequestMaxAggregateInputType
+  }
+
+  export type FriendRequestGroupByOutputType = {
+    id: string
+    senderId: string
+    receiverId: string
+    status: string
+    createdAt: Date
+    _count: FriendRequestCountAggregateOutputType | null
+    _min: FriendRequestMinAggregateOutputType | null
+    _max: FriendRequestMaxAggregateOutputType | null
+  }
+
+  type GetFriendRequestGroupByPayload<T extends FriendRequestGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FriendRequestGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FriendRequestGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FriendRequestGroupByOutputType[P]>
+            : GetScalarType<T[P], FriendRequestGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FriendRequestSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    senderId?: boolean
+    receiverId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    sender?: boolean | UserDefaultArgs<ExtArgs>
+    receiver?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["friendRequest"]>
+
+  export type FriendRequestSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    senderId?: boolean
+    receiverId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    sender?: boolean | UserDefaultArgs<ExtArgs>
+    receiver?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["friendRequest"]>
+
+  export type FriendRequestSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    senderId?: boolean
+    receiverId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    sender?: boolean | UserDefaultArgs<ExtArgs>
+    receiver?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["friendRequest"]>
+
+  export type FriendRequestSelectScalar = {
+    id?: boolean
+    senderId?: boolean
+    receiverId?: boolean
+    status?: boolean
+    createdAt?: boolean
+  }
+
+  export type FriendRequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "senderId" | "receiverId" | "status" | "createdAt", ExtArgs["result"]["friendRequest"]>
+  export type FriendRequestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sender?: boolean | UserDefaultArgs<ExtArgs>
+    receiver?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type FriendRequestIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sender?: boolean | UserDefaultArgs<ExtArgs>
+    receiver?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type FriendRequestIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sender?: boolean | UserDefaultArgs<ExtArgs>
+    receiver?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $FriendRequestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FriendRequest"
+    objects: {
+      sender: Prisma.$UserPayload<ExtArgs>
+      receiver: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      senderId: string
+      receiverId: string
+      status: string
+      createdAt: Date
+    }, ExtArgs["result"]["friendRequest"]>
+    composites: {}
+  }
+
+  type FriendRequestGetPayload<S extends boolean | null | undefined | FriendRequestDefaultArgs> = $Result.GetResult<Prisma.$FriendRequestPayload, S>
+
+  type FriendRequestCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FriendRequestFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FriendRequestCountAggregateInputType | true
+    }
+
+  export interface FriendRequestDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FriendRequest'], meta: { name: 'FriendRequest' } }
+    /**
+     * Find zero or one FriendRequest that matches the filter.
+     * @param {FriendRequestFindUniqueArgs} args - Arguments to find a FriendRequest
+     * @example
+     * // Get one FriendRequest
+     * const friendRequest = await prisma.friendRequest.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FriendRequestFindUniqueArgs>(args: SelectSubset<T, FriendRequestFindUniqueArgs<ExtArgs>>): Prisma__FriendRequestClient<$Result.GetResult<Prisma.$FriendRequestPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FriendRequest that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FriendRequestFindUniqueOrThrowArgs} args - Arguments to find a FriendRequest
+     * @example
+     * // Get one FriendRequest
+     * const friendRequest = await prisma.friendRequest.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FriendRequestFindUniqueOrThrowArgs>(args: SelectSubset<T, FriendRequestFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FriendRequestClient<$Result.GetResult<Prisma.$FriendRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FriendRequest that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FriendRequestFindFirstArgs} args - Arguments to find a FriendRequest
+     * @example
+     * // Get one FriendRequest
+     * const friendRequest = await prisma.friendRequest.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FriendRequestFindFirstArgs>(args?: SelectSubset<T, FriendRequestFindFirstArgs<ExtArgs>>): Prisma__FriendRequestClient<$Result.GetResult<Prisma.$FriendRequestPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FriendRequest that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FriendRequestFindFirstOrThrowArgs} args - Arguments to find a FriendRequest
+     * @example
+     * // Get one FriendRequest
+     * const friendRequest = await prisma.friendRequest.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FriendRequestFindFirstOrThrowArgs>(args?: SelectSubset<T, FriendRequestFindFirstOrThrowArgs<ExtArgs>>): Prisma__FriendRequestClient<$Result.GetResult<Prisma.$FriendRequestPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FriendRequests that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FriendRequestFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FriendRequests
+     * const friendRequests = await prisma.friendRequest.findMany()
+     * 
+     * // Get first 10 FriendRequests
+     * const friendRequests = await prisma.friendRequest.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const friendRequestWithIdOnly = await prisma.friendRequest.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FriendRequestFindManyArgs>(args?: SelectSubset<T, FriendRequestFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FriendRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FriendRequest.
+     * @param {FriendRequestCreateArgs} args - Arguments to create a FriendRequest.
+     * @example
+     * // Create one FriendRequest
+     * const FriendRequest = await prisma.friendRequest.create({
+     *   data: {
+     *     // ... data to create a FriendRequest
+     *   }
+     * })
+     * 
+     */
+    create<T extends FriendRequestCreateArgs>(args: SelectSubset<T, FriendRequestCreateArgs<ExtArgs>>): Prisma__FriendRequestClient<$Result.GetResult<Prisma.$FriendRequestPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FriendRequests.
+     * @param {FriendRequestCreateManyArgs} args - Arguments to create many FriendRequests.
+     * @example
+     * // Create many FriendRequests
+     * const friendRequest = await prisma.friendRequest.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FriendRequestCreateManyArgs>(args?: SelectSubset<T, FriendRequestCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FriendRequests and returns the data saved in the database.
+     * @param {FriendRequestCreateManyAndReturnArgs} args - Arguments to create many FriendRequests.
+     * @example
+     * // Create many FriendRequests
+     * const friendRequest = await prisma.friendRequest.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FriendRequests and only return the `id`
+     * const friendRequestWithIdOnly = await prisma.friendRequest.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FriendRequestCreateManyAndReturnArgs>(args?: SelectSubset<T, FriendRequestCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FriendRequestPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FriendRequest.
+     * @param {FriendRequestDeleteArgs} args - Arguments to delete one FriendRequest.
+     * @example
+     * // Delete one FriendRequest
+     * const FriendRequest = await prisma.friendRequest.delete({
+     *   where: {
+     *     // ... filter to delete one FriendRequest
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FriendRequestDeleteArgs>(args: SelectSubset<T, FriendRequestDeleteArgs<ExtArgs>>): Prisma__FriendRequestClient<$Result.GetResult<Prisma.$FriendRequestPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FriendRequest.
+     * @param {FriendRequestUpdateArgs} args - Arguments to update one FriendRequest.
+     * @example
+     * // Update one FriendRequest
+     * const friendRequest = await prisma.friendRequest.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FriendRequestUpdateArgs>(args: SelectSubset<T, FriendRequestUpdateArgs<ExtArgs>>): Prisma__FriendRequestClient<$Result.GetResult<Prisma.$FriendRequestPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FriendRequests.
+     * @param {FriendRequestDeleteManyArgs} args - Arguments to filter FriendRequests to delete.
+     * @example
+     * // Delete a few FriendRequests
+     * const { count } = await prisma.friendRequest.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FriendRequestDeleteManyArgs>(args?: SelectSubset<T, FriendRequestDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FriendRequests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FriendRequestUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FriendRequests
+     * const friendRequest = await prisma.friendRequest.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FriendRequestUpdateManyArgs>(args: SelectSubset<T, FriendRequestUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FriendRequests and returns the data updated in the database.
+     * @param {FriendRequestUpdateManyAndReturnArgs} args - Arguments to update many FriendRequests.
+     * @example
+     * // Update many FriendRequests
+     * const friendRequest = await prisma.friendRequest.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FriendRequests and only return the `id`
+     * const friendRequestWithIdOnly = await prisma.friendRequest.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FriendRequestUpdateManyAndReturnArgs>(args: SelectSubset<T, FriendRequestUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FriendRequestPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FriendRequest.
+     * @param {FriendRequestUpsertArgs} args - Arguments to update or create a FriendRequest.
+     * @example
+     * // Update or create a FriendRequest
+     * const friendRequest = await prisma.friendRequest.upsert({
+     *   create: {
+     *     // ... data to create a FriendRequest
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FriendRequest we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FriendRequestUpsertArgs>(args: SelectSubset<T, FriendRequestUpsertArgs<ExtArgs>>): Prisma__FriendRequestClient<$Result.GetResult<Prisma.$FriendRequestPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FriendRequests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FriendRequestCountArgs} args - Arguments to filter FriendRequests to count.
+     * @example
+     * // Count the number of FriendRequests
+     * const count = await prisma.friendRequest.count({
+     *   where: {
+     *     // ... the filter for the FriendRequests we want to count
+     *   }
+     * })
+    **/
+    count<T extends FriendRequestCountArgs>(
+      args?: Subset<T, FriendRequestCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FriendRequestCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FriendRequest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FriendRequestAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FriendRequestAggregateArgs>(args: Subset<T, FriendRequestAggregateArgs>): Prisma.PrismaPromise<GetFriendRequestAggregateType<T>>
+
+    /**
+     * Group by FriendRequest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FriendRequestGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FriendRequestGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FriendRequestGroupByArgs['orderBy'] }
+        : { orderBy?: FriendRequestGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FriendRequestGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFriendRequestGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FriendRequest model
+   */
+  readonly fields: FriendRequestFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FriendRequest.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FriendRequestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    sender<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    receiver<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FriendRequest model
+   */
+  interface FriendRequestFieldRefs {
+    readonly id: FieldRef<"FriendRequest", 'String'>
+    readonly senderId: FieldRef<"FriendRequest", 'String'>
+    readonly receiverId: FieldRef<"FriendRequest", 'String'>
+    readonly status: FieldRef<"FriendRequest", 'String'>
+    readonly createdAt: FieldRef<"FriendRequest", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FriendRequest findUnique
+   */
+  export type FriendRequestFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FriendRequest
+     */
+    select?: FriendRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FriendRequest
+     */
+    omit?: FriendRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FriendRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which FriendRequest to fetch.
+     */
+    where: FriendRequestWhereUniqueInput
+  }
+
+  /**
+   * FriendRequest findUniqueOrThrow
+   */
+  export type FriendRequestFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FriendRequest
+     */
+    select?: FriendRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FriendRequest
+     */
+    omit?: FriendRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FriendRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which FriendRequest to fetch.
+     */
+    where: FriendRequestWhereUniqueInput
+  }
+
+  /**
+   * FriendRequest findFirst
+   */
+  export type FriendRequestFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FriendRequest
+     */
+    select?: FriendRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FriendRequest
+     */
+    omit?: FriendRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FriendRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which FriendRequest to fetch.
+     */
+    where?: FriendRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FriendRequests to fetch.
+     */
+    orderBy?: FriendRequestOrderByWithRelationInput | FriendRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FriendRequests.
+     */
+    cursor?: FriendRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FriendRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FriendRequests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FriendRequests.
+     */
+    distinct?: FriendRequestScalarFieldEnum | FriendRequestScalarFieldEnum[]
+  }
+
+  /**
+   * FriendRequest findFirstOrThrow
+   */
+  export type FriendRequestFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FriendRequest
+     */
+    select?: FriendRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FriendRequest
+     */
+    omit?: FriendRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FriendRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which FriendRequest to fetch.
+     */
+    where?: FriendRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FriendRequests to fetch.
+     */
+    orderBy?: FriendRequestOrderByWithRelationInput | FriendRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FriendRequests.
+     */
+    cursor?: FriendRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FriendRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FriendRequests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FriendRequests.
+     */
+    distinct?: FriendRequestScalarFieldEnum | FriendRequestScalarFieldEnum[]
+  }
+
+  /**
+   * FriendRequest findMany
+   */
+  export type FriendRequestFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FriendRequest
+     */
+    select?: FriendRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FriendRequest
+     */
+    omit?: FriendRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FriendRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which FriendRequests to fetch.
+     */
+    where?: FriendRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FriendRequests to fetch.
+     */
+    orderBy?: FriendRequestOrderByWithRelationInput | FriendRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FriendRequests.
+     */
+    cursor?: FriendRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FriendRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FriendRequests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FriendRequests.
+     */
+    distinct?: FriendRequestScalarFieldEnum | FriendRequestScalarFieldEnum[]
+  }
+
+  /**
+   * FriendRequest create
+   */
+  export type FriendRequestCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FriendRequest
+     */
+    select?: FriendRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FriendRequest
+     */
+    omit?: FriendRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FriendRequestInclude<ExtArgs> | null
+    /**
+     * The data needed to create a FriendRequest.
+     */
+    data: XOR<FriendRequestCreateInput, FriendRequestUncheckedCreateInput>
+  }
+
+  /**
+   * FriendRequest createMany
+   */
+  export type FriendRequestCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FriendRequests.
+     */
+    data: FriendRequestCreateManyInput | FriendRequestCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FriendRequest createManyAndReturn
+   */
+  export type FriendRequestCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FriendRequest
+     */
+    select?: FriendRequestSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FriendRequest
+     */
+    omit?: FriendRequestOmit<ExtArgs> | null
+    /**
+     * The data used to create many FriendRequests.
+     */
+    data: FriendRequestCreateManyInput | FriendRequestCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FriendRequestIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FriendRequest update
+   */
+  export type FriendRequestUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FriendRequest
+     */
+    select?: FriendRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FriendRequest
+     */
+    omit?: FriendRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FriendRequestInclude<ExtArgs> | null
+    /**
+     * The data needed to update a FriendRequest.
+     */
+    data: XOR<FriendRequestUpdateInput, FriendRequestUncheckedUpdateInput>
+    /**
+     * Choose, which FriendRequest to update.
+     */
+    where: FriendRequestWhereUniqueInput
+  }
+
+  /**
+   * FriendRequest updateMany
+   */
+  export type FriendRequestUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FriendRequests.
+     */
+    data: XOR<FriendRequestUpdateManyMutationInput, FriendRequestUncheckedUpdateManyInput>
+    /**
+     * Filter which FriendRequests to update
+     */
+    where?: FriendRequestWhereInput
+    /**
+     * Limit how many FriendRequests to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FriendRequest updateManyAndReturn
+   */
+  export type FriendRequestUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FriendRequest
+     */
+    select?: FriendRequestSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FriendRequest
+     */
+    omit?: FriendRequestOmit<ExtArgs> | null
+    /**
+     * The data used to update FriendRequests.
+     */
+    data: XOR<FriendRequestUpdateManyMutationInput, FriendRequestUncheckedUpdateManyInput>
+    /**
+     * Filter which FriendRequests to update
+     */
+    where?: FriendRequestWhereInput
+    /**
+     * Limit how many FriendRequests to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FriendRequestIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FriendRequest upsert
+   */
+  export type FriendRequestUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FriendRequest
+     */
+    select?: FriendRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FriendRequest
+     */
+    omit?: FriendRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FriendRequestInclude<ExtArgs> | null
+    /**
+     * The filter to search for the FriendRequest to update in case it exists.
+     */
+    where: FriendRequestWhereUniqueInput
+    /**
+     * In case the FriendRequest found by the `where` argument doesn't exist, create a new FriendRequest with this data.
+     */
+    create: XOR<FriendRequestCreateInput, FriendRequestUncheckedCreateInput>
+    /**
+     * In case the FriendRequest was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FriendRequestUpdateInput, FriendRequestUncheckedUpdateInput>
+  }
+
+  /**
+   * FriendRequest delete
+   */
+  export type FriendRequestDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FriendRequest
+     */
+    select?: FriendRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FriendRequest
+     */
+    omit?: FriendRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FriendRequestInclude<ExtArgs> | null
+    /**
+     * Filter which FriendRequest to delete.
+     */
+    where: FriendRequestWhereUniqueInput
+  }
+
+  /**
+   * FriendRequest deleteMany
+   */
+  export type FriendRequestDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FriendRequests to delete
+     */
+    where?: FriendRequestWhereInput
+    /**
+     * Limit how many FriendRequests to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FriendRequest without action
+   */
+  export type FriendRequestDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FriendRequest
+     */
+    select?: FriendRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FriendRequest
+     */
+    omit?: FriendRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FriendRequestInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model RoomMember
+   */
+
+  export type AggregateRoomMember = {
+    _count: RoomMemberCountAggregateOutputType | null
+    _min: RoomMemberMinAggregateOutputType | null
+    _max: RoomMemberMaxAggregateOutputType | null
+  }
+
+  export type RoomMemberMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    roomId: string | null
+    role: string | null
+    joinedAt: Date | null
+  }
+
+  export type RoomMemberMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    roomId: string | null
+    role: string | null
+    joinedAt: Date | null
+  }
+
+  export type RoomMemberCountAggregateOutputType = {
+    id: number
+    userId: number
+    roomId: number
+    role: number
+    joinedAt: number
+    _all: number
+  }
+
+
+  export type RoomMemberMinAggregateInputType = {
+    id?: true
+    userId?: true
+    roomId?: true
+    role?: true
+    joinedAt?: true
+  }
+
+  export type RoomMemberMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    roomId?: true
+    role?: true
+    joinedAt?: true
+  }
+
+  export type RoomMemberCountAggregateInputType = {
+    id?: true
+    userId?: true
+    roomId?: true
+    role?: true
+    joinedAt?: true
+    _all?: true
+  }
+
+  export type RoomMemberAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RoomMember to aggregate.
+     */
+    where?: RoomMemberWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RoomMembers to fetch.
+     */
+    orderBy?: RoomMemberOrderByWithRelationInput | RoomMemberOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RoomMemberWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RoomMembers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RoomMembers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned RoomMembers
+    **/
+    _count?: true | RoomMemberCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RoomMemberMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RoomMemberMaxAggregateInputType
+  }
+
+  export type GetRoomMemberAggregateType<T extends RoomMemberAggregateArgs> = {
+        [P in keyof T & keyof AggregateRoomMember]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRoomMember[P]>
+      : GetScalarType<T[P], AggregateRoomMember[P]>
+  }
+
+
+
+
+  export type RoomMemberGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RoomMemberWhereInput
+    orderBy?: RoomMemberOrderByWithAggregationInput | RoomMemberOrderByWithAggregationInput[]
+    by: RoomMemberScalarFieldEnum[] | RoomMemberScalarFieldEnum
+    having?: RoomMemberScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RoomMemberCountAggregateInputType | true
+    _min?: RoomMemberMinAggregateInputType
+    _max?: RoomMemberMaxAggregateInputType
+  }
+
+  export type RoomMemberGroupByOutputType = {
+    id: string
+    userId: string
+    roomId: string
+    role: string
+    joinedAt: Date
+    _count: RoomMemberCountAggregateOutputType | null
+    _min: RoomMemberMinAggregateOutputType | null
+    _max: RoomMemberMaxAggregateOutputType | null
+  }
+
+  type GetRoomMemberGroupByPayload<T extends RoomMemberGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RoomMemberGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RoomMemberGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RoomMemberGroupByOutputType[P]>
+            : GetScalarType<T[P], RoomMemberGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RoomMemberSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    roomId?: boolean
+    role?: boolean
+    joinedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["roomMember"]>
+
+  export type RoomMemberSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    roomId?: boolean
+    role?: boolean
+    joinedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["roomMember"]>
+
+  export type RoomMemberSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    roomId?: boolean
+    role?: boolean
+    joinedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["roomMember"]>
+
+  export type RoomMemberSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    roomId?: boolean
+    role?: boolean
+    joinedAt?: boolean
+  }
+
+  export type RoomMemberOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "roomId" | "role" | "joinedAt", ExtArgs["result"]["roomMember"]>
+  export type RoomMemberInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type RoomMemberIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type RoomMemberIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $RoomMemberPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "RoomMember"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      roomId: string
+      role: string
+      joinedAt: Date
+    }, ExtArgs["result"]["roomMember"]>
+    composites: {}
+  }
+
+  type RoomMemberGetPayload<S extends boolean | null | undefined | RoomMemberDefaultArgs> = $Result.GetResult<Prisma.$RoomMemberPayload, S>
+
+  type RoomMemberCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<RoomMemberFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: RoomMemberCountAggregateInputType | true
+    }
+
+  export interface RoomMemberDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RoomMember'], meta: { name: 'RoomMember' } }
+    /**
+     * Find zero or one RoomMember that matches the filter.
+     * @param {RoomMemberFindUniqueArgs} args - Arguments to find a RoomMember
+     * @example
+     * // Get one RoomMember
+     * const roomMember = await prisma.roomMember.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RoomMemberFindUniqueArgs>(args: SelectSubset<T, RoomMemberFindUniqueArgs<ExtArgs>>): Prisma__RoomMemberClient<$Result.GetResult<Prisma.$RoomMemberPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one RoomMember that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {RoomMemberFindUniqueOrThrowArgs} args - Arguments to find a RoomMember
+     * @example
+     * // Get one RoomMember
+     * const roomMember = await prisma.roomMember.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RoomMemberFindUniqueOrThrowArgs>(args: SelectSubset<T, RoomMemberFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RoomMemberClient<$Result.GetResult<Prisma.$RoomMemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RoomMember that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoomMemberFindFirstArgs} args - Arguments to find a RoomMember
+     * @example
+     * // Get one RoomMember
+     * const roomMember = await prisma.roomMember.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RoomMemberFindFirstArgs>(args?: SelectSubset<T, RoomMemberFindFirstArgs<ExtArgs>>): Prisma__RoomMemberClient<$Result.GetResult<Prisma.$RoomMemberPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RoomMember that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoomMemberFindFirstOrThrowArgs} args - Arguments to find a RoomMember
+     * @example
+     * // Get one RoomMember
+     * const roomMember = await prisma.roomMember.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RoomMemberFindFirstOrThrowArgs>(args?: SelectSubset<T, RoomMemberFindFirstOrThrowArgs<ExtArgs>>): Prisma__RoomMemberClient<$Result.GetResult<Prisma.$RoomMemberPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more RoomMembers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoomMemberFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all RoomMembers
+     * const roomMembers = await prisma.roomMember.findMany()
+     * 
+     * // Get first 10 RoomMembers
+     * const roomMembers = await prisma.roomMember.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const roomMemberWithIdOnly = await prisma.roomMember.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RoomMemberFindManyArgs>(args?: SelectSubset<T, RoomMemberFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoomMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a RoomMember.
+     * @param {RoomMemberCreateArgs} args - Arguments to create a RoomMember.
+     * @example
+     * // Create one RoomMember
+     * const RoomMember = await prisma.roomMember.create({
+     *   data: {
+     *     // ... data to create a RoomMember
+     *   }
+     * })
+     * 
+     */
+    create<T extends RoomMemberCreateArgs>(args: SelectSubset<T, RoomMemberCreateArgs<ExtArgs>>): Prisma__RoomMemberClient<$Result.GetResult<Prisma.$RoomMemberPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many RoomMembers.
+     * @param {RoomMemberCreateManyArgs} args - Arguments to create many RoomMembers.
+     * @example
+     * // Create many RoomMembers
+     * const roomMember = await prisma.roomMember.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RoomMemberCreateManyArgs>(args?: SelectSubset<T, RoomMemberCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many RoomMembers and returns the data saved in the database.
+     * @param {RoomMemberCreateManyAndReturnArgs} args - Arguments to create many RoomMembers.
+     * @example
+     * // Create many RoomMembers
+     * const roomMember = await prisma.roomMember.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many RoomMembers and only return the `id`
+     * const roomMemberWithIdOnly = await prisma.roomMember.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RoomMemberCreateManyAndReturnArgs>(args?: SelectSubset<T, RoomMemberCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoomMemberPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a RoomMember.
+     * @param {RoomMemberDeleteArgs} args - Arguments to delete one RoomMember.
+     * @example
+     * // Delete one RoomMember
+     * const RoomMember = await prisma.roomMember.delete({
+     *   where: {
+     *     // ... filter to delete one RoomMember
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RoomMemberDeleteArgs>(args: SelectSubset<T, RoomMemberDeleteArgs<ExtArgs>>): Prisma__RoomMemberClient<$Result.GetResult<Prisma.$RoomMemberPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one RoomMember.
+     * @param {RoomMemberUpdateArgs} args - Arguments to update one RoomMember.
+     * @example
+     * // Update one RoomMember
+     * const roomMember = await prisma.roomMember.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RoomMemberUpdateArgs>(args: SelectSubset<T, RoomMemberUpdateArgs<ExtArgs>>): Prisma__RoomMemberClient<$Result.GetResult<Prisma.$RoomMemberPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more RoomMembers.
+     * @param {RoomMemberDeleteManyArgs} args - Arguments to filter RoomMembers to delete.
+     * @example
+     * // Delete a few RoomMembers
+     * const { count } = await prisma.roomMember.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RoomMemberDeleteManyArgs>(args?: SelectSubset<T, RoomMemberDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RoomMembers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoomMemberUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many RoomMembers
+     * const roomMember = await prisma.roomMember.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RoomMemberUpdateManyArgs>(args: SelectSubset<T, RoomMemberUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RoomMembers and returns the data updated in the database.
+     * @param {RoomMemberUpdateManyAndReturnArgs} args - Arguments to update many RoomMembers.
+     * @example
+     * // Update many RoomMembers
+     * const roomMember = await prisma.roomMember.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more RoomMembers and only return the `id`
+     * const roomMemberWithIdOnly = await prisma.roomMember.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends RoomMemberUpdateManyAndReturnArgs>(args: SelectSubset<T, RoomMemberUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoomMemberPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one RoomMember.
+     * @param {RoomMemberUpsertArgs} args - Arguments to update or create a RoomMember.
+     * @example
+     * // Update or create a RoomMember
+     * const roomMember = await prisma.roomMember.upsert({
+     *   create: {
+     *     // ... data to create a RoomMember
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the RoomMember we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RoomMemberUpsertArgs>(args: SelectSubset<T, RoomMemberUpsertArgs<ExtArgs>>): Prisma__RoomMemberClient<$Result.GetResult<Prisma.$RoomMemberPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of RoomMembers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoomMemberCountArgs} args - Arguments to filter RoomMembers to count.
+     * @example
+     * // Count the number of RoomMembers
+     * const count = await prisma.roomMember.count({
+     *   where: {
+     *     // ... the filter for the RoomMembers we want to count
+     *   }
+     * })
+    **/
+    count<T extends RoomMemberCountArgs>(
+      args?: Subset<T, RoomMemberCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RoomMemberCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a RoomMember.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoomMemberAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RoomMemberAggregateArgs>(args: Subset<T, RoomMemberAggregateArgs>): Prisma.PrismaPromise<GetRoomMemberAggregateType<T>>
+
+    /**
+     * Group by RoomMember.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoomMemberGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RoomMemberGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RoomMemberGroupByArgs['orderBy'] }
+        : { orderBy?: RoomMemberGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RoomMemberGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRoomMemberGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the RoomMember model
+   */
+  readonly fields: RoomMemberFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for RoomMember.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RoomMemberClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the RoomMember model
+   */
+  interface RoomMemberFieldRefs {
+    readonly id: FieldRef<"RoomMember", 'String'>
+    readonly userId: FieldRef<"RoomMember", 'String'>
+    readonly roomId: FieldRef<"RoomMember", 'String'>
+    readonly role: FieldRef<"RoomMember", 'String'>
+    readonly joinedAt: FieldRef<"RoomMember", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * RoomMember findUnique
+   */
+  export type RoomMemberFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoomMember
+     */
+    select?: RoomMemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoomMember
+     */
+    omit?: RoomMemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoomMemberInclude<ExtArgs> | null
+    /**
+     * Filter, which RoomMember to fetch.
+     */
+    where: RoomMemberWhereUniqueInput
+  }
+
+  /**
+   * RoomMember findUniqueOrThrow
+   */
+  export type RoomMemberFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoomMember
+     */
+    select?: RoomMemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoomMember
+     */
+    omit?: RoomMemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoomMemberInclude<ExtArgs> | null
+    /**
+     * Filter, which RoomMember to fetch.
+     */
+    where: RoomMemberWhereUniqueInput
+  }
+
+  /**
+   * RoomMember findFirst
+   */
+  export type RoomMemberFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoomMember
+     */
+    select?: RoomMemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoomMember
+     */
+    omit?: RoomMemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoomMemberInclude<ExtArgs> | null
+    /**
+     * Filter, which RoomMember to fetch.
+     */
+    where?: RoomMemberWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RoomMembers to fetch.
+     */
+    orderBy?: RoomMemberOrderByWithRelationInput | RoomMemberOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RoomMembers.
+     */
+    cursor?: RoomMemberWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RoomMembers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RoomMembers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RoomMembers.
+     */
+    distinct?: RoomMemberScalarFieldEnum | RoomMemberScalarFieldEnum[]
+  }
+
+  /**
+   * RoomMember findFirstOrThrow
+   */
+  export type RoomMemberFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoomMember
+     */
+    select?: RoomMemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoomMember
+     */
+    omit?: RoomMemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoomMemberInclude<ExtArgs> | null
+    /**
+     * Filter, which RoomMember to fetch.
+     */
+    where?: RoomMemberWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RoomMembers to fetch.
+     */
+    orderBy?: RoomMemberOrderByWithRelationInput | RoomMemberOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RoomMembers.
+     */
+    cursor?: RoomMemberWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RoomMembers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RoomMembers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RoomMembers.
+     */
+    distinct?: RoomMemberScalarFieldEnum | RoomMemberScalarFieldEnum[]
+  }
+
+  /**
+   * RoomMember findMany
+   */
+  export type RoomMemberFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoomMember
+     */
+    select?: RoomMemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoomMember
+     */
+    omit?: RoomMemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoomMemberInclude<ExtArgs> | null
+    /**
+     * Filter, which RoomMembers to fetch.
+     */
+    where?: RoomMemberWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RoomMembers to fetch.
+     */
+    orderBy?: RoomMemberOrderByWithRelationInput | RoomMemberOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing RoomMembers.
+     */
+    cursor?: RoomMemberWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RoomMembers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RoomMembers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RoomMembers.
+     */
+    distinct?: RoomMemberScalarFieldEnum | RoomMemberScalarFieldEnum[]
+  }
+
+  /**
+   * RoomMember create
+   */
+  export type RoomMemberCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoomMember
+     */
+    select?: RoomMemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoomMember
+     */
+    omit?: RoomMemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoomMemberInclude<ExtArgs> | null
+    /**
+     * The data needed to create a RoomMember.
+     */
+    data: XOR<RoomMemberCreateInput, RoomMemberUncheckedCreateInput>
+  }
+
+  /**
+   * RoomMember createMany
+   */
+  export type RoomMemberCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many RoomMembers.
+     */
+    data: RoomMemberCreateManyInput | RoomMemberCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * RoomMember createManyAndReturn
+   */
+  export type RoomMemberCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoomMember
+     */
+    select?: RoomMemberSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoomMember
+     */
+    omit?: RoomMemberOmit<ExtArgs> | null
+    /**
+     * The data used to create many RoomMembers.
+     */
+    data: RoomMemberCreateManyInput | RoomMemberCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoomMemberIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RoomMember update
+   */
+  export type RoomMemberUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoomMember
+     */
+    select?: RoomMemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoomMember
+     */
+    omit?: RoomMemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoomMemberInclude<ExtArgs> | null
+    /**
+     * The data needed to update a RoomMember.
+     */
+    data: XOR<RoomMemberUpdateInput, RoomMemberUncheckedUpdateInput>
+    /**
+     * Choose, which RoomMember to update.
+     */
+    where: RoomMemberWhereUniqueInput
+  }
+
+  /**
+   * RoomMember updateMany
+   */
+  export type RoomMemberUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update RoomMembers.
+     */
+    data: XOR<RoomMemberUpdateManyMutationInput, RoomMemberUncheckedUpdateManyInput>
+    /**
+     * Filter which RoomMembers to update
+     */
+    where?: RoomMemberWhereInput
+    /**
+     * Limit how many RoomMembers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * RoomMember updateManyAndReturn
+   */
+  export type RoomMemberUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoomMember
+     */
+    select?: RoomMemberSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoomMember
+     */
+    omit?: RoomMemberOmit<ExtArgs> | null
+    /**
+     * The data used to update RoomMembers.
+     */
+    data: XOR<RoomMemberUpdateManyMutationInput, RoomMemberUncheckedUpdateManyInput>
+    /**
+     * Filter which RoomMembers to update
+     */
+    where?: RoomMemberWhereInput
+    /**
+     * Limit how many RoomMembers to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoomMemberIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RoomMember upsert
+   */
+  export type RoomMemberUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoomMember
+     */
+    select?: RoomMemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoomMember
+     */
+    omit?: RoomMemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoomMemberInclude<ExtArgs> | null
+    /**
+     * The filter to search for the RoomMember to update in case it exists.
+     */
+    where: RoomMemberWhereUniqueInput
+    /**
+     * In case the RoomMember found by the `where` argument doesn't exist, create a new RoomMember with this data.
+     */
+    create: XOR<RoomMemberCreateInput, RoomMemberUncheckedCreateInput>
+    /**
+     * In case the RoomMember was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RoomMemberUpdateInput, RoomMemberUncheckedUpdateInput>
+  }
+
+  /**
+   * RoomMember delete
+   */
+  export type RoomMemberDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoomMember
+     */
+    select?: RoomMemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoomMember
+     */
+    omit?: RoomMemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoomMemberInclude<ExtArgs> | null
+    /**
+     * Filter which RoomMember to delete.
+     */
+    where: RoomMemberWhereUniqueInput
+  }
+
+  /**
+   * RoomMember deleteMany
+   */
+  export type RoomMemberDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RoomMembers to delete
+     */
+    where?: RoomMemberWhereInput
+    /**
+     * Limit how many RoomMembers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * RoomMember without action
+   */
+  export type RoomMemberDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoomMember
+     */
+    select?: RoomMemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoomMember
+     */
+    omit?: RoomMemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoomMemberInclude<ExtArgs> | null
   }
 
 
@@ -14979,12 +17433,14 @@ export namespace Prisma {
     mobileNumber: 'mobileNumber',
     bio: 'bio',
     avatar: 'avatar',
-    avatar2: 'avatar2',
     images: 'images',
+    mood: 'mood',
+    instagram: 'instagram',
+    facebook: 'facebook',
+    interest: 'interest',
     birthday: 'birthday',
     gender: 'gender',
     horoscope: 'horoscope',
-    mood: 'mood',
     purpose: 'purpose',
     prefferGender: 'prefferGender',
     intentions: 'intentions',
@@ -14995,22 +17451,45 @@ export namespace Prisma {
     attachmentStyle: 'attachmentStyle',
     beliefSystem: 'beliefSystem',
     mbtiType: 'mbtiType',
-    interest: 'interest',
     topArtists: 'topArtists',
     favoriteGenres: 'favoriteGenres',
     uiTheme: 'uiTheme',
-    instagram: 'instagram',
-    facebook: 'facebook',
     isOnline: 'isOnline',
     lastSeen: 'lastSeen',
     profileCompleted: 'profileCompleted',
     isVerified: 'isVerified',
     emailVerified: 'emailVerified',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    attachmentResults: 'attachmentResults',
+    loveLanguages: 'loveLanguages',
+    humanDesign: 'humanDesign',
+    testsCompleted: 'testsCompleted'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+  export const FriendRequestScalarFieldEnum: {
+    id: 'id',
+    senderId: 'senderId',
+    receiverId: 'receiverId',
+    status: 'status',
+    createdAt: 'createdAt'
+  };
+
+  export type FriendRequestScalarFieldEnum = (typeof FriendRequestScalarFieldEnum)[keyof typeof FriendRequestScalarFieldEnum]
+
+
+  export const RoomMemberScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    roomId: 'roomId',
+    role: 'role',
+    joinedAt: 'joinedAt'
+  };
+
+  export type RoomMemberScalarFieldEnum = (typeof RoomMemberScalarFieldEnum)[keyof typeof RoomMemberScalarFieldEnum]
 
 
   export const PrivacyScalarFieldEnum: {
@@ -15142,12 +17621,29 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const NullableJsonNullValueInput: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull
+  };
+
+  export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
   export const QueryMode: {
     default: 'default',
     insensitive: 'insensitive'
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   export const NullsOrder: {
@@ -15199,6 +17695,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -15241,12 +17751,14 @@ export namespace Prisma {
     mobileNumber?: StringNullableFilter<"User"> | string | null
     bio?: StringNullableFilter<"User"> | string | null
     avatar?: StringNullableFilter<"User"> | string | null
-    avatar2?: StringNullableFilter<"User"> | string | null
     images?: StringNullableListFilter<"User">
+    mood?: StringNullableFilter<"User"> | string | null
+    instagram?: StringNullableFilter<"User"> | string | null
+    facebook?: StringNullableFilter<"User"> | string | null
+    interest?: StringNullableListFilter<"User">
     birthday?: DateTimeNullableFilter<"User"> | Date | string | null
     gender?: StringNullableFilter<"User"> | string | null
     horoscope?: StringNullableFilter<"User"> | string | null
-    mood?: StringNullableFilter<"User"> | string | null
     purpose?: StringNullableFilter<"User"> | string | null
     prefferGender?: StringNullableFilter<"User"> | string | null
     intentions?: StringNullableFilter<"User"> | string | null
@@ -15257,12 +17769,9 @@ export namespace Prisma {
     attachmentStyle?: StringNullableFilter<"User"> | string | null
     beliefSystem?: StringNullableFilter<"User"> | string | null
     mbtiType?: StringNullableFilter<"User"> | string | null
-    interest?: StringNullableListFilter<"User">
     topArtists?: StringNullableListFilter<"User">
     favoriteGenres?: StringNullableListFilter<"User">
     uiTheme?: StringNullableFilter<"User"> | string | null
-    instagram?: StringNullableFilter<"User"> | string | null
-    facebook?: StringNullableFilter<"User"> | string | null
     isOnline?: BoolFilter<"User"> | boolean
     lastSeen?: DateTimeNullableFilter<"User"> | Date | string | null
     profileCompleted?: BoolFilter<"User"> | boolean
@@ -15270,10 +17779,17 @@ export namespace Prisma {
     emailVerified?: BoolFilter<"User"> | boolean
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
+    attachmentResults?: JsonNullableFilter<"User">
+    loveLanguages?: StringNullableListFilter<"User">
+    humanDesign?: StringNullableFilter<"User"> | string | null
+    testsCompleted?: StringNullableListFilter<"User">
     recvMessages?: MessageListRelationFilter
     sentMessages?: MessageListRelationFilter
+    sentRequests?: FriendRequestListRelationFilter
+    receivedRequests?: FriendRequestListRelationFilter
     globalMessages?: GlobalChatMessageListRelationFilter
     privateRoomMessages?: PrivateRoomMessageListRelationFilter
+    joinedRooms?: RoomMemberListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -15285,12 +17801,14 @@ export namespace Prisma {
     mobileNumber?: SortOrderInput | SortOrder
     bio?: SortOrderInput | SortOrder
     avatar?: SortOrderInput | SortOrder
-    avatar2?: SortOrderInput | SortOrder
     images?: SortOrder
+    mood?: SortOrderInput | SortOrder
+    instagram?: SortOrderInput | SortOrder
+    facebook?: SortOrderInput | SortOrder
+    interest?: SortOrder
     birthday?: SortOrderInput | SortOrder
     gender?: SortOrderInput | SortOrder
     horoscope?: SortOrderInput | SortOrder
-    mood?: SortOrderInput | SortOrder
     purpose?: SortOrderInput | SortOrder
     prefferGender?: SortOrderInput | SortOrder
     intentions?: SortOrderInput | SortOrder
@@ -15301,12 +17819,9 @@ export namespace Prisma {
     attachmentStyle?: SortOrderInput | SortOrder
     beliefSystem?: SortOrderInput | SortOrder
     mbtiType?: SortOrderInput | SortOrder
-    interest?: SortOrder
     topArtists?: SortOrder
     favoriteGenres?: SortOrder
     uiTheme?: SortOrderInput | SortOrder
-    instagram?: SortOrderInput | SortOrder
-    facebook?: SortOrderInput | SortOrder
     isOnline?: SortOrder
     lastSeen?: SortOrderInput | SortOrder
     profileCompleted?: SortOrder
@@ -15314,10 +17829,17 @@ export namespace Prisma {
     emailVerified?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    attachmentResults?: SortOrderInput | SortOrder
+    loveLanguages?: SortOrder
+    humanDesign?: SortOrderInput | SortOrder
+    testsCompleted?: SortOrder
     recvMessages?: MessageOrderByRelationAggregateInput
     sentMessages?: MessageOrderByRelationAggregateInput
+    sentRequests?: FriendRequestOrderByRelationAggregateInput
+    receivedRequests?: FriendRequestOrderByRelationAggregateInput
     globalMessages?: GlobalChatMessageOrderByRelationAggregateInput
     privateRoomMessages?: PrivateRoomMessageOrderByRelationAggregateInput
+    joinedRooms?: RoomMemberOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -15332,12 +17854,14 @@ export namespace Prisma {
     mobileNumber?: StringNullableFilter<"User"> | string | null
     bio?: StringNullableFilter<"User"> | string | null
     avatar?: StringNullableFilter<"User"> | string | null
-    avatar2?: StringNullableFilter<"User"> | string | null
     images?: StringNullableListFilter<"User">
+    mood?: StringNullableFilter<"User"> | string | null
+    instagram?: StringNullableFilter<"User"> | string | null
+    facebook?: StringNullableFilter<"User"> | string | null
+    interest?: StringNullableListFilter<"User">
     birthday?: DateTimeNullableFilter<"User"> | Date | string | null
     gender?: StringNullableFilter<"User"> | string | null
     horoscope?: StringNullableFilter<"User"> | string | null
-    mood?: StringNullableFilter<"User"> | string | null
     purpose?: StringNullableFilter<"User"> | string | null
     prefferGender?: StringNullableFilter<"User"> | string | null
     intentions?: StringNullableFilter<"User"> | string | null
@@ -15348,12 +17872,9 @@ export namespace Prisma {
     attachmentStyle?: StringNullableFilter<"User"> | string | null
     beliefSystem?: StringNullableFilter<"User"> | string | null
     mbtiType?: StringNullableFilter<"User"> | string | null
-    interest?: StringNullableListFilter<"User">
     topArtists?: StringNullableListFilter<"User">
     favoriteGenres?: StringNullableListFilter<"User">
     uiTheme?: StringNullableFilter<"User"> | string | null
-    instagram?: StringNullableFilter<"User"> | string | null
-    facebook?: StringNullableFilter<"User"> | string | null
     isOnline?: BoolFilter<"User"> | boolean
     lastSeen?: DateTimeNullableFilter<"User"> | Date | string | null
     profileCompleted?: BoolFilter<"User"> | boolean
@@ -15361,10 +17882,17 @@ export namespace Prisma {
     emailVerified?: BoolFilter<"User"> | boolean
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
+    attachmentResults?: JsonNullableFilter<"User">
+    loveLanguages?: StringNullableListFilter<"User">
+    humanDesign?: StringNullableFilter<"User"> | string | null
+    testsCompleted?: StringNullableListFilter<"User">
     recvMessages?: MessageListRelationFilter
     sentMessages?: MessageListRelationFilter
+    sentRequests?: FriendRequestListRelationFilter
+    receivedRequests?: FriendRequestListRelationFilter
     globalMessages?: GlobalChatMessageListRelationFilter
     privateRoomMessages?: PrivateRoomMessageListRelationFilter
+    joinedRooms?: RoomMemberListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -15376,12 +17904,14 @@ export namespace Prisma {
     mobileNumber?: SortOrderInput | SortOrder
     bio?: SortOrderInput | SortOrder
     avatar?: SortOrderInput | SortOrder
-    avatar2?: SortOrderInput | SortOrder
     images?: SortOrder
+    mood?: SortOrderInput | SortOrder
+    instagram?: SortOrderInput | SortOrder
+    facebook?: SortOrderInput | SortOrder
+    interest?: SortOrder
     birthday?: SortOrderInput | SortOrder
     gender?: SortOrderInput | SortOrder
     horoscope?: SortOrderInput | SortOrder
-    mood?: SortOrderInput | SortOrder
     purpose?: SortOrderInput | SortOrder
     prefferGender?: SortOrderInput | SortOrder
     intentions?: SortOrderInput | SortOrder
@@ -15392,12 +17922,9 @@ export namespace Prisma {
     attachmentStyle?: SortOrderInput | SortOrder
     beliefSystem?: SortOrderInput | SortOrder
     mbtiType?: SortOrderInput | SortOrder
-    interest?: SortOrder
     topArtists?: SortOrder
     favoriteGenres?: SortOrder
     uiTheme?: SortOrderInput | SortOrder
-    instagram?: SortOrderInput | SortOrder
-    facebook?: SortOrderInput | SortOrder
     isOnline?: SortOrder
     lastSeen?: SortOrderInput | SortOrder
     profileCompleted?: SortOrder
@@ -15405,6 +17932,10 @@ export namespace Prisma {
     emailVerified?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    attachmentResults?: SortOrderInput | SortOrder
+    loveLanguages?: SortOrder
+    humanDesign?: SortOrderInput | SortOrder
+    testsCompleted?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -15422,12 +17953,14 @@ export namespace Prisma {
     mobileNumber?: StringNullableWithAggregatesFilter<"User"> | string | null
     bio?: StringNullableWithAggregatesFilter<"User"> | string | null
     avatar?: StringNullableWithAggregatesFilter<"User"> | string | null
-    avatar2?: StringNullableWithAggregatesFilter<"User"> | string | null
     images?: StringNullableListFilter<"User">
+    mood?: StringNullableWithAggregatesFilter<"User"> | string | null
+    instagram?: StringNullableWithAggregatesFilter<"User"> | string | null
+    facebook?: StringNullableWithAggregatesFilter<"User"> | string | null
+    interest?: StringNullableListFilter<"User">
     birthday?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     gender?: StringNullableWithAggregatesFilter<"User"> | string | null
     horoscope?: StringNullableWithAggregatesFilter<"User"> | string | null
-    mood?: StringNullableWithAggregatesFilter<"User"> | string | null
     purpose?: StringNullableWithAggregatesFilter<"User"> | string | null
     prefferGender?: StringNullableWithAggregatesFilter<"User"> | string | null
     intentions?: StringNullableWithAggregatesFilter<"User"> | string | null
@@ -15438,12 +17971,9 @@ export namespace Prisma {
     attachmentStyle?: StringNullableWithAggregatesFilter<"User"> | string | null
     beliefSystem?: StringNullableWithAggregatesFilter<"User"> | string | null
     mbtiType?: StringNullableWithAggregatesFilter<"User"> | string | null
-    interest?: StringNullableListFilter<"User">
     topArtists?: StringNullableListFilter<"User">
     favoriteGenres?: StringNullableListFilter<"User">
     uiTheme?: StringNullableWithAggregatesFilter<"User"> | string | null
-    instagram?: StringNullableWithAggregatesFilter<"User"> | string | null
-    facebook?: StringNullableWithAggregatesFilter<"User"> | string | null
     isOnline?: BoolWithAggregatesFilter<"User"> | boolean
     lastSeen?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     profileCompleted?: BoolWithAggregatesFilter<"User"> | boolean
@@ -15451,6 +17981,124 @@ export namespace Prisma {
     emailVerified?: BoolWithAggregatesFilter<"User"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    attachmentResults?: JsonNullableWithAggregatesFilter<"User">
+    loveLanguages?: StringNullableListFilter<"User">
+    humanDesign?: StringNullableWithAggregatesFilter<"User"> | string | null
+    testsCompleted?: StringNullableListFilter<"User">
+  }
+
+  export type FriendRequestWhereInput = {
+    AND?: FriendRequestWhereInput | FriendRequestWhereInput[]
+    OR?: FriendRequestWhereInput[]
+    NOT?: FriendRequestWhereInput | FriendRequestWhereInput[]
+    id?: StringFilter<"FriendRequest"> | string
+    senderId?: StringFilter<"FriendRequest"> | string
+    receiverId?: StringFilter<"FriendRequest"> | string
+    status?: StringFilter<"FriendRequest"> | string
+    createdAt?: DateTimeFilter<"FriendRequest"> | Date | string
+    sender?: XOR<UserScalarRelationFilter, UserWhereInput>
+    receiver?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type FriendRequestOrderByWithRelationInput = {
+    id?: SortOrder
+    senderId?: SortOrder
+    receiverId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    sender?: UserOrderByWithRelationInput
+    receiver?: UserOrderByWithRelationInput
+  }
+
+  export type FriendRequestWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    senderId_receiverId?: FriendRequestSenderIdReceiverIdCompoundUniqueInput
+    AND?: FriendRequestWhereInput | FriendRequestWhereInput[]
+    OR?: FriendRequestWhereInput[]
+    NOT?: FriendRequestWhereInput | FriendRequestWhereInput[]
+    senderId?: StringFilter<"FriendRequest"> | string
+    receiverId?: StringFilter<"FriendRequest"> | string
+    status?: StringFilter<"FriendRequest"> | string
+    createdAt?: DateTimeFilter<"FriendRequest"> | Date | string
+    sender?: XOR<UserScalarRelationFilter, UserWhereInput>
+    receiver?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "senderId_receiverId">
+
+  export type FriendRequestOrderByWithAggregationInput = {
+    id?: SortOrder
+    senderId?: SortOrder
+    receiverId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    _count?: FriendRequestCountOrderByAggregateInput
+    _max?: FriendRequestMaxOrderByAggregateInput
+    _min?: FriendRequestMinOrderByAggregateInput
+  }
+
+  export type FriendRequestScalarWhereWithAggregatesInput = {
+    AND?: FriendRequestScalarWhereWithAggregatesInput | FriendRequestScalarWhereWithAggregatesInput[]
+    OR?: FriendRequestScalarWhereWithAggregatesInput[]
+    NOT?: FriendRequestScalarWhereWithAggregatesInput | FriendRequestScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"FriendRequest"> | string
+    senderId?: StringWithAggregatesFilter<"FriendRequest"> | string
+    receiverId?: StringWithAggregatesFilter<"FriendRequest"> | string
+    status?: StringWithAggregatesFilter<"FriendRequest"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"FriendRequest"> | Date | string
+  }
+
+  export type RoomMemberWhereInput = {
+    AND?: RoomMemberWhereInput | RoomMemberWhereInput[]
+    OR?: RoomMemberWhereInput[]
+    NOT?: RoomMemberWhereInput | RoomMemberWhereInput[]
+    id?: StringFilter<"RoomMember"> | string
+    userId?: StringFilter<"RoomMember"> | string
+    roomId?: StringFilter<"RoomMember"> | string
+    role?: StringFilter<"RoomMember"> | string
+    joinedAt?: DateTimeFilter<"RoomMember"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type RoomMemberOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    roomId?: SortOrder
+    role?: SortOrder
+    joinedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type RoomMemberWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: RoomMemberWhereInput | RoomMemberWhereInput[]
+    OR?: RoomMemberWhereInput[]
+    NOT?: RoomMemberWhereInput | RoomMemberWhereInput[]
+    userId?: StringFilter<"RoomMember"> | string
+    roomId?: StringFilter<"RoomMember"> | string
+    role?: StringFilter<"RoomMember"> | string
+    joinedAt?: DateTimeFilter<"RoomMember"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type RoomMemberOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    roomId?: SortOrder
+    role?: SortOrder
+    joinedAt?: SortOrder
+    _count?: RoomMemberCountOrderByAggregateInput
+    _max?: RoomMemberMaxOrderByAggregateInput
+    _min?: RoomMemberMinOrderByAggregateInput
+  }
+
+  export type RoomMemberScalarWhereWithAggregatesInput = {
+    AND?: RoomMemberScalarWhereWithAggregatesInput | RoomMemberScalarWhereWithAggregatesInput[]
+    OR?: RoomMemberScalarWhereWithAggregatesInput[]
+    NOT?: RoomMemberScalarWhereWithAggregatesInput | RoomMemberScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"RoomMember"> | string
+    userId?: StringWithAggregatesFilter<"RoomMember"> | string
+    roomId?: StringWithAggregatesFilter<"RoomMember"> | string
+    role?: StringWithAggregatesFilter<"RoomMember"> | string
+    joinedAt?: DateTimeWithAggregatesFilter<"RoomMember"> | Date | string
   }
 
   export type privacyWhereInput = {
@@ -16065,12 +18713,14 @@ export namespace Prisma {
     mobileNumber?: string | null
     bio?: string | null
     avatar?: string | null
-    avatar2?: string | null
     images?: UserCreateimagesInput | string[]
+    mood?: string | null
+    instagram?: string | null
+    facebook?: string | null
+    interest?: UserCreateinterestInput | string[]
     birthday?: Date | string | null
     gender?: string | null
     horoscope?: string | null
-    mood?: string | null
     purpose?: string | null
     prefferGender?: string | null
     intentions?: string | null
@@ -16081,12 +18731,9 @@ export namespace Prisma {
     attachmentStyle?: string | null
     beliefSystem?: string | null
     mbtiType?: string | null
-    interest?: UserCreateinterestInput | string[]
     topArtists?: UserCreatetopArtistsInput | string[]
     favoriteGenres?: UserCreatefavoriteGenresInput | string[]
     uiTheme?: string | null
-    instagram?: string | null
-    facebook?: string | null
     isOnline?: boolean
     lastSeen?: Date | string | null
     profileCompleted?: boolean
@@ -16094,10 +18741,17 @@ export namespace Prisma {
     emailVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserCreateloveLanguagesInput | string[]
+    humanDesign?: string | null
+    testsCompleted?: UserCreatetestsCompletedInput | string[]
     recvMessages?: MessageCreateNestedManyWithoutReceiverInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    sentRequests?: FriendRequestCreateNestedManyWithoutSenderInput
+    receivedRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     globalMessages?: GlobalChatMessageCreateNestedManyWithoutSenderInput
     privateRoomMessages?: PrivateRoomMessageCreateNestedManyWithoutSenderInput
+    joinedRooms?: RoomMemberCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -16109,12 +18763,14 @@ export namespace Prisma {
     mobileNumber?: string | null
     bio?: string | null
     avatar?: string | null
-    avatar2?: string | null
     images?: UserCreateimagesInput | string[]
+    mood?: string | null
+    instagram?: string | null
+    facebook?: string | null
+    interest?: UserCreateinterestInput | string[]
     birthday?: Date | string | null
     gender?: string | null
     horoscope?: string | null
-    mood?: string | null
     purpose?: string | null
     prefferGender?: string | null
     intentions?: string | null
@@ -16125,12 +18781,9 @@ export namespace Prisma {
     attachmentStyle?: string | null
     beliefSystem?: string | null
     mbtiType?: string | null
-    interest?: UserCreateinterestInput | string[]
     topArtists?: UserCreatetopArtistsInput | string[]
     favoriteGenres?: UserCreatefavoriteGenresInput | string[]
     uiTheme?: string | null
-    instagram?: string | null
-    facebook?: string | null
     isOnline?: boolean
     lastSeen?: Date | string | null
     profileCompleted?: boolean
@@ -16138,10 +18791,17 @@ export namespace Prisma {
     emailVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserCreateloveLanguagesInput | string[]
+    humanDesign?: string | null
+    testsCompleted?: UserCreatetestsCompletedInput | string[]
     recvMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    sentRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
+    receivedRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     globalMessages?: GlobalChatMessageUncheckedCreateNestedManyWithoutSenderInput
     privateRoomMessages?: PrivateRoomMessageUncheckedCreateNestedManyWithoutSenderInput
+    joinedRooms?: RoomMemberUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -16153,12 +18813,14 @@ export namespace Prisma {
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
+    mood?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: UserUpdateinterestInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
-    mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     prefferGender?: NullableStringFieldUpdateOperationsInput | string | null
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16169,12 +18831,9 @@ export namespace Prisma {
     attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
     beliefSystem?: NullableStringFieldUpdateOperationsInput | string | null
     mbtiType?: NullableStringFieldUpdateOperationsInput | string | null
-    interest?: UserUpdateinterestInput | string[]
     topArtists?: UserUpdatetopArtistsInput | string[]
     favoriteGenres?: UserUpdatefavoriteGenresInput | string[]
     uiTheme?: NullableStringFieldUpdateOperationsInput | string | null
-    instagram?: NullableStringFieldUpdateOperationsInput | string | null
-    facebook?: NullableStringFieldUpdateOperationsInput | string | null
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profileCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -16182,10 +18841,17 @@ export namespace Prisma {
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserUpdateloveLanguagesInput | string[]
+    humanDesign?: NullableStringFieldUpdateOperationsInput | string | null
+    testsCompleted?: UserUpdatetestsCompletedInput | string[]
     recvMessages?: MessageUpdateManyWithoutReceiverNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    sentRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
+    receivedRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     globalMessages?: GlobalChatMessageUpdateManyWithoutSenderNestedInput
     privateRoomMessages?: PrivateRoomMessageUpdateManyWithoutSenderNestedInput
+    joinedRooms?: RoomMemberUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -16197,12 +18863,14 @@ export namespace Prisma {
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
+    mood?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: UserUpdateinterestInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
-    mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     prefferGender?: NullableStringFieldUpdateOperationsInput | string | null
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16213,12 +18881,9 @@ export namespace Prisma {
     attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
     beliefSystem?: NullableStringFieldUpdateOperationsInput | string | null
     mbtiType?: NullableStringFieldUpdateOperationsInput | string | null
-    interest?: UserUpdateinterestInput | string[]
     topArtists?: UserUpdatetopArtistsInput | string[]
     favoriteGenres?: UserUpdatefavoriteGenresInput | string[]
     uiTheme?: NullableStringFieldUpdateOperationsInput | string | null
-    instagram?: NullableStringFieldUpdateOperationsInput | string | null
-    facebook?: NullableStringFieldUpdateOperationsInput | string | null
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profileCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -16226,10 +18891,17 @@ export namespace Prisma {
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserUpdateloveLanguagesInput | string[]
+    humanDesign?: NullableStringFieldUpdateOperationsInput | string | null
+    testsCompleted?: UserUpdatetestsCompletedInput | string[]
     recvMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    sentRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
+    receivedRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     globalMessages?: GlobalChatMessageUncheckedUpdateManyWithoutSenderNestedInput
     privateRoomMessages?: PrivateRoomMessageUncheckedUpdateManyWithoutSenderNestedInput
+    joinedRooms?: RoomMemberUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -16241,12 +18913,14 @@ export namespace Prisma {
     mobileNumber?: string | null
     bio?: string | null
     avatar?: string | null
-    avatar2?: string | null
     images?: UserCreateimagesInput | string[]
+    mood?: string | null
+    instagram?: string | null
+    facebook?: string | null
+    interest?: UserCreateinterestInput | string[]
     birthday?: Date | string | null
     gender?: string | null
     horoscope?: string | null
-    mood?: string | null
     purpose?: string | null
     prefferGender?: string | null
     intentions?: string | null
@@ -16257,12 +18931,9 @@ export namespace Prisma {
     attachmentStyle?: string | null
     beliefSystem?: string | null
     mbtiType?: string | null
-    interest?: UserCreateinterestInput | string[]
     topArtists?: UserCreatetopArtistsInput | string[]
     favoriteGenres?: UserCreatefavoriteGenresInput | string[]
     uiTheme?: string | null
-    instagram?: string | null
-    facebook?: string | null
     isOnline?: boolean
     lastSeen?: Date | string | null
     profileCompleted?: boolean
@@ -16270,6 +18941,10 @@ export namespace Prisma {
     emailVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserCreateloveLanguagesInput | string[]
+    humanDesign?: string | null
+    testsCompleted?: UserCreatetestsCompletedInput | string[]
   }
 
   export type UserUpdateManyMutationInput = {
@@ -16281,12 +18956,14 @@ export namespace Prisma {
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
+    mood?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: UserUpdateinterestInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
-    mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     prefferGender?: NullableStringFieldUpdateOperationsInput | string | null
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16297,12 +18974,9 @@ export namespace Prisma {
     attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
     beliefSystem?: NullableStringFieldUpdateOperationsInput | string | null
     mbtiType?: NullableStringFieldUpdateOperationsInput | string | null
-    interest?: UserUpdateinterestInput | string[]
     topArtists?: UserUpdatetopArtistsInput | string[]
     favoriteGenres?: UserUpdatefavoriteGenresInput | string[]
     uiTheme?: NullableStringFieldUpdateOperationsInput | string | null
-    instagram?: NullableStringFieldUpdateOperationsInput | string | null
-    facebook?: NullableStringFieldUpdateOperationsInput | string | null
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profileCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -16310,6 +18984,10 @@ export namespace Prisma {
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserUpdateloveLanguagesInput | string[]
+    humanDesign?: NullableStringFieldUpdateOperationsInput | string | null
+    testsCompleted?: UserUpdatetestsCompletedInput | string[]
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -16321,12 +18999,14 @@ export namespace Prisma {
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
+    mood?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: UserUpdateinterestInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
-    mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     prefferGender?: NullableStringFieldUpdateOperationsInput | string | null
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16337,12 +19017,9 @@ export namespace Prisma {
     attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
     beliefSystem?: NullableStringFieldUpdateOperationsInput | string | null
     mbtiType?: NullableStringFieldUpdateOperationsInput | string | null
-    interest?: UserUpdateinterestInput | string[]
     topArtists?: UserUpdatetopArtistsInput | string[]
     favoriteGenres?: UserUpdatefavoriteGenresInput | string[]
     uiTheme?: NullableStringFieldUpdateOperationsInput | string | null
-    instagram?: NullableStringFieldUpdateOperationsInput | string | null
-    facebook?: NullableStringFieldUpdateOperationsInput | string | null
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profileCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -16350,6 +19027,119 @@ export namespace Prisma {
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserUpdateloveLanguagesInput | string[]
+    humanDesign?: NullableStringFieldUpdateOperationsInput | string | null
+    testsCompleted?: UserUpdatetestsCompletedInput | string[]
+  }
+
+  export type FriendRequestCreateInput = {
+    id?: string
+    status?: string
+    createdAt?: Date | string
+    sender: UserCreateNestedOneWithoutSentRequestsInput
+    receiver: UserCreateNestedOneWithoutReceivedRequestsInput
+  }
+
+  export type FriendRequestUncheckedCreateInput = {
+    id?: string
+    senderId: string
+    receiverId: string
+    status?: string
+    createdAt?: Date | string
+  }
+
+  export type FriendRequestUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sender?: UserUpdateOneRequiredWithoutSentRequestsNestedInput
+    receiver?: UserUpdateOneRequiredWithoutReceivedRequestsNestedInput
+  }
+
+  export type FriendRequestUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
+    receiverId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FriendRequestCreateManyInput = {
+    id?: string
+    senderId: string
+    receiverId: string
+    status?: string
+    createdAt?: Date | string
+  }
+
+  export type FriendRequestUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FriendRequestUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
+    receiverId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RoomMemberCreateInput = {
+    id?: string
+    roomId: string
+    role?: string
+    joinedAt?: Date | string
+    user: UserCreateNestedOneWithoutJoinedRoomsInput
+  }
+
+  export type RoomMemberUncheckedCreateInput = {
+    id?: string
+    userId: string
+    roomId: string
+    role?: string
+    joinedAt?: Date | string
+  }
+
+  export type RoomMemberUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roomId?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutJoinedRoomsNestedInput
+  }
+
+  export type RoomMemberUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    roomId?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RoomMemberCreateManyInput = {
+    id?: string
+    userId: string
+    roomId: string
+    role?: string
+    joinedAt?: Date | string
+  }
+
+  export type RoomMemberUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roomId?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RoomMemberUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    roomId?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type privacyCreateInput = {
@@ -17034,11 +19824,40 @@ export namespace Prisma {
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
+  export type JsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type MessageListRelationFilter = {
     every?: MessageWhereInput
     some?: MessageWhereInput
     none?: MessageWhereInput
+  }
+
+  export type FriendRequestListRelationFilter = {
+    every?: FriendRequestWhereInput
+    some?: FriendRequestWhereInput
+    none?: FriendRequestWhereInput
   }
 
   export type GlobalChatMessageListRelationFilter = {
@@ -17053,6 +19872,12 @@ export namespace Prisma {
     none?: PrivateRoomMessageWhereInput
   }
 
+  export type RoomMemberListRelationFilter = {
+    every?: RoomMemberWhereInput
+    some?: RoomMemberWhereInput
+    none?: RoomMemberWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -17062,11 +19887,19 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type FriendRequestOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type GlobalChatMessageOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type PrivateRoomMessageOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type RoomMemberOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -17079,12 +19912,14 @@ export namespace Prisma {
     mobileNumber?: SortOrder
     bio?: SortOrder
     avatar?: SortOrder
-    avatar2?: SortOrder
     images?: SortOrder
+    mood?: SortOrder
+    instagram?: SortOrder
+    facebook?: SortOrder
+    interest?: SortOrder
     birthday?: SortOrder
     gender?: SortOrder
     horoscope?: SortOrder
-    mood?: SortOrder
     purpose?: SortOrder
     prefferGender?: SortOrder
     intentions?: SortOrder
@@ -17095,12 +19930,9 @@ export namespace Prisma {
     attachmentStyle?: SortOrder
     beliefSystem?: SortOrder
     mbtiType?: SortOrder
-    interest?: SortOrder
     topArtists?: SortOrder
     favoriteGenres?: SortOrder
     uiTheme?: SortOrder
-    instagram?: SortOrder
-    facebook?: SortOrder
     isOnline?: SortOrder
     lastSeen?: SortOrder
     profileCompleted?: SortOrder
@@ -17108,6 +19940,10 @@ export namespace Prisma {
     emailVerified?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    attachmentResults?: SortOrder
+    loveLanguages?: SortOrder
+    humanDesign?: SortOrder
+    testsCompleted?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -17119,11 +19955,12 @@ export namespace Prisma {
     mobileNumber?: SortOrder
     bio?: SortOrder
     avatar?: SortOrder
-    avatar2?: SortOrder
+    mood?: SortOrder
+    instagram?: SortOrder
+    facebook?: SortOrder
     birthday?: SortOrder
     gender?: SortOrder
     horoscope?: SortOrder
-    mood?: SortOrder
     purpose?: SortOrder
     prefferGender?: SortOrder
     intentions?: SortOrder
@@ -17133,8 +19970,6 @@ export namespace Prisma {
     beliefSystem?: SortOrder
     mbtiType?: SortOrder
     uiTheme?: SortOrder
-    instagram?: SortOrder
-    facebook?: SortOrder
     isOnline?: SortOrder
     lastSeen?: SortOrder
     profileCompleted?: SortOrder
@@ -17142,6 +19977,7 @@ export namespace Prisma {
     emailVerified?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    humanDesign?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -17153,11 +19989,12 @@ export namespace Prisma {
     mobileNumber?: SortOrder
     bio?: SortOrder
     avatar?: SortOrder
-    avatar2?: SortOrder
+    mood?: SortOrder
+    instagram?: SortOrder
+    facebook?: SortOrder
     birthday?: SortOrder
     gender?: SortOrder
     horoscope?: SortOrder
-    mood?: SortOrder
     purpose?: SortOrder
     prefferGender?: SortOrder
     intentions?: SortOrder
@@ -17167,8 +20004,6 @@ export namespace Prisma {
     beliefSystem?: SortOrder
     mbtiType?: SortOrder
     uiTheme?: SortOrder
-    instagram?: SortOrder
-    facebook?: SortOrder
     isOnline?: SortOrder
     lastSeen?: SortOrder
     profileCompleted?: SortOrder
@@ -17176,6 +20011,7 @@ export namespace Prisma {
     emailVerified?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    humanDesign?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -17248,6 +20084,90 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
+  }
+
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
+  export type FriendRequestSenderIdReceiverIdCompoundUniqueInput = {
+    senderId: string
+    receiverId: string
+  }
+
+  export type FriendRequestCountOrderByAggregateInput = {
+    id?: SortOrder
+    senderId?: SortOrder
+    receiverId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type FriendRequestMaxOrderByAggregateInput = {
+    id?: SortOrder
+    senderId?: SortOrder
+    receiverId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type FriendRequestMinOrderByAggregateInput = {
+    id?: SortOrder
+    senderId?: SortOrder
+    receiverId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type RoomMemberCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    roomId?: SortOrder
+    role?: SortOrder
+    joinedAt?: SortOrder
+  }
+
+  export type RoomMemberMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    roomId?: SortOrder
+    role?: SortOrder
+    joinedAt?: SortOrder
+  }
+
+  export type RoomMemberMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    roomId?: SortOrder
+    role?: SortOrder
+    joinedAt?: SortOrder
   }
 
   export type BoolNullableFilter<$PrismaModel = never> = {
@@ -17346,11 +20266,6 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
   }
 
   export type MessageCountOrderByAggregateInput = {
@@ -17598,6 +20513,10 @@ export namespace Prisma {
     set: string[]
   }
 
+  export type UserCreateinterestInput = {
+    set: string[]
+  }
+
   export type UserCreatepreferredMatchInput = {
     set: string[]
   }
@@ -17606,15 +20525,19 @@ export namespace Prisma {
     set: string[]
   }
 
-  export type UserCreateinterestInput = {
-    set: string[]
-  }
-
   export type UserCreatetopArtistsInput = {
     set: string[]
   }
 
   export type UserCreatefavoriteGenresInput = {
+    set: string[]
+  }
+
+  export type UserCreateloveLanguagesInput = {
+    set: string[]
+  }
+
+  export type UserCreatetestsCompletedInput = {
     set: string[]
   }
 
@@ -17632,6 +20555,20 @@ export namespace Prisma {
     connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
   }
 
+  export type FriendRequestCreateNestedManyWithoutSenderInput = {
+    create?: XOR<FriendRequestCreateWithoutSenderInput, FriendRequestUncheckedCreateWithoutSenderInput> | FriendRequestCreateWithoutSenderInput[] | FriendRequestUncheckedCreateWithoutSenderInput[]
+    connectOrCreate?: FriendRequestCreateOrConnectWithoutSenderInput | FriendRequestCreateOrConnectWithoutSenderInput[]
+    createMany?: FriendRequestCreateManySenderInputEnvelope
+    connect?: FriendRequestWhereUniqueInput | FriendRequestWhereUniqueInput[]
+  }
+
+  export type FriendRequestCreateNestedManyWithoutReceiverInput = {
+    create?: XOR<FriendRequestCreateWithoutReceiverInput, FriendRequestUncheckedCreateWithoutReceiverInput> | FriendRequestCreateWithoutReceiverInput[] | FriendRequestUncheckedCreateWithoutReceiverInput[]
+    connectOrCreate?: FriendRequestCreateOrConnectWithoutReceiverInput | FriendRequestCreateOrConnectWithoutReceiverInput[]
+    createMany?: FriendRequestCreateManyReceiverInputEnvelope
+    connect?: FriendRequestWhereUniqueInput | FriendRequestWhereUniqueInput[]
+  }
+
   export type GlobalChatMessageCreateNestedManyWithoutSenderInput = {
     create?: XOR<GlobalChatMessageCreateWithoutSenderInput, GlobalChatMessageUncheckedCreateWithoutSenderInput> | GlobalChatMessageCreateWithoutSenderInput[] | GlobalChatMessageUncheckedCreateWithoutSenderInput[]
     connectOrCreate?: GlobalChatMessageCreateOrConnectWithoutSenderInput | GlobalChatMessageCreateOrConnectWithoutSenderInput[]
@@ -17644,6 +20581,13 @@ export namespace Prisma {
     connectOrCreate?: PrivateRoomMessageCreateOrConnectWithoutSenderInput | PrivateRoomMessageCreateOrConnectWithoutSenderInput[]
     createMany?: PrivateRoomMessageCreateManySenderInputEnvelope
     connect?: PrivateRoomMessageWhereUniqueInput | PrivateRoomMessageWhereUniqueInput[]
+  }
+
+  export type RoomMemberCreateNestedManyWithoutUserInput = {
+    create?: XOR<RoomMemberCreateWithoutUserInput, RoomMemberUncheckedCreateWithoutUserInput> | RoomMemberCreateWithoutUserInput[] | RoomMemberUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RoomMemberCreateOrConnectWithoutUserInput | RoomMemberCreateOrConnectWithoutUserInput[]
+    createMany?: RoomMemberCreateManyUserInputEnvelope
+    connect?: RoomMemberWhereUniqueInput | RoomMemberWhereUniqueInput[]
   }
 
   export type MessageUncheckedCreateNestedManyWithoutReceiverInput = {
@@ -17660,6 +20604,20 @@ export namespace Prisma {
     connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
   }
 
+  export type FriendRequestUncheckedCreateNestedManyWithoutSenderInput = {
+    create?: XOR<FriendRequestCreateWithoutSenderInput, FriendRequestUncheckedCreateWithoutSenderInput> | FriendRequestCreateWithoutSenderInput[] | FriendRequestUncheckedCreateWithoutSenderInput[]
+    connectOrCreate?: FriendRequestCreateOrConnectWithoutSenderInput | FriendRequestCreateOrConnectWithoutSenderInput[]
+    createMany?: FriendRequestCreateManySenderInputEnvelope
+    connect?: FriendRequestWhereUniqueInput | FriendRequestWhereUniqueInput[]
+  }
+
+  export type FriendRequestUncheckedCreateNestedManyWithoutReceiverInput = {
+    create?: XOR<FriendRequestCreateWithoutReceiverInput, FriendRequestUncheckedCreateWithoutReceiverInput> | FriendRequestCreateWithoutReceiverInput[] | FriendRequestUncheckedCreateWithoutReceiverInput[]
+    connectOrCreate?: FriendRequestCreateOrConnectWithoutReceiverInput | FriendRequestCreateOrConnectWithoutReceiverInput[]
+    createMany?: FriendRequestCreateManyReceiverInputEnvelope
+    connect?: FriendRequestWhereUniqueInput | FriendRequestWhereUniqueInput[]
+  }
+
   export type GlobalChatMessageUncheckedCreateNestedManyWithoutSenderInput = {
     create?: XOR<GlobalChatMessageCreateWithoutSenderInput, GlobalChatMessageUncheckedCreateWithoutSenderInput> | GlobalChatMessageCreateWithoutSenderInput[] | GlobalChatMessageUncheckedCreateWithoutSenderInput[]
     connectOrCreate?: GlobalChatMessageCreateOrConnectWithoutSenderInput | GlobalChatMessageCreateOrConnectWithoutSenderInput[]
@@ -17672,6 +20630,13 @@ export namespace Prisma {
     connectOrCreate?: PrivateRoomMessageCreateOrConnectWithoutSenderInput | PrivateRoomMessageCreateOrConnectWithoutSenderInput[]
     createMany?: PrivateRoomMessageCreateManySenderInputEnvelope
     connect?: PrivateRoomMessageWhereUniqueInput | PrivateRoomMessageWhereUniqueInput[]
+  }
+
+  export type RoomMemberUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<RoomMemberCreateWithoutUserInput, RoomMemberUncheckedCreateWithoutUserInput> | RoomMemberCreateWithoutUserInput[] | RoomMemberUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RoomMemberCreateOrConnectWithoutUserInput | RoomMemberCreateOrConnectWithoutUserInput[]
+    createMany?: RoomMemberCreateManyUserInputEnvelope
+    connect?: RoomMemberWhereUniqueInput | RoomMemberWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -17687,6 +20652,11 @@ export namespace Prisma {
     push?: string | string[]
   }
 
+  export type UserUpdateinterestInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
   }
@@ -17697,11 +20667,6 @@ export namespace Prisma {
   }
 
   export type UserUpdateprimaryNeurotypeInput = {
-    set?: string[]
-    push?: string | string[]
-  }
-
-  export type UserUpdateinterestInput = {
     set?: string[]
     push?: string | string[]
   }
@@ -17722,6 +20687,16 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type UserUpdateloveLanguagesInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type UserUpdatetestsCompletedInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type MessageUpdateManyWithoutReceiverNestedInput = {
@@ -17752,6 +20727,34 @@ export namespace Prisma {
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
   }
 
+  export type FriendRequestUpdateManyWithoutSenderNestedInput = {
+    create?: XOR<FriendRequestCreateWithoutSenderInput, FriendRequestUncheckedCreateWithoutSenderInput> | FriendRequestCreateWithoutSenderInput[] | FriendRequestUncheckedCreateWithoutSenderInput[]
+    connectOrCreate?: FriendRequestCreateOrConnectWithoutSenderInput | FriendRequestCreateOrConnectWithoutSenderInput[]
+    upsert?: FriendRequestUpsertWithWhereUniqueWithoutSenderInput | FriendRequestUpsertWithWhereUniqueWithoutSenderInput[]
+    createMany?: FriendRequestCreateManySenderInputEnvelope
+    set?: FriendRequestWhereUniqueInput | FriendRequestWhereUniqueInput[]
+    disconnect?: FriendRequestWhereUniqueInput | FriendRequestWhereUniqueInput[]
+    delete?: FriendRequestWhereUniqueInput | FriendRequestWhereUniqueInput[]
+    connect?: FriendRequestWhereUniqueInput | FriendRequestWhereUniqueInput[]
+    update?: FriendRequestUpdateWithWhereUniqueWithoutSenderInput | FriendRequestUpdateWithWhereUniqueWithoutSenderInput[]
+    updateMany?: FriendRequestUpdateManyWithWhereWithoutSenderInput | FriendRequestUpdateManyWithWhereWithoutSenderInput[]
+    deleteMany?: FriendRequestScalarWhereInput | FriendRequestScalarWhereInput[]
+  }
+
+  export type FriendRequestUpdateManyWithoutReceiverNestedInput = {
+    create?: XOR<FriendRequestCreateWithoutReceiverInput, FriendRequestUncheckedCreateWithoutReceiverInput> | FriendRequestCreateWithoutReceiverInput[] | FriendRequestUncheckedCreateWithoutReceiverInput[]
+    connectOrCreate?: FriendRequestCreateOrConnectWithoutReceiverInput | FriendRequestCreateOrConnectWithoutReceiverInput[]
+    upsert?: FriendRequestUpsertWithWhereUniqueWithoutReceiverInput | FriendRequestUpsertWithWhereUniqueWithoutReceiverInput[]
+    createMany?: FriendRequestCreateManyReceiverInputEnvelope
+    set?: FriendRequestWhereUniqueInput | FriendRequestWhereUniqueInput[]
+    disconnect?: FriendRequestWhereUniqueInput | FriendRequestWhereUniqueInput[]
+    delete?: FriendRequestWhereUniqueInput | FriendRequestWhereUniqueInput[]
+    connect?: FriendRequestWhereUniqueInput | FriendRequestWhereUniqueInput[]
+    update?: FriendRequestUpdateWithWhereUniqueWithoutReceiverInput | FriendRequestUpdateWithWhereUniqueWithoutReceiverInput[]
+    updateMany?: FriendRequestUpdateManyWithWhereWithoutReceiverInput | FriendRequestUpdateManyWithWhereWithoutReceiverInput[]
+    deleteMany?: FriendRequestScalarWhereInput | FriendRequestScalarWhereInput[]
+  }
+
   export type GlobalChatMessageUpdateManyWithoutSenderNestedInput = {
     create?: XOR<GlobalChatMessageCreateWithoutSenderInput, GlobalChatMessageUncheckedCreateWithoutSenderInput> | GlobalChatMessageCreateWithoutSenderInput[] | GlobalChatMessageUncheckedCreateWithoutSenderInput[]
     connectOrCreate?: GlobalChatMessageCreateOrConnectWithoutSenderInput | GlobalChatMessageCreateOrConnectWithoutSenderInput[]
@@ -17778,6 +20781,20 @@ export namespace Prisma {
     update?: PrivateRoomMessageUpdateWithWhereUniqueWithoutSenderInput | PrivateRoomMessageUpdateWithWhereUniqueWithoutSenderInput[]
     updateMany?: PrivateRoomMessageUpdateManyWithWhereWithoutSenderInput | PrivateRoomMessageUpdateManyWithWhereWithoutSenderInput[]
     deleteMany?: PrivateRoomMessageScalarWhereInput | PrivateRoomMessageScalarWhereInput[]
+  }
+
+  export type RoomMemberUpdateManyWithoutUserNestedInput = {
+    create?: XOR<RoomMemberCreateWithoutUserInput, RoomMemberUncheckedCreateWithoutUserInput> | RoomMemberCreateWithoutUserInput[] | RoomMemberUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RoomMemberCreateOrConnectWithoutUserInput | RoomMemberCreateOrConnectWithoutUserInput[]
+    upsert?: RoomMemberUpsertWithWhereUniqueWithoutUserInput | RoomMemberUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: RoomMemberCreateManyUserInputEnvelope
+    set?: RoomMemberWhereUniqueInput | RoomMemberWhereUniqueInput[]
+    disconnect?: RoomMemberWhereUniqueInput | RoomMemberWhereUniqueInput[]
+    delete?: RoomMemberWhereUniqueInput | RoomMemberWhereUniqueInput[]
+    connect?: RoomMemberWhereUniqueInput | RoomMemberWhereUniqueInput[]
+    update?: RoomMemberUpdateWithWhereUniqueWithoutUserInput | RoomMemberUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: RoomMemberUpdateManyWithWhereWithoutUserInput | RoomMemberUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: RoomMemberScalarWhereInput | RoomMemberScalarWhereInput[]
   }
 
   export type MessageUncheckedUpdateManyWithoutReceiverNestedInput = {
@@ -17808,6 +20825,34 @@ export namespace Prisma {
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
   }
 
+  export type FriendRequestUncheckedUpdateManyWithoutSenderNestedInput = {
+    create?: XOR<FriendRequestCreateWithoutSenderInput, FriendRequestUncheckedCreateWithoutSenderInput> | FriendRequestCreateWithoutSenderInput[] | FriendRequestUncheckedCreateWithoutSenderInput[]
+    connectOrCreate?: FriendRequestCreateOrConnectWithoutSenderInput | FriendRequestCreateOrConnectWithoutSenderInput[]
+    upsert?: FriendRequestUpsertWithWhereUniqueWithoutSenderInput | FriendRequestUpsertWithWhereUniqueWithoutSenderInput[]
+    createMany?: FriendRequestCreateManySenderInputEnvelope
+    set?: FriendRequestWhereUniqueInput | FriendRequestWhereUniqueInput[]
+    disconnect?: FriendRequestWhereUniqueInput | FriendRequestWhereUniqueInput[]
+    delete?: FriendRequestWhereUniqueInput | FriendRequestWhereUniqueInput[]
+    connect?: FriendRequestWhereUniqueInput | FriendRequestWhereUniqueInput[]
+    update?: FriendRequestUpdateWithWhereUniqueWithoutSenderInput | FriendRequestUpdateWithWhereUniqueWithoutSenderInput[]
+    updateMany?: FriendRequestUpdateManyWithWhereWithoutSenderInput | FriendRequestUpdateManyWithWhereWithoutSenderInput[]
+    deleteMany?: FriendRequestScalarWhereInput | FriendRequestScalarWhereInput[]
+  }
+
+  export type FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput = {
+    create?: XOR<FriendRequestCreateWithoutReceiverInput, FriendRequestUncheckedCreateWithoutReceiverInput> | FriendRequestCreateWithoutReceiverInput[] | FriendRequestUncheckedCreateWithoutReceiverInput[]
+    connectOrCreate?: FriendRequestCreateOrConnectWithoutReceiverInput | FriendRequestCreateOrConnectWithoutReceiverInput[]
+    upsert?: FriendRequestUpsertWithWhereUniqueWithoutReceiverInput | FriendRequestUpsertWithWhereUniqueWithoutReceiverInput[]
+    createMany?: FriendRequestCreateManyReceiverInputEnvelope
+    set?: FriendRequestWhereUniqueInput | FriendRequestWhereUniqueInput[]
+    disconnect?: FriendRequestWhereUniqueInput | FriendRequestWhereUniqueInput[]
+    delete?: FriendRequestWhereUniqueInput | FriendRequestWhereUniqueInput[]
+    connect?: FriendRequestWhereUniqueInput | FriendRequestWhereUniqueInput[]
+    update?: FriendRequestUpdateWithWhereUniqueWithoutReceiverInput | FriendRequestUpdateWithWhereUniqueWithoutReceiverInput[]
+    updateMany?: FriendRequestUpdateManyWithWhereWithoutReceiverInput | FriendRequestUpdateManyWithWhereWithoutReceiverInput[]
+    deleteMany?: FriendRequestScalarWhereInput | FriendRequestScalarWhereInput[]
+  }
+
   export type GlobalChatMessageUncheckedUpdateManyWithoutSenderNestedInput = {
     create?: XOR<GlobalChatMessageCreateWithoutSenderInput, GlobalChatMessageUncheckedCreateWithoutSenderInput> | GlobalChatMessageCreateWithoutSenderInput[] | GlobalChatMessageUncheckedCreateWithoutSenderInput[]
     connectOrCreate?: GlobalChatMessageCreateOrConnectWithoutSenderInput | GlobalChatMessageCreateOrConnectWithoutSenderInput[]
@@ -17834,6 +20879,62 @@ export namespace Prisma {
     update?: PrivateRoomMessageUpdateWithWhereUniqueWithoutSenderInput | PrivateRoomMessageUpdateWithWhereUniqueWithoutSenderInput[]
     updateMany?: PrivateRoomMessageUpdateManyWithWhereWithoutSenderInput | PrivateRoomMessageUpdateManyWithWhereWithoutSenderInput[]
     deleteMany?: PrivateRoomMessageScalarWhereInput | PrivateRoomMessageScalarWhereInput[]
+  }
+
+  export type RoomMemberUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<RoomMemberCreateWithoutUserInput, RoomMemberUncheckedCreateWithoutUserInput> | RoomMemberCreateWithoutUserInput[] | RoomMemberUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RoomMemberCreateOrConnectWithoutUserInput | RoomMemberCreateOrConnectWithoutUserInput[]
+    upsert?: RoomMemberUpsertWithWhereUniqueWithoutUserInput | RoomMemberUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: RoomMemberCreateManyUserInputEnvelope
+    set?: RoomMemberWhereUniqueInput | RoomMemberWhereUniqueInput[]
+    disconnect?: RoomMemberWhereUniqueInput | RoomMemberWhereUniqueInput[]
+    delete?: RoomMemberWhereUniqueInput | RoomMemberWhereUniqueInput[]
+    connect?: RoomMemberWhereUniqueInput | RoomMemberWhereUniqueInput[]
+    update?: RoomMemberUpdateWithWhereUniqueWithoutUserInput | RoomMemberUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: RoomMemberUpdateManyWithWhereWithoutUserInput | RoomMemberUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: RoomMemberScalarWhereInput | RoomMemberScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutSentRequestsInput = {
+    create?: XOR<UserCreateWithoutSentRequestsInput, UserUncheckedCreateWithoutSentRequestsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSentRequestsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutReceivedRequestsInput = {
+    create?: XOR<UserCreateWithoutReceivedRequestsInput, UserUncheckedCreateWithoutReceivedRequestsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReceivedRequestsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutSentRequestsNestedInput = {
+    create?: XOR<UserCreateWithoutSentRequestsInput, UserUncheckedCreateWithoutSentRequestsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSentRequestsInput
+    upsert?: UserUpsertWithoutSentRequestsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSentRequestsInput, UserUpdateWithoutSentRequestsInput>, UserUncheckedUpdateWithoutSentRequestsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutReceivedRequestsNestedInput = {
+    create?: XOR<UserCreateWithoutReceivedRequestsInput, UserUncheckedCreateWithoutReceivedRequestsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReceivedRequestsInput
+    upsert?: UserUpsertWithoutReceivedRequestsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReceivedRequestsInput, UserUpdateWithoutReceivedRequestsInput>, UserUncheckedUpdateWithoutReceivedRequestsInput>
+  }
+
+  export type UserCreateNestedOneWithoutJoinedRoomsInput = {
+    create?: XOR<UserCreateWithoutJoinedRoomsInput, UserUncheckedCreateWithoutJoinedRoomsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutJoinedRoomsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutJoinedRoomsNestedInput = {
+    create?: XOR<UserCreateWithoutJoinedRoomsInput, UserUncheckedCreateWithoutJoinedRoomsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutJoinedRoomsInput
+    upsert?: UserUpsertWithoutJoinedRoomsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutJoinedRoomsInput, UserUpdateWithoutJoinedRoomsInput>, UserUncheckedUpdateWithoutJoinedRoomsInput>
   }
 
   export type NullableBoolFieldUpdateOperationsInput = {
@@ -18198,6 +21299,29 @@ export namespace Prisma {
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
+  export type NestedJsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type NestedBoolNullableFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
@@ -18291,6 +21415,54 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type FriendRequestCreateWithoutSenderInput = {
+    id?: string
+    status?: string
+    createdAt?: Date | string
+    receiver: UserCreateNestedOneWithoutReceivedRequestsInput
+  }
+
+  export type FriendRequestUncheckedCreateWithoutSenderInput = {
+    id?: string
+    receiverId: string
+    status?: string
+    createdAt?: Date | string
+  }
+
+  export type FriendRequestCreateOrConnectWithoutSenderInput = {
+    where: FriendRequestWhereUniqueInput
+    create: XOR<FriendRequestCreateWithoutSenderInput, FriendRequestUncheckedCreateWithoutSenderInput>
+  }
+
+  export type FriendRequestCreateManySenderInputEnvelope = {
+    data: FriendRequestCreateManySenderInput | FriendRequestCreateManySenderInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type FriendRequestCreateWithoutReceiverInput = {
+    id?: string
+    status?: string
+    createdAt?: Date | string
+    sender: UserCreateNestedOneWithoutSentRequestsInput
+  }
+
+  export type FriendRequestUncheckedCreateWithoutReceiverInput = {
+    id?: string
+    senderId: string
+    status?: string
+    createdAt?: Date | string
+  }
+
+  export type FriendRequestCreateOrConnectWithoutReceiverInput = {
+    where: FriendRequestWhereUniqueInput
+    create: XOR<FriendRequestCreateWithoutReceiverInput, FriendRequestUncheckedCreateWithoutReceiverInput>
+  }
+
+  export type FriendRequestCreateManyReceiverInputEnvelope = {
+    data: FriendRequestCreateManyReceiverInput | FriendRequestCreateManyReceiverInput[]
+    skipDuplicates?: boolean
+  }
+
   export type GlobalChatMessageCreateWithoutSenderInput = {
     id?: string
     text: string
@@ -18339,6 +21511,30 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type RoomMemberCreateWithoutUserInput = {
+    id?: string
+    roomId: string
+    role?: string
+    joinedAt?: Date | string
+  }
+
+  export type RoomMemberUncheckedCreateWithoutUserInput = {
+    id?: string
+    roomId: string
+    role?: string
+    joinedAt?: Date | string
+  }
+
+  export type RoomMemberCreateOrConnectWithoutUserInput = {
+    where: RoomMemberWhereUniqueInput
+    create: XOR<RoomMemberCreateWithoutUserInput, RoomMemberUncheckedCreateWithoutUserInput>
+  }
+
+  export type RoomMemberCreateManyUserInputEnvelope = {
+    data: RoomMemberCreateManyUserInput | RoomMemberCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type MessageUpsertWithWhereUniqueWithoutReceiverInput = {
     where: MessageWhereUniqueInput
     update: XOR<MessageUpdateWithoutReceiverInput, MessageUncheckedUpdateWithoutReceiverInput>
@@ -18381,6 +21577,49 @@ export namespace Prisma {
   export type MessageUpdateManyWithWhereWithoutSenderInput = {
     where: MessageScalarWhereInput
     data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyWithoutSenderInput>
+  }
+
+  export type FriendRequestUpsertWithWhereUniqueWithoutSenderInput = {
+    where: FriendRequestWhereUniqueInput
+    update: XOR<FriendRequestUpdateWithoutSenderInput, FriendRequestUncheckedUpdateWithoutSenderInput>
+    create: XOR<FriendRequestCreateWithoutSenderInput, FriendRequestUncheckedCreateWithoutSenderInput>
+  }
+
+  export type FriendRequestUpdateWithWhereUniqueWithoutSenderInput = {
+    where: FriendRequestWhereUniqueInput
+    data: XOR<FriendRequestUpdateWithoutSenderInput, FriendRequestUncheckedUpdateWithoutSenderInput>
+  }
+
+  export type FriendRequestUpdateManyWithWhereWithoutSenderInput = {
+    where: FriendRequestScalarWhereInput
+    data: XOR<FriendRequestUpdateManyMutationInput, FriendRequestUncheckedUpdateManyWithoutSenderInput>
+  }
+
+  export type FriendRequestScalarWhereInput = {
+    AND?: FriendRequestScalarWhereInput | FriendRequestScalarWhereInput[]
+    OR?: FriendRequestScalarWhereInput[]
+    NOT?: FriendRequestScalarWhereInput | FriendRequestScalarWhereInput[]
+    id?: StringFilter<"FriendRequest"> | string
+    senderId?: StringFilter<"FriendRequest"> | string
+    receiverId?: StringFilter<"FriendRequest"> | string
+    status?: StringFilter<"FriendRequest"> | string
+    createdAt?: DateTimeFilter<"FriendRequest"> | Date | string
+  }
+
+  export type FriendRequestUpsertWithWhereUniqueWithoutReceiverInput = {
+    where: FriendRequestWhereUniqueInput
+    update: XOR<FriendRequestUpdateWithoutReceiverInput, FriendRequestUncheckedUpdateWithoutReceiverInput>
+    create: XOR<FriendRequestCreateWithoutReceiverInput, FriendRequestUncheckedCreateWithoutReceiverInput>
+  }
+
+  export type FriendRequestUpdateWithWhereUniqueWithoutReceiverInput = {
+    where: FriendRequestWhereUniqueInput
+    data: XOR<FriendRequestUpdateWithoutReceiverInput, FriendRequestUncheckedUpdateWithoutReceiverInput>
+  }
+
+  export type FriendRequestUpdateManyWithWhereWithoutReceiverInput = {
+    where: FriendRequestScalarWhereInput
+    data: XOR<FriendRequestUpdateManyMutationInput, FriendRequestUncheckedUpdateManyWithoutReceiverInput>
   }
 
   export type GlobalChatMessageUpsertWithWhereUniqueWithoutSenderInput = {
@@ -18437,7 +21676,34 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"PrivateRoomMessage"> | Date | string
   }
 
-  export type UserCreateWithoutRecvMessagesInput = {
+  export type RoomMemberUpsertWithWhereUniqueWithoutUserInput = {
+    where: RoomMemberWhereUniqueInput
+    update: XOR<RoomMemberUpdateWithoutUserInput, RoomMemberUncheckedUpdateWithoutUserInput>
+    create: XOR<RoomMemberCreateWithoutUserInput, RoomMemberUncheckedCreateWithoutUserInput>
+  }
+
+  export type RoomMemberUpdateWithWhereUniqueWithoutUserInput = {
+    where: RoomMemberWhereUniqueInput
+    data: XOR<RoomMemberUpdateWithoutUserInput, RoomMemberUncheckedUpdateWithoutUserInput>
+  }
+
+  export type RoomMemberUpdateManyWithWhereWithoutUserInput = {
+    where: RoomMemberScalarWhereInput
+    data: XOR<RoomMemberUpdateManyMutationInput, RoomMemberUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type RoomMemberScalarWhereInput = {
+    AND?: RoomMemberScalarWhereInput | RoomMemberScalarWhereInput[]
+    OR?: RoomMemberScalarWhereInput[]
+    NOT?: RoomMemberScalarWhereInput | RoomMemberScalarWhereInput[]
+    id?: StringFilter<"RoomMember"> | string
+    userId?: StringFilter<"RoomMember"> | string
+    roomId?: StringFilter<"RoomMember"> | string
+    role?: StringFilter<"RoomMember"> | string
+    joinedAt?: DateTimeFilter<"RoomMember"> | Date | string
+  }
+
+  export type UserCreateWithoutSentRequestsInput = {
     id?: string
     fullName: string
     email: string
@@ -18446,12 +21712,14 @@ export namespace Prisma {
     mobileNumber?: string | null
     bio?: string | null
     avatar?: string | null
-    avatar2?: string | null
     images?: UserCreateimagesInput | string[]
+    mood?: string | null
+    instagram?: string | null
+    facebook?: string | null
+    interest?: UserCreateinterestInput | string[]
     birthday?: Date | string | null
     gender?: string | null
     horoscope?: string | null
-    mood?: string | null
     purpose?: string | null
     prefferGender?: string | null
     intentions?: string | null
@@ -18462,12 +21730,9 @@ export namespace Prisma {
     attachmentStyle?: string | null
     beliefSystem?: string | null
     mbtiType?: string | null
-    interest?: UserCreateinterestInput | string[]
     topArtists?: UserCreatetopArtistsInput | string[]
     favoriteGenres?: UserCreatefavoriteGenresInput | string[]
     uiTheme?: string | null
-    instagram?: string | null
-    facebook?: string | null
     isOnline?: boolean
     lastSeen?: Date | string | null
     profileCompleted?: boolean
@@ -18475,9 +21740,652 @@ export namespace Prisma {
     emailVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserCreateloveLanguagesInput | string[]
+    humanDesign?: string | null
+    testsCompleted?: UserCreatetestsCompletedInput | string[]
+    recvMessages?: MessageCreateNestedManyWithoutReceiverInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    receivedRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     globalMessages?: GlobalChatMessageCreateNestedManyWithoutSenderInput
     privateRoomMessages?: PrivateRoomMessageCreateNestedManyWithoutSenderInput
+    joinedRooms?: RoomMemberCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutSentRequestsInput = {
+    id?: string
+    fullName: string
+    email: string
+    password?: string | null
+    googleId?: string | null
+    mobileNumber?: string | null
+    bio?: string | null
+    avatar?: string | null
+    images?: UserCreateimagesInput | string[]
+    mood?: string | null
+    instagram?: string | null
+    facebook?: string | null
+    interest?: UserCreateinterestInput | string[]
+    birthday?: Date | string | null
+    gender?: string | null
+    horoscope?: string | null
+    purpose?: string | null
+    prefferGender?: string | null
+    intentions?: string | null
+    experienceLevel?: string | null
+    preferredMatch?: UserCreatepreferredMatchInput | string[]
+    primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
+    status?: string | null
+    attachmentStyle?: string | null
+    beliefSystem?: string | null
+    mbtiType?: string | null
+    topArtists?: UserCreatetopArtistsInput | string[]
+    favoriteGenres?: UserCreatefavoriteGenresInput | string[]
+    uiTheme?: string | null
+    isOnline?: boolean
+    lastSeen?: Date | string | null
+    profileCompleted?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserCreateloveLanguagesInput | string[]
+    humanDesign?: string | null
+    testsCompleted?: UserCreatetestsCompletedInput | string[]
+    recvMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    receivedRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
+    globalMessages?: GlobalChatMessageUncheckedCreateNestedManyWithoutSenderInput
+    privateRoomMessages?: PrivateRoomMessageUncheckedCreateNestedManyWithoutSenderInput
+    joinedRooms?: RoomMemberUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutSentRequestsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutSentRequestsInput, UserUncheckedCreateWithoutSentRequestsInput>
+  }
+
+  export type UserCreateWithoutReceivedRequestsInput = {
+    id?: string
+    fullName: string
+    email: string
+    password?: string | null
+    googleId?: string | null
+    mobileNumber?: string | null
+    bio?: string | null
+    avatar?: string | null
+    images?: UserCreateimagesInput | string[]
+    mood?: string | null
+    instagram?: string | null
+    facebook?: string | null
+    interest?: UserCreateinterestInput | string[]
+    birthday?: Date | string | null
+    gender?: string | null
+    horoscope?: string | null
+    purpose?: string | null
+    prefferGender?: string | null
+    intentions?: string | null
+    experienceLevel?: string | null
+    preferredMatch?: UserCreatepreferredMatchInput | string[]
+    primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
+    status?: string | null
+    attachmentStyle?: string | null
+    beliefSystem?: string | null
+    mbtiType?: string | null
+    topArtists?: UserCreatetopArtistsInput | string[]
+    favoriteGenres?: UserCreatefavoriteGenresInput | string[]
+    uiTheme?: string | null
+    isOnline?: boolean
+    lastSeen?: Date | string | null
+    profileCompleted?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserCreateloveLanguagesInput | string[]
+    humanDesign?: string | null
+    testsCompleted?: UserCreatetestsCompletedInput | string[]
+    recvMessages?: MessageCreateNestedManyWithoutReceiverInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    sentRequests?: FriendRequestCreateNestedManyWithoutSenderInput
+    globalMessages?: GlobalChatMessageCreateNestedManyWithoutSenderInput
+    privateRoomMessages?: PrivateRoomMessageCreateNestedManyWithoutSenderInput
+    joinedRooms?: RoomMemberCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutReceivedRequestsInput = {
+    id?: string
+    fullName: string
+    email: string
+    password?: string | null
+    googleId?: string | null
+    mobileNumber?: string | null
+    bio?: string | null
+    avatar?: string | null
+    images?: UserCreateimagesInput | string[]
+    mood?: string | null
+    instagram?: string | null
+    facebook?: string | null
+    interest?: UserCreateinterestInput | string[]
+    birthday?: Date | string | null
+    gender?: string | null
+    horoscope?: string | null
+    purpose?: string | null
+    prefferGender?: string | null
+    intentions?: string | null
+    experienceLevel?: string | null
+    preferredMatch?: UserCreatepreferredMatchInput | string[]
+    primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
+    status?: string | null
+    attachmentStyle?: string | null
+    beliefSystem?: string | null
+    mbtiType?: string | null
+    topArtists?: UserCreatetopArtistsInput | string[]
+    favoriteGenres?: UserCreatefavoriteGenresInput | string[]
+    uiTheme?: string | null
+    isOnline?: boolean
+    lastSeen?: Date | string | null
+    profileCompleted?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserCreateloveLanguagesInput | string[]
+    humanDesign?: string | null
+    testsCompleted?: UserCreatetestsCompletedInput | string[]
+    recvMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    sentRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
+    globalMessages?: GlobalChatMessageUncheckedCreateNestedManyWithoutSenderInput
+    privateRoomMessages?: PrivateRoomMessageUncheckedCreateNestedManyWithoutSenderInput
+    joinedRooms?: RoomMemberUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutReceivedRequestsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutReceivedRequestsInput, UserUncheckedCreateWithoutReceivedRequestsInput>
+  }
+
+  export type UserUpsertWithoutSentRequestsInput = {
+    update: XOR<UserUpdateWithoutSentRequestsInput, UserUncheckedUpdateWithoutSentRequestsInput>
+    create: XOR<UserCreateWithoutSentRequestsInput, UserUncheckedCreateWithoutSentRequestsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutSentRequestsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutSentRequestsInput, UserUncheckedUpdateWithoutSentRequestsInput>
+  }
+
+  export type UserUpdateWithoutSentRequestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    images?: UserUpdateimagesInput | string[]
+    mood?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: UserUpdateinterestInput | string[]
+    birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    horoscope?: NullableStringFieldUpdateOperationsInput | string | null
+    purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    prefferGender?: NullableStringFieldUpdateOperationsInput | string | null
+    intentions?: NullableStringFieldUpdateOperationsInput | string | null
+    experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    beliefSystem?: NullableStringFieldUpdateOperationsInput | string | null
+    mbtiType?: NullableStringFieldUpdateOperationsInput | string | null
+    topArtists?: UserUpdatetopArtistsInput | string[]
+    favoriteGenres?: UserUpdatefavoriteGenresInput | string[]
+    uiTheme?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profileCompleted?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserUpdateloveLanguagesInput | string[]
+    humanDesign?: NullableStringFieldUpdateOperationsInput | string | null
+    testsCompleted?: UserUpdatetestsCompletedInput | string[]
+    recvMessages?: MessageUpdateManyWithoutReceiverNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    receivedRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
+    globalMessages?: GlobalChatMessageUpdateManyWithoutSenderNestedInput
+    privateRoomMessages?: PrivateRoomMessageUpdateManyWithoutSenderNestedInput
+    joinedRooms?: RoomMemberUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutSentRequestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    images?: UserUpdateimagesInput | string[]
+    mood?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: UserUpdateinterestInput | string[]
+    birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    horoscope?: NullableStringFieldUpdateOperationsInput | string | null
+    purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    prefferGender?: NullableStringFieldUpdateOperationsInput | string | null
+    intentions?: NullableStringFieldUpdateOperationsInput | string | null
+    experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    beliefSystem?: NullableStringFieldUpdateOperationsInput | string | null
+    mbtiType?: NullableStringFieldUpdateOperationsInput | string | null
+    topArtists?: UserUpdatetopArtistsInput | string[]
+    favoriteGenres?: UserUpdatefavoriteGenresInput | string[]
+    uiTheme?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profileCompleted?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserUpdateloveLanguagesInput | string[]
+    humanDesign?: NullableStringFieldUpdateOperationsInput | string | null
+    testsCompleted?: UserUpdatetestsCompletedInput | string[]
+    recvMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    receivedRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
+    globalMessages?: GlobalChatMessageUncheckedUpdateManyWithoutSenderNestedInput
+    privateRoomMessages?: PrivateRoomMessageUncheckedUpdateManyWithoutSenderNestedInput
+    joinedRooms?: RoomMemberUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUpsertWithoutReceivedRequestsInput = {
+    update: XOR<UserUpdateWithoutReceivedRequestsInput, UserUncheckedUpdateWithoutReceivedRequestsInput>
+    create: XOR<UserCreateWithoutReceivedRequestsInput, UserUncheckedCreateWithoutReceivedRequestsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutReceivedRequestsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutReceivedRequestsInput, UserUncheckedUpdateWithoutReceivedRequestsInput>
+  }
+
+  export type UserUpdateWithoutReceivedRequestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    images?: UserUpdateimagesInput | string[]
+    mood?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: UserUpdateinterestInput | string[]
+    birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    horoscope?: NullableStringFieldUpdateOperationsInput | string | null
+    purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    prefferGender?: NullableStringFieldUpdateOperationsInput | string | null
+    intentions?: NullableStringFieldUpdateOperationsInput | string | null
+    experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    beliefSystem?: NullableStringFieldUpdateOperationsInput | string | null
+    mbtiType?: NullableStringFieldUpdateOperationsInput | string | null
+    topArtists?: UserUpdatetopArtistsInput | string[]
+    favoriteGenres?: UserUpdatefavoriteGenresInput | string[]
+    uiTheme?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profileCompleted?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserUpdateloveLanguagesInput | string[]
+    humanDesign?: NullableStringFieldUpdateOperationsInput | string | null
+    testsCompleted?: UserUpdatetestsCompletedInput | string[]
+    recvMessages?: MessageUpdateManyWithoutReceiverNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    sentRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
+    globalMessages?: GlobalChatMessageUpdateManyWithoutSenderNestedInput
+    privateRoomMessages?: PrivateRoomMessageUpdateManyWithoutSenderNestedInput
+    joinedRooms?: RoomMemberUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutReceivedRequestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    images?: UserUpdateimagesInput | string[]
+    mood?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: UserUpdateinterestInput | string[]
+    birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    horoscope?: NullableStringFieldUpdateOperationsInput | string | null
+    purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    prefferGender?: NullableStringFieldUpdateOperationsInput | string | null
+    intentions?: NullableStringFieldUpdateOperationsInput | string | null
+    experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    beliefSystem?: NullableStringFieldUpdateOperationsInput | string | null
+    mbtiType?: NullableStringFieldUpdateOperationsInput | string | null
+    topArtists?: UserUpdatetopArtistsInput | string[]
+    favoriteGenres?: UserUpdatefavoriteGenresInput | string[]
+    uiTheme?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profileCompleted?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserUpdateloveLanguagesInput | string[]
+    humanDesign?: NullableStringFieldUpdateOperationsInput | string | null
+    testsCompleted?: UserUpdatetestsCompletedInput | string[]
+    recvMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    sentRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
+    globalMessages?: GlobalChatMessageUncheckedUpdateManyWithoutSenderNestedInput
+    privateRoomMessages?: PrivateRoomMessageUncheckedUpdateManyWithoutSenderNestedInput
+    joinedRooms?: RoomMemberUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutJoinedRoomsInput = {
+    id?: string
+    fullName: string
+    email: string
+    password?: string | null
+    googleId?: string | null
+    mobileNumber?: string | null
+    bio?: string | null
+    avatar?: string | null
+    images?: UserCreateimagesInput | string[]
+    mood?: string | null
+    instagram?: string | null
+    facebook?: string | null
+    interest?: UserCreateinterestInput | string[]
+    birthday?: Date | string | null
+    gender?: string | null
+    horoscope?: string | null
+    purpose?: string | null
+    prefferGender?: string | null
+    intentions?: string | null
+    experienceLevel?: string | null
+    preferredMatch?: UserCreatepreferredMatchInput | string[]
+    primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
+    status?: string | null
+    attachmentStyle?: string | null
+    beliefSystem?: string | null
+    mbtiType?: string | null
+    topArtists?: UserCreatetopArtistsInput | string[]
+    favoriteGenres?: UserCreatefavoriteGenresInput | string[]
+    uiTheme?: string | null
+    isOnline?: boolean
+    lastSeen?: Date | string | null
+    profileCompleted?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserCreateloveLanguagesInput | string[]
+    humanDesign?: string | null
+    testsCompleted?: UserCreatetestsCompletedInput | string[]
+    recvMessages?: MessageCreateNestedManyWithoutReceiverInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    sentRequests?: FriendRequestCreateNestedManyWithoutSenderInput
+    receivedRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
+    globalMessages?: GlobalChatMessageCreateNestedManyWithoutSenderInput
+    privateRoomMessages?: PrivateRoomMessageCreateNestedManyWithoutSenderInput
+  }
+
+  export type UserUncheckedCreateWithoutJoinedRoomsInput = {
+    id?: string
+    fullName: string
+    email: string
+    password?: string | null
+    googleId?: string | null
+    mobileNumber?: string | null
+    bio?: string | null
+    avatar?: string | null
+    images?: UserCreateimagesInput | string[]
+    mood?: string | null
+    instagram?: string | null
+    facebook?: string | null
+    interest?: UserCreateinterestInput | string[]
+    birthday?: Date | string | null
+    gender?: string | null
+    horoscope?: string | null
+    purpose?: string | null
+    prefferGender?: string | null
+    intentions?: string | null
+    experienceLevel?: string | null
+    preferredMatch?: UserCreatepreferredMatchInput | string[]
+    primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
+    status?: string | null
+    attachmentStyle?: string | null
+    beliefSystem?: string | null
+    mbtiType?: string | null
+    topArtists?: UserCreatetopArtistsInput | string[]
+    favoriteGenres?: UserCreatefavoriteGenresInput | string[]
+    uiTheme?: string | null
+    isOnline?: boolean
+    lastSeen?: Date | string | null
+    profileCompleted?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserCreateloveLanguagesInput | string[]
+    humanDesign?: string | null
+    testsCompleted?: UserCreatetestsCompletedInput | string[]
+    recvMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    sentRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
+    receivedRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
+    globalMessages?: GlobalChatMessageUncheckedCreateNestedManyWithoutSenderInput
+    privateRoomMessages?: PrivateRoomMessageUncheckedCreateNestedManyWithoutSenderInput
+  }
+
+  export type UserCreateOrConnectWithoutJoinedRoomsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutJoinedRoomsInput, UserUncheckedCreateWithoutJoinedRoomsInput>
+  }
+
+  export type UserUpsertWithoutJoinedRoomsInput = {
+    update: XOR<UserUpdateWithoutJoinedRoomsInput, UserUncheckedUpdateWithoutJoinedRoomsInput>
+    create: XOR<UserCreateWithoutJoinedRoomsInput, UserUncheckedCreateWithoutJoinedRoomsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutJoinedRoomsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutJoinedRoomsInput, UserUncheckedUpdateWithoutJoinedRoomsInput>
+  }
+
+  export type UserUpdateWithoutJoinedRoomsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    images?: UserUpdateimagesInput | string[]
+    mood?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: UserUpdateinterestInput | string[]
+    birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    horoscope?: NullableStringFieldUpdateOperationsInput | string | null
+    purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    prefferGender?: NullableStringFieldUpdateOperationsInput | string | null
+    intentions?: NullableStringFieldUpdateOperationsInput | string | null
+    experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    beliefSystem?: NullableStringFieldUpdateOperationsInput | string | null
+    mbtiType?: NullableStringFieldUpdateOperationsInput | string | null
+    topArtists?: UserUpdatetopArtistsInput | string[]
+    favoriteGenres?: UserUpdatefavoriteGenresInput | string[]
+    uiTheme?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profileCompleted?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserUpdateloveLanguagesInput | string[]
+    humanDesign?: NullableStringFieldUpdateOperationsInput | string | null
+    testsCompleted?: UserUpdatetestsCompletedInput | string[]
+    recvMessages?: MessageUpdateManyWithoutReceiverNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    sentRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
+    receivedRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
+    globalMessages?: GlobalChatMessageUpdateManyWithoutSenderNestedInput
+    privateRoomMessages?: PrivateRoomMessageUpdateManyWithoutSenderNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutJoinedRoomsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    images?: UserUpdateimagesInput | string[]
+    mood?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: UserUpdateinterestInput | string[]
+    birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    horoscope?: NullableStringFieldUpdateOperationsInput | string | null
+    purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    prefferGender?: NullableStringFieldUpdateOperationsInput | string | null
+    intentions?: NullableStringFieldUpdateOperationsInput | string | null
+    experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
+    beliefSystem?: NullableStringFieldUpdateOperationsInput | string | null
+    mbtiType?: NullableStringFieldUpdateOperationsInput | string | null
+    topArtists?: UserUpdatetopArtistsInput | string[]
+    favoriteGenres?: UserUpdatefavoriteGenresInput | string[]
+    uiTheme?: NullableStringFieldUpdateOperationsInput | string | null
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profileCompleted?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserUpdateloveLanguagesInput | string[]
+    humanDesign?: NullableStringFieldUpdateOperationsInput | string | null
+    testsCompleted?: UserUpdatetestsCompletedInput | string[]
+    recvMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    sentRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
+    receivedRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
+    globalMessages?: GlobalChatMessageUncheckedUpdateManyWithoutSenderNestedInput
+    privateRoomMessages?: PrivateRoomMessageUncheckedUpdateManyWithoutSenderNestedInput
+  }
+
+  export type UserCreateWithoutRecvMessagesInput = {
+    id?: string
+    fullName: string
+    email: string
+    password?: string | null
+    googleId?: string | null
+    mobileNumber?: string | null
+    bio?: string | null
+    avatar?: string | null
+    images?: UserCreateimagesInput | string[]
+    mood?: string | null
+    instagram?: string | null
+    facebook?: string | null
+    interest?: UserCreateinterestInput | string[]
+    birthday?: Date | string | null
+    gender?: string | null
+    horoscope?: string | null
+    purpose?: string | null
+    prefferGender?: string | null
+    intentions?: string | null
+    experienceLevel?: string | null
+    preferredMatch?: UserCreatepreferredMatchInput | string[]
+    primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
+    status?: string | null
+    attachmentStyle?: string | null
+    beliefSystem?: string | null
+    mbtiType?: string | null
+    topArtists?: UserCreatetopArtistsInput | string[]
+    favoriteGenres?: UserCreatefavoriteGenresInput | string[]
+    uiTheme?: string | null
+    isOnline?: boolean
+    lastSeen?: Date | string | null
+    profileCompleted?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserCreateloveLanguagesInput | string[]
+    humanDesign?: string | null
+    testsCompleted?: UserCreatetestsCompletedInput | string[]
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    sentRequests?: FriendRequestCreateNestedManyWithoutSenderInput
+    receivedRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
+    globalMessages?: GlobalChatMessageCreateNestedManyWithoutSenderInput
+    privateRoomMessages?: PrivateRoomMessageCreateNestedManyWithoutSenderInput
+    joinedRooms?: RoomMemberCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRecvMessagesInput = {
@@ -18489,12 +22397,14 @@ export namespace Prisma {
     mobileNumber?: string | null
     bio?: string | null
     avatar?: string | null
-    avatar2?: string | null
     images?: UserCreateimagesInput | string[]
+    mood?: string | null
+    instagram?: string | null
+    facebook?: string | null
+    interest?: UserCreateinterestInput | string[]
     birthday?: Date | string | null
     gender?: string | null
     horoscope?: string | null
-    mood?: string | null
     purpose?: string | null
     prefferGender?: string | null
     intentions?: string | null
@@ -18505,12 +22415,9 @@ export namespace Prisma {
     attachmentStyle?: string | null
     beliefSystem?: string | null
     mbtiType?: string | null
-    interest?: UserCreateinterestInput | string[]
     topArtists?: UserCreatetopArtistsInput | string[]
     favoriteGenres?: UserCreatefavoriteGenresInput | string[]
     uiTheme?: string | null
-    instagram?: string | null
-    facebook?: string | null
     isOnline?: boolean
     lastSeen?: Date | string | null
     profileCompleted?: boolean
@@ -18518,9 +22425,16 @@ export namespace Prisma {
     emailVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserCreateloveLanguagesInput | string[]
+    humanDesign?: string | null
+    testsCompleted?: UserCreatetestsCompletedInput | string[]
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    sentRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
+    receivedRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     globalMessages?: GlobalChatMessageUncheckedCreateNestedManyWithoutSenderInput
     privateRoomMessages?: PrivateRoomMessageUncheckedCreateNestedManyWithoutSenderInput
+    joinedRooms?: RoomMemberUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRecvMessagesInput = {
@@ -18537,12 +22451,14 @@ export namespace Prisma {
     mobileNumber?: string | null
     bio?: string | null
     avatar?: string | null
-    avatar2?: string | null
     images?: UserCreateimagesInput | string[]
+    mood?: string | null
+    instagram?: string | null
+    facebook?: string | null
+    interest?: UserCreateinterestInput | string[]
     birthday?: Date | string | null
     gender?: string | null
     horoscope?: string | null
-    mood?: string | null
     purpose?: string | null
     prefferGender?: string | null
     intentions?: string | null
@@ -18553,12 +22469,9 @@ export namespace Prisma {
     attachmentStyle?: string | null
     beliefSystem?: string | null
     mbtiType?: string | null
-    interest?: UserCreateinterestInput | string[]
     topArtists?: UserCreatetopArtistsInput | string[]
     favoriteGenres?: UserCreatefavoriteGenresInput | string[]
     uiTheme?: string | null
-    instagram?: string | null
-    facebook?: string | null
     isOnline?: boolean
     lastSeen?: Date | string | null
     profileCompleted?: boolean
@@ -18566,9 +22479,16 @@ export namespace Prisma {
     emailVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserCreateloveLanguagesInput | string[]
+    humanDesign?: string | null
+    testsCompleted?: UserCreatetestsCompletedInput | string[]
     recvMessages?: MessageCreateNestedManyWithoutReceiverInput
+    sentRequests?: FriendRequestCreateNestedManyWithoutSenderInput
+    receivedRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     globalMessages?: GlobalChatMessageCreateNestedManyWithoutSenderInput
     privateRoomMessages?: PrivateRoomMessageCreateNestedManyWithoutSenderInput
+    joinedRooms?: RoomMemberCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSentMessagesInput = {
@@ -18580,12 +22500,14 @@ export namespace Prisma {
     mobileNumber?: string | null
     bio?: string | null
     avatar?: string | null
-    avatar2?: string | null
     images?: UserCreateimagesInput | string[]
+    mood?: string | null
+    instagram?: string | null
+    facebook?: string | null
+    interest?: UserCreateinterestInput | string[]
     birthday?: Date | string | null
     gender?: string | null
     horoscope?: string | null
-    mood?: string | null
     purpose?: string | null
     prefferGender?: string | null
     intentions?: string | null
@@ -18596,12 +22518,9 @@ export namespace Prisma {
     attachmentStyle?: string | null
     beliefSystem?: string | null
     mbtiType?: string | null
-    interest?: UserCreateinterestInput | string[]
     topArtists?: UserCreatetopArtistsInput | string[]
     favoriteGenres?: UserCreatefavoriteGenresInput | string[]
     uiTheme?: string | null
-    instagram?: string | null
-    facebook?: string | null
     isOnline?: boolean
     lastSeen?: Date | string | null
     profileCompleted?: boolean
@@ -18609,9 +22528,16 @@ export namespace Prisma {
     emailVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserCreateloveLanguagesInput | string[]
+    humanDesign?: string | null
+    testsCompleted?: UserCreatetestsCompletedInput | string[]
     recvMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
+    sentRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
+    receivedRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     globalMessages?: GlobalChatMessageUncheckedCreateNestedManyWithoutSenderInput
     privateRoomMessages?: PrivateRoomMessageUncheckedCreateNestedManyWithoutSenderInput
+    joinedRooms?: RoomMemberUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSentMessagesInput = {
@@ -18639,12 +22565,14 @@ export namespace Prisma {
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
+    mood?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: UserUpdateinterestInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
-    mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     prefferGender?: NullableStringFieldUpdateOperationsInput | string | null
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18655,12 +22583,9 @@ export namespace Prisma {
     attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
     beliefSystem?: NullableStringFieldUpdateOperationsInput | string | null
     mbtiType?: NullableStringFieldUpdateOperationsInput | string | null
-    interest?: UserUpdateinterestInput | string[]
     topArtists?: UserUpdatetopArtistsInput | string[]
     favoriteGenres?: UserUpdatefavoriteGenresInput | string[]
     uiTheme?: NullableStringFieldUpdateOperationsInput | string | null
-    instagram?: NullableStringFieldUpdateOperationsInput | string | null
-    facebook?: NullableStringFieldUpdateOperationsInput | string | null
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profileCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -18668,9 +22593,16 @@ export namespace Prisma {
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserUpdateloveLanguagesInput | string[]
+    humanDesign?: NullableStringFieldUpdateOperationsInput | string | null
+    testsCompleted?: UserUpdatetestsCompletedInput | string[]
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    sentRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
+    receivedRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     globalMessages?: GlobalChatMessageUpdateManyWithoutSenderNestedInput
     privateRoomMessages?: PrivateRoomMessageUpdateManyWithoutSenderNestedInput
+    joinedRooms?: RoomMemberUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRecvMessagesInput = {
@@ -18682,12 +22614,14 @@ export namespace Prisma {
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
+    mood?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: UserUpdateinterestInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
-    mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     prefferGender?: NullableStringFieldUpdateOperationsInput | string | null
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18698,12 +22632,9 @@ export namespace Prisma {
     attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
     beliefSystem?: NullableStringFieldUpdateOperationsInput | string | null
     mbtiType?: NullableStringFieldUpdateOperationsInput | string | null
-    interest?: UserUpdateinterestInput | string[]
     topArtists?: UserUpdatetopArtistsInput | string[]
     favoriteGenres?: UserUpdatefavoriteGenresInput | string[]
     uiTheme?: NullableStringFieldUpdateOperationsInput | string | null
-    instagram?: NullableStringFieldUpdateOperationsInput | string | null
-    facebook?: NullableStringFieldUpdateOperationsInput | string | null
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profileCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -18711,9 +22642,16 @@ export namespace Prisma {
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserUpdateloveLanguagesInput | string[]
+    humanDesign?: NullableStringFieldUpdateOperationsInput | string | null
+    testsCompleted?: UserUpdatetestsCompletedInput | string[]
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    sentRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
+    receivedRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     globalMessages?: GlobalChatMessageUncheckedUpdateManyWithoutSenderNestedInput
     privateRoomMessages?: PrivateRoomMessageUncheckedUpdateManyWithoutSenderNestedInput
+    joinedRooms?: RoomMemberUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutSentMessagesInput = {
@@ -18736,12 +22674,14 @@ export namespace Prisma {
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
+    mood?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: UserUpdateinterestInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
-    mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     prefferGender?: NullableStringFieldUpdateOperationsInput | string | null
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18752,12 +22692,9 @@ export namespace Prisma {
     attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
     beliefSystem?: NullableStringFieldUpdateOperationsInput | string | null
     mbtiType?: NullableStringFieldUpdateOperationsInput | string | null
-    interest?: UserUpdateinterestInput | string[]
     topArtists?: UserUpdatetopArtistsInput | string[]
     favoriteGenres?: UserUpdatefavoriteGenresInput | string[]
     uiTheme?: NullableStringFieldUpdateOperationsInput | string | null
-    instagram?: NullableStringFieldUpdateOperationsInput | string | null
-    facebook?: NullableStringFieldUpdateOperationsInput | string | null
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profileCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -18765,9 +22702,16 @@ export namespace Prisma {
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserUpdateloveLanguagesInput | string[]
+    humanDesign?: NullableStringFieldUpdateOperationsInput | string | null
+    testsCompleted?: UserUpdatetestsCompletedInput | string[]
     recvMessages?: MessageUpdateManyWithoutReceiverNestedInput
+    sentRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
+    receivedRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     globalMessages?: GlobalChatMessageUpdateManyWithoutSenderNestedInput
     privateRoomMessages?: PrivateRoomMessageUpdateManyWithoutSenderNestedInput
+    joinedRooms?: RoomMemberUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSentMessagesInput = {
@@ -18779,12 +22723,14 @@ export namespace Prisma {
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
+    mood?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: UserUpdateinterestInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
-    mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     prefferGender?: NullableStringFieldUpdateOperationsInput | string | null
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18795,12 +22741,9 @@ export namespace Prisma {
     attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
     beliefSystem?: NullableStringFieldUpdateOperationsInput | string | null
     mbtiType?: NullableStringFieldUpdateOperationsInput | string | null
-    interest?: UserUpdateinterestInput | string[]
     topArtists?: UserUpdatetopArtistsInput | string[]
     favoriteGenres?: UserUpdatefavoriteGenresInput | string[]
     uiTheme?: NullableStringFieldUpdateOperationsInput | string | null
-    instagram?: NullableStringFieldUpdateOperationsInput | string | null
-    facebook?: NullableStringFieldUpdateOperationsInput | string | null
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profileCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -18808,9 +22751,16 @@ export namespace Prisma {
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserUpdateloveLanguagesInput | string[]
+    humanDesign?: NullableStringFieldUpdateOperationsInput | string | null
+    testsCompleted?: UserUpdatetestsCompletedInput | string[]
     recvMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
+    sentRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
+    receivedRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     globalMessages?: GlobalChatMessageUncheckedUpdateManyWithoutSenderNestedInput
     privateRoomMessages?: PrivateRoomMessageUncheckedUpdateManyWithoutSenderNestedInput
+    joinedRooms?: RoomMemberUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type GlobalChatMessageCreateWithoutRoomInput = {
@@ -18862,12 +22812,14 @@ export namespace Prisma {
     mobileNumber?: string | null
     bio?: string | null
     avatar?: string | null
-    avatar2?: string | null
     images?: UserCreateimagesInput | string[]
+    mood?: string | null
+    instagram?: string | null
+    facebook?: string | null
+    interest?: UserCreateinterestInput | string[]
     birthday?: Date | string | null
     gender?: string | null
     horoscope?: string | null
-    mood?: string | null
     purpose?: string | null
     prefferGender?: string | null
     intentions?: string | null
@@ -18878,12 +22830,9 @@ export namespace Prisma {
     attachmentStyle?: string | null
     beliefSystem?: string | null
     mbtiType?: string | null
-    interest?: UserCreateinterestInput | string[]
     topArtists?: UserCreatetopArtistsInput | string[]
     favoriteGenres?: UserCreatefavoriteGenresInput | string[]
     uiTheme?: string | null
-    instagram?: string | null
-    facebook?: string | null
     isOnline?: boolean
     lastSeen?: Date | string | null
     profileCompleted?: boolean
@@ -18891,9 +22840,16 @@ export namespace Prisma {
     emailVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserCreateloveLanguagesInput | string[]
+    humanDesign?: string | null
+    testsCompleted?: UserCreatetestsCompletedInput | string[]
     recvMessages?: MessageCreateNestedManyWithoutReceiverInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    sentRequests?: FriendRequestCreateNestedManyWithoutSenderInput
+    receivedRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     privateRoomMessages?: PrivateRoomMessageCreateNestedManyWithoutSenderInput
+    joinedRooms?: RoomMemberCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutGlobalMessagesInput = {
@@ -18905,12 +22861,14 @@ export namespace Prisma {
     mobileNumber?: string | null
     bio?: string | null
     avatar?: string | null
-    avatar2?: string | null
     images?: UserCreateimagesInput | string[]
+    mood?: string | null
+    instagram?: string | null
+    facebook?: string | null
+    interest?: UserCreateinterestInput | string[]
     birthday?: Date | string | null
     gender?: string | null
     horoscope?: string | null
-    mood?: string | null
     purpose?: string | null
     prefferGender?: string | null
     intentions?: string | null
@@ -18921,12 +22879,9 @@ export namespace Prisma {
     attachmentStyle?: string | null
     beliefSystem?: string | null
     mbtiType?: string | null
-    interest?: UserCreateinterestInput | string[]
     topArtists?: UserCreatetopArtistsInput | string[]
     favoriteGenres?: UserCreatefavoriteGenresInput | string[]
     uiTheme?: string | null
-    instagram?: string | null
-    facebook?: string | null
     isOnline?: boolean
     lastSeen?: Date | string | null
     profileCompleted?: boolean
@@ -18934,9 +22889,16 @@ export namespace Prisma {
     emailVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserCreateloveLanguagesInput | string[]
+    humanDesign?: string | null
+    testsCompleted?: UserCreatetestsCompletedInput | string[]
     recvMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    sentRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
+    receivedRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     privateRoomMessages?: PrivateRoomMessageUncheckedCreateNestedManyWithoutSenderInput
+    joinedRooms?: RoomMemberUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutGlobalMessagesInput = {
@@ -18983,12 +22945,14 @@ export namespace Prisma {
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
+    mood?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: UserUpdateinterestInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
-    mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     prefferGender?: NullableStringFieldUpdateOperationsInput | string | null
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18999,12 +22963,9 @@ export namespace Prisma {
     attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
     beliefSystem?: NullableStringFieldUpdateOperationsInput | string | null
     mbtiType?: NullableStringFieldUpdateOperationsInput | string | null
-    interest?: UserUpdateinterestInput | string[]
     topArtists?: UserUpdatetopArtistsInput | string[]
     favoriteGenres?: UserUpdatefavoriteGenresInput | string[]
     uiTheme?: NullableStringFieldUpdateOperationsInput | string | null
-    instagram?: NullableStringFieldUpdateOperationsInput | string | null
-    facebook?: NullableStringFieldUpdateOperationsInput | string | null
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profileCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -19012,9 +22973,16 @@ export namespace Prisma {
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserUpdateloveLanguagesInput | string[]
+    humanDesign?: NullableStringFieldUpdateOperationsInput | string | null
+    testsCompleted?: UserUpdatetestsCompletedInput | string[]
     recvMessages?: MessageUpdateManyWithoutReceiverNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    sentRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
+    receivedRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     privateRoomMessages?: PrivateRoomMessageUpdateManyWithoutSenderNestedInput
+    joinedRooms?: RoomMemberUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutGlobalMessagesInput = {
@@ -19026,12 +22994,14 @@ export namespace Prisma {
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
+    mood?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: UserUpdateinterestInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
-    mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     prefferGender?: NullableStringFieldUpdateOperationsInput | string | null
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19042,12 +23012,9 @@ export namespace Prisma {
     attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
     beliefSystem?: NullableStringFieldUpdateOperationsInput | string | null
     mbtiType?: NullableStringFieldUpdateOperationsInput | string | null
-    interest?: UserUpdateinterestInput | string[]
     topArtists?: UserUpdatetopArtistsInput | string[]
     favoriteGenres?: UserUpdatefavoriteGenresInput | string[]
     uiTheme?: NullableStringFieldUpdateOperationsInput | string | null
-    instagram?: NullableStringFieldUpdateOperationsInput | string | null
-    facebook?: NullableStringFieldUpdateOperationsInput | string | null
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profileCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -19055,9 +23022,16 @@ export namespace Prisma {
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserUpdateloveLanguagesInput | string[]
+    humanDesign?: NullableStringFieldUpdateOperationsInput | string | null
+    testsCompleted?: UserUpdatetestsCompletedInput | string[]
     recvMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    sentRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
+    receivedRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     privateRoomMessages?: PrivateRoomMessageUncheckedUpdateManyWithoutSenderNestedInput
+    joinedRooms?: RoomMemberUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type GlobalChatsUpsertWithoutMessagesInput = {
@@ -19134,12 +23108,14 @@ export namespace Prisma {
     mobileNumber?: string | null
     bio?: string | null
     avatar?: string | null
-    avatar2?: string | null
     images?: UserCreateimagesInput | string[]
+    mood?: string | null
+    instagram?: string | null
+    facebook?: string | null
+    interest?: UserCreateinterestInput | string[]
     birthday?: Date | string | null
     gender?: string | null
     horoscope?: string | null
-    mood?: string | null
     purpose?: string | null
     prefferGender?: string | null
     intentions?: string | null
@@ -19150,12 +23126,9 @@ export namespace Prisma {
     attachmentStyle?: string | null
     beliefSystem?: string | null
     mbtiType?: string | null
-    interest?: UserCreateinterestInput | string[]
     topArtists?: UserCreatetopArtistsInput | string[]
     favoriteGenres?: UserCreatefavoriteGenresInput | string[]
     uiTheme?: string | null
-    instagram?: string | null
-    facebook?: string | null
     isOnline?: boolean
     lastSeen?: Date | string | null
     profileCompleted?: boolean
@@ -19163,9 +23136,16 @@ export namespace Prisma {
     emailVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserCreateloveLanguagesInput | string[]
+    humanDesign?: string | null
+    testsCompleted?: UserCreatetestsCompletedInput | string[]
     recvMessages?: MessageCreateNestedManyWithoutReceiverInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    sentRequests?: FriendRequestCreateNestedManyWithoutSenderInput
+    receivedRequests?: FriendRequestCreateNestedManyWithoutReceiverInput
     globalMessages?: GlobalChatMessageCreateNestedManyWithoutSenderInput
+    joinedRooms?: RoomMemberCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPrivateRoomMessagesInput = {
@@ -19177,12 +23157,14 @@ export namespace Prisma {
     mobileNumber?: string | null
     bio?: string | null
     avatar?: string | null
-    avatar2?: string | null
     images?: UserCreateimagesInput | string[]
+    mood?: string | null
+    instagram?: string | null
+    facebook?: string | null
+    interest?: UserCreateinterestInput | string[]
     birthday?: Date | string | null
     gender?: string | null
     horoscope?: string | null
-    mood?: string | null
     purpose?: string | null
     prefferGender?: string | null
     intentions?: string | null
@@ -19193,12 +23175,9 @@ export namespace Prisma {
     attachmentStyle?: string | null
     beliefSystem?: string | null
     mbtiType?: string | null
-    interest?: UserCreateinterestInput | string[]
     topArtists?: UserCreatetopArtistsInput | string[]
     favoriteGenres?: UserCreatefavoriteGenresInput | string[]
     uiTheme?: string | null
-    instagram?: string | null
-    facebook?: string | null
     isOnline?: boolean
     lastSeen?: Date | string | null
     profileCompleted?: boolean
@@ -19206,9 +23185,16 @@ export namespace Prisma {
     emailVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserCreateloveLanguagesInput | string[]
+    humanDesign?: string | null
+    testsCompleted?: UserCreatetestsCompletedInput | string[]
     recvMessages?: MessageUncheckedCreateNestedManyWithoutReceiverInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    sentRequests?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
+    receivedRequests?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
     globalMessages?: GlobalChatMessageUncheckedCreateNestedManyWithoutSenderInput
+    joinedRooms?: RoomMemberUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPrivateRoomMessagesInput = {
@@ -19263,12 +23249,14 @@ export namespace Prisma {
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
+    mood?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: UserUpdateinterestInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
-    mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     prefferGender?: NullableStringFieldUpdateOperationsInput | string | null
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19279,12 +23267,9 @@ export namespace Prisma {
     attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
     beliefSystem?: NullableStringFieldUpdateOperationsInput | string | null
     mbtiType?: NullableStringFieldUpdateOperationsInput | string | null
-    interest?: UserUpdateinterestInput | string[]
     topArtists?: UserUpdatetopArtistsInput | string[]
     favoriteGenres?: UserUpdatefavoriteGenresInput | string[]
     uiTheme?: NullableStringFieldUpdateOperationsInput | string | null
-    instagram?: NullableStringFieldUpdateOperationsInput | string | null
-    facebook?: NullableStringFieldUpdateOperationsInput | string | null
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profileCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -19292,9 +23277,16 @@ export namespace Prisma {
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserUpdateloveLanguagesInput | string[]
+    humanDesign?: NullableStringFieldUpdateOperationsInput | string | null
+    testsCompleted?: UserUpdatetestsCompletedInput | string[]
     recvMessages?: MessageUpdateManyWithoutReceiverNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    sentRequests?: FriendRequestUpdateManyWithoutSenderNestedInput
+    receivedRequests?: FriendRequestUpdateManyWithoutReceiverNestedInput
     globalMessages?: GlobalChatMessageUpdateManyWithoutSenderNestedInput
+    joinedRooms?: RoomMemberUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPrivateRoomMessagesInput = {
@@ -19306,12 +23298,14 @@ export namespace Prisma {
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar2?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
+    mood?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    interest?: UserUpdateinterestInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
-    mood?: NullableStringFieldUpdateOperationsInput | string | null
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     prefferGender?: NullableStringFieldUpdateOperationsInput | string | null
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19322,12 +23316,9 @@ export namespace Prisma {
     attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
     beliefSystem?: NullableStringFieldUpdateOperationsInput | string | null
     mbtiType?: NullableStringFieldUpdateOperationsInput | string | null
-    interest?: UserUpdateinterestInput | string[]
     topArtists?: UserUpdatetopArtistsInput | string[]
     favoriteGenres?: UserUpdatefavoriteGenresInput | string[]
     uiTheme?: NullableStringFieldUpdateOperationsInput | string | null
-    instagram?: NullableStringFieldUpdateOperationsInput | string | null
-    facebook?: NullableStringFieldUpdateOperationsInput | string | null
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profileCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -19335,9 +23326,16 @@ export namespace Prisma {
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attachmentResults?: NullableJsonNullValueInput | InputJsonValue
+    loveLanguages?: UserUpdateloveLanguagesInput | string[]
+    humanDesign?: NullableStringFieldUpdateOperationsInput | string | null
+    testsCompleted?: UserUpdatetestsCompletedInput | string[]
     recvMessages?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    sentRequests?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
+    receivedRequests?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
     globalMessages?: GlobalChatMessageUncheckedUpdateManyWithoutSenderNestedInput
+    joinedRooms?: RoomMemberUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PrivateRoomUpsertWithoutMessagesInput = {
@@ -19389,6 +23387,20 @@ export namespace Prisma {
     seen?: boolean
   }
 
+  export type FriendRequestCreateManySenderInput = {
+    id?: string
+    receiverId: string
+    status?: string
+    createdAt?: Date | string
+  }
+
+  export type FriendRequestCreateManyReceiverInput = {
+    id?: string
+    senderId: string
+    status?: string
+    createdAt?: Date | string
+  }
+
   export type GlobalChatMessageCreateManySenderInput = {
     id?: string
     roomId: string
@@ -19401,6 +23413,13 @@ export namespace Prisma {
     roomId: string
     text: string
     createdAt?: Date | string
+  }
+
+  export type RoomMemberCreateManyUserInput = {
+    id?: string
+    roomId: string
+    role?: string
+    joinedAt?: Date | string
   }
 
   export type MessageUpdateWithoutReceiverInput = {
@@ -19451,6 +23470,48 @@ export namespace Prisma {
     seen?: BoolFieldUpdateOperationsInput | boolean
   }
 
+  export type FriendRequestUpdateWithoutSenderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    receiver?: UserUpdateOneRequiredWithoutReceivedRequestsNestedInput
+  }
+
+  export type FriendRequestUncheckedUpdateWithoutSenderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    receiverId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FriendRequestUncheckedUpdateManyWithoutSenderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    receiverId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FriendRequestUpdateWithoutReceiverInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sender?: UserUpdateOneRequiredWithoutSentRequestsNestedInput
+  }
+
+  export type FriendRequestUncheckedUpdateWithoutReceiverInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FriendRequestUncheckedUpdateManyWithoutReceiverInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type GlobalChatMessageUpdateWithoutSenderInput = {
     id?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
@@ -19491,6 +23552,27 @@ export namespace Prisma {
     roomId?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RoomMemberUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roomId?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RoomMemberUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roomId?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RoomMemberUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roomId?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GlobalChatMessageCreateManyRoomInput = {

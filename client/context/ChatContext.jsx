@@ -215,7 +215,7 @@ export const ChatProvider = ({ children }) => {
       }
     }
     catch (error) {
-      toast.error(error.message);
+      // toast.error(error.message);
     }
   }
 
@@ -230,7 +230,7 @@ export const ChatProvider = ({ children }) => {
       }
     }
     catch (error) {
-      toast.error(error.message);
+      // toast.error(error.message);
     }
 
   }
@@ -245,7 +245,7 @@ export const ChatProvider = ({ children }) => {
       }
     }
     catch (error) {
-      toast.error(error.message);
+      // toast.error(error.message);
     }
 
   }

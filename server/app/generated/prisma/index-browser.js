@@ -129,12 +129,14 @@ exports.Prisma.UserScalarFieldEnum = {
   mobileNumber: 'mobileNumber',
   bio: 'bio',
   avatar: 'avatar',
-  avatar2: 'avatar2',
   images: 'images',
+  mood: 'mood',
+  instagram: 'instagram',
+  facebook: 'facebook',
+  interest: 'interest',
   birthday: 'birthday',
   gender: 'gender',
   horoscope: 'horoscope',
-  mood: 'mood',
   purpose: 'purpose',
   prefferGender: 'prefferGender',
   intentions: 'intentions',
@@ -145,19 +147,36 @@ exports.Prisma.UserScalarFieldEnum = {
   attachmentStyle: 'attachmentStyle',
   beliefSystem: 'beliefSystem',
   mbtiType: 'mbtiType',
-  interest: 'interest',
   topArtists: 'topArtists',
   favoriteGenres: 'favoriteGenres',
   uiTheme: 'uiTheme',
-  instagram: 'instagram',
-  facebook: 'facebook',
   isOnline: 'isOnline',
   lastSeen: 'lastSeen',
   profileCompleted: 'profileCompleted',
   isVerified: 'isVerified',
   emailVerified: 'emailVerified',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  attachmentResults: 'attachmentResults',
+  loveLanguages: 'loveLanguages',
+  humanDesign: 'humanDesign',
+  testsCompleted: 'testsCompleted'
+};
+
+exports.Prisma.FriendRequestScalarFieldEnum = {
+  id: 'id',
+  senderId: 'senderId',
+  receiverId: 'receiverId',
+  status: 'status',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.RoomMemberScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  roomId: 'roomId',
+  role: 'role',
+  joinedAt: 'joinedAt'
 };
 
 exports.Prisma.PrivacyScalarFieldEnum = {
@@ -253,9 +272,20 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
 };
 
 exports.Prisma.NullsOrder = {
@@ -266,6 +296,8 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  FriendRequest: 'FriendRequest',
+  RoomMember: 'RoomMember',
   privacy: 'privacy',
   song: 'song',
   Message: 'Message',
