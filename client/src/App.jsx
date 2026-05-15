@@ -19,6 +19,7 @@ import PrivateChatWindow from './components/chatroom/private/ChatWindow';
 import PrivateRoomSideBar from './components/chatroom/private/SideBar';
 import JoinRoom from './components/chatroom/private/JoinRoom';
 
+
 const App = () => {
   const { authUser, isCheckingAuth } = useContext(AuthContext);
 
