@@ -24,6 +24,8 @@ export const protectRoute = async (req, res, next) => {
         facebook: true,
         interest: true,
         images: true,
+        Age: true,
+
 
         // 🔥 NEW FIELDS ADDED HERE
         gender: true,
@@ -35,7 +37,8 @@ export const protectRoute = async (req, res, next) => {
         loveLanguages: true,
         primaryNeurotype: true,
         topArtists: true,
-        favoriteGenres: true
+        favoriteGenres: true,
+        beliefSystem: true,
       },
     });
 

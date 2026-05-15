@@ -13,11 +13,13 @@ model User {
   id String @id @default(uuid())
 
   // Basic Info
+  pronouns     String?
   fullName     String
   email        String  @unique
   password     String?
   googleId     String?
   mobileNumber String?
+  Age          String?
 
   // Profile & Socials (Updated for ProfilePage)
   bio       String?

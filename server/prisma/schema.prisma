@@ -19,6 +19,7 @@ model User {
   password          String?
   googleId          String?
   mobileNumber      String?
+  Age               String?
 
   // Profile & Socials (Updated for ProfilePage)
   bio               String?

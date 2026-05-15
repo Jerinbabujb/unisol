@@ -2207,11 +2207,13 @@ export namespace Prisma {
 
   export type UserMinAggregateOutputType = {
     id: string | null
+    pronouns: string | null
     fullName: string | null
     email: string | null
     password: string | null
     googleId: string | null
     mobileNumber: string | null
+    Age: string | null
     bio: string | null
     avatar: string | null
     mood: string | null
@@ -2241,11 +2243,13 @@ export namespace Prisma {
 
   export type UserMaxAggregateOutputType = {
     id: string | null
+    pronouns: string | null
     fullName: string | null
     email: string | null
     password: string | null
     googleId: string | null
     mobileNumber: string | null
+    Age: string | null
     bio: string | null
     avatar: string | null
     mood: string | null
@@ -2275,11 +2279,13 @@ export namespace Prisma {
 
   export type UserCountAggregateOutputType = {
     id: number
+    pronouns: number
     fullName: number
     email: number
     password: number
     googleId: number
     mobileNumber: number
+    Age: number
     bio: number
     avatar: number
     images: number
@@ -2320,11 +2326,13 @@ export namespace Prisma {
 
   export type UserMinAggregateInputType = {
     id?: true
+    pronouns?: true
     fullName?: true
     email?: true
     password?: true
     googleId?: true
     mobileNumber?: true
+    Age?: true
     bio?: true
     avatar?: true
     mood?: true
@@ -2354,11 +2362,13 @@ export namespace Prisma {
 
   export type UserMaxAggregateInputType = {
     id?: true
+    pronouns?: true
     fullName?: true
     email?: true
     password?: true
     googleId?: true
     mobileNumber?: true
+    Age?: true
     bio?: true
     avatar?: true
     mood?: true
@@ -2388,11 +2398,13 @@ export namespace Prisma {
 
   export type UserCountAggregateInputType = {
     id?: true
+    pronouns?: true
     fullName?: true
     email?: true
     password?: true
     googleId?: true
     mobileNumber?: true
+    Age?: true
     bio?: true
     avatar?: true
     images?: true
@@ -2504,11 +2516,13 @@ export namespace Prisma {
 
   export type UserGroupByOutputType = {
     id: string
+    pronouns: string | null
     fullName: string
     email: string
     password: string | null
     googleId: string | null
     mobileNumber: string | null
+    Age: string | null
     bio: string | null
     avatar: string | null
     images: string[]
@@ -2564,11 +2578,13 @@ export namespace Prisma {
 
   export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    pronouns?: boolean
     fullName?: boolean
     email?: boolean
     password?: boolean
     googleId?: boolean
     mobileNumber?: boolean
+    Age?: boolean
     bio?: boolean
     avatar?: boolean
     images?: boolean
@@ -2615,11 +2631,13 @@ export namespace Prisma {
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    pronouns?: boolean
     fullName?: boolean
     email?: boolean
     password?: boolean
     googleId?: boolean
     mobileNumber?: boolean
+    Age?: boolean
     bio?: boolean
     avatar?: boolean
     images?: boolean
@@ -2658,11 +2676,13 @@ export namespace Prisma {
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    pronouns?: boolean
     fullName?: boolean
     email?: boolean
     password?: boolean
     googleId?: boolean
     mobileNumber?: boolean
+    Age?: boolean
     bio?: boolean
     avatar?: boolean
     images?: boolean
@@ -2701,11 +2721,13 @@ export namespace Prisma {
 
   export type UserSelectScalar = {
     id?: boolean
+    pronouns?: boolean
     fullName?: boolean
     email?: boolean
     password?: boolean
     googleId?: boolean
     mobileNumber?: boolean
+    Age?: boolean
     bio?: boolean
     avatar?: boolean
     images?: boolean
@@ -2742,7 +2764,7 @@ export namespace Prisma {
     testsCompleted?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "email" | "password" | "googleId" | "mobileNumber" | "bio" | "avatar" | "images" | "mood" | "instagram" | "facebook" | "interest" | "birthday" | "gender" | "horoscope" | "purpose" | "prefferGender" | "intentions" | "experienceLevel" | "preferredMatch" | "primaryNeurotype" | "status" | "attachmentStyle" | "beliefSystem" | "mbtiType" | "topArtists" | "favoriteGenres" | "uiTheme" | "isOnline" | "lastSeen" | "profileCompleted" | "isVerified" | "emailVerified" | "createdAt" | "updatedAt" | "attachmentResults" | "loveLanguages" | "humanDesign" | "testsCompleted", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "pronouns" | "fullName" | "email" | "password" | "googleId" | "mobileNumber" | "Age" | "bio" | "avatar" | "images" | "mood" | "instagram" | "facebook" | "interest" | "birthday" | "gender" | "horoscope" | "purpose" | "prefferGender" | "intentions" | "experienceLevel" | "preferredMatch" | "primaryNeurotype" | "status" | "attachmentStyle" | "beliefSystem" | "mbtiType" | "topArtists" | "favoriteGenres" | "uiTheme" | "isOnline" | "lastSeen" | "profileCompleted" | "isVerified" | "emailVerified" | "createdAt" | "updatedAt" | "attachmentResults" | "loveLanguages" | "humanDesign" | "testsCompleted", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     recvMessages?: boolean | User$recvMessagesArgs<ExtArgs>
     sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
@@ -2769,11 +2791,13 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      pronouns: string | null
       fullName: string
       email: string
       password: string | null
       googleId: string | null
       mobileNumber: string | null
+      Age: string | null
       bio: string | null
       avatar: string | null
       images: string[]
@@ -3239,11 +3263,13 @@ export namespace Prisma {
    */
   interface UserFieldRefs {
     readonly id: FieldRef<"User", 'String'>
+    readonly pronouns: FieldRef<"User", 'String'>
     readonly fullName: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
     readonly googleId: FieldRef<"User", 'String'>
     readonly mobileNumber: FieldRef<"User", 'String'>
+    readonly Age: FieldRef<"User", 'String'>
     readonly bio: FieldRef<"User", 'String'>
     readonly avatar: FieldRef<"User", 'String'>
     readonly images: FieldRef<"User", 'String[]'>
@@ -17426,11 +17452,13 @@ export namespace Prisma {
 
   export const UserScalarFieldEnum: {
     id: 'id',
+    pronouns: 'pronouns',
     fullName: 'fullName',
     email: 'email',
     password: 'password',
     googleId: 'googleId',
     mobileNumber: 'mobileNumber',
+    Age: 'Age',
     bio: 'bio',
     avatar: 'avatar',
     images: 'images',
@@ -17744,11 +17772,13 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     id?: StringFilter<"User"> | string
+    pronouns?: StringNullableFilter<"User"> | string | null
     fullName?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     password?: StringNullableFilter<"User"> | string | null
     googleId?: StringNullableFilter<"User"> | string | null
     mobileNumber?: StringNullableFilter<"User"> | string | null
+    Age?: StringNullableFilter<"User"> | string | null
     bio?: StringNullableFilter<"User"> | string | null
     avatar?: StringNullableFilter<"User"> | string | null
     images?: StringNullableListFilter<"User">
@@ -17794,11 +17824,13 @@ export namespace Prisma {
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
+    pronouns?: SortOrderInput | SortOrder
     fullName?: SortOrder
     email?: SortOrder
     password?: SortOrderInput | SortOrder
     googleId?: SortOrderInput | SortOrder
     mobileNumber?: SortOrderInput | SortOrder
+    Age?: SortOrderInput | SortOrder
     bio?: SortOrderInput | SortOrder
     avatar?: SortOrderInput | SortOrder
     images?: SortOrder
@@ -17848,10 +17880,12 @@ export namespace Prisma {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
+    pronouns?: StringNullableFilter<"User"> | string | null
     fullName?: StringFilter<"User"> | string
     password?: StringNullableFilter<"User"> | string | null
     googleId?: StringNullableFilter<"User"> | string | null
     mobileNumber?: StringNullableFilter<"User"> | string | null
+    Age?: StringNullableFilter<"User"> | string | null
     bio?: StringNullableFilter<"User"> | string | null
     avatar?: StringNullableFilter<"User"> | string | null
     images?: StringNullableListFilter<"User">
@@ -17897,11 +17931,13 @@ export namespace Prisma {
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
+    pronouns?: SortOrderInput | SortOrder
     fullName?: SortOrder
     email?: SortOrder
     password?: SortOrderInput | SortOrder
     googleId?: SortOrderInput | SortOrder
     mobileNumber?: SortOrderInput | SortOrder
+    Age?: SortOrderInput | SortOrder
     bio?: SortOrderInput | SortOrder
     avatar?: SortOrderInput | SortOrder
     images?: SortOrder
@@ -17946,11 +17982,13 @@ export namespace Prisma {
     OR?: UserScalarWhereWithAggregatesInput[]
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"User"> | string
+    pronouns?: StringNullableWithAggregatesFilter<"User"> | string | null
     fullName?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
     password?: StringNullableWithAggregatesFilter<"User"> | string | null
     googleId?: StringNullableWithAggregatesFilter<"User"> | string | null
     mobileNumber?: StringNullableWithAggregatesFilter<"User"> | string | null
+    Age?: StringNullableWithAggregatesFilter<"User"> | string | null
     bio?: StringNullableWithAggregatesFilter<"User"> | string | null
     avatar?: StringNullableWithAggregatesFilter<"User"> | string | null
     images?: StringNullableListFilter<"User">
@@ -18706,11 +18744,13 @@ export namespace Prisma {
 
   export type UserCreateInput = {
     id?: string
+    pronouns?: string | null
     fullName: string
     email: string
     password?: string | null
     googleId?: string | null
     mobileNumber?: string | null
+    Age?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -18756,11 +18796,13 @@ export namespace Prisma {
 
   export type UserUncheckedCreateInput = {
     id?: string
+    pronouns?: string | null
     fullName: string
     email: string
     password?: string | null
     googleId?: string | null
     mobileNumber?: string | null
+    Age?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -18806,11 +18848,13 @@ export namespace Prisma {
 
   export type UserUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    pronouns?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    Age?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -18856,11 +18900,13 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    pronouns?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    Age?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -18906,11 +18952,13 @@ export namespace Prisma {
 
   export type UserCreateManyInput = {
     id?: string
+    pronouns?: string | null
     fullName: string
     email: string
     password?: string | null
     googleId?: string | null
     mobileNumber?: string | null
+    Age?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -18949,11 +18997,13 @@ export namespace Prisma {
 
   export type UserUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    pronouns?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    Age?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -18992,11 +19042,13 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    pronouns?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    Age?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -19905,11 +19957,13 @@ export namespace Prisma {
 
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
+    pronouns?: SortOrder
     fullName?: SortOrder
     email?: SortOrder
     password?: SortOrder
     googleId?: SortOrder
     mobileNumber?: SortOrder
+    Age?: SortOrder
     bio?: SortOrder
     avatar?: SortOrder
     images?: SortOrder
@@ -19948,11 +20002,13 @@ export namespace Prisma {
 
   export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
+    pronouns?: SortOrder
     fullName?: SortOrder
     email?: SortOrder
     password?: SortOrder
     googleId?: SortOrder
     mobileNumber?: SortOrder
+    Age?: SortOrder
     bio?: SortOrder
     avatar?: SortOrder
     mood?: SortOrder
@@ -19982,11 +20038,13 @@ export namespace Prisma {
 
   export type UserMinOrderByAggregateInput = {
     id?: SortOrder
+    pronouns?: SortOrder
     fullName?: SortOrder
     email?: SortOrder
     password?: SortOrder
     googleId?: SortOrder
     mobileNumber?: SortOrder
+    Age?: SortOrder
     bio?: SortOrder
     avatar?: SortOrder
     mood?: SortOrder
@@ -21705,11 +21763,13 @@ export namespace Prisma {
 
   export type UserCreateWithoutSentRequestsInput = {
     id?: string
+    pronouns?: string | null
     fullName: string
     email: string
     password?: string | null
     googleId?: string | null
     mobileNumber?: string | null
+    Age?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -21754,11 +21814,13 @@ export namespace Prisma {
 
   export type UserUncheckedCreateWithoutSentRequestsInput = {
     id?: string
+    pronouns?: string | null
     fullName: string
     email: string
     password?: string | null
     googleId?: string | null
     mobileNumber?: string | null
+    Age?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -21808,11 +21870,13 @@ export namespace Prisma {
 
   export type UserCreateWithoutReceivedRequestsInput = {
     id?: string
+    pronouns?: string | null
     fullName: string
     email: string
     password?: string | null
     googleId?: string | null
     mobileNumber?: string | null
+    Age?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -21857,11 +21921,13 @@ export namespace Prisma {
 
   export type UserUncheckedCreateWithoutReceivedRequestsInput = {
     id?: string
+    pronouns?: string | null
     fullName: string
     email: string
     password?: string | null
     googleId?: string | null
     mobileNumber?: string | null
+    Age?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -21922,11 +21988,13 @@ export namespace Prisma {
 
   export type UserUpdateWithoutSentRequestsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    pronouns?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    Age?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -21971,11 +22039,13 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateWithoutSentRequestsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    pronouns?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    Age?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -22031,11 +22101,13 @@ export namespace Prisma {
 
   export type UserUpdateWithoutReceivedRequestsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    pronouns?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    Age?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -22080,11 +22152,13 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateWithoutReceivedRequestsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    pronouns?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    Age?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -22129,11 +22203,13 @@ export namespace Prisma {
 
   export type UserCreateWithoutJoinedRoomsInput = {
     id?: string
+    pronouns?: string | null
     fullName: string
     email: string
     password?: string | null
     googleId?: string | null
     mobileNumber?: string | null
+    Age?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -22178,11 +22254,13 @@ export namespace Prisma {
 
   export type UserUncheckedCreateWithoutJoinedRoomsInput = {
     id?: string
+    pronouns?: string | null
     fullName: string
     email: string
     password?: string | null
     googleId?: string | null
     mobileNumber?: string | null
+    Age?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -22243,11 +22321,13 @@ export namespace Prisma {
 
   export type UserUpdateWithoutJoinedRoomsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    pronouns?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    Age?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -22292,11 +22372,13 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateWithoutJoinedRoomsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    pronouns?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    Age?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -22341,11 +22423,13 @@ export namespace Prisma {
 
   export type UserCreateWithoutRecvMessagesInput = {
     id?: string
+    pronouns?: string | null
     fullName: string
     email: string
     password?: string | null
     googleId?: string | null
     mobileNumber?: string | null
+    Age?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -22390,11 +22474,13 @@ export namespace Prisma {
 
   export type UserUncheckedCreateWithoutRecvMessagesInput = {
     id?: string
+    pronouns?: string | null
     fullName: string
     email: string
     password?: string | null
     googleId?: string | null
     mobileNumber?: string | null
+    Age?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -22444,11 +22530,13 @@ export namespace Prisma {
 
   export type UserCreateWithoutSentMessagesInput = {
     id?: string
+    pronouns?: string | null
     fullName: string
     email: string
     password?: string | null
     googleId?: string | null
     mobileNumber?: string | null
+    Age?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -22493,11 +22581,13 @@ export namespace Prisma {
 
   export type UserUncheckedCreateWithoutSentMessagesInput = {
     id?: string
+    pronouns?: string | null
     fullName: string
     email: string
     password?: string | null
     googleId?: string | null
     mobileNumber?: string | null
+    Age?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -22558,11 +22648,13 @@ export namespace Prisma {
 
   export type UserUpdateWithoutRecvMessagesInput = {
     id?: StringFieldUpdateOperationsInput | string
+    pronouns?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    Age?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -22607,11 +22699,13 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateWithoutRecvMessagesInput = {
     id?: StringFieldUpdateOperationsInput | string
+    pronouns?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    Age?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -22667,11 +22761,13 @@ export namespace Prisma {
 
   export type UserUpdateWithoutSentMessagesInput = {
     id?: StringFieldUpdateOperationsInput | string
+    pronouns?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    Age?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -22716,11 +22812,13 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateWithoutSentMessagesInput = {
     id?: StringFieldUpdateOperationsInput | string
+    pronouns?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    Age?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -22805,11 +22903,13 @@ export namespace Prisma {
 
   export type UserCreateWithoutGlobalMessagesInput = {
     id?: string
+    pronouns?: string | null
     fullName: string
     email: string
     password?: string | null
     googleId?: string | null
     mobileNumber?: string | null
+    Age?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -22854,11 +22954,13 @@ export namespace Prisma {
 
   export type UserUncheckedCreateWithoutGlobalMessagesInput = {
     id?: string
+    pronouns?: string | null
     fullName: string
     email: string
     password?: string | null
     googleId?: string | null
     mobileNumber?: string | null
+    Age?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -22938,11 +23040,13 @@ export namespace Prisma {
 
   export type UserUpdateWithoutGlobalMessagesInput = {
     id?: StringFieldUpdateOperationsInput | string
+    pronouns?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    Age?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -22987,11 +23091,13 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateWithoutGlobalMessagesInput = {
     id?: StringFieldUpdateOperationsInput | string
+    pronouns?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    Age?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -23101,11 +23207,13 @@ export namespace Prisma {
 
   export type UserCreateWithoutPrivateRoomMessagesInput = {
     id?: string
+    pronouns?: string | null
     fullName: string
     email: string
     password?: string | null
     googleId?: string | null
     mobileNumber?: string | null
+    Age?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -23150,11 +23258,13 @@ export namespace Prisma {
 
   export type UserUncheckedCreateWithoutPrivateRoomMessagesInput = {
     id?: string
+    pronouns?: string | null
     fullName: string
     email: string
     password?: string | null
     googleId?: string | null
     mobileNumber?: string | null
+    Age?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -23242,11 +23352,13 @@ export namespace Prisma {
 
   export type UserUpdateWithoutPrivateRoomMessagesInput = {
     id?: StringFieldUpdateOperationsInput | string
+    pronouns?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    Age?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -23291,11 +23403,13 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateWithoutPrivateRoomMessagesInput = {
     id?: StringFieldUpdateOperationsInput | string
+    pronouns?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    Age?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]

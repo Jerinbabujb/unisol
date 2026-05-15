@@ -95,7 +95,7 @@ const FeedContainer = ({ onOpenMenu }) => {
                     {/* Profile Info inside Image */}
                     <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                       <div className="flex items-center gap-2 mb-2">
-                        <h3 className="text-3xl font-bold tracking-tight">{user.fullName}, {user.age || '24'}</h3>
+                        <h3 className="text-3xl font-bold tracking-tight">{user.fullName}, {user.Age || '24'}</h3>
                         {user.online && <span className="w-3 h-3 rounded-full bg-green-500 border-2 border-white/20 shadow-[0_0_10px_rgba(34,197,94,0.5)]"></span>}
                       </div>
 

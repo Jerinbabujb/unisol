@@ -361,7 +361,7 @@ const LoginPage = () => {
 
                   <div className="grid grid-cols-2 gap-4">
                     <SelectField theme={currentTheme} label='Gender' name='gender' value={formData.gender} onChange={handleChange} options={['Woman', 'Man', 'Non-binary', 'Other']} />
-                    <SelectField theme={currentTheme} label='Pronouns' name='pronouns' value={formData.pronouns} onChange={handleChange} options={['She/Her', 'He/Him', 'They/Them', 'She/They', 'He/They', 'Other', 'Prefer not to say']} />
+                    <SelectField theme={currentTheme} label='Pronouns' name='pronouns' value={formData.pronouns} onChange={handleChange} options={['She/Her', 'He/Him', 'Prefer not to say']} />
                   </div>
                 </div>
               )}

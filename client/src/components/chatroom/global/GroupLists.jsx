@@ -42,6 +42,11 @@ const GroupsLists = () => {
     globalRoomJoin(room);
     navigate(`/global-room/${room}`);
   }
+  const joiningRoomPrivate = (room, id) => {
+    joinRoom(id);
+    globalRoomJoin(room);
+    navigate(`/private-room/${room}`);
+  }
 
   return (
     <div className="flex h-screen w-full bg-[#FDFCFE] font-sans text-gray-900 overflow-hidden relative">
@@ -106,10 +111,12 @@ const GroupsLists = () => {
                       <div className="w-8 h-8 rounded-full border-2 border-white bg-gray-200"></div>
                       <div className="w-8 h-8 rounded-full border-2 border-white bg-gray-300"></div>
                     </div>
-                    {isJoind(room.roomName) || isPrivateRoomJoined(room.roomName) ? (
-                      <button onClick={() => navigate(`/${activeTab}-room/${room.roomName}`)} className="bg-green-500 text-white px-5 py-2 rounded-xl text-xs font-bold">Open</button>
-                    ) : (
+
+                    {activeTab === "public" ? (
                       <button onClick={() => joiningRoom(room.roomName, room.id)} className="bg-[#5D3289] text-white px-5 py-2 rounded-xl text-xs font-bold">Join Hub</button>
+                    ) : (
+                      <button onClick={() => joiningRoomPrivate(room.roomName, room.id)} className="bg-[#5D3289] text-white px-5 py-2 rounded-xl text-xs font-bold">Join Hub</button>
+
                     )}
                   </div>
                 </div>

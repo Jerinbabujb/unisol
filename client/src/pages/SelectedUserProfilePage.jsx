@@ -80,9 +80,9 @@ const SelectedUserProfilePage = () => {
             <h1 className="text-4xl font-black text-gray-900 tracking-tight">{selectedUser.fullName}</h1>
 
             {/* PRONOUNS / IDENTITY BADGE */}
-            <p className="text-[#5D3289] text-sm font-bold mt-2 tracking-widest uppercase bg-purple-50 px-4 py-1 rounded-full">
+            {/* <p className="text-[#5D3289] text-sm font-bold mt-2 tracking-widest uppercase bg-purple-50 px-4 py-1 rounded-full">
               {selectedUser.gender || "Human"}
-            </p>
+            </p> */}
           </div>
 
           <div className="w-full max-w-5xl z-10">
