@@ -79,7 +79,7 @@ const SideBar = () => {
       <div className="mt-auto px-4 pb-6 flex flex-col gap-4 whitespace-nowrap">
 
         {/* Boost Profile (Hidden when collapsed, fades in) */}
-        <div className="opacity-0 h-0 group-hover:h-auto group-hover:opacity-100 transition-all duration-500 overflow-hidden">
+        {/* <div className="opacity-0 h-0 group-hover:h-auto group-hover:opacity-100 transition-all duration-500 overflow-hidden">
           <div className="rounded-[20px] bg-gradient-to-br from-[#1A0B2E] to-[#5D3289] p-4 text-white shadow-lg relative cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all mx-2 mb-2">
             <div className="absolute -top-6 -right-6 w-20 h-20 bg-white opacity-10 rounded-full blur-xl"></div>
             <div className="flex items-center gap-2 mb-1">
@@ -88,7 +88,7 @@ const SideBar = () => {
             </div>
             <p className="text-[10px] text-purple-200">10x more visibility</p>
           </div>
-        </div>
+        </div> */}
 
         {/* User Profile Snippet (Click to logout or go to profile) */}
         {authUser && (
