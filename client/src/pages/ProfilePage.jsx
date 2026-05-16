@@ -189,10 +189,6 @@ const ProfilePage = () => {
 
             <div className="space-y-6 mb-12">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="group">
-                  <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-2 ml-1 group-focus-within:text-[#5D3289] transition-colors">Display Name</label>
-                  <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-full bg-white px-5 py-4 rounded-2xl outline-none border border-gray-200 focus:border-[#5D3289] focus:ring-4 focus:ring-[#5D3289]/10 transition-all font-medium text-gray-800 shadow-sm" placeholder="Your name" />
-                </div>
                 <div className="group relative">
                   <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-2 ml-1 group-focus-within:text-[#5D3289] transition-colors">Pronouns</label>
                   <select value={pronouns} onChange={(e) => setPronouns(e.target.value)} className="appearance-none w-full bg-white px-5 py-4 rounded-2xl border border-gray-200 outline-none cursor-pointer focus:border-[#5D3289] focus:ring-4 focus:ring-[#5D3289]/10 transition-all font-medium text-gray-800 shadow-sm">
@@ -200,6 +196,10 @@ const ProfilePage = () => {
                     {pronounOptions.map(opt => <option key={opt} value={opt}>{opt}</option>)}
                   </select>
                   <svg className="absolute right-4 bottom-5 w-4 h-4 text-gray-400 pointer-events-none group-focus-within:text-[#5D3289] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <div className="group">
+                  <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-2 ml-1 group-focus-within:text-[#5D3289] transition-colors">Display Name</label>
+                  <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-full bg-white px-5 py-4 rounded-2xl outline-none border border-gray-200 focus:border-[#5D3289] focus:ring-4 focus:ring-[#5D3289]/10 transition-all font-medium text-gray-800 shadow-sm" placeholder="Your name" />
                 </div>
               </div>
 

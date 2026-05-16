@@ -166,7 +166,7 @@ export const checkAuth = (req, res) => {
 export const updateProfile = async (req, res) => {
     try {
         const {
-            fullName, avatar, bio, mood, instagram, facebook, interest, images,
+            fullName, avatar, bio, mood, instagram, facebook, interest, images, pronouns,
             // 🔥 NEW PSYCHOLOGY & IDENTITY FIELDS
             mbtiType, attachmentStyle, beliefSystem, horoscope, topArtists, loveLanguages
         } = req.body;
@@ -205,6 +205,7 @@ export const updateProfile = async (req, res) => {
                 instagram,
                 facebook,
                 images: uploadedImages,
+                pronouns,
                 // Ensure arrays default to empty if undefined
                 interest: interest || [],
                 topArtists: topArtists || [],

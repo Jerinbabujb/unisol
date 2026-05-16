@@ -8,12 +8,19 @@ import {
 } from 'firebase/auth';
 import { auth, googleProvider } from '../../config/firebase';
 
+// Import our modular quiz components
+import QuizModal from '../modal/QuizModal';
+import { quizConfigs } from '../lib/quizConfigs';
+
 const LoginPage = () => {
   const googleLoginRef = useRef(false);
 
   const [currentState, setCurrentState] = useState('Sign Up');
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
+
+  // Tracks which quiz is currently open (null, 'mbti', 'attachmentStyle', 'loveLanguage')
+  const [activeQuiz, setActiveQuiz] = useState(null);
 
   // Expanded Form State
   const [formData, setFormData] = useState({
@@ -35,6 +42,7 @@ const LoginPage = () => {
     preferredMatch: [],
     mbtiType: '',
     attachmentStyle: '',
+    loveLanguage: '',
     beliefSystem: '',
     intentions: '',
     experienceLevel: '',
@@ -212,7 +220,7 @@ const LoginPage = () => {
   return (
     <div className={`min-h-screen bg-[#FDFCFE] flex flex-col items-center justify-center p-4 lg:p-6 font-sans selection:bg-gray-200 selection:${currentTheme.text}`}>
 
-      {/* Background Ambient Glow (Dynamic based on theme) */}
+      {/* Background Ambient Glow */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none transition-colors duration-700">
         <div className={`absolute -top-[10%] -left-[10%] w-[40%] h-[40%] rounded-full opacity-[0.08] blur-[120px] ${currentTheme.bg}`}></div>
         <div className="absolute top-[20%] -right-[5%] w-[30%] h-[30%] bg-indigo-400 rounded-full opacity-[0.06] blur-[100px]"></div>
@@ -245,12 +253,12 @@ const LoginPage = () => {
       </div>
 
       {/* Main Card */}
-      <div className='w-full max-w-6xl bg-white rounded-[48px] shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] flex overflow-hidden min-h-[720px] border border-gray-50 z-10'>
+      <div className='w-full max-w-6xl bg-white rounded-[48px] shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] flex overflow-hidden min-h-[720px] border border-gray-50 z-10 relative'>
 
         {/* Left Side: Visual Experience */}
         <div className='hidden lg:flex lg:w-5/12 relative overflow-hidden'>
           <img
-            src={`./assets/hero${step <= 3 ? step : 1}.jpg`} // Failsafes to hero1.jpg
+            src={`./assets/hero${step <= 3 ? step : 1}.jpg`}
             alt='Hero Connection'
             className='absolute inset-0 w-full h-full object-cover transition-transform duration-[10s] hover:scale-105'
           />
@@ -297,7 +305,7 @@ const LoginPage = () => {
                 <button
                   type='button'
                   onClick={() => setStep(step - 1)}
-                  className={`mb-4 flex items-center gap-2 text-[11px] font-bold ${currentTheme.text} uppercase tracking-widest hover:translate-x-[-4px] transition-transform w-fit`}
+                  className={`mb-4 flex items-center gap-2 text-[11px] font-bold ${currentTheme.text} uppercase tracking-widest hover:translate-x-[-4px] transition-transform w-fit cursor-pointer`}
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                   Back
@@ -348,7 +356,7 @@ const LoginPage = () => {
                 </div>
               )}
 
-              {/* Step 2: Personal Info (Expanded with Age & Pronouns) */}
+              {/* Step 2: Personal Info */}
               {currentState === 'Sign Up' && step === 2 && (
                 <div className='animate-in fade-in slide-in-from-right-8 duration-500 space-y-5'>
                   <InputField theme={currentTheme} label='Full Name' type='text' name='fullName' value={formData.fullName} onChange={handleChange} placeholder='Jane Doe' />
@@ -356,12 +364,12 @@ const LoginPage = () => {
 
                   <div className="grid grid-cols-2 gap-4">
                     <InputField theme={currentTheme} label='Date of Birth' type='date' name='birthday' value={formData.birthday} onChange={handleChange} />
-                    <InputField theme={currentTheme} label='What is your Age?' type='number' name='age' value={formData.age} onChange={handleChange} placeholder='e.g. 25' min="18" max="100" />
+                    <InputField theme={currentTheme} label='Age' type='number' name='age' value={formData.age} onChange={handleChange} placeholder='e.g. 25' min="18" max="100" />
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <SelectField theme={currentTheme} label='Gender' name='gender' value={formData.gender} onChange={handleChange} options={['Woman', 'Man', 'Non-binary', 'Other']} />
-                    <SelectField theme={currentTheme} label='Pronouns' name='pronouns' value={formData.pronouns} onChange={handleChange} options={['She/Her', 'He/Him', 'Prefer not to say']} />
+                    <SelectField theme={currentTheme} label='Pronouns' name='pronouns' value={formData.pronouns} onChange={handleChange} options={['She/Her', 'He/Him', 'They/Them', 'Prefer not to say']} />
                   </div>
                 </div>
               )}
@@ -381,7 +389,18 @@ const LoginPage = () => {
 
                   <div className="grid grid-cols-2 gap-4">
                     <SelectField theme={currentTheme} label='Diagnosis Status' name='status' value={formData.status} onChange={handleChange} options={['Formally Diagnosed', 'Self-diagnosed', 'Not Diagnosed', 'Prefer not to say']} />
-                    <SelectField theme={currentTheme} label='MBTI Type' name='mbtiType' value={formData.mbtiType} onChange={handleChange} options={['INTJ', 'INTP', 'ENTJ', 'ENTP', 'INFJ', 'INFP', 'ENFJ', 'ENFP', 'ISTJ', 'ISFJ', 'ESTJ', 'ESFJ', 'ISTP', 'ISFP', 'ESTP', 'ESFP', 'Unsure']} />
+
+                    {/* MBTI Trigger */}
+                    <div className="flex flex-col gap-1 w-full">
+                      <SelectField theme={currentTheme} label='MBTI Type' name='mbtiType' value={formData.mbtiType} onChange={handleChange} options={['INTJ', 'INTP', 'ENTJ', 'ENTP', 'INFJ', 'INFP', 'ENFJ', 'ENFP', 'ISTJ', 'ISFJ', 'ESTJ', 'ESFJ', 'ISTP', 'ISFP', 'ESTP', 'ESFP', 'Unsure']} />
+                      <button
+                        type="button"
+                        onClick={() => setActiveQuiz('mbti')}
+                        className={`text-[11px] font-bold mt-1 text-left ${currentTheme.text} hover:underline transition-all w-fit cursor-pointer`}
+                      >
+                        Not sure? Take a quick quiz
+                      </button>
+                    </div>
                   </div>
 
                   <TagSelector
@@ -398,7 +417,7 @@ const LoginPage = () => {
                 </div>
               )}
 
-              {/* Step 4: Express Yourself (Hobbies, Movies, Artists, Natal Chart) */}
+              {/* Step 4: Express Yourself */}
               {currentState === 'Sign Up' && step === 4 && (
                 <div className='animate-in fade-in slide-in-from-right-8 duration-500 space-y-6'>
 
@@ -427,7 +446,7 @@ const LoginPage = () => {
                 </div>
               )}
 
-              {/* Step 5: Intentions & Theme Setup */}
+              {/* Step 5: Intentions & Psychology */}
               {currentState === 'Sign Up' && step === 5 && (
                 <div className='animate-in fade-in slide-in-from-right-8 duration-500 space-y-6'>
                   <SelectField
@@ -450,8 +469,21 @@ const LoginPage = () => {
                   />
 
                   <div className="grid grid-cols-2 gap-4">
-                    <SelectField theme={currentTheme} label='Attachment Style' name='attachmentStyle' value={formData.attachmentStyle} onChange={handleChange} options={['Secure', 'Anxious', 'Avoidant', 'Disorganized', 'Unsure']} />
-                    <SelectField theme={currentTheme} label='Belief System' name='beliefSystem' value={formData.beliefSystem} onChange={handleChange} options={['Atheist', 'Agnostic', 'Spiritual', 'Religious', 'Other']} />
+                    {/* Attachment Style Trigger */}
+                    <div className="flex flex-col gap-1 w-full">
+                      <SelectField theme={currentTheme} label='Attachment Style' name='attachmentStyle' value={formData.attachmentStyle} onChange={handleChange} options={['Secure', 'Anxious', 'Avoidant', 'Disorganized', 'Unsure']} />
+                      <button type="button" onClick={() => setActiveQuiz('attachmentStyle')} className={`text-[11px] font-bold mt-1 text-left ${currentTheme.text} hover:underline transition-all w-fit cursor-pointer`}>
+                        Find your style
+                      </button>
+                    </div>
+
+                    {/* Love Language Trigger */}
+                    <div className="flex flex-col gap-1 w-full">
+                      <SelectField theme={currentTheme} label='Love Language' name='loveLanguage' value={formData.loveLanguage} onChange={handleChange} options={['Words of Affirmation', 'Quality Time', 'Receiving Gifts', 'Acts of Service', 'Physical Touch', 'Unsure']} />
+                      <button type="button" onClick={() => setActiveQuiz('loveLanguage')} className={`text-[11px] font-bold mt-1 text-left ${currentTheme.text} hover:underline transition-all w-fit cursor-pointer`}>
+                        Find your language
+                      </button>
+                    </div>
                   </div>
 
                   {/* UI Theme Customization */}
@@ -465,7 +497,7 @@ const LoginPage = () => {
                           key={themeKey}
                           type="button"
                           onClick={() => setFormData({ ...formData, uiTheme: themeKey })}
-                          className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${themes[themeKey].bg} ${formData.uiTheme === themeKey ? 'ring-4 ring-offset-2 ring-gray-300 scale-110' : 'opacity-80 hover:scale-105'}`}
+                          className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${themes[themeKey].bg} ${formData.uiTheme === themeKey ? 'ring-4 ring-offset-2 ring-gray-300 scale-110' : 'opacity-80 hover:scale-105 cursor-pointer'}`}
                         >
                           {formData.uiTheme === themeKey && <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>}
                         </button>
@@ -490,6 +522,18 @@ const LoginPage = () => {
             </p>
           </form>
         </div>
+
+        {/* DYNAMIC QUIZ MODAL */}
+        <QuizModal
+          isOpen={!!activeQuiz}
+          onClose={() => setActiveQuiz(null)}
+          theme={currentTheme}
+          config={activeQuiz ? quizConfigs[activeQuiz] : null}
+          onApply={(calculatedResult) => {
+            setFormData({ ...formData, [activeQuiz]: calculatedResult });
+            setActiveQuiz(null);
+          }}
+        />
       </div>
 
       <style dangerouslySetInnerHTML={{
@@ -502,7 +546,7 @@ const LoginPage = () => {
   );
 };
 
-/* --- Refined Reusable Components (Theme Aware) --- */
+/* --- Reusable Form Components --- */
 
 const InputField = ({ label, theme, ...props }) => (
   <div className='flex flex-col gap-1.5 group'>
@@ -518,7 +562,7 @@ const InputField = ({ label, theme, ...props }) => (
 );
 
 const SelectField = ({ label, options, theme, ...props }) => (
-  <div className='flex flex-col gap-1.5 group'>
+  <div className='flex flex-col gap-1.5 group w-full'>
     <label className={`text-[10px] font-bold text-gray-400 uppercase tracking-[0.15em] ml-1 group-focus-within:${theme.text} transition-colors`}>
       {label}
     </label>
@@ -567,7 +611,7 @@ const TagSelector = ({ label, options, selected, onToggle, theme }) => (
             type='button'
             key={option}
             onClick={() => onToggle(option)}
-            className={`px-4 py-2 rounded-full border text-xs font-bold transition-all duration-200 
+            className={`px-4 py-2 rounded-full border text-xs font-bold transition-all duration-200 cursor-pointer
             ${isSelected
                 ? `${theme.bg} text-white border-transparent shadow-md -translate-y-[1px]`
                 : `bg-white text-gray-600 border-gray-200 ${theme.borderHover} ${theme.textHover}`
@@ -596,7 +640,7 @@ const ThreeItemInput = ({ label, items, onChange, placeholderPrefix, theme }) =>
             onChange={(e) => onChange(index, e.target.value)}
             placeholder={`${placeholderPrefix} name...`}
             className={`w-full pl-9 pr-5 py-3 bg-gray-50/70 border border-gray-100 rounded-xl focus:bg-white ${theme.focusBorder} focus:ring-4 ${theme.ring} outline-none transition-all text-sm font-medium placeholder:text-gray-300`}
-            required={index === 0} // Only first item is strictly required
+            required={index === 0}
           />
         </div>
       ))}
