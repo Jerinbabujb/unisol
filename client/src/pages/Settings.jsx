@@ -48,6 +48,9 @@ const Settings = () => {
         "#EC4899",
     ];
 
+    const handleLogout = () => { logout(); navigate('/login'); };
+
+
     useEffect(() => {
         document.documentElement.style.setProperty(
             "--theme-color",
@@ -63,13 +66,13 @@ const Settings = () => {
 
     useEffect(() => {
         getBlockedUsers();
-    }, [blockedUsersList, unBlockingUsers]);
+    }, []);
 
     useEffect(() => {
         if (blockedUsersList?.length > 0) {
             getUsersFromIds(blockedUsersList);
         }
-    }, [blockedUsersList]);
+    }, []);
 
     const handleUnblock = async (userId) => {
         console.log("unblock user", userId);
@@ -409,100 +412,43 @@ const Settings = () => {
             </div>
 
             {/* MOBILE NAVIGATION */}
-            <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-xl border-t border-gray-200 px-6 py-4 flex justify-between items-center z-50 shadow-[0_-10px_40px_-10px_rgba(0,0,0,0.1)]">
+            <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-xl border-t border-[#F4F0F9] px-2 py-4 flex justify-between items-center z-40 shadow-[0_-8px_24px_-8px_rgba(93,50,137,0.08)] safe-area-pb">
 
-                <button
-                    onClick={() => navigate('/')}
-                    className={`transition-all ${location.pathname === '/'
-                        ? 'scale-110'
-                        : 'opacity-60'
-                        }`}
-                    style={{
-                        color:
-                            location.pathname === '/'
-                                ? activeColor
-                                : '#6B7280'
-                    }}
-                >
-                    <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2L2 22l10-3 10 3L12 2z" />
-                    </svg>
+                {/* Home */}
+                <button onClick={() => navigate('/')} className={`flex flex-col items-center flex-1 transition-all ${location.pathname === '/' ? 'text-[#5D3289] scale-110' : 'text-gray-400 hover:text-gray-600'}`}>
+                    <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 22l10-3 10 3L12 2z" /></svg>
                 </button>
 
-                <button
-                    onClick={() => navigate('/friend-request')}
-                    className={`transition-all ${location.pathname === '/friend-request'
-                        ? 'scale-110'
-                        : 'opacity-60'
-                        }`}
-                    style={{
-                        color:
-                            location.pathname === '/friend-request'
-                                ? activeColor
-                                : '#6B7280'
-                    }}
-                >
-                    <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.2">
-                        <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                    </svg>
+                {/* Friend Requests (Active Page) */}
+                <button onClick={() => navigate('/friend-request')} className={`flex flex-col items-center flex-1 transition-all ${location.pathname === '/friend-request' ? 'text-[#5D3289] scale-110' : 'text-gray-400 hover:text-gray-600'}`}>
+                    <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
                 </button>
 
-                <button
-                    onClick={() => navigate('/global-room-lists')}
-                    className={`transition-all ${location.pathname === '/global-room-lists'
-                        ? 'scale-110'
-                        : 'opacity-60'
-                        }`}
-                    style={{
-                        color:
-                            location.pathname === '/global-room-lists'
-                                ? activeColor
-                                : '#6B7280'
-                    }}
-                >
-                    <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.2">
-                        <path d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
-                    </svg>
+                {/* Chat Room */}
+                <button onClick={() => navigate('/global-room-lists')} className={`flex flex-col items-center flex-1 transition-all ${location.pathname === '/global-room-lists' ? 'text-[#5D3289] scale-110' : 'text-gray-400 hover:text-gray-600'}`}>
+                    <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path></svg>
                 </button>
 
-                <button
-                    onClick={() => navigate('/messages')}
-                    className={`transition-all ${location.pathname === '/messages'
-                        ? 'scale-110'
-                        : 'opacity-60'
-                        }`}
-                    style={{
-                        color:
-                            location.pathname === '/messages'
-                                ? activeColor
-                                : '#6B7280'
-                    }}
-                >
-                    <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
-                    </svg>
+                {/* Messages */}
+                <button onClick={() => navigate('/messages')} className={`flex flex-col items-center flex-1 transition-all ${location.pathname === '/messages' ? 'text-[#5D3289] scale-110' : 'text-gray-400 hover:text-gray-600'}`}>
+                    <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" /></svg>
                 </button>
 
-                <button
-                    onClick={() => navigate('/profile')}
-                    className={`transition-all ${location.pathname === '/profile'
-                        ? 'scale-110'
-                        : 'opacity-60'
-                        }`}
-                    style={{
-                        color:
-                            location.pathname === '/profile'
-                                ? activeColor
-                                : '#6B7280'
-                    }}
-                >
-                    <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                    </svg>
+                {/* Profile (Added) */}
+                <button onClick={() => navigate('/profile')} className={`flex flex-col items-center flex-1 transition-all ${location.pathname === '/profile' ? 'text-[#5D3289] scale-110' : 'text-gray-400 hover:text-gray-600'}`}>
+                    <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" /></svg>
                 </button>
 
+                {/* Settings */}
+                <button onClick={() => navigate('/settings')} className={`flex flex-col items-center flex-1 transition-all ${location.pathname === '/settings' ? 'text-[#5D3289] scale-110' : 'text-gray-400 hover:text-gray-600'}`}>
+                    <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                </button>
+
+                {/* Logout */}
+                <button onClick={handleLogout} className="flex flex-col items-center flex-1 transition-all text-gray-400 hover:text-red-500">
+                    <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                </button>
             </nav>
-
         </div>
     );
 };
