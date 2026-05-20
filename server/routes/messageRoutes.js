@@ -1,6 +1,6 @@
 import e from "express";
 import { protectRoute } from "../middleware/auth.js";
-import { allSongs, connectionRequest, createRoom, freindRequestCheck, getMessages, getprivateRoom, getPrivateRoomMessages, getRoomMessages, getUserForSidebar, getUsers, globalRoom, globalRoomJoin, globalRoomMembers, globalRoomSendMessage, joinPrivateRoom, markMessageAsSeen, privacy, privacyCheck, privacyToggle, privateRoomInvite, privateRoomMembers, privateRoomSendMessage, requestCheck, sendMessage, userGlobalRoomExists } from "../controllers/messageController.js";
+import { allSongs, blockedUser, blockingUser, connectionRequest, createRoom, freindRequestCheck, getMessages, getprivateRoom, getPrivateRoomMessages, getRoomMessages, getUserForSidebar, getUsers, getUsersFromIds, globalRoom, globalRoomJoin, globalRoomMembers, globalRoomSendMessage, joinPrivateRoom, markMessageAsSeen, privacy, privacyCheck, privacyToggle, privateRoomInvite, privateRoomMembers, privateRoomSendMessage, requestCheck, sendMessage, unBlockingUser, userGlobalRoomExists } from "../controllers/messageController.js";
 
 
 const messageRouter = e.Router();
@@ -23,6 +23,10 @@ messageRouter.post('/private-room-send', protectRoute, privateRoomSendMessage);
 messageRouter.post('/get-private-room-messages', protectRoute, getPrivateRoomMessages);
 messageRouter.post('/join-private-room', protectRoute, joinPrivateRoom);
 messageRouter.post('/private-room-invite', protectRoute, privateRoomInvite);
+messageRouter.post("/blocking", protectRoute, blockingUser);
+messageRouter.get("/blocked-users", protectRoute, blockedUser);
+messageRouter.post("/unblocking", protectRoute, unBlockingUser);
+messageRouter.post("/users-from-ids", protectRoute, getUsersFromIds);
 messageRouter.get("/:id", protectRoute, getMessages);
 messageRouter.put("/mark/:id", protectRoute, markMessageAsSeen);
 messageRouter.post("/send/:id", protectRoute, sendMessage);

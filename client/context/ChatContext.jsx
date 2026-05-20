@@ -29,6 +29,8 @@ export const ChatProvider = ({ children }) => {
   const [roomMessages, setRoomMessages] = useState({});
   const [joinedRooms, setJoinedRooms] = useState([]);
   const [privateMembers, setPrivateMembers] = useState([]);
+  const [blockedUsersList, setBlockedUsersList] = useState([]);
+  const [userslists, setUSersLists] = useState([]);
   const getUsers = useCallback(async () => {
     if (!axios) {
       console.log("axios not ready yet");
@@ -440,10 +442,63 @@ export const ChatProvider = ({ children }) => {
     }
   }
 
+  const blockingUser = async (selectedUser) => {
+    try {
+      const { data } = await axios.post('/api/messages/blocking', { selectedUser });
+      if (data.success) {
+        console.log("blocked user", data);
+      }
+    }
+    catch (error) {
+      toast.error(error.message);
+    }
+  }
+
+  const unBlockingUsers = async (selectedUser) => {
+    try {
+      const { data } = await axios.post('/api/messages/unblocking', { selectedUser });
+      console.log("selectedusers", selectedUser)
+      if (data.success) {
+        console.log("unblocked user", data);
+      }
+    }
+    catch (error) {
+      toast.error(error.message);
+    }
+  }
+
+  const getBlockedUsers = async () => {
+    try {
+      const { data } = await axios.get('/api/messages/blocked-users');
+      if (data.success) {
+        console.log("blocked users", data.blockedUsers.blockedUsers);
+        setBlockedUsersList(data.blockedUsers.blockedUsers);
+      }
+    }
+    catch (error) {
+      toast.error(error.message);
+    }
+  }
+
+
+  const getUsersFromIds = async (ids) => {
+    try {
+      const { data } = await axios.post('/api/messages/users-from-ids', { ids });
+      if (data.success) {
+        console.log("users from ids", data.users);
+        setUSersLists(data.users);
+      }
+    }
+    catch (error) {
+      toast.error(error.message);
+    }
+  }
+
   useEffect(() => {
     if (!authUser) return;
 
     globalRoomUserExists();
+    getBlockedUsers();
   }, [authUser]);
 
 
@@ -510,7 +565,14 @@ export const ChatProvider = ({ children }) => {
     privateRoomSendMessage,
     getPrivateRoomMessages,
     joinPrivateRoom,
-    privateRoomInvite
+    privateRoomInvite,
+    blockingUser,
+    getBlockedUsers,
+    blockedUsersList,
+    getUsersFromIds,
+    userslists,
+    setUSersLists,
+    unBlockingUsers
   }
   return (
 

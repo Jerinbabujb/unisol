@@ -34,9 +34,9 @@ export async function getMatchesForUser(currentUserId, limit = 20) {
     // 🔥 FIX: Use LOWER("gender") in the SQL query so capitalization doesn't matter
     const matches = await prisma.$queryRaw`
         SELECT 
-            id, "fullName", avatar, bio, interest, mood, gender, horoscope,
+            id, "fullName", "Age", avatar, bio, interest, mood, gender, horoscope,
             "mbtiType", "attachmentStyle", "humanDesign", "loveLanguages", 
-            "primaryNeurotype", "topArtists", "favoriteGenres", images,"beliefSystem","Age",
+            "primaryNeurotype", "topArtists", "favoriteGenres", images,"beliefSystem",
             ROUND((1 - (embedding <=> ${embeddingString}::vector))::numeric * 100, 1) as match_percentage
         FROM "User"
         WHERE id != ${currentUserId} 

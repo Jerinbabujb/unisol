@@ -13,8 +13,16 @@ export const getUsers = async (req, res) => {
 
     // Call the AI Matchmaking Engine instead of fetching everyone
     // The '20' is the limit of matches to return
-    const matchedUsers = await getMatchesForUser(userId, 20);
-
+    const matchedUser = await getMatchesForUser(userId, 20);
+    const blockedUsers = await prisma.user.findUnique({
+      where: {
+        id: userId
+      },
+      select: {
+        blockedUsers: true
+      }
+    });
+    const matchedUsers = matchedUser.filter(user => !blockedUsers.blockedUsers.includes(user.id));
     res.json({
       success: true,
       users: matchedUsers, // Keep the key as 'users' so your frontend doesn't break!
@@ -29,9 +37,82 @@ export const getUsers = async (req, res) => {
   }
 };
 
+
+export const blockingUser = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const blockedUsers = await prisma.user.update({
+      where: {
+        id: userId
+      },
+      data: {
+        blockedUsers: { push: req.body.selectedUser }
+      }
+    });
+    res.json({ success: true, blockedUsers });
+  }
+  catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+}
+
+export const blockedUser = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const blockedUsers = await prisma.user.findUnique({
+      where: {
+        id: userId
+      },
+      select: {
+        blockedUsers: true
+      }
+    });
+    res.json({ success: true, blockedUsers });
+  }
+  catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+}
+
+export const unBlockingUser = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const selectedUser = req.body.selectedUser;
+    const getBlockedUsers = await prisma.user.findUnique({
+      where: {
+        id: userId
+      },
+      select: {
+        blockedUsers: true
+      }
+    });
+    const updatedBlockedUsers = getBlockedUsers.blockedUsers.filter(user => user !== selectedUser);
+    const unBlockedUsers = await prisma.user.update({
+      where: {
+        id: userId
+      },
+      data: {
+        blockedUsers: { set: updatedBlockedUsers }
+      }
+    });
+    res.json({ success: true, unBlockedUsers });
+  }
+  catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+}
+
 export const getUserForSidebar = async (req, res) => {
   try {
     const userId = req.user.id;
+    const blockedUsers = await prisma.user.findUnique({
+      where: {
+        id: userId
+      },
+      select: {
+        blockedUsers: true
+      }
+    });
     const getUsers = await prisma.connection.findMany({
       where: {
         OR: [
@@ -48,10 +129,12 @@ export const getUserForSidebar = async (req, res) => {
     const ids = getUsers.map(id =>
       id.senderId === userId ? id.receiverId : id.senderId
     );
+    const blockedIds = blockedUsers.blockedUsers.map(id => id);
+    const filteredIds = ids.filter(id => !blockedIds.includes(id));
     // 1. Get all users except logged-in user
     const users = await prisma.user.findMany({
       where: {
-        id: { in: ids }
+        id: { in: filteredIds }
       },
       select: {
         id: true,
@@ -175,10 +258,7 @@ export const connectionRequest = async (req, res) => {
     const senderId = req.user.id;
     let { id } = req.body;
     const receiverId = id;
-    console.log("req.body", req.body);
     let { status } = req.body;
-    console.log(senderId);
-    console.log("backedn :", status);
     let updateStatus = null;
     let request = null;
     // 2. Check for existing request
@@ -233,7 +313,6 @@ export const requestCheck = async (req, res) => {
       }
     });
     if (request) {
-      console.log("recevierID", request.receiverId);
       return res.json({ success: true, recerverId: request.receiverId, senderId: request.senderId, request })
     }
   }
@@ -437,7 +516,6 @@ export const globalRoomJoin = async (req, res) => {
 export const userGlobalRoomExists = async (req, res) => {
   try {
     const userId = req.user.id;
-    console.log("userId", userId);
     const exists = await prisma.GlobalChats.findMany({
       where: {
         memberLists: { has: userId }
@@ -448,7 +526,6 @@ export const userGlobalRoomExists = async (req, res) => {
         roomImage: true
       }
     });
-    console.log("user exists?", exists);
     res.json({ success: true, exists });
   }
   catch (error) {
@@ -589,7 +666,6 @@ export const getprivateRoom = async (req, res) => {
         inviteToken: true
       }
     });
-    console.log("privateRoom", privateRoom);
     res.json({ success: true, privateRoom });
   }
   catch (error) {
@@ -732,3 +808,27 @@ export const getPrivateRoomMessages = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
+
+export const getUsersFromIds = async (req, res) => {
+  try {
+    const { ids } = req.body;
+    const users = await prisma.User.findMany({
+      where: {
+        id: {
+          in: ids
+        }
+      },
+      select: {
+        id: true,
+        fullName: true,
+        avatar: true
+      }
+    });
+    res.json({ success: true, users });
+  }
+  catch (error) {
+    console.error("GET USERS FROM IDS ERROR:", error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+}

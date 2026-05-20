@@ -2293,6 +2293,8 @@ export namespace Prisma {
     instagram: number
     facebook: number
     interest: number
+    blockedUsers: number
+    matchUsers: number
     birthday: number
     gender: number
     horoscope: number
@@ -2412,6 +2414,8 @@ export namespace Prisma {
     instagram?: true
     facebook?: true
     interest?: true
+    blockedUsers?: true
+    matchUsers?: true
     birthday?: true
     gender?: true
     horoscope?: true
@@ -2530,6 +2534,8 @@ export namespace Prisma {
     instagram: string | null
     facebook: string | null
     interest: string[]
+    blockedUsers: string[]
+    matchUsers: string[]
     birthday: Date | null
     gender: string | null
     horoscope: string | null
@@ -2592,6 +2598,8 @@ export namespace Prisma {
     instagram?: boolean
     facebook?: boolean
     interest?: boolean
+    blockedUsers?: boolean
+    matchUsers?: boolean
     birthday?: boolean
     gender?: boolean
     horoscope?: boolean
@@ -2645,6 +2653,8 @@ export namespace Prisma {
     instagram?: boolean
     facebook?: boolean
     interest?: boolean
+    blockedUsers?: boolean
+    matchUsers?: boolean
     birthday?: boolean
     gender?: boolean
     horoscope?: boolean
@@ -2690,6 +2700,8 @@ export namespace Prisma {
     instagram?: boolean
     facebook?: boolean
     interest?: boolean
+    blockedUsers?: boolean
+    matchUsers?: boolean
     birthday?: boolean
     gender?: boolean
     horoscope?: boolean
@@ -2735,6 +2747,8 @@ export namespace Prisma {
     instagram?: boolean
     facebook?: boolean
     interest?: boolean
+    blockedUsers?: boolean
+    matchUsers?: boolean
     birthday?: boolean
     gender?: boolean
     horoscope?: boolean
@@ -2764,7 +2778,7 @@ export namespace Prisma {
     testsCompleted?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "pronouns" | "fullName" | "email" | "password" | "googleId" | "mobileNumber" | "Age" | "bio" | "avatar" | "images" | "mood" | "instagram" | "facebook" | "interest" | "birthday" | "gender" | "horoscope" | "purpose" | "prefferGender" | "intentions" | "experienceLevel" | "preferredMatch" | "primaryNeurotype" | "status" | "attachmentStyle" | "beliefSystem" | "mbtiType" | "topArtists" | "favoriteGenres" | "uiTheme" | "isOnline" | "lastSeen" | "profileCompleted" | "isVerified" | "emailVerified" | "createdAt" | "updatedAt" | "attachmentResults" | "loveLanguages" | "humanDesign" | "testsCompleted", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "pronouns" | "fullName" | "email" | "password" | "googleId" | "mobileNumber" | "Age" | "bio" | "avatar" | "images" | "mood" | "instagram" | "facebook" | "interest" | "blockedUsers" | "matchUsers" | "birthday" | "gender" | "horoscope" | "purpose" | "prefferGender" | "intentions" | "experienceLevel" | "preferredMatch" | "primaryNeurotype" | "status" | "attachmentStyle" | "beliefSystem" | "mbtiType" | "topArtists" | "favoriteGenres" | "uiTheme" | "isOnline" | "lastSeen" | "profileCompleted" | "isVerified" | "emailVerified" | "createdAt" | "updatedAt" | "attachmentResults" | "loveLanguages" | "humanDesign" | "testsCompleted", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     recvMessages?: boolean | User$recvMessagesArgs<ExtArgs>
     sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
@@ -2805,6 +2819,8 @@ export namespace Prisma {
       instagram: string | null
       facebook: string | null
       interest: string[]
+      blockedUsers: string[]
+      matchUsers: string[]
       birthday: Date | null
       gender: string | null
       horoscope: string | null
@@ -3277,6 +3293,8 @@ export namespace Prisma {
     readonly instagram: FieldRef<"User", 'String'>
     readonly facebook: FieldRef<"User", 'String'>
     readonly interest: FieldRef<"User", 'String[]'>
+    readonly blockedUsers: FieldRef<"User", 'String[]'>
+    readonly matchUsers: FieldRef<"User", 'String[]'>
     readonly birthday: FieldRef<"User", 'DateTime'>
     readonly gender: FieldRef<"User", 'String'>
     readonly horoscope: FieldRef<"User", 'String'>
@@ -17466,6 +17484,8 @@ export namespace Prisma {
     instagram: 'instagram',
     facebook: 'facebook',
     interest: 'interest',
+    blockedUsers: 'blockedUsers',
+    matchUsers: 'matchUsers',
     birthday: 'birthday',
     gender: 'gender',
     horoscope: 'horoscope',
@@ -17786,6 +17806,8 @@ export namespace Prisma {
     instagram?: StringNullableFilter<"User"> | string | null
     facebook?: StringNullableFilter<"User"> | string | null
     interest?: StringNullableListFilter<"User">
+    blockedUsers?: StringNullableListFilter<"User">
+    matchUsers?: StringNullableListFilter<"User">
     birthday?: DateTimeNullableFilter<"User"> | Date | string | null
     gender?: StringNullableFilter<"User"> | string | null
     horoscope?: StringNullableFilter<"User"> | string | null
@@ -17838,6 +17860,8 @@ export namespace Prisma {
     instagram?: SortOrderInput | SortOrder
     facebook?: SortOrderInput | SortOrder
     interest?: SortOrder
+    blockedUsers?: SortOrder
+    matchUsers?: SortOrder
     birthday?: SortOrderInput | SortOrder
     gender?: SortOrderInput | SortOrder
     horoscope?: SortOrderInput | SortOrder
@@ -17893,6 +17917,8 @@ export namespace Prisma {
     instagram?: StringNullableFilter<"User"> | string | null
     facebook?: StringNullableFilter<"User"> | string | null
     interest?: StringNullableListFilter<"User">
+    blockedUsers?: StringNullableListFilter<"User">
+    matchUsers?: StringNullableListFilter<"User">
     birthday?: DateTimeNullableFilter<"User"> | Date | string | null
     gender?: StringNullableFilter<"User"> | string | null
     horoscope?: StringNullableFilter<"User"> | string | null
@@ -17945,6 +17971,8 @@ export namespace Prisma {
     instagram?: SortOrderInput | SortOrder
     facebook?: SortOrderInput | SortOrder
     interest?: SortOrder
+    blockedUsers?: SortOrder
+    matchUsers?: SortOrder
     birthday?: SortOrderInput | SortOrder
     gender?: SortOrderInput | SortOrder
     horoscope?: SortOrderInput | SortOrder
@@ -17996,6 +18024,8 @@ export namespace Prisma {
     instagram?: StringNullableWithAggregatesFilter<"User"> | string | null
     facebook?: StringNullableWithAggregatesFilter<"User"> | string | null
     interest?: StringNullableListFilter<"User">
+    blockedUsers?: StringNullableListFilter<"User">
+    matchUsers?: StringNullableListFilter<"User">
     birthday?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     gender?: StringNullableWithAggregatesFilter<"User"> | string | null
     horoscope?: StringNullableWithAggregatesFilter<"User"> | string | null
@@ -18758,6 +18788,8 @@ export namespace Prisma {
     instagram?: string | null
     facebook?: string | null
     interest?: UserCreateinterestInput | string[]
+    blockedUsers?: UserCreateblockedUsersInput | string[]
+    matchUsers?: UserCreatematchUsersInput | string[]
     birthday?: Date | string | null
     gender?: string | null
     horoscope?: string | null
@@ -18810,6 +18842,8 @@ export namespace Prisma {
     instagram?: string | null
     facebook?: string | null
     interest?: UserCreateinterestInput | string[]
+    blockedUsers?: UserCreateblockedUsersInput | string[]
+    matchUsers?: UserCreatematchUsersInput | string[]
     birthday?: Date | string | null
     gender?: string | null
     horoscope?: string | null
@@ -18862,6 +18896,8 @@ export namespace Prisma {
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
+    blockedUsers?: UserUpdateblockedUsersInput | string[]
+    matchUsers?: UserUpdatematchUsersInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18914,6 +18950,8 @@ export namespace Prisma {
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
+    blockedUsers?: UserUpdateblockedUsersInput | string[]
+    matchUsers?: UserUpdatematchUsersInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18966,6 +19004,8 @@ export namespace Prisma {
     instagram?: string | null
     facebook?: string | null
     interest?: UserCreateinterestInput | string[]
+    blockedUsers?: UserCreateblockedUsersInput | string[]
+    matchUsers?: UserCreatematchUsersInput | string[]
     birthday?: Date | string | null
     gender?: string | null
     horoscope?: string | null
@@ -19011,6 +19051,8 @@ export namespace Prisma {
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
+    blockedUsers?: UserUpdateblockedUsersInput | string[]
+    matchUsers?: UserUpdatematchUsersInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19056,6 +19098,8 @@ export namespace Prisma {
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
+    blockedUsers?: UserUpdateblockedUsersInput | string[]
+    matchUsers?: UserUpdatematchUsersInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19971,6 +20015,8 @@ export namespace Prisma {
     instagram?: SortOrder
     facebook?: SortOrder
     interest?: SortOrder
+    blockedUsers?: SortOrder
+    matchUsers?: SortOrder
     birthday?: SortOrder
     gender?: SortOrder
     horoscope?: SortOrder
@@ -20575,6 +20621,14 @@ export namespace Prisma {
     set: string[]
   }
 
+  export type UserCreateblockedUsersInput = {
+    set: string[]
+  }
+
+  export type UserCreatematchUsersInput = {
+    set: string[]
+  }
+
   export type UserCreatepreferredMatchInput = {
     set: string[]
   }
@@ -20711,6 +20765,16 @@ export namespace Prisma {
   }
 
   export type UserUpdateinterestInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type UserUpdateblockedUsersInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type UserUpdatematchUsersInput = {
     set?: string[]
     push?: string | string[]
   }
@@ -21777,6 +21841,8 @@ export namespace Prisma {
     instagram?: string | null
     facebook?: string | null
     interest?: UserCreateinterestInput | string[]
+    blockedUsers?: UserCreateblockedUsersInput | string[]
+    matchUsers?: UserCreatematchUsersInput | string[]
     birthday?: Date | string | null
     gender?: string | null
     horoscope?: string | null
@@ -21828,6 +21894,8 @@ export namespace Prisma {
     instagram?: string | null
     facebook?: string | null
     interest?: UserCreateinterestInput | string[]
+    blockedUsers?: UserCreateblockedUsersInput | string[]
+    matchUsers?: UserCreatematchUsersInput | string[]
     birthday?: Date | string | null
     gender?: string | null
     horoscope?: string | null
@@ -21884,6 +21952,8 @@ export namespace Prisma {
     instagram?: string | null
     facebook?: string | null
     interest?: UserCreateinterestInput | string[]
+    blockedUsers?: UserCreateblockedUsersInput | string[]
+    matchUsers?: UserCreatematchUsersInput | string[]
     birthday?: Date | string | null
     gender?: string | null
     horoscope?: string | null
@@ -21935,6 +22005,8 @@ export namespace Prisma {
     instagram?: string | null
     facebook?: string | null
     interest?: UserCreateinterestInput | string[]
+    blockedUsers?: UserCreateblockedUsersInput | string[]
+    matchUsers?: UserCreatematchUsersInput | string[]
     birthday?: Date | string | null
     gender?: string | null
     horoscope?: string | null
@@ -22002,6 +22074,8 @@ export namespace Prisma {
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
+    blockedUsers?: UserUpdateblockedUsersInput | string[]
+    matchUsers?: UserUpdatematchUsersInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22053,6 +22127,8 @@ export namespace Prisma {
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
+    blockedUsers?: UserUpdateblockedUsersInput | string[]
+    matchUsers?: UserUpdatematchUsersInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22115,6 +22191,8 @@ export namespace Prisma {
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
+    blockedUsers?: UserUpdateblockedUsersInput | string[]
+    matchUsers?: UserUpdatematchUsersInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22166,6 +22244,8 @@ export namespace Prisma {
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
+    blockedUsers?: UserUpdateblockedUsersInput | string[]
+    matchUsers?: UserUpdatematchUsersInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22217,6 +22297,8 @@ export namespace Prisma {
     instagram?: string | null
     facebook?: string | null
     interest?: UserCreateinterestInput | string[]
+    blockedUsers?: UserCreateblockedUsersInput | string[]
+    matchUsers?: UserCreatematchUsersInput | string[]
     birthday?: Date | string | null
     gender?: string | null
     horoscope?: string | null
@@ -22268,6 +22350,8 @@ export namespace Prisma {
     instagram?: string | null
     facebook?: string | null
     interest?: UserCreateinterestInput | string[]
+    blockedUsers?: UserCreateblockedUsersInput | string[]
+    matchUsers?: UserCreatematchUsersInput | string[]
     birthday?: Date | string | null
     gender?: string | null
     horoscope?: string | null
@@ -22335,6 +22419,8 @@ export namespace Prisma {
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
+    blockedUsers?: UserUpdateblockedUsersInput | string[]
+    matchUsers?: UserUpdatematchUsersInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22386,6 +22472,8 @@ export namespace Prisma {
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
+    blockedUsers?: UserUpdateblockedUsersInput | string[]
+    matchUsers?: UserUpdatematchUsersInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22437,6 +22525,8 @@ export namespace Prisma {
     instagram?: string | null
     facebook?: string | null
     interest?: UserCreateinterestInput | string[]
+    blockedUsers?: UserCreateblockedUsersInput | string[]
+    matchUsers?: UserCreatematchUsersInput | string[]
     birthday?: Date | string | null
     gender?: string | null
     horoscope?: string | null
@@ -22488,6 +22578,8 @@ export namespace Prisma {
     instagram?: string | null
     facebook?: string | null
     interest?: UserCreateinterestInput | string[]
+    blockedUsers?: UserCreateblockedUsersInput | string[]
+    matchUsers?: UserCreatematchUsersInput | string[]
     birthday?: Date | string | null
     gender?: string | null
     horoscope?: string | null
@@ -22544,6 +22636,8 @@ export namespace Prisma {
     instagram?: string | null
     facebook?: string | null
     interest?: UserCreateinterestInput | string[]
+    blockedUsers?: UserCreateblockedUsersInput | string[]
+    matchUsers?: UserCreatematchUsersInput | string[]
     birthday?: Date | string | null
     gender?: string | null
     horoscope?: string | null
@@ -22595,6 +22689,8 @@ export namespace Prisma {
     instagram?: string | null
     facebook?: string | null
     interest?: UserCreateinterestInput | string[]
+    blockedUsers?: UserCreateblockedUsersInput | string[]
+    matchUsers?: UserCreatematchUsersInput | string[]
     birthday?: Date | string | null
     gender?: string | null
     horoscope?: string | null
@@ -22662,6 +22758,8 @@ export namespace Prisma {
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
+    blockedUsers?: UserUpdateblockedUsersInput | string[]
+    matchUsers?: UserUpdatematchUsersInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22713,6 +22811,8 @@ export namespace Prisma {
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
+    blockedUsers?: UserUpdateblockedUsersInput | string[]
+    matchUsers?: UserUpdatematchUsersInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22775,6 +22875,8 @@ export namespace Prisma {
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
+    blockedUsers?: UserUpdateblockedUsersInput | string[]
+    matchUsers?: UserUpdatematchUsersInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22826,6 +22928,8 @@ export namespace Prisma {
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
+    blockedUsers?: UserUpdateblockedUsersInput | string[]
+    matchUsers?: UserUpdatematchUsersInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22917,6 +23021,8 @@ export namespace Prisma {
     instagram?: string | null
     facebook?: string | null
     interest?: UserCreateinterestInput | string[]
+    blockedUsers?: UserCreateblockedUsersInput | string[]
+    matchUsers?: UserCreatematchUsersInput | string[]
     birthday?: Date | string | null
     gender?: string | null
     horoscope?: string | null
@@ -22968,6 +23074,8 @@ export namespace Prisma {
     instagram?: string | null
     facebook?: string | null
     interest?: UserCreateinterestInput | string[]
+    blockedUsers?: UserCreateblockedUsersInput | string[]
+    matchUsers?: UserCreatematchUsersInput | string[]
     birthday?: Date | string | null
     gender?: string | null
     horoscope?: string | null
@@ -23054,6 +23162,8 @@ export namespace Prisma {
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
+    blockedUsers?: UserUpdateblockedUsersInput | string[]
+    matchUsers?: UserUpdatematchUsersInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23105,6 +23215,8 @@ export namespace Prisma {
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
+    blockedUsers?: UserUpdateblockedUsersInput | string[]
+    matchUsers?: UserUpdatematchUsersInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23221,6 +23333,8 @@ export namespace Prisma {
     instagram?: string | null
     facebook?: string | null
     interest?: UserCreateinterestInput | string[]
+    blockedUsers?: UserCreateblockedUsersInput | string[]
+    matchUsers?: UserCreatematchUsersInput | string[]
     birthday?: Date | string | null
     gender?: string | null
     horoscope?: string | null
@@ -23272,6 +23386,8 @@ export namespace Prisma {
     instagram?: string | null
     facebook?: string | null
     interest?: UserCreateinterestInput | string[]
+    blockedUsers?: UserCreateblockedUsersInput | string[]
+    matchUsers?: UserCreatematchUsersInput | string[]
     birthday?: Date | string | null
     gender?: string | null
     horoscope?: string | null
@@ -23366,6 +23482,8 @@ export namespace Prisma {
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
+    blockedUsers?: UserUpdateblockedUsersInput | string[]
+    matchUsers?: UserUpdatematchUsersInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23417,6 +23535,8 @@ export namespace Prisma {
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     interest?: UserUpdateinterestInput | string[]
+    blockedUsers?: UserUpdateblockedUsersInput | string[]
+    matchUsers?: UserUpdatematchUsersInput | string[]
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     horoscope?: NullableStringFieldUpdateOperationsInput | string | null

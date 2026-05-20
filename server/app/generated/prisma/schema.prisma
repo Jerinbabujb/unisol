@@ -22,13 +22,15 @@ model User {
   Age          String?
 
   // Profile & Socials (Updated for ProfilePage)
-  bio       String?
-  avatar    String?
-  images    String[] @default([]) // For the Photo Gallery
-  mood      String? // For the "Set Mood" feature
-  instagram String? // For Social Links
-  facebook  String? // For Social Links
-  interest  String[] @default([]) // For Interests & Vibes
+  bio          String?
+  avatar       String?
+  images       String[] @default([]) // For the Photo Gallery
+  mood         String? // For the "Set Mood" feature
+  instagram    String? // For Social Links
+  facebook     String? // For Social Links
+  interest     String[] @default([]) // For Interests & Vibes
+  blockedUsers String[] @default([])
+  matchUsers   String[] @default([])
 
   // Personal Details
   birthday  DateTime?

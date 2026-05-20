@@ -18,6 +18,7 @@ import CreateRoom from './components/chatroom/private/CreateRoom';
 import PrivateChatWindow from './components/chatroom/private/ChatWindow';
 import PrivateRoomSideBar from './components/chatroom/private/SideBar';
 import JoinRoom from './components/chatroom/private/JoinRoom';
+import Settings from './pages/Settings';
 
 
 const App = () => {
@@ -49,6 +50,7 @@ const App = () => {
           <Route path='/Emoji Charades' element={authUser ? <EmojiCharades /> : <Navigate to="/login" />} />
           <Route path='/global-room-lists' element={authUser ? <GroupsLists /> : <Navigate to="/login" />} />
           <Route path='/create-room' element={authUser ? <CreateRoom /> : <Navigate to='/login' />} />
+          <Route path='/settings' element={authUser ? <Settings /> : <Navigate to='/login' />} />
           <Route path='/join-private-room/:inviteToken' element={authUser ? <JoinRoom /> : <Navigate to='/login' />} />
           <Route path='/private-room/:roomName' element={authUser ? <PrivateChatWindow /> : <Navigate to='/login' />} />
           <Route path='/private-room/:roomName/profile' element={authUser ? <PrivateRoomSideBar /> : <Navigate to='/login' />} />

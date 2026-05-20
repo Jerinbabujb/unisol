@@ -136,6 +136,8 @@ exports.Prisma.UserScalarFieldEnum = {
   instagram: 'instagram',
   facebook: 'facebook',
   interest: 'interest',
+  blockedUsers: 'blockedUsers',
+  matchUsers: 'matchUsers',
   birthday: 'birthday',
   gender: 'gender',
   horoscope: 'horoscope',
