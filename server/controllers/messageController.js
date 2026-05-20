@@ -272,12 +272,19 @@ export const connectionRequest = async (req, res) => {
     const connectionId = existingRequest?.id
 
     if (existingRequest) {
+      if(status==="rejected"){
+        updateStatus = await prisma.connection.delete({
+        where: { id: connectionId }
+      })
+      }
+      else{
       updateStatus = await prisma.connection.update({
         where: { id: connectionId },
         data: {
           status: status
         }
       })
+    }
     }
     else {
 
@@ -363,22 +370,25 @@ export const freindRequestCheck = async (req, res) => {
 
 
 export const sendMessage = async (req, res) => {
+      const { text, image } = req.body;
+  console.log("req.body",req.body);
   try {
-    const { text, image } = req.body;
+
     const receiverId = req.params.id;
     const senderId = req.user.id;
-
+    
     let imageUrl;
     if (image) {
       const uploadResponse = await cloudinary.uploader.upload(image);
       imageUrl = uploadResponse.secure_url;
+      console.log(imageUrl);
     }
 
-    const newMessage = await prisma.message.create({
+    const newMessage = await prisma.Message.create({
       data: {
         senderId,
         receiverId,
-        text,
+        text : text ||"",
         image: imageUrl
       }
     });

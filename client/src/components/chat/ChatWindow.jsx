@@ -70,6 +70,7 @@ const ChatWindow = ({ setOpenProfile }) => {
     navigate('/');
     setTimeout(() => navigate('/messages'), 10);
   };
+  
   const handleSendMessage = async (e) => {
     e.preventDefault();
     if (input.trim() === "") return;
@@ -77,20 +78,37 @@ const ChatWindow = ({ setOpenProfile }) => {
     setInput('');
   };
 
-  const handleSendImage = async (e) => {
-    const file = e.target.files[0];
-    if (!file || !file.type.startsWith("image/")) {
-      toast.error("Please select an image file");
-      return;
+const handleSendImage = async (e) => {
+  const file = e.target.files[0];
+
+  if (!file || !file.type.startsWith("image/")) {
+    toast.error("Please select an image file");
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.readAsDataURL(file);
+
+  reader.onload = async () => {
+    try {
+      const base64Image = reader.result;
+
+      await sendMessage({
+        image: base64Image,
+      });
+
+      e.target.value = ""; // reset input
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to send image");
     }
-    const reader = new FileReader();
-    reader.onloadend = async () => {
-      await sendMessage({ image: reader.result });
-      e.target.value = "";
-    };
-    reader.readAsDataURL(file);
   };
 
+  reader.onerror = () => {
+    toast.error("Failed to read image file");
+  };
+};
   const selectedUserIdTransfer = (url) => {
     postAnswer(selectedUser?.id);
     navigate(`/${url}`, { state: { selectedUserId: selectedUser?.id } });
@@ -279,12 +297,12 @@ const ChatWindow = ({ setOpenProfile }) => {
 
           {/* Games */}
 
-          <button
+          {/* <button
             onClick={() => setGames(!games)}
             className="hover:text-purple-400 transition cursor-pointer"
           >
             <GiGamepad size={26} />
-          </button>
+          </button> */}
           {games && (
             <div className="absolute bottom-12 right-0 w-72 bg-zinc-900 text-white rounded-xl shadow-2xl p-4 z-50 border border-zinc-700">
 

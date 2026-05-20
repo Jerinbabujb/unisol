@@ -149,6 +149,7 @@ model Message {
   senderId   String
   receiverId String
   text       String
+  image      String?
   createdAt  DateTime @default(now())
   seen       Boolean @default(false)
   receiver   User     @relation("received", fields: [receiverId], references: [id])

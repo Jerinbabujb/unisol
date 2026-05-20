@@ -1,0 +1,5 @@
+{
+    "github.copilot.chat.summarizeAgentConversationHistory.enabled": true,
+    "editor.inlineSuggest.suppressSuggestions": true,
+    "editor.inlineSuggest.experimental.showOnSuggestConflict": "always"
+}

@@ -13,6 +13,7 @@ const GroupsLists = () => {
     joinRoom, getPrivateRoom, privateRoom, privateRoomMembers
   } = useContext(ChatContext);
   const { authUser, logout } = useContext(AuthContext);
+  
 
   useEffect(() => {
     globalRoomLists();
