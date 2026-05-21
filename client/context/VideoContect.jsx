@@ -29,6 +29,8 @@ export const VideoProvider = ({ children }) => {
       console.log("❌ SOCKET NOT CONNECTED");
       return;
     }
+    setCurrentVideo(videoUrl);
+  setPartnerId(to);
     socket.emit("video-invite", { to, videoUrl });
   };
 
@@ -59,8 +61,11 @@ export const VideoProvider = ({ children }) => {
     const handleSync = ({ action, time }) => setSyncState({ action, time });
 
     const handleAccepted = (data) => {
-      setPartnerId(data.from);
-      setCurrentVideo(data.videoUrl);
+
+      if (!currentVideo) {
+    setPartnerId(data.from);
+    setCurrentVideo(data.videoUrl);
+  }
       syncLockUntil.current = Date.now() + 3500;
       setPlaying(true);
     };

@@ -187,7 +187,7 @@ const ChatWindow = ({ setOpenProfile }) => {
   // Use the aliased names here:
   onPlay={handleVideoPlay}
   onPause={handleVideoPause}
- onSeek={(seconds) => handleVideoSeek(seconds)}
+ onSeek={handleVideoSeek}
 />
           </div>
         </div>
