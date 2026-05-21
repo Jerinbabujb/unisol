@@ -16,11 +16,17 @@ export const io = new Server(server, {
   cors: { origin: "*" }
 })
 
+
 export const userSocketMap = {};
 
 io.on("connection", (socket) => {
+  // const userId = socket.handshake.auth?.userId;
   const userId = socket.handshake.auth?.userId;
 
+if (!userId) {
+  console.log("❌ No userId in socket auth");
+  return socket.disconnect();
+}
   console.log("user connected", userId);
 
   if (userId) userSocketMap[userId] = socket.id;
@@ -110,42 +116,69 @@ io.on("connection", (socket) => {
   })
 
   /*---Video Stream ---*/
+ 
+ socket.on("video-invite", (data) => {
+  console.log("🔥 RAW VIDEO INVITE EVENT:", data);
 
-  socket.on("video-invite",({to, videoUrl})=>{
-    const receiverSocketId=userSocketMap[userId];
-    if(receiverSocketId){
-      io.to(receiverSocketId).emit("video-invite",{
-        from:userId,
-        videoUrl
-      })
-    }
-  })
+  if (!data) return;
 
-  socket.on("video-accept",({to,videoUrl})=>{
-    const receiverSocketId= userSocketMap[userId];
-    if(receiverSocketId){
-      io.to(receiverSocketId).emit("video-accpet",{
-        from:userId,
-        startTime:Date.now(),
-        videoUrl
-      })
-    }
+  const { to, videoUrl } = data;
+
+  const receiverSocketId = userSocketMap[to];
+
+  
+  if (receiverSocketId) {
+    io.to(receiverSocketId).emit("video-invite", {
+      from: userId,
+      videoUrl,
+    });
+  }
+});
+
+  socket.on("video-accepted", ({ to, videoUrl }) => {
+  const receiverSocketId = userSocketMap[to];
+
+  console.log("DEBUG accepted:", {
+    from: userId,
+    to,
+    videoUrl,
   });
-  socket.on("video-reject",({to})=>{
-    const receiverSocketId=userSocketMap[userId];
-    if(receiverSocketId){
-      io.to(receiverSocketId).emit("video-reject");
-    }
-  });
+
+
+  if (receiverSocketId) {
+    io.to(receiverSocketId).emit("video-accepted", {
+      from: userId,
+      videoUrl,
+      startTime: Date.now(),
+    });
+  }
+});
+
+socket.on("video-rejected", ({ to }) => {
+  const receiverSocketId = userSocketMap[to];
+
+  if (receiverSocketId) {
+    io.to(receiverSocketId).emit("video-rejected");
+  }
+});
+
   socket.on("video-sync",({to,action,currentTime})=>{
-    const receiverSocketId= userSocketMap[userId];
+    const receiverSocketId= userSocketMap[to];
     if(receiverSocketId){
       io.to(receiverSocketId).emit("video-sync",{
         action,
         currentTime
       })
     }
-  })
+  });
+  // Backend: socket.js
+socket.on("video-close", ({ to }) => {
+  const receiverSocketId = userSocketMap[to];
+  if (receiverSocketId) {
+    io.to(receiverSocketId).emit("video-close");
+  }
+});
+  
 
 });
 

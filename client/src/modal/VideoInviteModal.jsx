@@ -2,12 +2,12 @@ import { useContext } from "react";
 import { VideoContext } from "../../context/VideoContect";
 
 const VideoInviteModal = () => {
-  const { musicInvite, acceptInvite, rejectInvite } = useContext(VideoContext);
+  const { videoInvite, acceptInvite, rejectInvite } =
+    useContext(VideoContext);
 
-  if (!musicInvite) return null;
-
+  if (!videoInvite) return null;
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
       <div className="bg-white p-6 rounded-lg w-80 text-center">
 
         <h2 className="text-xl font-bold mb-2">
@@ -15,11 +15,11 @@ const VideoInviteModal = () => {
         </h2>
 
         <p className="mb-4">
-          {musicInvite.name || "Someone"} wants to watch to:
+          Someone wants to watch:
         </p>
 
         <p className="font-semibold mb-6">
-          {musicInvite.songName}
+          {videoInvite.videoUrl}
         </p>
 
         <div className="flex justify-center gap-4">

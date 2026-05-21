@@ -9,6 +9,8 @@ import { CallProvider } from '../context/CallContext.jsx';
 import { io } from 'socket.io-client';
 import { MusicProvider } from '../context/MusicContext.jsx';
 import { GameProvider } from '../context/GameContext.jsx';
+import { VideoProvider } from '../context/VideoContect.jsx';
+import { useEffect } from 'react';
 
 // Helper to get ID from your specific AuthProvider storage key
 const getUserId = () => {
@@ -19,7 +21,7 @@ const getUserId = () => {
         return null;
     }
 };
-
+console.log("VideoProvider:", VideoProvider);
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
 const socket = io(BACKEND_URL, {
@@ -33,10 +35,13 @@ createRoot(document.getElementById('root')).render(
             <ChatProvider>
                 <CallProvider socket={socket}>
                     <GameProvider>
+                                                <VideoProvider>
+
                       <MusicProvider>
-                        
                     <App />
                       </MusicProvider>
+                                          </VideoProvider>
+
                     </GameProvider>
                 </CallProvider>
             </ChatProvider>

@@ -1,180 +1,220 @@
-import { createContext, useContext, useEffect, useRef, useState } from "react";
-import { socket } from "../socket"; 
-import MusicInviteModal from "../src/modal/MusicInviteModal";
-import AudioPlayer from 'react-h5-audio-player';
-import 'react-h5-audio-player/lib/styles.css';
-import { FiX } from "react-icons/fi";
+import { createContext, useEffect, useRef, useState, useContext } from "react";
+import { socket } from "../socket";
+import { AuthContext } from "./AuthContext";
+import VideoInviteModal from "../src/modal/VideoInviteModal";
 
 export const VideoContext = createContext();
 
 export const VideoProvider = ({ children }) => {
+  const { authUser } = useContext(AuthContext);
 
-  const audioRef = useRef(null);
-  const isRemoteAction = useRef(false);
-  
-  const [currentSong, setCurrentSong] = useState(null);
+  const videoRef = useRef(null);
+  const syncLockUntil = useRef(0);
+  const isPlayingRef = useRef(false);
+
+  const [currentVideo, setCurrentVideo] = useState(null);
   const [partnerId, setPartnerId] = useState(null);
-  const [pendingTime, setPendingTime] = useState(0);
-  const [syncState, setSyncState] = useState({ action: null, time: 0, version: 0 });                                                                                                                 
-  /* ---------------- SEND INVITE ---------------- */
-  const sendMusicInvite = (toUserId, song) => {
-    setPartnerId(toUserId);
+  const [syncState, setSyncState] = useState(null);
+  const [videoInvite, setVideoInvite] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
-    socket.emit("music-invite", {
-      to: toUserId,
-      songUrl: song.song_url,
-      songName: song.song_name,
-    });
-    console.log("Full song object:", song); // 👈 add this
-  console.log("song_url:", song.song_url);
-  console.log("song_name:", song.song_name);
-
+  const setPlaying = (val) => {
+    isPlayingRef.current = val;
+    setIsPlaying(val);
   };
 
-  /* ---------------- ACCEPT INVITE ---------------- */
-// In MusicContext.jsx
-const musicInviteRef = useRef(null);
-const [musicInvite, setMusicInviteState] = useState(null);
-
-// Keep ref in sync with state
-const setMusicInvite = (val) => {
-  musicInviteRef.current = val;
-  setMusicInviteState(val);
-};
-
-const acceptInvite = () => {
-  const invite = musicInviteRef.current; // ✅ always fresh
-  if (!invite) return;
-
-  console.log("musicInvite.songUrl:", invite.songUrl);
-
-  socket.emit("music-accepted", {
-    to: invite.from,
-    songUrl: invite.songUrl,
-  });
-
-  setPartnerId(invite.from);
-  setCurrentSong(invite.songUrl);
- 
-  setMusicInvite(null);
-  setTimeout(() => {
-    setSyncState({ action: "play", time: 0, version: Date.now() });
-  }, 500);
-};
-const rejectInvite = () => {
-  socket.emit("music-rejected", {
-    to: musicInvite.from,
-  });
-
-  setMusicInvite(null);
-};
-  /* ---------------- LOCAL CONTROLS ---------------- */
-
-  const handlePlay = () => {
-  if (!partnerId || isRemoteAction.current) return;
-
-  const audio = audioRef.current?.audio?.current;
-  if (!audio) return;
-
-  socket.emit("music-sync", {
-    to: partnerId,
-    action: "play",
-    currentTime: audio.currentTime,
-  });
-
-  console.log("Audio element:", audio);
-  console.log("Current time:", audio.currentTime);
-};
-
-  const handlePause = () => {
-    if (!partnerId || isRemoteAction.current) return;
-    const audio = audioRef.current?.audio?.current;
-  if (!audio) return;
-    socket.emit("music-sync", {
-      to: partnerId,
-      action: "pause",
-      currentTime: audio.currentTime,
-    });
+  /* ---------------- INVITE ---------------- */
+  const sendVideoInvite = (to, videoUrl) => {
+    if (!socket.connected) {
+      console.log("❌ SOCKET NOT CONNECTED");
+      return;
+    }
+    socket.emit("video-invite", { to, videoUrl });
   };
 
-  const handleSeek = () => {
-    if (!partnerId || isRemoteAction.current) return;
-   const audio = audioRef.current?.audio?.current;
-  if (!audio) return;
-    socket.emit("music-sync", {
-      to: partnerId,
-      action: "seek",
-      currentTime: audio.currentTime,
+  /* ---------------- ACCEPT & REJECT ---------------- */
+  const acceptInvite = () => {
+    if (!videoInvite) return;
+    socket.emit("video-accepted", {
+      to: videoInvite.from,
+      videoUrl: videoInvite.videoUrl,
     });
+
+    setPartnerId(videoInvite.from);
+    setCurrentVideo(videoInvite.videoUrl);
+    setVideoInvite(null);
+    syncLockUntil.current = Date.now() + 3500;
+    setPlaying(true);
+  };
+
+  const rejectInvite = () => {
+    if (!videoInvite) return;
+    socket.emit("video-rejected", { to: videoInvite.from });
+    setVideoInvite(null);
   };
 
   /* ---------------- SOCKET LISTENERS ---------------- */
-
   useEffect(() => {
-  socket.on("music-invite", (data) => {
-    setMusicInvite(data);
-    console.log("Incoming invite:", data);
-  });
+    const handleInvite = (data) => setVideoInvite(data);
+    const handleSync = ({ action, time }) => setSyncState({ action, time });
 
- socket.on("music-start", ({ songUrl, startTime, from }) => {
-    console.log("music started");
-    const delay = (Date.now() - startTime) / 1000;
-    setCurrentSong(songUrl);
-    setPartnerId(from);
-    console.log("from",from);
-    // Use a version/timestamp to ensure the Effect triggers even if time is the same
-    setSyncState({ action: "play", time: delay, version: Date.now() });
-  });
+    const handleAccepted = (data) => {
+      setPartnerId(data.from);
+      setCurrentVideo(data.videoUrl);
+      syncLockUntil.current = Date.now() + 3500;
+      setPlaying(true);
+    };
 
-  socket.on("music-sync", ({ action, currentTime }) => {
-    setSyncState({ action, time: currentTime, version: Date.now() });
-  });
+    const handleRejected = () => {
+      alert("Your video invite was declined.");
+      setPartnerId(null);
+    };
 
-  return () => {
-    socket.off("music-invite");
-    socket.off("music-start");
-    socket.off("music-sync");
-  };
-}, [socket]);
-useEffect(() => {
-  if (!syncState.action) return;
+    const handleClose = () => {
+      setCurrentVideo(null);
+      setPartnerId(null);
+      setPlaying(false);
+    };
 
-  // ✅ Retry until audio is available
-  const tryPlay = () => {
-    const audio = audioRef.current?.audio?.current;
-    console.log("tryPlay audio:", audio);
-    if (!audio) {
-      setTimeout(tryPlay, 100); // retry every 100ms
-      return;
+    socket.on("video-invite", handleInvite);
+    socket.on("video-sync", handleSync);
+    socket.on("video-accepted", handleAccepted);
+    socket.on("video-rejected", handleRejected);
+    socket.on("video-close", handleClose);
+
+    return () => {
+      socket.off("video-invite", handleInvite);
+      socket.off("video-sync", handleSync);
+      socket.off("video-accepted", handleAccepted);
+      socket.off("video-rejected", handleRejected);
+      socket.off("video-close", handleClose);
+    };
+  }, []);
+
+  /* ---------------- SYNC APPLY ---------------- */
+/* ---------------- SYNC APPLY ---------------- */
+  useEffect(() => {
+    if (!syncState || !videoRef.current) return;
+
+    // Set a lock so that when we call seekTo(), it doesn't trigger handleSeek()
+    syncLockUntil.current = Date.now() + 1500; 
+
+    const safeTime = Number(syncState.time) || 0;
+
+    // Apply the seek action
+    if (typeof videoRef.current.seekTo === 'function') {
+      videoRef.current.seekTo(safeTime, 'seconds');
     }
 
-    isRemoteAction.current = true;
-
+    // Apply Play/Pause state
     if (syncState.action === "play") {
-      audio.currentTime = syncState.time;
-      audio.play().catch(e => console.log("Autoplay blocked:", e));
+      setPlaying(true);
     } else if (syncState.action === "pause") {
-      audio.pause();
-    } else if (syncState.action === "seek") {
-      audio.currentTime = syncState.time;
+      setPlaying(false);
     }
-
-    setTimeout(() => { isRemoteAction.current = false; }, 200);
-  };
-
-  tryPlay();
-}, [syncState]); // ✅ only syncState as dependency
- return (
-  <VideoProvider.Provider value={{
-    audioRef, currentSong, musicInvite, sendMusicInvite,
-    acceptInvite, handlePlay, handlePause, handleSeek,
-    rejectInvite, pendingTime, setPendingTime
-  }}>
-    {children}
-    <MusicInviteModal />
+    // Note: If action is 'seek', we just seek and keep previous playing state
     
-
-  </VideoProvider.Provider>
-);
+  }, [syncState]);
+  /* ---------------- LOCAL CONTROLS ---------------- */
+  // Inside VideoProvider
+// Inside VideoProvider, update the "SOCKET LISTENERS" section
+const handleSync = ({ action, time }) => {
+  console.log(`📡 [Received Sync] Action: ${action}, Time: ${time}`);
+  setSyncState({ action, time });
 };
 
+// Inside your local control functions:
+/* ---------------- LOCAL CONTROLS ---------------- */
+const handlePlay = () => {
+    // 1. Safety Check: Only proceed if ref is ready
+    if (!videoRef.current) {
+      console.warn("Play blocked: videoRef.current is null");
+      return;
+    }
+    if (Date.now() < syncLockUntil.current) return;
+    if (!partnerId) return;
+
+    setPlaying(true);
+
+    // 2. Direct Call: ReactPlayer v3 exposes these on the ref itself
+    const currentTime = typeof videoRef.current.getCurrentTime === 'function' 
+      ? videoRef.current.getCurrentTime() 
+      : 0;
+
+    socket.emit("video-sync", {
+      to: partnerId,
+      action: "play",
+      time: currentTime,
+    });
+  };
+
+  const handlePause = () => {
+    // 1. Safety Check
+    if (!videoRef.current) {
+      console.warn("Pause blocked: videoRef.current is null");
+      return;
+    }
+    if (Date.now() < syncLockUntil.current) return;
+    if (!partnerId) return;
+
+    setPlaying(false);
+
+    // 2. Direct Call
+    const currentTime = typeof videoRef.current.getCurrentTime === 'function' 
+      ? videoRef.current.getCurrentTime() 
+      : 0;
+
+    socket.emit("video-sync", {
+      to: partnerId,
+      action: "pause",
+      time: currentTime,
+    });
+  };
+
+// Inside VideoProvider in VideoContext.jsx
+
+const handleSeek = (seconds) => {
+  // 1. Prevent loop: If we are currently "locked" (receiving a remote update), don't emit back
+  if (Date.now() < syncLockUntil.current) return;
+  if (!partnerId) return;
+
+  console.log(`⏩ [Local] Seeking to: ${seconds}s`);
+
+  socket.emit("video-sync", {
+    to: partnerId,
+    action: "seek", // We use 'seek' to distinguish from play/pause
+    time: seconds,
+  });
+};
+
+  const handleCloseVideo = () => {
+    if (partnerId) {
+      socket.emit("video-close", { to: partnerId });
+    }
+    setCurrentVideo(null);
+    setPartnerId(null);
+    setPlaying(false);
+  };
+
+  return (
+    <VideoContext.Provider
+      value={{
+        videoRef,
+        currentVideo,
+        setCurrentVideo,
+        sendVideoInvite,
+        acceptInvite,
+        rejectInvite,
+        handlePlay,
+        handlePause,
+        handleSeek,
+        handleCloseVideo,
+        videoInvite,
+        isPlaying,
+      }}
+    >
+      {children}
+      <VideoInviteModal />
+    </VideoContext.Provider>
+  );
+};
