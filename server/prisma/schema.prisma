@@ -20,6 +20,8 @@ model User {
   googleId          String?
   mobileNumber      String?
   Age               String?
+  preferredFont     String?
+  preferredColor    String?
 
   // Profile & Socials (Updated for ProfilePage)
   bio               String?

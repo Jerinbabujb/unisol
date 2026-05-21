@@ -25,6 +25,8 @@ export const protectRoute = async (req, res, next) => {
         interest: true,
         images: true,
         Age: true,
+        preferredColor:true,
+        preferredFont:true,
 
 
         // 🔥 NEW FIELDS ADDED HERE

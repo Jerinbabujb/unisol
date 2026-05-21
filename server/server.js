@@ -109,6 +109,44 @@ io.on("connection", (socket) => {
     io.to(roomId).emit("new_room_message", message);
   })
 
+  /*---Video Stream ---*/
+
+  socket.on("video-invite",({to, videoUrl})=>{
+    const receiverSocketId=userSocketMap[userId];
+    if(receiverSocketId){
+      io.to(receiverSocketId).emit("video-invite",{
+        from:userId,
+        videoUrl
+      })
+    }
+  })
+
+  socket.on("video-accept",({to,videoUrl})=>{
+    const receiverSocketId= userSocketMap[userId];
+    if(receiverSocketId){
+      io.to(receiverSocketId).emit("video-accpet",{
+        from:userId,
+        startTime:Date.now(),
+        videoUrl
+      })
+    }
+  });
+  socket.on("video-reject",({to})=>{
+    const receiverSocketId=userSocketMap[userId];
+    if(receiverSocketId){
+      io.to(receiverSocketId).emit("video-reject");
+    }
+  });
+  socket.on("video-sync",({to,action,currentTime})=>{
+    const receiverSocketId= userSocketMap[userId];
+    if(receiverSocketId){
+      io.to(receiverSocketId).emit("video-sync",{
+        action,
+        currentTime
+      })
+    }
+  })
+
 });
 
 

@@ -2214,6 +2214,8 @@ export namespace Prisma {
     googleId: string | null
     mobileNumber: string | null
     Age: string | null
+    preferredFont: string | null
+    preferredColor: string | null
     bio: string | null
     avatar: string | null
     mood: string | null
@@ -2250,6 +2252,8 @@ export namespace Prisma {
     googleId: string | null
     mobileNumber: string | null
     Age: string | null
+    preferredFont: string | null
+    preferredColor: string | null
     bio: string | null
     avatar: string | null
     mood: string | null
@@ -2286,6 +2290,8 @@ export namespace Prisma {
     googleId: number
     mobileNumber: number
     Age: number
+    preferredFont: number
+    preferredColor: number
     bio: number
     avatar: number
     images: number
@@ -2335,6 +2341,8 @@ export namespace Prisma {
     googleId?: true
     mobileNumber?: true
     Age?: true
+    preferredFont?: true
+    preferredColor?: true
     bio?: true
     avatar?: true
     mood?: true
@@ -2371,6 +2379,8 @@ export namespace Prisma {
     googleId?: true
     mobileNumber?: true
     Age?: true
+    preferredFont?: true
+    preferredColor?: true
     bio?: true
     avatar?: true
     mood?: true
@@ -2407,6 +2417,8 @@ export namespace Prisma {
     googleId?: true
     mobileNumber?: true
     Age?: true
+    preferredFont?: true
+    preferredColor?: true
     bio?: true
     avatar?: true
     images?: true
@@ -2527,6 +2539,8 @@ export namespace Prisma {
     googleId: string | null
     mobileNumber: string | null
     Age: string | null
+    preferredFont: string | null
+    preferredColor: string | null
     bio: string | null
     avatar: string | null
     images: string[]
@@ -2591,6 +2605,8 @@ export namespace Prisma {
     googleId?: boolean
     mobileNumber?: boolean
     Age?: boolean
+    preferredFont?: boolean
+    preferredColor?: boolean
     bio?: boolean
     avatar?: boolean
     images?: boolean
@@ -2646,6 +2662,8 @@ export namespace Prisma {
     googleId?: boolean
     mobileNumber?: boolean
     Age?: boolean
+    preferredFont?: boolean
+    preferredColor?: boolean
     bio?: boolean
     avatar?: boolean
     images?: boolean
@@ -2693,6 +2711,8 @@ export namespace Prisma {
     googleId?: boolean
     mobileNumber?: boolean
     Age?: boolean
+    preferredFont?: boolean
+    preferredColor?: boolean
     bio?: boolean
     avatar?: boolean
     images?: boolean
@@ -2740,6 +2760,8 @@ export namespace Prisma {
     googleId?: boolean
     mobileNumber?: boolean
     Age?: boolean
+    preferredFont?: boolean
+    preferredColor?: boolean
     bio?: boolean
     avatar?: boolean
     images?: boolean
@@ -2778,7 +2800,7 @@ export namespace Prisma {
     testsCompleted?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "pronouns" | "fullName" | "email" | "password" | "googleId" | "mobileNumber" | "Age" | "bio" | "avatar" | "images" | "mood" | "instagram" | "facebook" | "interest" | "blockedUsers" | "matchUsers" | "birthday" | "gender" | "horoscope" | "purpose" | "prefferGender" | "intentions" | "experienceLevel" | "preferredMatch" | "primaryNeurotype" | "status" | "attachmentStyle" | "beliefSystem" | "mbtiType" | "topArtists" | "favoriteGenres" | "uiTheme" | "isOnline" | "lastSeen" | "profileCompleted" | "isVerified" | "emailVerified" | "createdAt" | "updatedAt" | "attachmentResults" | "loveLanguages" | "humanDesign" | "testsCompleted", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "pronouns" | "fullName" | "email" | "password" | "googleId" | "mobileNumber" | "Age" | "preferredFont" | "preferredColor" | "bio" | "avatar" | "images" | "mood" | "instagram" | "facebook" | "interest" | "blockedUsers" | "matchUsers" | "birthday" | "gender" | "horoscope" | "purpose" | "prefferGender" | "intentions" | "experienceLevel" | "preferredMatch" | "primaryNeurotype" | "status" | "attachmentStyle" | "beliefSystem" | "mbtiType" | "topArtists" | "favoriteGenres" | "uiTheme" | "isOnline" | "lastSeen" | "profileCompleted" | "isVerified" | "emailVerified" | "createdAt" | "updatedAt" | "attachmentResults" | "loveLanguages" | "humanDesign" | "testsCompleted", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     recvMessages?: boolean | User$recvMessagesArgs<ExtArgs>
     sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
@@ -2812,6 +2834,8 @@ export namespace Prisma {
       googleId: string | null
       mobileNumber: string | null
       Age: string | null
+      preferredFont: string | null
+      preferredColor: string | null
       bio: string | null
       avatar: string | null
       images: string[]
@@ -3286,6 +3310,8 @@ export namespace Prisma {
     readonly googleId: FieldRef<"User", 'String'>
     readonly mobileNumber: FieldRef<"User", 'String'>
     readonly Age: FieldRef<"User", 'String'>
+    readonly preferredFont: FieldRef<"User", 'String'>
+    readonly preferredColor: FieldRef<"User", 'String'>
     readonly bio: FieldRef<"User", 'String'>
     readonly avatar: FieldRef<"User", 'String'>
     readonly images: FieldRef<"User", 'String[]'>
@@ -17490,6 +17516,8 @@ export namespace Prisma {
     googleId: 'googleId',
     mobileNumber: 'mobileNumber',
     Age: 'Age',
+    preferredFont: 'preferredFont',
+    preferredColor: 'preferredColor',
     bio: 'bio',
     avatar: 'avatar',
     images: 'images',
@@ -17813,6 +17841,8 @@ export namespace Prisma {
     googleId?: StringNullableFilter<"User"> | string | null
     mobileNumber?: StringNullableFilter<"User"> | string | null
     Age?: StringNullableFilter<"User"> | string | null
+    preferredFont?: StringNullableFilter<"User"> | string | null
+    preferredColor?: StringNullableFilter<"User"> | string | null
     bio?: StringNullableFilter<"User"> | string | null
     avatar?: StringNullableFilter<"User"> | string | null
     images?: StringNullableListFilter<"User">
@@ -17867,6 +17897,8 @@ export namespace Prisma {
     googleId?: SortOrderInput | SortOrder
     mobileNumber?: SortOrderInput | SortOrder
     Age?: SortOrderInput | SortOrder
+    preferredFont?: SortOrderInput | SortOrder
+    preferredColor?: SortOrderInput | SortOrder
     bio?: SortOrderInput | SortOrder
     avatar?: SortOrderInput | SortOrder
     images?: SortOrder
@@ -17924,6 +17956,8 @@ export namespace Prisma {
     googleId?: StringNullableFilter<"User"> | string | null
     mobileNumber?: StringNullableFilter<"User"> | string | null
     Age?: StringNullableFilter<"User"> | string | null
+    preferredFont?: StringNullableFilter<"User"> | string | null
+    preferredColor?: StringNullableFilter<"User"> | string | null
     bio?: StringNullableFilter<"User"> | string | null
     avatar?: StringNullableFilter<"User"> | string | null
     images?: StringNullableListFilter<"User">
@@ -17978,6 +18012,8 @@ export namespace Prisma {
     googleId?: SortOrderInput | SortOrder
     mobileNumber?: SortOrderInput | SortOrder
     Age?: SortOrderInput | SortOrder
+    preferredFont?: SortOrderInput | SortOrder
+    preferredColor?: SortOrderInput | SortOrder
     bio?: SortOrderInput | SortOrder
     avatar?: SortOrderInput | SortOrder
     images?: SortOrder
@@ -18031,6 +18067,8 @@ export namespace Prisma {
     googleId?: StringNullableWithAggregatesFilter<"User"> | string | null
     mobileNumber?: StringNullableWithAggregatesFilter<"User"> | string | null
     Age?: StringNullableWithAggregatesFilter<"User"> | string | null
+    preferredFont?: StringNullableWithAggregatesFilter<"User"> | string | null
+    preferredColor?: StringNullableWithAggregatesFilter<"User"> | string | null
     bio?: StringNullableWithAggregatesFilter<"User"> | string | null
     avatar?: StringNullableWithAggregatesFilter<"User"> | string | null
     images?: StringNullableListFilter<"User">
@@ -18800,6 +18838,8 @@ export namespace Prisma {
     googleId?: string | null
     mobileNumber?: string | null
     Age?: string | null
+    preferredFont?: string | null
+    preferredColor?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -18854,6 +18894,8 @@ export namespace Prisma {
     googleId?: string | null
     mobileNumber?: string | null
     Age?: string | null
+    preferredFont?: string | null
+    preferredColor?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -18908,6 +18950,8 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     Age?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredFont?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredColor?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -18962,6 +19006,8 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     Age?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredFont?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredColor?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -19016,6 +19062,8 @@ export namespace Prisma {
     googleId?: string | null
     mobileNumber?: string | null
     Age?: string | null
+    preferredFont?: string | null
+    preferredColor?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -19063,6 +19111,8 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     Age?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredFont?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredColor?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -19110,6 +19160,8 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     Age?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredFont?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredColor?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -20034,6 +20086,8 @@ export namespace Prisma {
     googleId?: SortOrder
     mobileNumber?: SortOrder
     Age?: SortOrder
+    preferredFont?: SortOrder
+    preferredColor?: SortOrder
     bio?: SortOrder
     avatar?: SortOrder
     images?: SortOrder
@@ -20081,6 +20135,8 @@ export namespace Prisma {
     googleId?: SortOrder
     mobileNumber?: SortOrder
     Age?: SortOrder
+    preferredFont?: SortOrder
+    preferredColor?: SortOrder
     bio?: SortOrder
     avatar?: SortOrder
     mood?: SortOrder
@@ -20117,6 +20173,8 @@ export namespace Prisma {
     googleId?: SortOrder
     mobileNumber?: SortOrder
     Age?: SortOrder
+    preferredFont?: SortOrder
+    preferredColor?: SortOrder
     bio?: SortOrder
     avatar?: SortOrder
     mood?: SortOrder
@@ -21868,6 +21926,8 @@ export namespace Prisma {
     googleId?: string | null
     mobileNumber?: string | null
     Age?: string | null
+    preferredFont?: string | null
+    preferredColor?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -21921,6 +21981,8 @@ export namespace Prisma {
     googleId?: string | null
     mobileNumber?: string | null
     Age?: string | null
+    preferredFont?: string | null
+    preferredColor?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -21979,6 +22041,8 @@ export namespace Prisma {
     googleId?: string | null
     mobileNumber?: string | null
     Age?: string | null
+    preferredFont?: string | null
+    preferredColor?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -22032,6 +22096,8 @@ export namespace Prisma {
     googleId?: string | null
     mobileNumber?: string | null
     Age?: string | null
+    preferredFont?: string | null
+    preferredColor?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -22101,6 +22167,8 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     Age?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredFont?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredColor?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -22154,6 +22222,8 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     Age?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredFont?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredColor?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -22218,6 +22288,8 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     Age?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredFont?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredColor?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -22271,6 +22343,8 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     Age?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredFont?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredColor?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -22324,6 +22398,8 @@ export namespace Prisma {
     googleId?: string | null
     mobileNumber?: string | null
     Age?: string | null
+    preferredFont?: string | null
+    preferredColor?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -22377,6 +22453,8 @@ export namespace Prisma {
     googleId?: string | null
     mobileNumber?: string | null
     Age?: string | null
+    preferredFont?: string | null
+    preferredColor?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -22446,6 +22524,8 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     Age?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredFont?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredColor?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -22499,6 +22579,8 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     Age?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredFont?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredColor?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -22552,6 +22634,8 @@ export namespace Prisma {
     googleId?: string | null
     mobileNumber?: string | null
     Age?: string | null
+    preferredFont?: string | null
+    preferredColor?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -22605,6 +22689,8 @@ export namespace Prisma {
     googleId?: string | null
     mobileNumber?: string | null
     Age?: string | null
+    preferredFont?: string | null
+    preferredColor?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -22663,6 +22749,8 @@ export namespace Prisma {
     googleId?: string | null
     mobileNumber?: string | null
     Age?: string | null
+    preferredFont?: string | null
+    preferredColor?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -22716,6 +22804,8 @@ export namespace Prisma {
     googleId?: string | null
     mobileNumber?: string | null
     Age?: string | null
+    preferredFont?: string | null
+    preferredColor?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -22785,6 +22875,8 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     Age?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredFont?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredColor?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -22838,6 +22930,8 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     Age?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredFont?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredColor?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -22902,6 +22996,8 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     Age?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredFont?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredColor?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -22955,6 +23051,8 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     Age?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredFont?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredColor?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -23048,6 +23146,8 @@ export namespace Prisma {
     googleId?: string | null
     mobileNumber?: string | null
     Age?: string | null
+    preferredFont?: string | null
+    preferredColor?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -23101,6 +23201,8 @@ export namespace Prisma {
     googleId?: string | null
     mobileNumber?: string | null
     Age?: string | null
+    preferredFont?: string | null
+    preferredColor?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -23189,6 +23291,8 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     Age?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredFont?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredColor?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -23242,6 +23346,8 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     Age?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredFont?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredColor?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -23360,6 +23466,8 @@ export namespace Prisma {
     googleId?: string | null
     mobileNumber?: string | null
     Age?: string | null
+    preferredFont?: string | null
+    preferredColor?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -23413,6 +23521,8 @@ export namespace Prisma {
     googleId?: string | null
     mobileNumber?: string | null
     Age?: string | null
+    preferredFont?: string | null
+    preferredColor?: string | null
     bio?: string | null
     avatar?: string | null
     images?: UserCreateimagesInput | string[]
@@ -23509,6 +23619,8 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     Age?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredFont?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredColor?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]
@@ -23562,6 +23674,8 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     mobileNumber?: NullableStringFieldUpdateOperationsInput | string | null
     Age?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredFont?: NullableStringFieldUpdateOperationsInput | string | null
+    preferredColor?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     images?: UserUpdateimagesInput | string[]

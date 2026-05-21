@@ -129,6 +129,8 @@ exports.Prisma.UserScalarFieldEnum = {
   googleId: 'googleId',
   mobileNumber: 'mobileNumber',
   Age: 'Age',
+  preferredFont: 'preferredFont',
+  preferredColor: 'preferredColor',
   bio: 'bio',
   avatar: 'avatar',
   images: 'images',

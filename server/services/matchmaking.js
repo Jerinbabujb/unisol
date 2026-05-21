@@ -36,7 +36,7 @@ export async function getMatchesForUser(currentUserId, limit = 20) {
         SELECT 
             id, "fullName", "Age", avatar, bio, interest, mood, gender, horoscope,
             "mbtiType", "attachmentStyle", "humanDesign", "loveLanguages", 
-            "primaryNeurotype", "topArtists", "favoriteGenres", images,"beliefSystem",
+            "primaryNeurotype", "topArtists", "favoriteGenres", images,"beliefSystem","preferredColor","preferredFont",
             ROUND((1 - (embedding <=> ${embeddingString}::vector))::numeric * 100, 1) as match_percentage
         FROM "User"
         WHERE id != ${currentUserId} 

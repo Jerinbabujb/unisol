@@ -1,61 +1,63 @@
 import { useContext, useEffect, useState, useRef } from "react";
 import { ChatContext } from "../../../context/ChatContext";
 import { AuthContext } from "../../../context/AuthContext";
-import { CallContext } from "../../../context/CallContext"; // Import the new context
-import { MusicContext } from "../../../context/MusicContext"; // Import the new context
+import { CallContext } from "../../../context/CallContext";
+import { MusicContext } from "../../../context/MusicContext";
 import assets from "../../assets";
 import toast from "react-hot-toast";
-import { FiX } from "react-icons/fi";
-import { FiMusic } from "react-icons/fi";
+import { FiX, FiMusic, FiVideo } from "react-icons/fi";
 import { MdPhotoLibrary } from "react-icons/md";
-import ChatPage from "../../pages/ChatPage";
 import { useNavigate } from "react-router-dom";
-import { GiGamepad } from "react-icons/gi";
 import { GameContext } from "../../../context/GameContext";
-import EmojiCharades from "../games/EmojiCharades";
 
 const ChatWindow = ({ setOpenProfile }) => {
-  const { selectedUser, setSelectedUser, messages, getMessages, sendMessage, getSongs, song } = useContext(ChatContext);
-  const { authUser, onlineUsers } = useContext(AuthContext);
   const {
-    audioRef,
+    selectedUser,
+    setSelectedUser,
+    messages,
+    getMessages,
+    sendMessage,
+    getSongs,
+    song,
+  } = useContext(ChatContext);
+
+  const { authUser, onlineUsers } = useContext(AuthContext);
+
+  const {
     currentSong,
     sendMusicInvite,
-    handlePlay,
-    handlePause,
-    handleSeek,
-    acceptInvite
-  } = useContext(MusicContext);
-  const [musicList, setMusicList] = useState(false);
-  // Call Context states and functions
-  const {
     initiateCall,
     isCalling,
     callAccepted,
     localVideo,
     remoteVideo,
-    endCall
+    endCall,
   } = useContext(CallContext);
 
-  const { getGames,
-    gamesLists, postAnswer } = useContext(GameContext);
+  const { getGames, gamesLists, postAnswer } =
+    useContext(GameContext);
 
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const [games, setGames] = useState(false);
+  const [musicList, setMusicList] = useState(false);
+
+  const [videoPopup, setVideoPopup] = useState(false);
+  const [youtubeUrl, setYoutubeUrl] = useState("");
+  const [activeVideoId, setActiveVideoId] = useState(null);
 
   const scrollRef = useRef(null);
   const navigate = useNavigate();
+
   useEffect(() => {
     getSongs();
     getGames();
-  }, [])
-  useEffect(() => {
-    console.log("games lists", gamesLists);
   }, []);
-  // Auto-scroll to bottom whenever messages change
+
   useEffect(() => {
     if (scrollRef.current) {
-      scrollRef.current.scrollIntoView({ behavior: "smooth" });
+      scrollRef.current.scrollIntoView({
+        behavior: "smooth",
+      });
     }
   }, [messages]);
 
@@ -63,82 +65,154 @@ const ChatWindow = ({ setOpenProfile }) => {
     if (selectedUser) {
       getMessages(selectedUser.id);
     }
-  }, [selectedUser, getMessages]);
+  }, [selectedUser]);
 
   const handleBack = () => {
     setSelectedUser(null);
-    navigate('/');
-    setTimeout(() => navigate('/messages'), 10);
+    navigate("/");
+    setTimeout(() => navigate("/messages"), 10);
   };
-  
+
   const handleSendMessage = async (e) => {
     e.preventDefault();
+
     if (input.trim() === "") return;
-    await sendMessage({ text: input.trim() });
-    setInput('');
+
+    await sendMessage({
+      text: input.trim(),
+    });
+
+    setInput("");
   };
 
-const handleSendImage = async (e) => {
-  const file = e.target.files[0];
+  const handleSendImage = async (e) => {
+    const file = e.target.files[0];
 
-  if (!file || !file.type.startsWith("image/")) {
-    toast.error("Please select an image file");
-    return;
-  }
+    if (!file || !file.type.startsWith("image/")) {
+      toast.error("Please select an image file");
+      return;
+    }
 
-  const reader = new FileReader();
+    const reader = new FileReader();
 
-  reader.readAsDataURL(file);
-
-  reader.onload = async () => {
-    try {
-      const base64Image = reader.result;
-
+    reader.onloadend = async () => {
       await sendMessage({
-        image: base64Image,
+        image: reader.result,
       });
 
-      e.target.value = ""; // reset input
-    } catch (err) {
-      console.error(err);
-      toast.error("Failed to send image");
+      e.target.value = "";
+    };
+
+    reader.readAsDataURL(file);
+  };
+
+  const handleVideoRequest = async () => {
+    if (!youtubeUrl.trim()) {
+      toast.error("Please enter a YouTube URL");
+      return;
+    }
+
+    if (
+      !youtubeUrl.includes("youtube.com") &&
+      !youtubeUrl.includes("youtu.be")
+    ) {
+      toast.error("Please enter a valid YouTube link");
+      return;
+    }
+
+    try {
+      await sendMessage({
+        text: `🎵 YouTube Request: ${youtubeUrl.trim()}`,
+      });
+
+      toast.success("Video request shared!");
+
+      setYoutubeUrl("");
+      setVideoPopup(false);
+    } catch (error) {
+      toast.error("Failed to send video request");
     }
   };
 
-  reader.onerror = () => {
-    toast.error("Failed to read image file");
-  };
-};
   const selectedUserIdTransfer = (url) => {
     postAnswer(selectedUser?.id);
-    navigate(`/${url}`, { state: { selectedUserId: selectedUser?.id } });
-  }
-  const formatMessageTime = (date) => {
-    return new Date(date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    navigate(`/${url}`, {
+      state: {
+        selectedUserId: selectedUser?.id,
+      },
+    });
   };
 
+  const formatMessageTime = (date) => {
+    return new Date(date).toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
 
+  const extractVideoId = (url) => {
+    const regExp =
+      /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?v=))([^#&?]*).*/;
 
+    const match = url.match(regExp);
+
+    return match && match[7].length === 11
+      ? match[7]
+      : null;
+  };
 
   if (!selectedUser) {
     return (
-      <div className='hidden md:flex flex-col items-center justify-center h-full gap-2 text-gray-400 bg-gray-50/50'>
-        <img src={assets.logo} alt='' className='w-16 opacity-20 grayscale' />
-        <p className='text-lg font-medium'>Select a match to start chatting</p>
+      <div className="hidden md:flex flex-col items-center justify-center h-full gap-2 text-gray-400 bg-gray-50/50">
+        <img
+          src={assets.logo}
+          alt=""
+          className="w-16 opacity-20 grayscale"
+        />
+
+        <p className="text-lg font-medium">
+          Select a match to start chatting
+        </p>
       </div>
     );
   }
 
   return (
+    
     <div className="flex flex-col h-full bg-white overflow-hidden relative">
+      {activeVideoId && (
+  <div className="absolute inset-0 z-[999] bg-black flex flex-col">
+    
+    {/* Close Button */}
+    <div className="absolute top-4 right-4 z-[1000]">
+      <button
+        onClick={() => setActiveVideoId(null)}
+        className="bg-white text-black px-4 py-2 rounded-full"
+      >
+        ✕ Close
+      </button>
+    </div>
 
-      {/* --- CALL OVERLAY (Visible only during active calls) --- */}
+    {/* Video Player FULL SCREEN */}
+    <iframe
+      className="w-full h-full"
+      src={`https://www.youtube.com/embed/${activeVideoId}?autoplay=1`}
+      title="YouTube Video"
+      allow="autoplay; encrypted-media"
+      allowFullScreen
+    />
+  </div>
+)}
       {(isCalling || callAccepted) && (
         <div className="absolute inset-0 z-50 bg-slate-900 flex flex-col items-center justify-center animate-in fade-in duration-300">
-          {/* Remote Video (Full Screen) */}
-          <video ref={remoteVideo} autoPlay playsInline className="w-full h-full object-cover" />
+          <video
+            ref={remoteVideo}
+            autoPlay
+            playsInline
+            className="w-full h-full object-cover"
+          />
 
-          {/* Local Video (Picture-in-Picture) */}
           <video
             ref={localVideo}
             autoPlay
@@ -147,11 +221,13 @@ const handleSendImage = async (e) => {
             className="absolute top-6 right-6 w-32 h-44 object-cover rounded-2xl border-2 border-white shadow-2xl z-50 bg-black"
           />
 
-          {/* Call Controls */}
           <div className="absolute bottom-12 flex flex-col items-center gap-4">
             <p className="text-white font-medium text-lg drop-shadow-md">
-              {callAccepted ? "Connected" : `Calling ${selectedUser.fullName}...`}
+              {callAccepted
+                ? "Connected"
+                : `Calling ${selectedUser.fullName}...`}
             </p>
+
             <button
               onClick={endCall}
               className="w-16 h-16 bg-red-500 hover:bg-red-600 rounded-full text-white shadow-xl flex items-center justify-center transition-transform hover:scale-110 active:scale-90 cursor-pointer"
@@ -162,125 +238,276 @@ const handleSendImage = async (e) => {
         </div>
       )}
 
-      {/* Header */}
+      {/* HEADER */}
       <div className="px-4 py-3 md:px-6 md:py-4 flex justify-between items-center border-b border-gray-100 shrink-0 z-10 bg-white">
-        <div className="flex items-center gap-3 cursor-pointer" onClick={() => setOpenProfile(true)}>
-
-          <button onClick={handleBack} className="md:hidden p-2 -ml-2 text-gray-500">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" />
+        <div
+          className="flex items-center gap-3 cursor-pointer"
+          onClick={() => setOpenProfile(true)}
+        >
+          <button
+            onClick={handleBack}
+            className="md:hidden p-2 -ml-2 text-gray-500"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2.5"
+                d="M15 19l-7-7 7-7"
+              />
             </svg>
           </button>
-          <img src={selectedUser.avatar || assets.logo} className="w-10 h-10 rounded-full object-cover" alt="" />
+
+          <img
+            src={selectedUser.avatar || assets.logo}
+            className="w-10 h-10 rounded-full object-cover"
+            alt=""
+          />
+
           <div>
-            <h3 className="font-bold text-sm md:text-base">{selectedUser.fullName}</h3>
-            {onlineUsers.includes(selectedUser?.id) &&
+            <h3 className="font-bold text-sm md:text-base">
+              {selectedUser.fullName}
+            </h3>
+
+            {onlineUsers.includes(selectedUser?.id) && (
               <p className="text-[10px] text-green-500 flex items-center gap-1">
-                <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span> Active now
+                <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+                Active now
               </p>
-            }
+            )}
           </div>
         </div>
 
-        {/* Call Buttons in Header */}
         <div className="flex items-center gap-2">
           <button
-            onClick={() => initiateCall(selectedUser.id, selectedUser.fullName, 'audio')}
+            onClick={() =>
+              initiateCall(
+                selectedUser.id,
+                selectedUser.fullName,
+                "audio"
+              )
+            }
             className="p-2.5 bg-gray-50 rounded-full hover:bg-pink-50 text-gray-600 hover:text-pink-600 transition-colors cursor-pointer"
-            title="Audio Call"
           >
             📞
           </button>
+
           <button
-            onClick={() => initiateCall(selectedUser.id, selectedUser.fullName, 'video')}
+            onClick={() =>
+              initiateCall(
+                selectedUser.id,
+                selectedUser.fullName,
+                "video"
+              )
+            }
             className="p-2.5 bg-gray-50 rounded-full hover:bg-pink-50 text-gray-600 hover:text-pink-600 transition-colors cursor-pointer"
-            title="Video Call"
           >
             📽️
           </button>
         </div>
       </div>
 
-      {/* Messages Area */}
+      {/* MESSAGES */}
       <div className="flex-1 overflow-y-auto p-4 md:p-6 flex flex-col gap-4 bg-[#F8F9FB]">
         {messages.map((msg, index) => {
-          const isMine = msg.senderId === authUser.id;
-          return (
-            <div
-              key={index}
-              className={`flex items-end gap-2 ${isMine ? 'flex-row-reverse self-end' : 'flex-row self-start'}`}
-            >
-              <img
-                src={isMine ? (authUser.avatar || assets.avatar_icon) : (selectedUser.avatar || assets.avatar_icon)}
-                className="w-7 h-7 rounded-full object-cover mb-1"
-                alt=""
-              />
+  const isMine = msg.senderId === authUser.id;
 
-              <div className={`flex flex-col ${isMine ? 'items-end' : 'items-start'}`}>
-                {msg.image ? (
-                  <img src={msg.image} alt='' className='max-w-[200px] md:max-w-xs rounded-2xl border border-gray-200 shadow-sm' />
-                ) : (
-                  <div className={`p-3 rounded-2xl text-sm shadow-sm max-w-[260px] md:max-w-md break-words ${isMine
-                    ? 'bg-pink-500 text-white rounded-br-none'
-                    : 'bg-white text-gray-800 border border-gray-100 rounded-bl-none'
-                    }`}>
-                    {msg.text}
-                  </div>
-                )}
-                <span className="text-[9px] text-gray-400 mt-1 px-1">
-                  {formatMessageTime(msg.createdAt)}
-                </span>
-              </div>
-            </div>
-          );
-        })}
+  const isYoutube =
+    msg.text?.includes("youtube.com") ||
+    msg.text?.includes("youtu.be");
+
+  const extractVideoId = (url) => {
+    const regExp =
+      /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?v=))([^#&?]*).*/;
+
+    const match = url.match(regExp);
+    return match && match[7].length === 11 ? match[7] : null;
+  };
+
+  let videoId = null;
+
+  if (isYoutube) {
+    const cleanUrl = msg.text
+      .replace("🎵 YouTube Request:", "")
+      .trim();
+
+    videoId = extractVideoId(cleanUrl);
+  }
+
+  return (
+    <div
+      key={index}
+      className={`flex items-end gap-2 ${
+        isMine
+          ? "flex-row-reverse self-end"
+          : "flex-row self-start"
+      }`}
+    >
+      <img
+        src={
+          isMine
+            ? authUser.avatar || assets.avatar_icon
+            : selectedUser.avatar || assets.avatar_icon
+        }
+        className="w-7 h-7 rounded-full object-cover mb-1"
+      />
+
+      <div className={`flex flex-col ${isMine ? "items-end" : "items-start"}`}>
+
+        {msg.image ? (
+          <img
+            src={msg.image}
+            className="max-w-[200px] md:max-w-xs rounded-2xl"
+          />
+        ) : isYoutube && videoId ? (
+          <div
+            onClick={() => setActiveVideoId(videoId)}
+            className="cursor-pointer bg-black text-white px-4 py-2 rounded-2xl text-sm"
+          >
+            ▶ Play YouTube Video
+          </div>
+        ) : (
+          <div className={`p-3 rounded-2xl text-sm max-w-[260px] ${
+            isMine
+              ? "bg-pink-500 text-white"
+              : "bg-white text-gray-800 border"
+          }`}>
+            {msg.text}
+          </div>
+        )}
+
+        <span className="text-[9px] text-gray-400 mt-1">
+          {formatMessageTime(msg.createdAt)}
+        </span>
+      </div>
+    </div>
+  );
+})}
+
         <div ref={scrollRef} />
       </div>
 
-      {/* Input Area */}
-      <div className="p-4 bg-white border-t border-gray-100" style={{ paddingBottom: currentSong ? '100px' : '0' }} >
-        <form onSubmit={handleSendMessage} className="flex items-center gap-2 md:gap-3 bg-gray-100 px-4 py-2 rounded-full">
+      {/* INPUT */}
+      <div
+        className="p-4 bg-white border-t border-gray-100 relative"
+        style={{
+          paddingBottom: currentSong
+            ? "100px"
+            : "0",
+        }}
+      >
+        <form
+          onSubmit={handleSendMessage}
+          className="flex items-center gap-2 md:gap-3 bg-gray-100 px-4 py-2 rounded-full relative"
+        >
           <input
-            type='text'
-            onChange={(e) => setInput(e.target.value)}
+            type="text"
+            onChange={(e) =>
+              setInput(e.target.value)
+            }
             value={input}
-            placeholder='Type a message...'
-            className='flex-1 bg-transparent border-none outline-none text-sm py-1.5 text-gray-700 placeholder-gray-400'
+            placeholder="Type a message..."
+            className="flex-1 bg-transparent border-none outline-none text-sm py-1.5 text-gray-700 placeholder-gray-400"
           />
-          {/* Music button*/}
+
+          {/* VIDEO */}
           <button
-            onClick={() => setMusicList(!musicList)}
-            className="hover:text-purple-400 transition cursor-pointer"
+            type="button"
+            onClick={() => {
+              setVideoPopup(!videoPopup);
+              setMusicList(false);
+              setGames(false);
+            }}
+            className="hover:text-purple-400 transition cursor-pointer text-gray-600"
           >
-            <FiMusic size={26} />
+            <FiVideo size={24} />
           </button>
 
+          {videoPopup && (
+            <div className="absolute bottom-14 right-0 w-72 bg-zinc-900 text-white rounded-xl shadow-2xl p-4 z-50 border border-zinc-700 flex flex-col gap-3">
+              <div className="flex justify-between items-center">
+                <h3 className="text-sm font-semibold">
+                  Request YouTube Video
+                </h3>
 
-
-
-          {/* Popup Box */}
-          {musicList && (
-            <div className="absolute bottom-12 right-0 w-72 bg-zinc-900 text-white rounded-xl shadow-2xl p-4 z-50 border border-zinc-700">
-
-              {/* Header */}
-              <div className="flex justify-between items-center mb-3">
-                <h3 className="text-sm font-semibold">Music List</h3>
                 <button
-                  onClick={() => setMusicList(false)}
+                  type="button"
+                  onClick={() =>
+                    setVideoPopup(false)
+                  }
                   className="text-gray-400 hover:text-white cursor-pointer"
                 >
                   <FiX size={18} />
                 </button>
               </div>
 
-              {/* Song List */}
+              <input
+                type="text"
+                placeholder="Paste YouTube URL here..."
+                value={youtubeUrl}
+                onChange={(e) =>
+                  setYoutubeUrl(e.target.value)
+                }
+                className="w-full bg-zinc-800 text-white text-xs rounded-lg p-2.5 outline-none border border-zinc-700 focus:border-purple-500 transition"
+              />
+
+              <button
+                type="button"
+                onClick={handleVideoRequest}
+                className="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 rounded-lg text-xs transition active:scale-95 cursor-pointer"
+              >
+                Request Video
+              </button>
+            </div>
+          )}
+
+          {/* MUSIC */}
+          <button
+            type="button"
+            onClick={() => {
+              setMusicList(!musicList);
+              setVideoPopup(false);
+              setGames(false);
+            }}
+            className="hover:text-purple-400 transition cursor-pointer text-gray-600"
+          >
+            <FiMusic size={24} />
+          </button>
+
+          {musicList && (
+            <div className="absolute bottom-14 right-0 w-72 bg-zinc-900 text-white rounded-xl shadow-2xl p-4 z-50 border border-zinc-700">
+              <div className="flex justify-between items-center mb-3">
+                <h3 className="text-sm font-semibold">
+                  Music List
+                </h3>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    setMusicList(false)
+                  }
+                  className="text-gray-400 hover:text-white cursor-pointer"
+                >
+                  <FiX size={18} />
+                </button>
+              </div>
+
               <div className="max-h-40 overflow-y-auto space-y-2 mb-3">
                 {song?.map((item, index) => (
                   <div
                     key={item.id || index}
                     onClick={() => {
-                      sendMusicInvite(selectedUser.id, item);
-                      setMusicList(false)
+                      sendMusicInvite(
+                        selectedUser.id,
+                        item
+                      );
+
+                      setMusicList(false);
                     }}
                     className="cursor-pointer px-2 py-1 rounded-md hover:bg-purple-600 transition text-sm"
                   >
@@ -288,70 +515,39 @@ const handleSendImage = async (e) => {
                   </div>
                 ))}
               </div>
-
-
-
             </div>
           )}
 
+          {/* IMAGE */}
+          <input
+            type="file"
+            id="image"
+            onChange={handleSendImage}
+            accept="image/*"
+            hidden
+          />
 
-          {/* Games */}
-
-          {/* <button
-            onClick={() => setGames(!games)}
-            className="hover:text-purple-400 transition cursor-pointer"
+          <label
+            htmlFor="image"
+            className="cursor-pointer hover:opacity-70 transition text-gray-600 hover:text-purple-400"
           >
-            <GiGamepad size={26} />
-          </button> */}
-          {games && (
-            <div className="absolute bottom-12 right-0 w-72 bg-zinc-900 text-white rounded-xl shadow-2xl p-4 z-50 border border-zinc-700">
-
-              {/* Header */}
-              <div className="flex justify-between items-center mb-3">
-                <h3 className="text-sm font-semibold">Games List</h3>
-                <button
-                  onClick={() => setGames(false)}
-                  className="text-gray-400 hover:text-white cursor-pointer"
-                >
-                  <FiX size={18} />
-                </button>
-              </div>
-
-              {/* Games List */}
-              <div className="max-h-40 overflow-y-auto space-y-2 mb-3">
-                {gamesLists?.map((item, index) => (
-                  <div
-                    key={item.id || index}
-                    onClick={() => {
-                      setGames(false)
-                    }}
-                    className="cursor-pointer px-2 py-1 rounded-md hover:bg-purple-600 transition text-sm"
-                  >
-                    <a onClick={() => selectedUserIdTransfer(item.name)}><img src={item.icon} className="w-5" title={item.name}></img></a>
-                  </div>
-                ))}
-              </div>
-
-
-
-            </div>
-          )}
-
-          <input type='file' id='image' onChange={handleSendImage} accept='image/*' hidden />
-          <label htmlFor='image' className="cursor-pointer hover:opacity-70 transition hover:text-purple-400 ">
             <MdPhotoLibrary size={24} />
           </label>
 
-          <button type="submit" className="hover:scale-110 transition active:scale-95 cursor-pointer">
-            <img src={assets.send_button} alt='send' className='w-8 h-8' />
+          {/* SEND */}
+          <button
+            type="submit"
+            className="hover:scale-110 transition active:scale-95 cursor-pointer shrink-0"
+          >
+            <img
+              src={assets.send_button}
+              alt="send"
+              className="w-8 h-8"
+            />
           </button>
-
-
         </form>
-
       </div>
     </div>
-
   );
 };
 

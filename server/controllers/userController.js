@@ -168,9 +168,9 @@ export const updateProfile = async (req, res) => {
         const {
             fullName, avatar, bio, mood, instagram, facebook, interest, images, pronouns,
             // 🔥 NEW PSYCHOLOGY & IDENTITY FIELDS
-            mbtiType, attachmentStyle, beliefSystem, horoscope, topArtists, loveLanguages
+            mbtiType, attachmentStyle, beliefSystem, horoscope, topArtists, loveLanguages,preferredFont,preferredColor
         } = req.body;
-
+        console.log(req.body);
         const userId = req.user.id;
 
         // 1. Process Main Avatar
@@ -206,6 +206,8 @@ export const updateProfile = async (req, res) => {
                 facebook,
                 images: uploadedImages,
                 pronouns,
+                preferredColor,
+                preferredFont,
                 // Ensure arrays default to empty if undefined
                 interest: interest || [],
                 topArtists: topArtists || [],
