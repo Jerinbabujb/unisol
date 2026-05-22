@@ -178,6 +178,27 @@ socket.on("video-close", ({ to }) => {
     io.to(receiverSocketId).emit("video-close");
   }
 });
+socket.on("video-room-join", ({ room }) => {
+  socket.join(room);
+  console.log("🎥 joined room:", room);
+});
+
+socket.on("group-video-start", ({ room, videoUrl, startAt, currentTime }) => {
+  io.to(room).emit("group-video-start", {
+    videoUrl,
+    startAt,
+    currentTime,
+    host: userId,
+  });
+});
+
+socket.on("group-video-sync", ({ room, action, time }) => {
+  io.to(room).emit("group-video-sync", {
+    action,
+    time,
+    from: userId,
+  });
+});
   
 
 });

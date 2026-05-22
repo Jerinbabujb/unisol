@@ -11,6 +11,7 @@ import { MusicProvider } from '../context/MusicContext.jsx';
 import { GameProvider } from '../context/GameContext.jsx';
 import { VideoProvider } from '../context/VideoContect.jsx';
 import { useEffect } from 'react';
+import { GroupVideoContext, GroupVideoProvider } from '../context/GroupVideoContext.jsx';
 
 // Helper to get ID from your specific AuthProvider storage key
 const getUserId = () => {
@@ -38,7 +39,9 @@ createRoot(document.getElementById('root')).render(
                                                 <VideoProvider>
 
                       <MusicProvider>
+                        <GroupVideoProvider>
                     <App />
+                    </GroupVideoProvider>
                       </MusicProvider>
                                           </VideoProvider>
 

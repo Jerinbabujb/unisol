@@ -180,7 +180,7 @@ const ChatWindow = ({ setOpenProfile }) => {
           <div className="w-full h-full md:max-w-4xl md:max-h-[70vh]">
       <ReactPlayer
   ref={videoRef}
-  src={currentVideo}
+  url={currentVideo}
   playing={isPlaying}
   controls
   width="100%"
