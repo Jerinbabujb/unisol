@@ -7,7 +7,7 @@ export const VideoContext = createContext();
 
 export const VideoProvider = ({ children }) => {
   const { authUser } = useContext(AuthContext);
-
+const [scheduledStart, setScheduledStart] = useState(null);
   const videoRef = useRef(null);
   const syncLockUntil = useRef(0);
   const isPlayingRef = useRef(false);
@@ -17,37 +17,49 @@ export const VideoProvider = ({ children }) => {
   const [syncState, setSyncState] = useState(null);
   const [videoInvite, setVideoInvite] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [playerReady, setPlayerReady] = useState(false);
 
   const setPlaying = (val) => {
     isPlayingRef.current = val;
     setIsPlaying(val);
   };
-
+useEffect(() => {
+  setPlayerReady(false);
+}, [currentVideo]);
   /* ---------------- INVITE ---------------- */
   const sendVideoInvite = (to, videoUrl) => {
     if (!socket.connected) {
       console.log("❌ SOCKET NOT CONNECTED");
       return;
     }
-    setCurrentVideo(videoUrl);
-  setPartnerId(to);
+    
     socket.emit("video-invite", { to, videoUrl });
   };
 
   /* ---------------- ACCEPT & REJECT ---------------- */
   const acceptInvite = () => {
-    if (!videoInvite) return;
-    socket.emit("video-accepted", {
-      to: videoInvite.from,
-      videoUrl: videoInvite.videoUrl,
-    });
+  if (!videoInvite) return;
 
-    setPartnerId(videoInvite.from);
-    setCurrentVideo(videoInvite.videoUrl);
-    setVideoInvite(null);
-    syncLockUntil.current = Date.now() + 3500;
-    setPlaying(true);
-  };
+  // Start 3 seconds in future
+  const startAt = Date.now() + 3000;
+
+  socket.emit("video-accepted", {
+    to: videoInvite.from,
+    videoUrl: videoInvite.videoUrl,
+    startAt,
+  });
+
+  setPartnerId(videoInvite.from);
+  setCurrentVideo(videoInvite.videoUrl);
+
+  // Save scheduled start
+  setScheduledStart(startAt);
+
+  setVideoInvite(null);
+
+  // DO NOT PLAY IMMEDIATELY
+  setPlaying(false);
+};
 
   const rejectInvite = () => {
     if (!videoInvite) return;
@@ -61,14 +73,19 @@ export const VideoProvider = ({ children }) => {
     const handleSync = ({ action, time }) => setSyncState({ action, time });
 
     const handleAccepted = (data) => {
-
-      if (!currentVideo) {
+ 
     setPartnerId(data.from);
     setCurrentVideo(data.videoUrl);
-  }
-      syncLockUntil.current = Date.now() + 3500;
-      setPlaying(true);
-    };
+      isPlaying(true);
+
+  // Shared synchronized start time
+  setScheduledStart(data.startAt);
+
+  syncLockUntil.current = Date.now() + 3500;
+
+  // DO NOT PLAY NOW
+  setPlaying(false);
+};
 
     const handleRejected = () => {
       alert("Your video invite was declined.");
@@ -95,7 +112,36 @@ export const VideoProvider = ({ children }) => {
       socket.off("video-close", handleClose);
     };
   }, []);
+  
+  /* ---------------- SYNCHRONIZED START ---------------- */
+useEffect(() => {
+  if (!scheduledStart) return;
+  if (!playerReady) return;
+  if (!videoRef.current) return;
 
+  const delay = scheduledStart - Date.now();
+
+  const startVideo = () => {
+    try {
+      if (typeof videoRef.current.seekTo === "function") {
+        videoRef.current.seekTo(0, "seconds");
+      }
+
+      setPlaying(true);
+    } catch (err) {
+      console.log("Start sync error:", err);
+    }
+  };
+
+  if (delay <= 0) {
+    startVideo();
+    return;
+  }
+
+  const timer = setTimeout(startVideo, delay);
+
+  return () => clearTimeout(timer);
+}, [scheduledStart, playerReady]);
   /* ---------------- SYNC APPLY ---------------- */
 /* ---------------- SYNC APPLY ---------------- */
   useEffect(() => {
@@ -216,6 +262,7 @@ const handleSeek = (seconds) => {
         handleCloseVideo,
         videoInvite,
         isPlaying,
+        setPlayerReady
       }}
     >
       {children}

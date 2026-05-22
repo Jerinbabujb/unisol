@@ -33,6 +33,7 @@ const ChatWindow = ({ setOpenProfile }) => {
     handlePause: handleVideoPause, // Aliased
     handleSeek: handleVideoSeek, // Aliased
     handleCloseVideo,
+    setPlayerReady
   } = useContext(VideoContext);
 
   const {
@@ -177,17 +178,21 @@ const ChatWindow = ({ setOpenProfile }) => {
           </button>
 
           <div className="w-full h-full md:max-w-4xl md:max-h-[70vh]">
-            <ReactPlayer
+      <ReactPlayer
   ref={videoRef}
   src={currentVideo}
   playing={isPlaying}
-  controls={true}
+  controls
   width="100%"
   height="100%"
-  // Use the aliased names here:
+  progressInterval={250}
+  onReady={() => {
+    console.log("PLAYER READY");
+    setPlayerReady(true);
+  }}
   onPlay={handleVideoPlay}
   onPause={handleVideoPause}
- onSeek={handleVideoSeek}
+  onSeek={handleVideoSeek}
 />
           </div>
         </div>
