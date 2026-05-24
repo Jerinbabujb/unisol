@@ -8,11 +8,11 @@ import ReactPlayer from "react-player";
 
 // Contexts
 import { AuthContext } from "../../../../context/AuthContext";
-import { MusicContext } from "../../../../context/MusicContext";
 import { CallContext } from "../../../../context/CallContext";
 import { ChatContext } from "../../../../context/ChatContext";
 import { GameContext } from "../../../../context/GameContext";
 import { GroupVideoContext } from "../../../../context/GroupVideoContext"; 
+import { GroupMusicContext } from "../../../../context/GroupMusicContext";
 import assets from "../../../assets";
 
 const GlobalChatWindow = () => {
@@ -22,9 +22,18 @@ const GlobalChatWindow = () => {
 
   // Context Destructuring
   const { authUser } = useContext(AuthContext);
-  const { selectedUser, messages, globalSendMessage, sendMessage, getRoomMessages, currentRoom } = useContext(ChatContext);
-  const { currentSong, sendMusicInvite, getSongs, song } = useContext(MusicContext);
+  const { selectedUser, messages, globalSendMessage, sendMessage, getRoomMessages, currentRoom ,song, 
+    getSongs, } = useContext(ChatContext);
   const { getGames, gamesLists, postAnswer } = useContext(GameContext);
+  
+  // Music Context
+  const { 
+    currentSong, 
+    activeGroupMusic, 
+    startGroupMusic, 
+    joinActiveMusic, 
+    joinMusicRoom 
+  } = useContext(GroupMusicContext);
   
   // Group Video Context
   const {
@@ -49,14 +58,15 @@ const GlobalChatWindow = () => {
   const [videoUrl, setVideoUrl] = useState("");
   const [hasJoinedVideo, setHasJoinedVideo] = useState(false);
 
-  // Check room and initialize video socket room
+  // Check room and initialize socket rooms
   useEffect(() => {
     if (!currentRoom) {
       navigate("/global-room-lists");
     } else {
       joinVideoRoom(roomName); 
+      joinMusicRoom(roomName); // Ensure we join the music socket room
     }
-  }, [currentRoom, roomName, navigate, joinVideoRoom]);
+  }, [currentRoom, roomName, navigate, joinVideoRoom, joinMusicRoom]);
 
   // Initial Fetches
   useEffect(() => {
@@ -70,7 +80,7 @@ const GlobalChatWindow = () => {
     if (scrollRef.current) {
       scrollRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, [messages, currentVideo, hasJoinedVideo]); // Added video states to trigger scroll when invite appears
+  }, [messages, currentVideo, hasJoinedVideo, activeGroupMusic, currentSong]); 
 
   // Handlers
   const handleBack = () => navigate('/global-room-lists');
@@ -178,25 +188,43 @@ const GlobalChatWindow = () => {
           );
         })}
 
-        {/* Video Invite - Rendered as a System Message Bubble */}
+        {/* Video Invite Bubble */}
         {currentVideo && !hasJoinedVideo && (
           <div className="flex justify-center my-4 animate-fadeIn">
             <div className="bg-white border border-indigo-100 shadow-sm rounded-2xl p-4 flex flex-col items-center gap-2 max-w-sm w-full relative">
-              
               <div className="flex items-center gap-2 text-indigo-600 font-semibold">
                 <FiVideo size={20} />
                 <span>Someone started a video!</span>
               </div>
-              
               <p className="text-xs text-gray-500 text-center mb-1">
                 Want to join and watch together?
               </p>
-              
               <button 
                 onClick={() => setHasJoinedVideo(true)} 
                 className="bg-indigo-600 text-white px-8 py-2 rounded-xl text-sm font-bold hover:bg-indigo-700 transition w-full shadow-sm"
               >
                 Join Video
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Music Invite Bubble */}
+        {activeGroupMusic && !currentSong && (
+          <div className="flex justify-center my-4 animate-fadeIn">
+            <div className="bg-white border border-purple-200 shadow-sm rounded-2xl p-4 flex flex-col items-center gap-2 max-w-sm w-full relative">
+              <div className="flex items-center gap-2 text-purple-600 font-semibold">
+                <FiMusic size={20} />
+                <span>Someone started a music session!</span>
+              </div>
+              <p className="text-xs text-gray-500 text-center mb-1">
+                Want to join and listen together?
+              </p>
+              <button 
+                onClick={joinActiveMusic} 
+                className="bg-purple-600 text-white px-8 py-2 rounded-xl text-sm font-bold hover:bg-purple-700 transition w-full shadow-sm"
+              >
+                Join Music
               </button>
             </div>
           </div>
@@ -214,7 +242,7 @@ const GlobalChatWindow = () => {
           <button type="button" onClick={() => { setVideoPopup(!videoPopup); setMusicList(false); setGames(false); }} className="hover:text-indigo-600 text-gray-500 transition">
             <FiVideo size={22} />
           </button>
-          <button type="button" onClick={() => { setMusicList(!musicList); setVideoPopup(false); setGames(false); }} className="hover:text-indigo-600 text-gray-500 transition">
+          <button type="button" onClick={() => { setMusicList(!musicList); setVideoPopup(false); setGames(false); }} className="hover:text-purple-600 text-gray-500 transition">
             <FiMusic size={22} />
           </button>
           <button type="button" onClick={() => { setGames(!games); setMusicList(false); setVideoPopup(false); }} className="hover:text-indigo-600 text-gray-500 transition">
@@ -274,9 +302,14 @@ const GlobalChatWindow = () => {
                 <h3 className="text-sm font-semibold">Music List</h3>
                 <FiX size={18} className="cursor-pointer text-gray-400 hover:text-white" onClick={() => setMusicList(false)} />
               </div>
-              <div className="max-h-40 overflow-y-auto space-y-2">
+              <div className="max-h-40 overflow-y-auto space-y-2 custom-scroll">
                 {song?.map((item, index) => (
-                  <div key={index} onClick={() => { sendMusicInvite(selectedUser?.id, item); setMusicList(false); }} className="px-3 py-2 rounded-md hover:bg-indigo-600 cursor-pointer transition text-sm">
+                  <div key={index} 
+                    onClick={() => { 
+                      startGroupMusic(roomName, item.song_url); 
+                      setMusicList(false); 
+                    }} 
+                    className="px-3 py-2 rounded-md hover:bg-purple-600 cursor-pointer transition text-sm">
                     {item.song_name}
                   </div>
                 ))}

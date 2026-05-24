@@ -199,6 +199,28 @@ socket.on("group-video-sync", ({ room, action, time }) => {
     from: userId,
   });
 });
+
+socket.on("group-music-invite",({room})=>{
+  socket.join(room);
+  console.log("joined room ", room);
+});
+
+socket.on("group-music-start",({room, songUrl,startAt,currentTime})=>{
+  io.to(room).emit("group-music-start",{
+    songUrl,
+    startAt,
+    currentTime,
+    host:userId
+  });
+});
+
+socket.on("group-music-sync",({room,action,time})=>{
+  io.to(room).emit("group-music-sync",{
+    action,
+    time,
+    from:userId
+  });
+});
   
 
 });

@@ -738,6 +738,12 @@ export const joinPrivateRoom = async (req, res) => {
 export const privateRoomMembers = async (req, res) => {
   try {
     const { currentRoom } = req.body;
+
+    // Optional: Safety check to ensure currentRoom was actually sent in the request
+    if (!currentRoom) {
+      return res.status(400).json({ success: false, message: "Room ID is required" });
+    }
+
     const privateRoomMembers = await prisma.PrivateRoom.findFirst({
       where: {
         id: currentRoom
@@ -747,6 +753,12 @@ export const privateRoomMembers = async (req, res) => {
         memberLists: true
       }
     });
+
+    // 🚨 ADDED: Check if the room was actually found before proceeding
+    if (!privateRoomMembers) {
+      return res.status(404).json({ success: false, message: "Private room not found" });
+    }
+
     const members = await prisma.user.findMany({
       where: {
         id: { in: privateRoomMembers.memberLists }
@@ -762,7 +774,7 @@ export const privateRoomMembers = async (req, res) => {
   }
   catch (error) {
     console.error("UPDATE ERROR:", error);
-    res.json({ success: false, message: error.message });
+    res.status(500).json({ success: false, message: error.message });
   }
 }
 
