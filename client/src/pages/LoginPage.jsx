@@ -18,42 +18,29 @@ const LoginPage = () => {
   const [currentState, setCurrentState] = useState('Sign Up');
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
-
-  // Tracks which quiz is currently open (null, 'mbti', 'attachmentStyle', 'loveLanguage')
   const [activeQuiz, setActiveQuiz] = useState(null);
 
-  // Expanded Form State
+  // Interactive mouse position state
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    birthday: '',
-    age: '',
-    gender: '',
-    pronouns: '',
-    bio: '',
-    googleId: '',
-    mobileNumber: '',
-    primaryNeurotype: [],
-    status: '',
-    sensorySensitivities: [],
-    prefferGender: '',
-    preferredMatch: [],
-    mbtiType: '',
-    attachmentStyle: '',
-    loveLanguage: '',
-    beliefSystem: '',
-    intentions: '',
-    experienceLevel: '',
-    socialComfort: '',
-    topArtists: ['', '', ''],
-    topMovies: ['', '', ''],
-    topHobbies: ['', '', ''],
-    optInNatalChart: false,
-    natalChart: { sun: '', moon: '', rising: '' },
-    uiTheme: 'purple',
-    horoscope: '',
+    fullName: '', email: '', password: '', confirmPassword: '',
+    birthday: '', age: '', gender: '', pronouns: '', bio: '',
+    googleId: '', mobileNumber: '', primaryNeurotype: [], status: '',
+    sensorySensitivities: [], prefferGender: '', preferredMatch: [],
+    mbtiType: '', attachmentStyle: '', loveLanguage: '', beliefSystem: '',
+    intentions: '', experienceLevel: '', socialComfort: '',
+    topArtists: ['', '', ''], topMovies: ['', '', ''], topHobbies: ['', '', ''],
+    optInNatalChart: false, natalChart: { sun: '', moon: '', rising: '' },
+    uiTheme: 'purple', horoscope: '',cityName:"", birthTime:""
   });
 
   const neuroOptions = [
@@ -73,11 +60,13 @@ const LoginPage = () => {
     'Taste (Over-reactive)', 'Taste (Under-reactive)'
   ];
 
-  // Dynamic Theme Definitions
+  // Dynamic Theme Definitions - Added Light Background Gradients
   const themes = {
     purple: {
       bg: "bg-[#5D3289]",
       gradient: "from-[#4B2471] via-[#5D3289] to-[#7B52AB]",
+      bgGradient: "from-purple-100 via-fuchsia-50 to-indigo-100",
+      glow: "bg-purple-400",
       text: "text-[#5D3289]",
       borderHover: "hover:border-[#7B52AB]",
       textHover: "hover:text-[#5D3289]",
@@ -87,6 +76,8 @@ const LoginPage = () => {
     ocean: {
       bg: "bg-[#0369a1]",
       gradient: "from-[#075985] via-[#0369a1] to-[#0284c7]",
+      bgGradient: "from-sky-100 via-blue-50 to-cyan-100",
+      glow: "bg-blue-400",
       text: "text-[#0369a1]",
       borderHover: "hover:border-[#0284c7]",
       textHover: "hover:text-[#0369a1]",
@@ -96,6 +87,8 @@ const LoginPage = () => {
     forest: {
       bg: "bg-[#15803d]",
       gradient: "from-[#166534] via-[#15803d] to-[#16a34a]",
+      bgGradient: "from-green-100 via-emerald-50 to-teal-100",
+      glow: "bg-green-400",
       text: "text-[#15803d]",
       borderHover: "hover:border-[#16a34a]",
       textHover: "hover:text-[#15803d]",
@@ -105,6 +98,8 @@ const LoginPage = () => {
     rose: {
       bg: "bg-[#be123c]",
       gradient: "from-[#9f1239] via-[#be123c] to-[#e11d48]",
+      bgGradient: "from-rose-100 via-red-50 to-pink-100",
+      glow: "bg-rose-400",
       text: "text-[#be123c]",
       borderHover: "hover:border-[#e11d48]",
       textHover: "hover:text-[#be123c]",
@@ -114,42 +109,23 @@ const LoginPage = () => {
   };
 
   const currentTheme = themes[formData.uiTheme] || themes.purple;
-
   const { login } = useContext(AuthContext);
 
   useEffect(() => {
     getRedirectResult(auth)
       .then((result) => {
-        if (result?.user) {
-          console.log('Redirect result caught:', result.user.email);
-        }
+        if (result?.user) console.log('Redirect result caught:', result.user.email);
       })
       .catch((error) => console.error('Redirect Error:', error));
 
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user && googleLoginRef.current) {
         setLoading(true);
-
-        const googleData = {
-          email: user.email,
-          fullName: user.displayName,
-          googleId: user.uid,
-        };
-
-        setFormData((prev) => ({
-          ...prev,
-          ...googleData,
-        }));
-
-        if (currentState === 'Sign Up') {
-          setStep(2);
-        } else {
-          await login('login', {
-            googleId: user.uid,
-            email: user.email,
-          });
-        }
-
+        const googleData = { email: user.email, fullName: user.displayName, googleId: user.uid };
+        setFormData((prev) => ({ ...prev, ...googleData }));
+        if (currentState === 'Sign Up') setStep(2);
+        else await login('login', { googleId: user.uid, email: user.email });
+        
         googleLoginRef.current = false;
         setLoading(false);
       }
@@ -158,37 +134,21 @@ const LoginPage = () => {
     return () => unsubscribe();
   }, [currentState, login]);
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
   const handleArrayChange = (category, index, value) => {
     const updatedArray = [...formData[category]];
     updatedArray[index] = value;
     setFormData({ ...formData, [category]: updatedArray });
   };
-
   const handleNestedChange = (category, field, value) => {
-    setFormData({
-      ...formData,
-      [category]: {
-        ...formData[category],
-        [field]: value
-      }
-    });
+    setFormData({ ...formData, [category]: { ...formData[category], [field]: value } });
   };
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
-
     if (currentState === 'Sign Up') {
       if (step === 1) {
-        if (formData.password !== formData.confirmPassword) {
-          return alert('Passwords do not match!');
-        }
+        if (formData.password !== formData.confirmPassword) return alert('Passwords do not match!');
         setStep(2);
       } else if (step < 5) {
         setStep(step + 1);
@@ -199,10 +159,7 @@ const LoginPage = () => {
       }
     } else {
       setLoading(true);
-      await login('login', {
-        email: formData.email,
-        password: formData.password,
-      });
+      await login('login', { email: formData.email, password: formData.password });
       setLoading(false);
     }
   };
@@ -218,53 +175,62 @@ const LoginPage = () => {
   };
 
   return (
-    <div className={`min-h-screen bg-[#FDFCFE] flex flex-col items-center justify-center p-4 lg:p-6 font-sans selection:bg-gray-200 selection:${currentTheme.text}`}>
+    <div className={`min-h-screen flex flex-col items-center justify-center p-4 lg:p-6 font-sans selection:bg-gray-900 selection:text-white relative overflow-hidden transition-colors duration-1000 bg-gradient-to-br ${currentTheme.bgGradient}`}>
 
-      {/* Background Ambient Glow */}
-      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none transition-colors duration-700">
-        <div className={`absolute -top-[10%] -left-[10%] w-[40%] h-[40%] rounded-full opacity-[0.08] blur-[120px] ${currentTheme.bg}`}></div>
-        <div className="absolute top-[20%] -right-[5%] w-[30%] h-[30%] bg-indigo-400 rounded-full opacity-[0.06] blur-[100px]"></div>
+      {/* Colorful Animated & Interactive Background */}
+      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        {/* Interactive Mouse Orb */}
+        <div 
+          className={`absolute rounded-full opacity-40 blur-[100px] transition-all duration-300 ease-out ${currentTheme.glow}`}
+          style={{
+            width: '40vw',
+            height: '40vw',
+            left: `${mousePos.x}px`,
+            top: `${mousePos.y}px`,
+            transform: 'translate(-50%, -50%)'
+          }}
+        />
+        
+        {/* Floating Ambient Orbs */}
+        <div className={`absolute -top-[10%] -left-[10%] w-[50%] h-[50%] rounded-full opacity-30 blur-[120px] ${currentTheme.bg} floating-orb-slow`}></div>
+        <div className={`absolute bottom-[5%] -right-[5%] w-[45%] h-[45%] rounded-full opacity-30 blur-[120px] bg-white floating-orb-fast`}></div>
       </div>
 
       {/* Header */}
       <div className='w-full max-w-6xl flex justify-between items-center mb-6 lg:mb-8 px-2 sm:px-4 z-10'>
         <div className='flex items-center gap-3 cursor-pointer group' onClick={() => window.location.reload()}>
-          <img
-            src={assets.logo}
-            className='w-12 h-12 object-contain transition-transform duration-300 group-hover:scale-105'
-            alt='Unisoul Logo'
-          />
-          <h1 className='text-2xl font-bold text-gray-900 tracking-tight'>
+          <img src={assets.logo} className='w-12 h-12 object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-md' alt='Unisoul Logo' />
+          <h1 className='text-2xl font-bold text-gray-900 tracking-tight drop-shadow-sm'>
             Unisoul
           </h1>
         </div>
 
         <div className='flex items-center gap-5 text-sm'>
-          <span className='text-gray-400 font-medium hidden sm:block tracking-wide'>
+          <span className='text-gray-700 font-medium hidden sm:block tracking-wide drop-shadow-sm'>
             {currentState === 'Sign Up' ? 'Already a member?' : 'New to Unisoul?'}
           </span>
           <button
             onClick={toggleState}
-            className={`px-7 py-2.5 border border-gray-200 rounded-full font-bold text-gray-700 ${currentTheme.borderHover} ${currentTheme.textHover} transition-all bg-white shadow-sm active:scale-95 cursor-pointer`}
+            className={`px-7 py-2.5 border border-white/40 rounded-full font-bold text-gray-800 ${currentTheme.borderHover} ${currentTheme.textHover} transition-all bg-white/60 backdrop-blur-md shadow-sm hover:shadow-md hover:bg-white active:scale-95 cursor-pointer`}
           >
             {currentState === 'Sign Up' ? 'Log In' : 'Join Now'}
           </button>
         </div>
       </div>
 
-      {/* Main Card */}
-      <div className='w-full max-w-6xl bg-white rounded-[48px] shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] flex overflow-hidden min-h-[720px] border border-gray-50 z-10 relative'>
+      {/* Main Glassmorphism Card */}
+      <div className='w-full max-w-6xl bg-white/90 backdrop-blur-2xl rounded-[48px] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)] flex overflow-hidden min-h-[720px] border border-white/50 z-10 relative transition-all duration-700 hover:shadow-[0_30px_80px_-15px_rgba(0,0,0,0.2)]'>
 
         {/* Left Side: Visual Experience */}
-        <div className='hidden lg:flex lg:w-5/12 relative overflow-hidden'>
+        <div className='hidden lg:flex lg:w-5/12 relative overflow-hidden group'>
           <img
             src={`./assets/hero${step <= 3 ? step : 1}.jpg`}
             alt='Hero Connection'
-            className='absolute inset-0 w-full h-full object-cover transition-transform duration-[10s] hover:scale-105'
+            className='absolute inset-0 w-full h-full object-cover transition-transform duration-[15s] group-hover:scale-110'
           />
 
-          <div className={`absolute inset-0 bg-gradient-to-b ${currentTheme.gradient} mix-blend-multiply opacity-60 transition-colors duration-700`}></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-[#1A0B2E] via-transparent to-transparent"></div>
+          <div className={`absolute inset-0 bg-gradient-to-b ${currentTheme.gradient} mix-blend-multiply opacity-70 transition-colors duration-700`}></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1A0B2E] via-transparent to-transparent opacity-90"></div>
 
           <div className='absolute bottom-14 left-12 right-12 text-white'>
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[10px] font-bold mb-6 uppercase tracking-widest shadow-xl">
@@ -276,7 +242,7 @@ const LoginPage = () => {
               Where Souls <br /><span className="text-white/80 italic font-serif font-light pr-1">Truly</span> Align.
             </h2>
 
-            <p className='text-white/80 font-medium max-w-xs leading-relaxed text-sm'>
+            <p className='text-white/80 font-medium max-w-xs leading-relaxed text-sm drop-shadow-sm'>
               An inclusive space designed for neurodiverse and neurotypical hearts to find harmony and authentic connections.
             </p>
 
@@ -285,8 +251,8 @@ const LoginPage = () => {
                 {[1, 2, 3, 4, 5].map((i) => (
                   <div
                     key={i}
-                    className={`h-1 rounded-full transition-all duration-500 ${step >= i
-                      ? 'w-10 bg-white shadow-[0_0_10px_rgba(255,255,255,0.5)]'
+                    className={`h-1.5 rounded-full transition-all duration-500 ${step >= i
+                      ? 'w-10 bg-white shadow-[0_0_12px_rgba(255,255,255,0.8)]'
                       : 'w-4 bg-white/30'
                       }`}
                   ></div>
@@ -297,7 +263,7 @@ const LoginPage = () => {
         </div>
 
         {/* Right Side: Form Content */}
-        <div className='w-full lg:w-7/12 bg-white flex flex-col items-center px-6 sm:px-12 lg:px-20 py-12 overflow-y-auto custom-scrollbar'>
+        <div className='w-full lg:w-7/12 flex flex-col items-center px-6 sm:px-12 lg:px-20 py-12 overflow-y-auto custom-scrollbar bg-transparent'>
           <form onSubmit={onSubmitHandler} className='flex flex-col gap-6 w-full max-w-[440px] my-auto'>
             {/* Heading Section */}
             <div className='mb-2'>
@@ -312,11 +278,11 @@ const LoginPage = () => {
                 </button>
               )}
 
-              <h3 className='text-3xl font-bold text-gray-900 tracking-tight mb-2'>
+              <h3 className='text-3xl font-extrabold text-gray-900 tracking-tight mb-2'>
                 {currentState === 'Sign Up' ? 'Create Account' : 'Welcome Back'}
               </h3>
 
-              <p className='text-gray-400 text-sm font-medium'>
+              <p className='text-gray-500 text-sm font-medium'>
                 {currentState === 'Sign Up'
                   ? `Step ${step} of 5 — ${step === 1 ? 'Security & Access' : step === 2 ? 'Personal Details' : step === 3 ? 'Identity & Senses' : step === 4 ? 'Favorites & Astro' : 'Dating Goals'}`
                   : 'Enter your credentials to access your profile.'}
@@ -329,22 +295,21 @@ const LoginPage = () => {
                 <button
                   type='button'
                   onClick={handleGoogleSignIn}
-                  className='flex items-center justify-center gap-3 w-full py-3.5 border border-gray-200 rounded-2xl font-bold text-gray-600 hover:bg-gray-50 hover:border-gray-300 transition-all active:scale-[0.98] cursor-pointer'
+                  className={`flex items-center justify-center gap-3 w-full py-3.5 border border-gray-200 rounded-2xl font-bold text-gray-700 bg-white/50 hover:bg-white ${currentTheme.borderHover} hover:shadow-md transition-all active:scale-[0.98] cursor-pointer backdrop-blur-sm`}
                 >
                   <img src='https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg' className='w-5 h-5' alt='Google' />
                   Continue with Google
                 </button>
 
                 <div className='relative flex items-center justify-center py-2'>
-                  <div className='absolute inset-0 flex items-center'><div className='w-full border-t border-gray-100'></div></div>
-                  <span className='relative px-4 text-[10px] text-gray-400 bg-white uppercase font-bold tracking-[0.2em]'>Or use email</span>
+                  <div className='absolute inset-0 flex items-center'><div className='w-full border-t border-gray-200'></div></div>
+                  <span className='relative px-4 text-[10px] text-gray-500 bg-white/80 backdrop-blur-sm uppercase font-bold tracking-[0.2em] rounded-full'>Or use email</span>
                 </div>
               </div>
             )}
 
             {/* Form Fields container */}
             <div className='space-y-5'>
-
               {/* Step 1: Credentials */}
               {(currentState === 'Login' || step === 1) && (
                 <div className='space-y-5 animate-in fade-in duration-500'>
@@ -390,14 +355,9 @@ const LoginPage = () => {
                   <div className="grid grid-cols-2 gap-4">
                     <SelectField theme={currentTheme} label='Diagnosis Status' name='status' value={formData.status} onChange={handleChange} options={['Formally Diagnosed', 'Self-diagnosed', 'Not Diagnosed', 'Prefer not to say']} />
 
-                    {/* MBTI Trigger */}
                     <div className="flex flex-col gap-1 w-full">
                       <SelectField theme={currentTheme} label='MBTI Type' name='mbtiType' value={formData.mbtiType} onChange={handleChange} options={['INTJ', 'INTP', 'ENTJ', 'ENTP', 'INFJ', 'INFP', 'ENFJ', 'ENFP', 'ISTJ', 'ISFJ', 'ESTJ', 'ESFJ', 'ISTP', 'ISFP', 'ESTP', 'ESFP', 'Unsure']} />
-                      <button
-                        type="button"
-                        onClick={() => setActiveQuiz('mbti')}
-                        className={`text-[11px] font-bold mt-1 text-left ${currentTheme.text} hover:underline transition-all w-fit cursor-pointer`}
-                      >
+                      <button type="button" onClick={() => setActiveQuiz('mbti')} className={`text-[11px] font-bold mt-1 text-left ${currentTheme.text} hover:underline transition-all w-fit cursor-pointer`}>
                         Not sure? Take a quick quiz
                       </button>
                     </div>
@@ -420,15 +380,14 @@ const LoginPage = () => {
               {/* Step 4: Express Yourself */}
               {currentState === 'Sign Up' && step === 4 && (
                 <div className='animate-in fade-in slide-in-from-right-8 duration-500 space-y-6'>
-
                   <ThreeItemInput theme={currentTheme} label="Top 3 Favorite Artists" items={formData.topArtists} onChange={(i, v) => handleArrayChange('topArtists', i, v)} placeholderPrefix="Artist" />
                   <ThreeItemInput theme={currentTheme} label="Top 3 Fun Hobbies" items={formData.topHobbies} onChange={(i, v) => handleArrayChange('topHobbies', i, v)} placeholderPrefix="Hobby" />
                   <ThreeItemInput theme={currentTheme} label="Top 3 Movies" items={formData.topMovies} onChange={(i, v) => handleArrayChange('topMovies', i, v)} placeholderPrefix="Movie" />
 
                   {/* Natal Chart Opt-In */}
-                  <div className="bg-gray-50/50 p-4 rounded-2xl border border-gray-100">
+                  <div className="bg-white/60 p-4 rounded-2xl border border-gray-200 shadow-sm backdrop-blur-md">
                     <label className="flex items-center gap-3 cursor-pointer group">
-                      <div className={`w-5 h-5 rounded border ${formData.optInNatalChart ? `${currentTheme.bg} border-transparent` : 'bg-white border-gray-300'} flex items-center justify-center transition-colors`}>
+                      <div className={`w-5 h-5 rounded border ${formData.optInNatalChart ? `${currentTheme.bg} border-transparent` : 'bg-white border-gray-300'} flex items-center justify-center transition-colors shadow-inner`}>
                         {formData.optInNatalChart && <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>}
                       </div>
                       <input type="checkbox" checked={formData.optInNatalChart} onChange={(e) => setFormData({ ...formData, optInNatalChart: e.target.checked })} className="hidden" />
@@ -437,9 +396,22 @@ const LoginPage = () => {
 
                     {formData.optInNatalChart && (
                       <div className="mt-4 grid grid-cols-3 gap-3 animate-in fade-in slide-in-from-top-2">
-                        <InputField theme={currentTheme} label='Sun Sign' type='text' value={formData.natalChart.sun} onChange={(e) => handleNestedChange('natalChart', 'sun', e.target.value)} placeholder='e.g. Leo' />
-                        <InputField theme={currentTheme} label='Moon Sign' type='text' value={formData.natalChart.moon} onChange={(e) => handleNestedChange('natalChart', 'moon', e.target.value)} placeholder='e.g. Pisces' />
-                        <InputField theme={currentTheme} label='Rising Sign' type='text' value={formData.natalChart.rising} onChange={(e) => handleNestedChange('natalChart', 'rising', e.target.value)} placeholder='e.g. Taurus' />
+                       <InputField 
+        theme={currentTheme} 
+        label='Birth Time' 
+        name='birthTime' 
+        value={formData.birthTime} 
+        onChange={handleChange} 
+        placeholder="21:20"
+      />
+      <InputField 
+        theme={currentTheme} 
+        label='Birth Place' 
+        name='cityName' 
+        value={formData.cityName} 
+        onChange={handleChange} 
+        placeholder="London"
+      />
                       </div>
                     )}
                   </div>
@@ -469,7 +441,6 @@ const LoginPage = () => {
                   />
 
                   <div className="grid grid-cols-2 gap-4">
-                    {/* Attachment Style Trigger */}
                     <div className="flex flex-col gap-1 w-full">
                       <SelectField theme={currentTheme} label='Attachment Style' name='attachmentStyle' value={formData.attachmentStyle} onChange={handleChange} options={['Secure', 'Anxious', 'Avoidant', 'Disorganized', 'Unsure']} />
                       <button type="button" onClick={() => setActiveQuiz('attachmentStyle')} className={`text-[11px] font-bold mt-1 text-left ${currentTheme.text} hover:underline transition-all w-fit cursor-pointer`}>
@@ -477,7 +448,6 @@ const LoginPage = () => {
                       </button>
                     </div>
 
-                    {/* Love Language Trigger */}
                     <div className="flex flex-col gap-1 w-full">
                       <SelectField theme={currentTheme} label='Love Language' name='loveLanguage' value={formData.loveLanguage} onChange={handleChange} options={['Words of Affirmation', 'Quality Time', 'Receiving Gifts', 'Acts of Service', 'Physical Touch', 'Unsure']} />
                       <button type="button" onClick={() => setActiveQuiz('loveLanguage')} className={`text-[11px] font-bold mt-1 text-left ${currentTheme.text} hover:underline transition-all w-fit cursor-pointer`}>
@@ -487,8 +457,8 @@ const LoginPage = () => {
                   </div>
 
                   {/* UI Theme Customization */}
-                  <div className="pt-2 border-t border-gray-100">
-                    <label className='text-[10px] font-bold text-gray-400 uppercase tracking-[0.15em] ml-1 block mb-3'>
+                  <div className="pt-4 border-t border-gray-200">
+                    <label className='text-[10px] font-bold text-gray-500 uppercase tracking-[0.15em] ml-1 block mb-3'>
                       Customize Your App Color Theme
                     </label>
                     <div className="flex gap-4">
@@ -497,9 +467,9 @@ const LoginPage = () => {
                           key={themeKey}
                           type="button"
                           onClick={() => setFormData({ ...formData, uiTheme: themeKey })}
-                          className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${themes[themeKey].bg} ${formData.uiTheme === themeKey ? 'ring-4 ring-offset-2 ring-gray-300 scale-110' : 'opacity-80 hover:scale-105 cursor-pointer'}`}
+                          className={`w-10 h-10 rounded-full flex items-center justify-center transition-all shadow-md ${themes[themeKey].bg} ${formData.uiTheme === themeKey ? 'ring-4 ring-offset-2 ring-white scale-110' : 'opacity-80 hover:scale-110 cursor-pointer hover:shadow-lg'}`}
                         >
-                          {formData.uiTheme === themeKey && <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>}
+                          {formData.uiTheme === themeKey && <svg className="w-5 h-5 text-white drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7"></path></svg>}
                         </button>
                       ))}
                     </div>
@@ -512,18 +482,17 @@ const LoginPage = () => {
             <button
               type='submit'
               disabled={loading}
-              className={`mt-4 py-4 w-full ${currentTheme.bg} text-white rounded-2xl font-bold text-base shadow-lg hover:brightness-90 hover:-translate-y-0.5 transition-all active:scale-[0.98] disabled:opacity-70 cursor-pointer`}
+              className={`mt-4 py-4 w-full bg-gradient-to-r ${currentTheme.gradient} text-white rounded-2xl font-bold text-base shadow-[0_10px_20px_-10px_rgba(0,0,0,0.3)] hover:shadow-[0_15px_25px_-10px_rgba(0,0,0,0.4)] hover:-translate-y-1 transition-all active:scale-[0.98] disabled:opacity-70 cursor-pointer`}
             >
               {loading ? 'Processing...' : currentState === 'Login' ? 'Sign In to Unisoul' : step === 5 ? 'Complete Profile' : 'Continue to Next Step'}
             </button>
 
-            <p className='text-[11px] text-gray-400 text-center px-4 leading-relaxed font-medium mt-2'>
+            <p className='text-[11px] text-gray-500 text-center px-4 leading-relaxed font-medium mt-2'>
               By continuing, you agree to our <span className={`${currentTheme.text} font-bold cursor-pointer hover:underline`}>Terms of Service</span> & <span className={`${currentTheme.text} font-bold cursor-pointer hover:underline`}>Privacy Policy</span>.
             </p>
           </form>
         </div>
 
-        {/* DYNAMIC QUIZ MODAL */}
         <QuizModal
           isOpen={!!activeQuiz}
           onClose={() => setActiveQuiz(null)}
@@ -540,7 +509,19 @@ const LoginPage = () => {
         __html: `
         .custom-scrollbar::-webkit-scrollbar { width: 6px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #e5e7eb; border-radius: 20px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 20px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background-color: #94a3b8; }
+        
+        @keyframes float-slow {
+          0%, 100% { transform: translateY(0) scale(1); }
+          50% { transform: translateY(-30px) scale(1.05); }
+        }
+        @keyframes float-fast {
+          0%, 100% { transform: translateY(0) scale(1); }
+          50% { transform: translateY(-20px) scale(0.95); }
+        }
+        .floating-orb-slow { animation: float-slow 12s ease-in-out infinite; }
+        .floating-orb-fast { animation: float-fast 8s ease-in-out infinite; }
       `}} />
     </div>
   );
@@ -550,12 +531,12 @@ const LoginPage = () => {
 
 const InputField = ({ label, theme, ...props }) => (
   <div className='flex flex-col gap-1.5 group'>
-    <label className={`text-[10px] font-bold text-gray-400 uppercase tracking-[0.15em] ml-1 group-focus-within:${theme.text} transition-colors`}>
+    <label className={`text-[10px] font-bold text-gray-500 uppercase tracking-[0.15em] ml-1 group-focus-within:${theme.text} transition-colors`}>
       {label}
     </label>
     <input
       {...props}
-      className={`w-full px-5 py-3.5 bg-gray-50/70 border border-gray-100 rounded-xl focus:bg-white ${theme.focusBorder} focus:ring-4 ${theme.ring} outline-none transition-all text-sm font-medium placeholder:text-gray-300`}
+      className={`w-full px-5 py-3.5 bg-white/70 backdrop-blur-md border border-gray-200 rounded-xl focus:bg-white ${theme.focusBorder} focus:ring-4 ${theme.ring} outline-none transition-all shadow-sm hover:border-gray-300 text-sm font-medium placeholder:text-gray-400`}
       required={props.required !== false}
     />
   </div>
@@ -563,13 +544,13 @@ const InputField = ({ label, theme, ...props }) => (
 
 const SelectField = ({ label, options, theme, ...props }) => (
   <div className='flex flex-col gap-1.5 group w-full'>
-    <label className={`text-[10px] font-bold text-gray-400 uppercase tracking-[0.15em] ml-1 group-focus-within:${theme.text} transition-colors`}>
+    <label className={`text-[10px] font-bold text-gray-500 uppercase tracking-[0.15em] ml-1 group-focus-within:${theme.text} transition-colors`}>
       {label}
     </label>
     <div className="relative">
       <select
         {...props}
-        className={`w-full px-5 py-3.5 bg-gray-50/70 border border-gray-100 rounded-xl focus:bg-white ${theme.focusBorder} focus:ring-4 ${theme.ring} outline-none transition-all text-sm font-medium appearance-none cursor-pointer`}
+        className={`w-full px-5 py-3.5 bg-white/70 backdrop-blur-md border border-gray-200 rounded-xl focus:bg-white ${theme.focusBorder} focus:ring-4 ${theme.ring} outline-none transition-all shadow-sm hover:border-gray-300 text-sm font-medium appearance-none cursor-pointer`}
         required
       >
         <option value="" disabled hidden>Select...</option>
@@ -577,7 +558,7 @@ const SelectField = ({ label, options, theme, ...props }) => (
           <option key={option} value={option}>{option}</option>
         ))}
       </select>
-      <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+      <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
       </div>
     </div>
@@ -586,13 +567,13 @@ const SelectField = ({ label, options, theme, ...props }) => (
 
 const TextAreaField = ({ label, theme, rows = 4, ...props }) => (
   <div className='flex flex-col gap-1.5 group'>
-    <label className={`text-[10px] font-bold text-gray-400 uppercase tracking-[0.15em] ml-1 group-focus-within:${theme.text} transition-colors`}>
+    <label className={`text-[10px] font-bold text-gray-500 uppercase tracking-[0.15em] ml-1 group-focus-within:${theme.text} transition-colors`}>
       {label}
     </label>
     <textarea
       rows={rows}
       {...props}
-      className={`w-full px-5 py-3.5 bg-gray-50/70 border border-gray-100 rounded-xl focus:bg-white ${theme.focusBorder} focus:ring-4 ${theme.ring} outline-none resize-none transition-all text-sm font-medium placeholder:text-gray-300`}
+      className={`w-full px-5 py-3.5 bg-white/70 backdrop-blur-md border border-gray-200 rounded-xl focus:bg-white ${theme.focusBorder} focus:ring-4 ${theme.ring} outline-none resize-none transition-all shadow-sm hover:border-gray-300 text-sm font-medium placeholder:text-gray-400`}
       required
     />
   </div>
@@ -600,7 +581,7 @@ const TextAreaField = ({ label, theme, rows = 4, ...props }) => (
 
 const TagSelector = ({ label, options, selected, onToggle, theme }) => (
   <div className='flex flex-col gap-2.5'>
-    <label className='text-[10px] font-bold text-gray-400 uppercase tracking-[0.15em] ml-1'>
+    <label className='text-[10px] font-bold text-gray-500 uppercase tracking-[0.15em] ml-1'>
       {label}
     </label>
     <div className='flex flex-wrap gap-2'>
@@ -611,10 +592,10 @@ const TagSelector = ({ label, options, selected, onToggle, theme }) => (
             type='button'
             key={option}
             onClick={() => onToggle(option)}
-            className={`px-4 py-2 rounded-full border text-xs font-bold transition-all duration-200 cursor-pointer
+            className={`px-4 py-2 rounded-full border text-xs font-bold transition-all duration-200 cursor-pointer backdrop-blur-sm
             ${isSelected
-                ? `${theme.bg} text-white border-transparent shadow-md -translate-y-[1px]`
-                : `bg-white text-gray-600 border-gray-200 ${theme.borderHover} ${theme.textHover}`
+                ? `${theme.bg} text-white border-transparent shadow-[0_4px_12px_rgba(0,0,0,0.15)] -translate-y-[1px]`
+                : `bg-white/60 text-gray-700 border-gray-200 ${theme.borderHover} ${theme.textHover} hover:bg-white`
               }`}
           >
             {option}
@@ -627,19 +608,19 @@ const TagSelector = ({ label, options, selected, onToggle, theme }) => (
 
 const ThreeItemInput = ({ label, items, onChange, placeholderPrefix, theme }) => (
   <div className='flex flex-col gap-2 group'>
-    <label className={`text-[10px] font-bold text-gray-400 uppercase tracking-[0.15em] ml-1 group-focus-within:${theme.text} transition-colors`}>
+    <label className={`text-[10px] font-bold text-gray-500 uppercase tracking-[0.15em] ml-1 group-focus-within:${theme.text} transition-colors`}>
       {label}
     </label>
     <div className='flex flex-col gap-2'>
       {[0, 1, 2].map((index) => (
         <div key={index} className="relative flex items-center">
-          <div className="absolute left-4 text-xs font-bold text-gray-300">{index + 1}.</div>
+          <div className={`absolute left-4 text-xs font-bold ${items[index] ? theme.text : 'text-gray-400'} transition-colors`}>{index + 1}.</div>
           <input
             type="text"
             value={items[index]}
             onChange={(e) => onChange(index, e.target.value)}
             placeholder={`${placeholderPrefix} name...`}
-            className={`w-full pl-9 pr-5 py-3 bg-gray-50/70 border border-gray-100 rounded-xl focus:bg-white ${theme.focusBorder} focus:ring-4 ${theme.ring} outline-none transition-all text-sm font-medium placeholder:text-gray-300`}
+            className={`w-full pl-9 pr-5 py-3 bg-white/70 backdrop-blur-md border border-gray-200 rounded-xl focus:bg-white ${theme.focusBorder} focus:ring-4 ${theme.ring} outline-none transition-all shadow-sm hover:border-gray-300 text-sm font-medium placeholder:text-gray-400`}
             required={index === 0}
           />
         </div>

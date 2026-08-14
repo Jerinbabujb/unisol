@@ -5,46 +5,107 @@ import prisma from "../config/prisma.js"; // Use the shared instance
 
 // Import the matchmaking engine utility
 import { updateUserEmbedding } from "../utils/generateEmbedding.js";
+const API_KEY = process.env.ASTRO_API;
+const BASE_URL = "https://json.freeastrologyapi.com";
+const headers = { "Content-Type": "application/json", "x-api-key": API_KEY };
 
+console.log("MY API KEY IS:", process.env.ASTRO_API);
 export const signup = async (req, res) => {
     const {
         email, fullName, password, bio, birthday, gender, interest, googleId, avatar,
         mobileNumber, horoscope, primaryNeurotype, status, preferredMatch, mbtiType,
         attachmentStyle, beliefSystem, intentions, experienceLevel, topArtists,
-        favoriteGenres, uiTheme, prefferGender, pronouns,
-        // 🔥 NEW FIELDS ADDED HERE
+        favoriteGenres, uiTheme, prefferGender, pronouns, cityName, birthTime,
         mood, instagram, facebook, images
     } = req.body;
 
     try {
-        // Validation
         if (!email || !fullName) {
             return res.json({ success: false, message: "Email and Name are required" });
         }
 
-        // Password hashing
         let hashedPassword = null;
         if (password) {
             const salt = await bcrypt.genSalt(10);
             hashedPassword = await bcrypt.hash(password, salt);
         }
 
-        // Convert interests safely (from multi-select or comma string)
-        let interestsArray = [];
-        if (Array.isArray(interest)) {
-            interestsArray = interest;
-        } else if (typeof interest === "string") {
-            interestsArray = interest.split(",").map((item) => item.trim()).filter(Boolean);
+        let interestsArray = Array.isArray(interest) ? interest : 
+            (typeof interest === "string" ? interest.split(",").map(i => i.trim()).filter(Boolean) : []);
+
+        let finalImages = Array.isArray(images) ? images.map(img => typeof img === 'object' ? img.src : img) : [];
+
+        // --- ASTROLOGY PIPELINE ---
+// --- ASTROLOGY PIPELINE ---
+        let astroProfile = {};
+
+        if (cityName && birthday) {
+            try {
+                // 1. Safely parse the frontend date string
+                const birthDateObj = new Date(birthday);
+                const year = birthDateObj.getFullYear();
+                const month = birthDateObj.getMonth() + 1; 
+                const day = birthDateObj.getDate(); // Note: V1 uses 'day', not 'date'
+
+                // Safely parse the time string (e.g., "14:30")
+                const [hour, minute] = (typeof birthTime === 'string' && birthTime.includes(':')) 
+                    ? birthTime.split(':').map(Number) 
+                    : [12, 0];
+
+                // 2. Call the new V1 endpoint (Handles Geo and Timezone automatically!)
+                const planetsResponse = await fetch('https://api.freeastroapi.com/api/v1/natal/calculate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-api-key': process.env.ASTRO_API.trim()
+                    },
+                    body: JSON.stringify({
+                        year, 
+                        month, 
+                        day, 
+                        hour, 
+                        minute, 
+                        city: cityName 
+                    })
+                });
+
+                if (!planetsResponse.ok) {
+                    throw new Error(`Astrology API V1 failed: ${planetsResponse.status}`);
+                }
+                
+                const astrologyData = await planetsResponse.json();
+                console.log("astrology data",astrologyData);
+                // 3. Extract core signs from the new V1 response structure
+                // Assuming the new API returns a standard 'data' object or planets array
+                const planets = astrologyData.data?.planets || astrologyData.planets || astrologyData;
+
+                if (Array.isArray(planets)) {
+                    const sun = planets.find(p => p.name === "Sun");
+                    const moon = planets.find(p => p.name === "Moon");
+                    const ascendant = planets.find(p => p.name === "Ascendant" || p.name === "Asc");
+
+                    astroProfile = {
+                        birthTime:birthTime,
+                       birthCity: cityName,
+    sunSign: sun?.sign_id ? sun.sign_id.charAt(0).toUpperCase() + sun.sign_id.slice(1) : undefined,
+    moonSign: moon?.sign_id ? moon.sign_id.charAt(0).toUpperCase() + moon.sign_id.slice(1) : undefined,
+    ascendantSign: ascendant?.sign_id ? ascendant.sign_id.charAt(0).toUpperCase() + ascendant.sign_id.slice(1) : undefined,
+    sunDegree: sun?.abs_pos,
+    moonDegree: moon?.abs_pos,
+    ascendantDegree: ascendant?.abs_pos,
+    
+    // NEW: Save the whole raw JSON response for the frontend!
+    fullAstrologyData: astrologyData
+                    };
+                }
+
+            } catch (astroError) {
+                console.error("Astrology V1 Error:", astroError.message || astroError);
+                // Fail silently so the user can still register
+            }
         }
 
-        // Convert image gallery safely
-        // If frontend sends array of objects [{src: '...'}], extract just the strings
-        let finalImages = [];
-        if (Array.isArray(images)) {
-            finalImages = images.map(img => (typeof img === 'object' ? img.src : img));
-        }
-
-        // UPSERT USER
+        // --- UPSERT USER ---
         const user = await prisma.user.upsert({
             where: { email: email },
             update: {
@@ -69,11 +130,12 @@ export const signup = async (req, res) => {
                 birthday: birthday ? new Date(birthday) : undefined,
                 interest: interestsArray,
                 prefferGender: prefferGender || undefined,
-                // 🔥 NEW FIELDS IN UPDATE
                 mood: mood || undefined,
                 instagram: instagram || undefined,
                 facebook: facebook || undefined,
                 images: finalImages.length > 0 ? finalImages : undefined,
+                ...astroProfile,
+           
                 profileCompleted: true,
             },
             create: {
@@ -101,19 +163,19 @@ export const signup = async (req, res) => {
                 uiTheme,
                 avatar,
                 prefferGender: prefferGender || undefined,
-                // 🔥 NEW FIELDS IN CREATE
                 mood: mood || null,
                 instagram: instagram || null,
                 facebook: facebook || null,
                 images: finalImages,
+                ...astroProfile,
+               
+
                 profileCompleted: true,
             },
         });
 
-        // Generate JWT Token
         const token = generateToken(user.id);
 
-        // 🔥 MATCHMAKING TRIGGER: Generate the vector embedding in the background
         updateUserEmbedding(user.id).catch(err => console.error("Embedding Generation Error:", err));
 
         res.json({

@@ -165,7 +165,7 @@ export const GroupMusicProvider = ({ children }) => {
             autoPlay
             showJumpControls={false}
             showDownloadProgress={false}
-            showFilledProgress={true}
+            showFilledProgress={isHost}
             layout="horizontal"
             style={{
               background: 'transparent',

@@ -11,7 +11,7 @@ export const protectRoute = async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // ✅ Prisma user lookup by UUID
-    const user = await prisma.user.findUnique({
+  const user = await prisma.user.findUnique({
       where: { id: decoded.userId },
       select: {
         id: true,
@@ -25,11 +25,9 @@ export const protectRoute = async (req, res, next) => {
         interest: true,
         images: true,
         Age: true,
-        preferredColor:true,
-        preferredFont:true,
-
-
-        // 🔥 NEW FIELDS ADDED HERE
+        preferredColor: true,
+        preferredFont: true,
+        
         gender: true,
         prefferGender: true,
         horoscope: true,
@@ -41,6 +39,17 @@ export const protectRoute = async (req, res, next) => {
         topArtists: true,
         favoriteGenres: true,
         beliefSystem: true,
+
+        // 🔥 MISSING ASTROLOGY PERMISSIONS ADDED HERE
+        birthCity: true,
+        birthTime: true,
+        sunSign: true,
+        moonSign: true,
+        ascendantSign: true,
+        sunDegree: true,
+        moonDegree: true,
+        ascendantDegree: true,
+        fullAstrologyData: true,
       },
     });
 

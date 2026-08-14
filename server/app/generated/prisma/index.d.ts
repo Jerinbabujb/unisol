@@ -2201,8 +2201,22 @@ export namespace Prisma {
 
   export type AggregateUser = {
     _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
+  }
+
+  export type UserAvgAggregateOutputType = {
+    sunDegree: number | null
+    moonDegree: number | null
+    ascendantDegree: number | null
+  }
+
+  export type UserSumAggregateOutputType = {
+    sunDegree: number | null
+    moonDegree: number | null
+    ascendantDegree: number | null
   }
 
   export type UserMinAggregateOutputType = {
@@ -2228,6 +2242,14 @@ export namespace Prisma {
     prefferGender: string | null
     intentions: string | null
     experienceLevel: string | null
+    birthCity: string | null
+    birthTime: string | null
+    sunSign: string | null
+    moonSign: string | null
+    ascendantSign: string | null
+    sunDegree: number | null
+    moonDegree: number | null
+    ascendantDegree: number | null
     status: string | null
     attachmentStyle: string | null
     beliefSystem: string | null
@@ -2266,6 +2288,14 @@ export namespace Prisma {
     prefferGender: string | null
     intentions: string | null
     experienceLevel: string | null
+    birthCity: string | null
+    birthTime: string | null
+    sunSign: string | null
+    moonSign: string | null
+    ascendantSign: string | null
+    sunDegree: number | null
+    moonDegree: number | null
+    ascendantDegree: number | null
     status: string | null
     attachmentStyle: string | null
     beliefSystem: string | null
@@ -2309,6 +2339,15 @@ export namespace Prisma {
     intentions: number
     experienceLevel: number
     preferredMatch: number
+    birthCity: number
+    birthTime: number
+    sunSign: number
+    moonSign: number
+    ascendantSign: number
+    sunDegree: number
+    moonDegree: number
+    ascendantDegree: number
+    fullAstrologyData: number
     primaryNeurotype: number
     status: number
     attachmentStyle: number
@@ -2331,6 +2370,18 @@ export namespace Prisma {
     _all: number
   }
 
+
+  export type UserAvgAggregateInputType = {
+    sunDegree?: true
+    moonDegree?: true
+    ascendantDegree?: true
+  }
+
+  export type UserSumAggregateInputType = {
+    sunDegree?: true
+    moonDegree?: true
+    ascendantDegree?: true
+  }
 
   export type UserMinAggregateInputType = {
     id?: true
@@ -2355,6 +2406,14 @@ export namespace Prisma {
     prefferGender?: true
     intentions?: true
     experienceLevel?: true
+    birthCity?: true
+    birthTime?: true
+    sunSign?: true
+    moonSign?: true
+    ascendantSign?: true
+    sunDegree?: true
+    moonDegree?: true
+    ascendantDegree?: true
     status?: true
     attachmentStyle?: true
     beliefSystem?: true
@@ -2393,6 +2452,14 @@ export namespace Prisma {
     prefferGender?: true
     intentions?: true
     experienceLevel?: true
+    birthCity?: true
+    birthTime?: true
+    sunSign?: true
+    moonSign?: true
+    ascendantSign?: true
+    sunDegree?: true
+    moonDegree?: true
+    ascendantDegree?: true
     status?: true
     attachmentStyle?: true
     beliefSystem?: true
@@ -2436,6 +2503,15 @@ export namespace Prisma {
     intentions?: true
     experienceLevel?: true
     preferredMatch?: true
+    birthCity?: true
+    birthTime?: true
+    sunSign?: true
+    moonSign?: true
+    ascendantSign?: true
+    sunDegree?: true
+    moonDegree?: true
+    ascendantDegree?: true
+    fullAstrologyData?: true
     primaryNeurotype?: true
     status?: true
     attachmentStyle?: true
@@ -2496,6 +2572,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: UserAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: UserMinAggregateInputType
@@ -2526,6 +2614,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: UserCountAggregateInputType | true
+    _avg?: UserAvgAggregateInputType
+    _sum?: UserSumAggregateInputType
     _min?: UserMinAggregateInputType
     _max?: UserMaxAggregateInputType
   }
@@ -2558,6 +2648,15 @@ export namespace Prisma {
     intentions: string | null
     experienceLevel: string | null
     preferredMatch: string[]
+    birthCity: string | null
+    birthTime: string | null
+    sunSign: string | null
+    moonSign: string | null
+    ascendantSign: string | null
+    sunDegree: number | null
+    moonDegree: number | null
+    ascendantDegree: number | null
+    fullAstrologyData: JsonValue | null
     primaryNeurotype: string[]
     status: string | null
     attachmentStyle: string | null
@@ -2578,6 +2677,8 @@ export namespace Prisma {
     humanDesign: string | null
     testsCompleted: string[]
     _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
   }
@@ -2624,6 +2725,15 @@ export namespace Prisma {
     intentions?: boolean
     experienceLevel?: boolean
     preferredMatch?: boolean
+    birthCity?: boolean
+    birthTime?: boolean
+    sunSign?: boolean
+    moonSign?: boolean
+    ascendantSign?: boolean
+    sunDegree?: boolean
+    moonDegree?: boolean
+    ascendantDegree?: boolean
+    fullAstrologyData?: boolean
     primaryNeurotype?: boolean
     status?: boolean
     attachmentStyle?: boolean
@@ -2681,6 +2791,15 @@ export namespace Prisma {
     intentions?: boolean
     experienceLevel?: boolean
     preferredMatch?: boolean
+    birthCity?: boolean
+    birthTime?: boolean
+    sunSign?: boolean
+    moonSign?: boolean
+    ascendantSign?: boolean
+    sunDegree?: boolean
+    moonDegree?: boolean
+    ascendantDegree?: boolean
+    fullAstrologyData?: boolean
     primaryNeurotype?: boolean
     status?: boolean
     attachmentStyle?: boolean
@@ -2730,6 +2849,15 @@ export namespace Prisma {
     intentions?: boolean
     experienceLevel?: boolean
     preferredMatch?: boolean
+    birthCity?: boolean
+    birthTime?: boolean
+    sunSign?: boolean
+    moonSign?: boolean
+    ascendantSign?: boolean
+    sunDegree?: boolean
+    moonDegree?: boolean
+    ascendantDegree?: boolean
+    fullAstrologyData?: boolean
     primaryNeurotype?: boolean
     status?: boolean
     attachmentStyle?: boolean
@@ -2779,6 +2907,15 @@ export namespace Prisma {
     intentions?: boolean
     experienceLevel?: boolean
     preferredMatch?: boolean
+    birthCity?: boolean
+    birthTime?: boolean
+    sunSign?: boolean
+    moonSign?: boolean
+    ascendantSign?: boolean
+    sunDegree?: boolean
+    moonDegree?: boolean
+    ascendantDegree?: boolean
+    fullAstrologyData?: boolean
     primaryNeurotype?: boolean
     status?: boolean
     attachmentStyle?: boolean
@@ -2800,7 +2937,7 @@ export namespace Prisma {
     testsCompleted?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "pronouns" | "fullName" | "email" | "password" | "googleId" | "mobileNumber" | "Age" | "preferredFont" | "preferredColor" | "bio" | "avatar" | "images" | "mood" | "instagram" | "facebook" | "interest" | "blockedUsers" | "matchUsers" | "birthday" | "gender" | "horoscope" | "purpose" | "prefferGender" | "intentions" | "experienceLevel" | "preferredMatch" | "primaryNeurotype" | "status" | "attachmentStyle" | "beliefSystem" | "mbtiType" | "topArtists" | "favoriteGenres" | "uiTheme" | "isOnline" | "lastSeen" | "profileCompleted" | "isVerified" | "emailVerified" | "createdAt" | "updatedAt" | "attachmentResults" | "loveLanguages" | "humanDesign" | "testsCompleted", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "pronouns" | "fullName" | "email" | "password" | "googleId" | "mobileNumber" | "Age" | "preferredFont" | "preferredColor" | "bio" | "avatar" | "images" | "mood" | "instagram" | "facebook" | "interest" | "blockedUsers" | "matchUsers" | "birthday" | "gender" | "horoscope" | "purpose" | "prefferGender" | "intentions" | "experienceLevel" | "preferredMatch" | "birthCity" | "birthTime" | "sunSign" | "moonSign" | "ascendantSign" | "sunDegree" | "moonDegree" | "ascendantDegree" | "fullAstrologyData" | "primaryNeurotype" | "status" | "attachmentStyle" | "beliefSystem" | "mbtiType" | "topArtists" | "favoriteGenres" | "uiTheme" | "isOnline" | "lastSeen" | "profileCompleted" | "isVerified" | "emailVerified" | "createdAt" | "updatedAt" | "attachmentResults" | "loveLanguages" | "humanDesign" | "testsCompleted", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     recvMessages?: boolean | User$recvMessagesArgs<ExtArgs>
     sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
@@ -2853,6 +2990,15 @@ export namespace Prisma {
       intentions: string | null
       experienceLevel: string | null
       preferredMatch: string[]
+      birthCity: string | null
+      birthTime: string | null
+      sunSign: string | null
+      moonSign: string | null
+      ascendantSign: string | null
+      sunDegree: number | null
+      moonDegree: number | null
+      ascendantDegree: number | null
+      fullAstrologyData: Prisma.JsonValue | null
       primaryNeurotype: string[]
       status: string | null
       attachmentStyle: string | null
@@ -3329,6 +3475,15 @@ export namespace Prisma {
     readonly intentions: FieldRef<"User", 'String'>
     readonly experienceLevel: FieldRef<"User", 'String'>
     readonly preferredMatch: FieldRef<"User", 'String[]'>
+    readonly birthCity: FieldRef<"User", 'String'>
+    readonly birthTime: FieldRef<"User", 'String'>
+    readonly sunSign: FieldRef<"User", 'String'>
+    readonly moonSign: FieldRef<"User", 'String'>
+    readonly ascendantSign: FieldRef<"User", 'String'>
+    readonly sunDegree: FieldRef<"User", 'Float'>
+    readonly moonDegree: FieldRef<"User", 'Float'>
+    readonly ascendantDegree: FieldRef<"User", 'Float'>
+    readonly fullAstrologyData: FieldRef<"User", 'Json'>
     readonly primaryNeurotype: FieldRef<"User", 'String[]'>
     readonly status: FieldRef<"User", 'String'>
     readonly attachmentStyle: FieldRef<"User", 'String'>
@@ -17535,6 +17690,15 @@ export namespace Prisma {
     intentions: 'intentions',
     experienceLevel: 'experienceLevel',
     preferredMatch: 'preferredMatch',
+    birthCity: 'birthCity',
+    birthTime: 'birthTime',
+    sunSign: 'sunSign',
+    moonSign: 'moonSign',
+    ascendantSign: 'ascendantSign',
+    sunDegree: 'sunDegree',
+    moonDegree: 'moonDegree',
+    ascendantDegree: 'ascendantDegree',
+    fullAstrologyData: 'fullAstrologyData',
     primaryNeurotype: 'primaryNeurotype',
     status: 'status',
     attachmentStyle: 'attachmentStyle',
@@ -17778,9 +17942,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Boolean'
+   * Reference to a field of type 'Float'
    */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 
@@ -17799,6 +17970,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -17809,20 +17987,6 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float'
-   */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float[]'
-   */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -17860,6 +18024,15 @@ export namespace Prisma {
     intentions?: StringNullableFilter<"User"> | string | null
     experienceLevel?: StringNullableFilter<"User"> | string | null
     preferredMatch?: StringNullableListFilter<"User">
+    birthCity?: StringNullableFilter<"User"> | string | null
+    birthTime?: StringNullableFilter<"User"> | string | null
+    sunSign?: StringNullableFilter<"User"> | string | null
+    moonSign?: StringNullableFilter<"User"> | string | null
+    ascendantSign?: StringNullableFilter<"User"> | string | null
+    sunDegree?: FloatNullableFilter<"User"> | number | null
+    moonDegree?: FloatNullableFilter<"User"> | number | null
+    ascendantDegree?: FloatNullableFilter<"User"> | number | null
+    fullAstrologyData?: JsonNullableFilter<"User">
     primaryNeurotype?: StringNullableListFilter<"User">
     status?: StringNullableFilter<"User"> | string | null
     attachmentStyle?: StringNullableFilter<"User"> | string | null
@@ -17916,6 +18089,15 @@ export namespace Prisma {
     intentions?: SortOrderInput | SortOrder
     experienceLevel?: SortOrderInput | SortOrder
     preferredMatch?: SortOrder
+    birthCity?: SortOrderInput | SortOrder
+    birthTime?: SortOrderInput | SortOrder
+    sunSign?: SortOrderInput | SortOrder
+    moonSign?: SortOrderInput | SortOrder
+    ascendantSign?: SortOrderInput | SortOrder
+    sunDegree?: SortOrderInput | SortOrder
+    moonDegree?: SortOrderInput | SortOrder
+    ascendantDegree?: SortOrderInput | SortOrder
+    fullAstrologyData?: SortOrderInput | SortOrder
     primaryNeurotype?: SortOrder
     status?: SortOrderInput | SortOrder
     attachmentStyle?: SortOrderInput | SortOrder
@@ -17975,6 +18157,15 @@ export namespace Prisma {
     intentions?: StringNullableFilter<"User"> | string | null
     experienceLevel?: StringNullableFilter<"User"> | string | null
     preferredMatch?: StringNullableListFilter<"User">
+    birthCity?: StringNullableFilter<"User"> | string | null
+    birthTime?: StringNullableFilter<"User"> | string | null
+    sunSign?: StringNullableFilter<"User"> | string | null
+    moonSign?: StringNullableFilter<"User"> | string | null
+    ascendantSign?: StringNullableFilter<"User"> | string | null
+    sunDegree?: FloatNullableFilter<"User"> | number | null
+    moonDegree?: FloatNullableFilter<"User"> | number | null
+    ascendantDegree?: FloatNullableFilter<"User"> | number | null
+    fullAstrologyData?: JsonNullableFilter<"User">
     primaryNeurotype?: StringNullableListFilter<"User">
     status?: StringNullableFilter<"User"> | string | null
     attachmentStyle?: StringNullableFilter<"User"> | string | null
@@ -18031,6 +18222,15 @@ export namespace Prisma {
     intentions?: SortOrderInput | SortOrder
     experienceLevel?: SortOrderInput | SortOrder
     preferredMatch?: SortOrder
+    birthCity?: SortOrderInput | SortOrder
+    birthTime?: SortOrderInput | SortOrder
+    sunSign?: SortOrderInput | SortOrder
+    moonSign?: SortOrderInput | SortOrder
+    ascendantSign?: SortOrderInput | SortOrder
+    sunDegree?: SortOrderInput | SortOrder
+    moonDegree?: SortOrderInput | SortOrder
+    ascendantDegree?: SortOrderInput | SortOrder
+    fullAstrologyData?: SortOrderInput | SortOrder
     primaryNeurotype?: SortOrder
     status?: SortOrderInput | SortOrder
     attachmentStyle?: SortOrderInput | SortOrder
@@ -18051,8 +18251,10 @@ export namespace Prisma {
     humanDesign?: SortOrderInput | SortOrder
     testsCompleted?: SortOrder
     _count?: UserCountOrderByAggregateInput
+    _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
+    _sum?: UserSumOrderByAggregateInput
   }
 
   export type UserScalarWhereWithAggregatesInput = {
@@ -18086,6 +18288,15 @@ export namespace Prisma {
     intentions?: StringNullableWithAggregatesFilter<"User"> | string | null
     experienceLevel?: StringNullableWithAggregatesFilter<"User"> | string | null
     preferredMatch?: StringNullableListFilter<"User">
+    birthCity?: StringNullableWithAggregatesFilter<"User"> | string | null
+    birthTime?: StringNullableWithAggregatesFilter<"User"> | string | null
+    sunSign?: StringNullableWithAggregatesFilter<"User"> | string | null
+    moonSign?: StringNullableWithAggregatesFilter<"User"> | string | null
+    ascendantSign?: StringNullableWithAggregatesFilter<"User"> | string | null
+    sunDegree?: FloatNullableWithAggregatesFilter<"User"> | number | null
+    moonDegree?: FloatNullableWithAggregatesFilter<"User"> | number | null
+    ascendantDegree?: FloatNullableWithAggregatesFilter<"User"> | number | null
+    fullAstrologyData?: JsonNullableWithAggregatesFilter<"User">
     primaryNeurotype?: StringNullableListFilter<"User">
     status?: StringNullableWithAggregatesFilter<"User"> | string | null
     attachmentStyle?: StringNullableWithAggregatesFilter<"User"> | string | null
@@ -18857,6 +19068,15 @@ export namespace Prisma {
     intentions?: string | null
     experienceLevel?: string | null
     preferredMatch?: UserCreatepreferredMatchInput | string[]
+    birthCity?: string | null
+    birthTime?: string | null
+    sunSign?: string | null
+    moonSign?: string | null
+    ascendantSign?: string | null
+    sunDegree?: number | null
+    moonDegree?: number | null
+    ascendantDegree?: number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
     status?: string | null
     attachmentStyle?: string | null
@@ -18913,6 +19133,15 @@ export namespace Prisma {
     intentions?: string | null
     experienceLevel?: string | null
     preferredMatch?: UserCreatepreferredMatchInput | string[]
+    birthCity?: string | null
+    birthTime?: string | null
+    sunSign?: string | null
+    moonSign?: string | null
+    ascendantSign?: string | null
+    sunDegree?: number | null
+    moonDegree?: number | null
+    ascendantDegree?: number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
     status?: string | null
     attachmentStyle?: string | null
@@ -18969,6 +19198,15 @@ export namespace Prisma {
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
     experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
     preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
+    birthTime?: NullableStringFieldUpdateOperationsInput | string | null
+    sunSign?: NullableStringFieldUpdateOperationsInput | string | null
+    moonSign?: NullableStringFieldUpdateOperationsInput | string | null
+    ascendantSign?: NullableStringFieldUpdateOperationsInput | string | null
+    sunDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    moonDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    ascendantDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
     status?: NullableStringFieldUpdateOperationsInput | string | null
     attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19025,6 +19263,15 @@ export namespace Prisma {
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
     experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
     preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
+    birthTime?: NullableStringFieldUpdateOperationsInput | string | null
+    sunSign?: NullableStringFieldUpdateOperationsInput | string | null
+    moonSign?: NullableStringFieldUpdateOperationsInput | string | null
+    ascendantSign?: NullableStringFieldUpdateOperationsInput | string | null
+    sunDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    moonDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    ascendantDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
     status?: NullableStringFieldUpdateOperationsInput | string | null
     attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19081,6 +19328,15 @@ export namespace Prisma {
     intentions?: string | null
     experienceLevel?: string | null
     preferredMatch?: UserCreatepreferredMatchInput | string[]
+    birthCity?: string | null
+    birthTime?: string | null
+    sunSign?: string | null
+    moonSign?: string | null
+    ascendantSign?: string | null
+    sunDegree?: number | null
+    moonDegree?: number | null
+    ascendantDegree?: number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
     status?: string | null
     attachmentStyle?: string | null
@@ -19130,6 +19386,15 @@ export namespace Prisma {
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
     experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
     preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
+    birthTime?: NullableStringFieldUpdateOperationsInput | string | null
+    sunSign?: NullableStringFieldUpdateOperationsInput | string | null
+    moonSign?: NullableStringFieldUpdateOperationsInput | string | null
+    ascendantSign?: NullableStringFieldUpdateOperationsInput | string | null
+    sunDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    moonDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    ascendantDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
     status?: NullableStringFieldUpdateOperationsInput | string | null
     attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19179,6 +19444,15 @@ export namespace Prisma {
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
     experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
     preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
+    birthTime?: NullableStringFieldUpdateOperationsInput | string | null
+    sunSign?: NullableStringFieldUpdateOperationsInput | string | null
+    moonSign?: NullableStringFieldUpdateOperationsInput | string | null
+    ascendantSign?: NullableStringFieldUpdateOperationsInput | string | null
+    sunDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    moonDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    ascendantDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
     status?: NullableStringFieldUpdateOperationsInput | string | null
     attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19983,20 +20257,15 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
   export type JsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -20020,6 +20289,22 @@ export namespace Prisma {
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type MessageListRelationFilter = {
@@ -20105,6 +20390,15 @@ export namespace Prisma {
     intentions?: SortOrder
     experienceLevel?: SortOrder
     preferredMatch?: SortOrder
+    birthCity?: SortOrder
+    birthTime?: SortOrder
+    sunSign?: SortOrder
+    moonSign?: SortOrder
+    ascendantSign?: SortOrder
+    sunDegree?: SortOrder
+    moonDegree?: SortOrder
+    ascendantDegree?: SortOrder
+    fullAstrologyData?: SortOrder
     primaryNeurotype?: SortOrder
     status?: SortOrder
     attachmentStyle?: SortOrder
@@ -20124,6 +20418,12 @@ export namespace Prisma {
     loveLanguages?: SortOrder
     humanDesign?: SortOrder
     testsCompleted?: SortOrder
+  }
+
+  export type UserAvgOrderByAggregateInput = {
+    sunDegree?: SortOrder
+    moonDegree?: SortOrder
+    ascendantDegree?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -20149,6 +20449,14 @@ export namespace Prisma {
     prefferGender?: SortOrder
     intentions?: SortOrder
     experienceLevel?: SortOrder
+    birthCity?: SortOrder
+    birthTime?: SortOrder
+    sunSign?: SortOrder
+    moonSign?: SortOrder
+    ascendantSign?: SortOrder
+    sunDegree?: SortOrder
+    moonDegree?: SortOrder
+    ascendantDegree?: SortOrder
     status?: SortOrder
     attachmentStyle?: SortOrder
     beliefSystem?: SortOrder
@@ -20187,6 +20495,14 @@ export namespace Prisma {
     prefferGender?: SortOrder
     intentions?: SortOrder
     experienceLevel?: SortOrder
+    birthCity?: SortOrder
+    birthTime?: SortOrder
+    sunSign?: SortOrder
+    moonSign?: SortOrder
+    ascendantSign?: SortOrder
+    sunDegree?: SortOrder
+    moonDegree?: SortOrder
+    ascendantDegree?: SortOrder
     status?: SortOrder
     attachmentStyle?: SortOrder
     beliefSystem?: SortOrder
@@ -20200,6 +20516,12 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     humanDesign?: SortOrder
+  }
+
+  export type UserSumOrderByAggregateInput = {
+    sunDegree?: SortOrder
+    moonDegree?: SortOrder
+    ascendantDegree?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -20252,26 +20574,20 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
   }
   export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -20298,6 +20614,28 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedJsonNullableFilter<$PrismaModel>
     _max?: NestedJsonNullableFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type UserScalarRelationFilter = {
@@ -20875,6 +21213,14 @@ export namespace Prisma {
     push?: string | string[]
   }
 
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type UserUpdateprimaryNeurotypeInput = {
     set?: string[]
     push?: string | string[]
@@ -21401,6 +21747,17 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedBoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -21487,26 +21844,20 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
   }
   export type NestedJsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -21530,6 +21881,28 @@ export namespace Prisma {
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedBoolNullableFilter<$PrismaModel = never> = {
@@ -21945,6 +22318,15 @@ export namespace Prisma {
     intentions?: string | null
     experienceLevel?: string | null
     preferredMatch?: UserCreatepreferredMatchInput | string[]
+    birthCity?: string | null
+    birthTime?: string | null
+    sunSign?: string | null
+    moonSign?: string | null
+    ascendantSign?: string | null
+    sunDegree?: number | null
+    moonDegree?: number | null
+    ascendantDegree?: number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
     status?: string | null
     attachmentStyle?: string | null
@@ -22000,6 +22382,15 @@ export namespace Prisma {
     intentions?: string | null
     experienceLevel?: string | null
     preferredMatch?: UserCreatepreferredMatchInput | string[]
+    birthCity?: string | null
+    birthTime?: string | null
+    sunSign?: string | null
+    moonSign?: string | null
+    ascendantSign?: string | null
+    sunDegree?: number | null
+    moonDegree?: number | null
+    ascendantDegree?: number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
     status?: string | null
     attachmentStyle?: string | null
@@ -22060,6 +22451,15 @@ export namespace Prisma {
     intentions?: string | null
     experienceLevel?: string | null
     preferredMatch?: UserCreatepreferredMatchInput | string[]
+    birthCity?: string | null
+    birthTime?: string | null
+    sunSign?: string | null
+    moonSign?: string | null
+    ascendantSign?: string | null
+    sunDegree?: number | null
+    moonDegree?: number | null
+    ascendantDegree?: number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
     status?: string | null
     attachmentStyle?: string | null
@@ -22115,6 +22515,15 @@ export namespace Prisma {
     intentions?: string | null
     experienceLevel?: string | null
     preferredMatch?: UserCreatepreferredMatchInput | string[]
+    birthCity?: string | null
+    birthTime?: string | null
+    sunSign?: string | null
+    moonSign?: string | null
+    ascendantSign?: string | null
+    sunDegree?: number | null
+    moonDegree?: number | null
+    ascendantDegree?: number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
     status?: string | null
     attachmentStyle?: string | null
@@ -22186,6 +22595,15 @@ export namespace Prisma {
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
     experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
     preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
+    birthTime?: NullableStringFieldUpdateOperationsInput | string | null
+    sunSign?: NullableStringFieldUpdateOperationsInput | string | null
+    moonSign?: NullableStringFieldUpdateOperationsInput | string | null
+    ascendantSign?: NullableStringFieldUpdateOperationsInput | string | null
+    sunDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    moonDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    ascendantDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
     status?: NullableStringFieldUpdateOperationsInput | string | null
     attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22241,6 +22659,15 @@ export namespace Prisma {
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
     experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
     preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
+    birthTime?: NullableStringFieldUpdateOperationsInput | string | null
+    sunSign?: NullableStringFieldUpdateOperationsInput | string | null
+    moonSign?: NullableStringFieldUpdateOperationsInput | string | null
+    ascendantSign?: NullableStringFieldUpdateOperationsInput | string | null
+    sunDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    moonDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    ascendantDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
     status?: NullableStringFieldUpdateOperationsInput | string | null
     attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22307,6 +22734,15 @@ export namespace Prisma {
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
     experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
     preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
+    birthTime?: NullableStringFieldUpdateOperationsInput | string | null
+    sunSign?: NullableStringFieldUpdateOperationsInput | string | null
+    moonSign?: NullableStringFieldUpdateOperationsInput | string | null
+    ascendantSign?: NullableStringFieldUpdateOperationsInput | string | null
+    sunDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    moonDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    ascendantDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
     status?: NullableStringFieldUpdateOperationsInput | string | null
     attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22362,6 +22798,15 @@ export namespace Prisma {
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
     experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
     preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
+    birthTime?: NullableStringFieldUpdateOperationsInput | string | null
+    sunSign?: NullableStringFieldUpdateOperationsInput | string | null
+    moonSign?: NullableStringFieldUpdateOperationsInput | string | null
+    ascendantSign?: NullableStringFieldUpdateOperationsInput | string | null
+    sunDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    moonDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    ascendantDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
     status?: NullableStringFieldUpdateOperationsInput | string | null
     attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22417,6 +22862,15 @@ export namespace Prisma {
     intentions?: string | null
     experienceLevel?: string | null
     preferredMatch?: UserCreatepreferredMatchInput | string[]
+    birthCity?: string | null
+    birthTime?: string | null
+    sunSign?: string | null
+    moonSign?: string | null
+    ascendantSign?: string | null
+    sunDegree?: number | null
+    moonDegree?: number | null
+    ascendantDegree?: number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
     status?: string | null
     attachmentStyle?: string | null
@@ -22472,6 +22926,15 @@ export namespace Prisma {
     intentions?: string | null
     experienceLevel?: string | null
     preferredMatch?: UserCreatepreferredMatchInput | string[]
+    birthCity?: string | null
+    birthTime?: string | null
+    sunSign?: string | null
+    moonSign?: string | null
+    ascendantSign?: string | null
+    sunDegree?: number | null
+    moonDegree?: number | null
+    ascendantDegree?: number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
     status?: string | null
     attachmentStyle?: string | null
@@ -22543,6 +23006,15 @@ export namespace Prisma {
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
     experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
     preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
+    birthTime?: NullableStringFieldUpdateOperationsInput | string | null
+    sunSign?: NullableStringFieldUpdateOperationsInput | string | null
+    moonSign?: NullableStringFieldUpdateOperationsInput | string | null
+    ascendantSign?: NullableStringFieldUpdateOperationsInput | string | null
+    sunDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    moonDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    ascendantDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
     status?: NullableStringFieldUpdateOperationsInput | string | null
     attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22598,6 +23070,15 @@ export namespace Prisma {
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
     experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
     preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
+    birthTime?: NullableStringFieldUpdateOperationsInput | string | null
+    sunSign?: NullableStringFieldUpdateOperationsInput | string | null
+    moonSign?: NullableStringFieldUpdateOperationsInput | string | null
+    ascendantSign?: NullableStringFieldUpdateOperationsInput | string | null
+    sunDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    moonDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    ascendantDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
     status?: NullableStringFieldUpdateOperationsInput | string | null
     attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22653,6 +23134,15 @@ export namespace Prisma {
     intentions?: string | null
     experienceLevel?: string | null
     preferredMatch?: UserCreatepreferredMatchInput | string[]
+    birthCity?: string | null
+    birthTime?: string | null
+    sunSign?: string | null
+    moonSign?: string | null
+    ascendantSign?: string | null
+    sunDegree?: number | null
+    moonDegree?: number | null
+    ascendantDegree?: number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
     status?: string | null
     attachmentStyle?: string | null
@@ -22708,6 +23198,15 @@ export namespace Prisma {
     intentions?: string | null
     experienceLevel?: string | null
     preferredMatch?: UserCreatepreferredMatchInput | string[]
+    birthCity?: string | null
+    birthTime?: string | null
+    sunSign?: string | null
+    moonSign?: string | null
+    ascendantSign?: string | null
+    sunDegree?: number | null
+    moonDegree?: number | null
+    ascendantDegree?: number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
     status?: string | null
     attachmentStyle?: string | null
@@ -22768,6 +23267,15 @@ export namespace Prisma {
     intentions?: string | null
     experienceLevel?: string | null
     preferredMatch?: UserCreatepreferredMatchInput | string[]
+    birthCity?: string | null
+    birthTime?: string | null
+    sunSign?: string | null
+    moonSign?: string | null
+    ascendantSign?: string | null
+    sunDegree?: number | null
+    moonDegree?: number | null
+    ascendantDegree?: number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
     status?: string | null
     attachmentStyle?: string | null
@@ -22823,6 +23331,15 @@ export namespace Prisma {
     intentions?: string | null
     experienceLevel?: string | null
     preferredMatch?: UserCreatepreferredMatchInput | string[]
+    birthCity?: string | null
+    birthTime?: string | null
+    sunSign?: string | null
+    moonSign?: string | null
+    ascendantSign?: string | null
+    sunDegree?: number | null
+    moonDegree?: number | null
+    ascendantDegree?: number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
     status?: string | null
     attachmentStyle?: string | null
@@ -22894,6 +23411,15 @@ export namespace Prisma {
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
     experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
     preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
+    birthTime?: NullableStringFieldUpdateOperationsInput | string | null
+    sunSign?: NullableStringFieldUpdateOperationsInput | string | null
+    moonSign?: NullableStringFieldUpdateOperationsInput | string | null
+    ascendantSign?: NullableStringFieldUpdateOperationsInput | string | null
+    sunDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    moonDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    ascendantDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
     status?: NullableStringFieldUpdateOperationsInput | string | null
     attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22949,6 +23475,15 @@ export namespace Prisma {
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
     experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
     preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
+    birthTime?: NullableStringFieldUpdateOperationsInput | string | null
+    sunSign?: NullableStringFieldUpdateOperationsInput | string | null
+    moonSign?: NullableStringFieldUpdateOperationsInput | string | null
+    ascendantSign?: NullableStringFieldUpdateOperationsInput | string | null
+    sunDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    moonDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    ascendantDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
     status?: NullableStringFieldUpdateOperationsInput | string | null
     attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23015,6 +23550,15 @@ export namespace Prisma {
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
     experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
     preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
+    birthTime?: NullableStringFieldUpdateOperationsInput | string | null
+    sunSign?: NullableStringFieldUpdateOperationsInput | string | null
+    moonSign?: NullableStringFieldUpdateOperationsInput | string | null
+    ascendantSign?: NullableStringFieldUpdateOperationsInput | string | null
+    sunDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    moonDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    ascendantDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
     status?: NullableStringFieldUpdateOperationsInput | string | null
     attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23070,6 +23614,15 @@ export namespace Prisma {
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
     experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
     preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
+    birthTime?: NullableStringFieldUpdateOperationsInput | string | null
+    sunSign?: NullableStringFieldUpdateOperationsInput | string | null
+    moonSign?: NullableStringFieldUpdateOperationsInput | string | null
+    ascendantSign?: NullableStringFieldUpdateOperationsInput | string | null
+    sunDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    moonDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    ascendantDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
     status?: NullableStringFieldUpdateOperationsInput | string | null
     attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23165,6 +23718,15 @@ export namespace Prisma {
     intentions?: string | null
     experienceLevel?: string | null
     preferredMatch?: UserCreatepreferredMatchInput | string[]
+    birthCity?: string | null
+    birthTime?: string | null
+    sunSign?: string | null
+    moonSign?: string | null
+    ascendantSign?: string | null
+    sunDegree?: number | null
+    moonDegree?: number | null
+    ascendantDegree?: number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
     status?: string | null
     attachmentStyle?: string | null
@@ -23220,6 +23782,15 @@ export namespace Prisma {
     intentions?: string | null
     experienceLevel?: string | null
     preferredMatch?: UserCreatepreferredMatchInput | string[]
+    birthCity?: string | null
+    birthTime?: string | null
+    sunSign?: string | null
+    moonSign?: string | null
+    ascendantSign?: string | null
+    sunDegree?: number | null
+    moonDegree?: number | null
+    ascendantDegree?: number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
     status?: string | null
     attachmentStyle?: string | null
@@ -23310,6 +23881,15 @@ export namespace Prisma {
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
     experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
     preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
+    birthTime?: NullableStringFieldUpdateOperationsInput | string | null
+    sunSign?: NullableStringFieldUpdateOperationsInput | string | null
+    moonSign?: NullableStringFieldUpdateOperationsInput | string | null
+    ascendantSign?: NullableStringFieldUpdateOperationsInput | string | null
+    sunDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    moonDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    ascendantDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
     status?: NullableStringFieldUpdateOperationsInput | string | null
     attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23365,6 +23945,15 @@ export namespace Prisma {
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
     experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
     preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
+    birthTime?: NullableStringFieldUpdateOperationsInput | string | null
+    sunSign?: NullableStringFieldUpdateOperationsInput | string | null
+    moonSign?: NullableStringFieldUpdateOperationsInput | string | null
+    ascendantSign?: NullableStringFieldUpdateOperationsInput | string | null
+    sunDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    moonDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    ascendantDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
     status?: NullableStringFieldUpdateOperationsInput | string | null
     attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23485,6 +24074,15 @@ export namespace Prisma {
     intentions?: string | null
     experienceLevel?: string | null
     preferredMatch?: UserCreatepreferredMatchInput | string[]
+    birthCity?: string | null
+    birthTime?: string | null
+    sunSign?: string | null
+    moonSign?: string | null
+    ascendantSign?: string | null
+    sunDegree?: number | null
+    moonDegree?: number | null
+    ascendantDegree?: number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
     status?: string | null
     attachmentStyle?: string | null
@@ -23540,6 +24138,15 @@ export namespace Prisma {
     intentions?: string | null
     experienceLevel?: string | null
     preferredMatch?: UserCreatepreferredMatchInput | string[]
+    birthCity?: string | null
+    birthTime?: string | null
+    sunSign?: string | null
+    moonSign?: string | null
+    ascendantSign?: string | null
+    sunDegree?: number | null
+    moonDegree?: number | null
+    ascendantDegree?: number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserCreateprimaryNeurotypeInput | string[]
     status?: string | null
     attachmentStyle?: string | null
@@ -23638,6 +24245,15 @@ export namespace Prisma {
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
     experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
     preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
+    birthTime?: NullableStringFieldUpdateOperationsInput | string | null
+    sunSign?: NullableStringFieldUpdateOperationsInput | string | null
+    moonSign?: NullableStringFieldUpdateOperationsInput | string | null
+    ascendantSign?: NullableStringFieldUpdateOperationsInput | string | null
+    sunDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    moonDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    ascendantDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
     status?: NullableStringFieldUpdateOperationsInput | string | null
     attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23693,6 +24309,15 @@ export namespace Prisma {
     intentions?: NullableStringFieldUpdateOperationsInput | string | null
     experienceLevel?: NullableStringFieldUpdateOperationsInput | string | null
     preferredMatch?: UserUpdatepreferredMatchInput | string[]
+    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
+    birthTime?: NullableStringFieldUpdateOperationsInput | string | null
+    sunSign?: NullableStringFieldUpdateOperationsInput | string | null
+    moonSign?: NullableStringFieldUpdateOperationsInput | string | null
+    ascendantSign?: NullableStringFieldUpdateOperationsInput | string | null
+    sunDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    moonDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    ascendantDegree?: NullableFloatFieldUpdateOperationsInput | number | null
+    fullAstrologyData?: NullableJsonNullValueInput | InputJsonValue
     primaryNeurotype?: UserUpdateprimaryNeurotypeInput | string[]
     status?: NullableStringFieldUpdateOperationsInput | string | null
     attachmentStyle?: NullableStringFieldUpdateOperationsInput | string | null

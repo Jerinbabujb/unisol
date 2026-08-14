@@ -45,7 +45,22 @@ model User {
   intentions        String?
   experienceLevel   String?
   preferredMatch    String[]  @default([])
+// --- ASTROLOGY & NATAL CHART ---
+  birthCity         String?   // E.g., "London"
+  birthTime         String?   // E.g., "14:30"
 
+  // Core Identity Signs (For Profile UI Display)
+  sunSign           String?   // E.g., "Aries"
+  moonSign          String?   // E.g., "Aquarius"
+  ascendantSign     String?   // E.g., "Cancer"
+
+  // Absolute Degrees (For Fast Database Matchmaking & Math)
+  sunDegree         Float?
+  moonDegree        Float?
+  ascendantDegree   Float?
+
+  // Full Raw Data (For Astrochart Frontend Rendering)
+  fullAstrologyData Json?     // Stores the entire API response
   // Neurodivergent Preferences
   primaryNeurotype  String[]  @default([])
   status            String?
