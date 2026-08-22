@@ -324,6 +324,8 @@ const LoginPage = () => {
               {/* Step 2: Personal Info */}
               {currentState === 'Sign Up' && step === 2 && (
                 <div className='animate-in fade-in slide-in-from-right-8 duration-500 space-y-5'>
+                                      <SelectField theme={currentTheme} label='Pronouns' name='pronouns' value={formData.pronouns} onChange={handleChange} options={['She/Her', 'He/Him', 'They/Them', 'Prefer not to say']} />
+
                   <InputField theme={currentTheme} label='Full Name' type='text' name='fullName' value={formData.fullName} onChange={handleChange} placeholder='Jane Doe' />
                   <InputField theme={currentTheme} label='Mobile Number' type='tel' name='mobileNumber' value={formData.mobileNumber} onChange={handleChange} placeholder='+1 (555) 000-0000' />
 
@@ -332,9 +334,8 @@ const LoginPage = () => {
                     <InputField theme={currentTheme} label='Age' type='number' name='age' value={formData.age} onChange={handleChange} placeholder='e.g. 25' min="18" max="100" />
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 gap-4">
                     <SelectField theme={currentTheme} label='Gender' name='gender' value={formData.gender} onChange={handleChange} options={['Woman', 'Man', 'Non-binary', 'Other']} />
-                    <SelectField theme={currentTheme} label='Pronouns' name='pronouns' value={formData.pronouns} onChange={handleChange} options={['She/Her', 'He/Him', 'They/Them', 'Prefer not to say']} />
                   </div>
                 </div>
               )}
@@ -362,6 +363,8 @@ const LoginPage = () => {
                       </button>
                     </div>
                   </div>
+                                      <SelectField theme={currentTheme} label='Religious belief' name='beliefSystem' value={formData.beliefSystem} onChange={handleChange} options={['Religious', 'Spiritual', 'Not']} />
+
 
                   <TagSelector
                     theme={currentTheme} label='Sensory Sensitivities' options={sensoryOptions} selected={formData.sensorySensitivities}
@@ -372,6 +375,7 @@ const LoginPage = () => {
                       setFormData({ ...formData, sensorySensitivities: updated });
                     }}
                   />
+
 
                   <TextAreaField theme={currentTheme} label='Tell us your story (Bio)' name='bio' value={formData.bio} onChange={handleChange} placeholder='What makes you unique?' rows={3} />
                 </div>
