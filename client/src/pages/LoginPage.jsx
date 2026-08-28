@@ -36,7 +36,7 @@ const LoginPage = () => {
     birthday: '', age: '', gender: '', pronouns: '', bio: '',
     googleId: '', mobileNumber: '', primaryNeurotype: [], status: '',
     sensorySensitivities: [], prefferGender: '', preferredMatch: [],
-    mbtiType: '', attachmentStyle: '', loveLanguage: '', beliefSystem: '',
+    mbtiType: '', attachmentStyle: '', loveLanguage: '',humanDesign: '', beliefSystem: '',
     intentions: '', experienceLevel: '', socialComfort: '',
     topArtists: ['', '', ''], topMovies: ['', '', ''], topHobbies: ['', '', ''],
     optInNatalChart: false, natalChart: { sun: '', moon: '', rising: '' },
@@ -337,6 +337,37 @@ const LoginPage = () => {
                   <div className="grid grid-cols-1 gap-4">
                     <SelectField theme={currentTheme} label='Gender' name='gender' value={formData.gender} onChange={handleChange} options={['Woman', 'Man', 'Non-binary', 'Other']} />
                   </div>
+                  {/* Natal Chart Opt-In */}
+                  <div className="bg-white/60 p-4 rounded-2xl border border-gray-200 shadow-sm backdrop-blur-md">
+                    <label className="flex items-center gap-3 cursor-pointer group">
+                      <div className={`w-5 h-5 rounded border ${formData.optInNatalChart ? `${currentTheme.bg} border-transparent` : 'bg-white border-gray-300'} flex items-center justify-center transition-colors shadow-inner`}>
+                        {formData.optInNatalChart && <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>}
+                      </div>
+                      <input type="checkbox" checked={formData.optInNatalChart} onChange={(e) => setFormData({ ...formData, optInNatalChart: e.target.checked })} className="hidden" />
+                      <span className={`text-sm font-bold ${formData.optInNatalChart ? currentTheme.text : 'text-gray-600'} transition-colors`}>Add Natal Chart Information (optional)</span>
+                    </label>
+
+                    {formData.optInNatalChart && (
+                      <div className="mt-4 grid grid-cols-3 gap-3 animate-in fade-in slide-in-from-top-2">
+                       <InputField 
+        theme={currentTheme} 
+        label='Birth Time' 
+        name='birthTime' 
+        value={formData.birthTime} 
+        onChange={handleChange} 
+        placeholder="21:20"
+      />
+      <InputField 
+        theme={currentTheme} 
+        label='Birth Place' 
+        name='cityName' 
+        value={formData.cityName} 
+        onChange={handleChange} 
+        placeholder="London"
+      />
+                      </div>
+                    )}
+                  </div>
                 </div>
               )}
 
@@ -365,7 +396,26 @@ const LoginPage = () => {
                   </div>
                                       <SelectField theme={currentTheme} label='Religious belief' name='beliefSystem' value={formData.beliefSystem} onChange={handleChange} options={['Religious', 'Spiritual', 'Not']} />
 
-
+{/* Add this inside the Step 3 container, below the MBTI/Diagnosis grid */}
+  <div className="grid grid-cols-1 gap-4 mt-2">
+    <div className="flex flex-col gap-1 w-full">
+      <SelectField 
+        theme={currentTheme} 
+        label='Human Design Energy Type' 
+        name='humanDesign' 
+        value={formData.humanDesign} 
+        onChange={handleChange} 
+        options={['Manifestor', 'Generator', 'Manifesting Generator', 'Projector', 'Reflector', 'Unsure']} 
+      />
+      <button 
+        type="button" 
+        onClick={() => setActiveQuiz('humanDesign')} 
+        className={`text-[11px] font-bold mt-1 text-left ${currentTheme.text} hover:underline transition-all w-fit cursor-pointer`}
+      >
+        Discover your energy type
+      </button>
+    </div>
+  </div>
                   <TagSelector
                     theme={currentTheme} label='Sensory Sensitivities' options={sensoryOptions} selected={formData.sensorySensitivities}
                     onToggle={(option) => {
@@ -388,37 +438,7 @@ const LoginPage = () => {
                   <ThreeItemInput theme={currentTheme} label="Top 3 Fun Hobbies" items={formData.topHobbies} onChange={(i, v) => handleArrayChange('topHobbies', i, v)} placeholderPrefix="Hobby" />
                   <ThreeItemInput theme={currentTheme} label="Top 3 Movies" items={formData.topMovies} onChange={(i, v) => handleArrayChange('topMovies', i, v)} placeholderPrefix="Movie" />
 
-                  {/* Natal Chart Opt-In */}
-                  <div className="bg-white/60 p-4 rounded-2xl border border-gray-200 shadow-sm backdrop-blur-md">
-                    <label className="flex items-center gap-3 cursor-pointer group">
-                      <div className={`w-5 h-5 rounded border ${formData.optInNatalChart ? `${currentTheme.bg} border-transparent` : 'bg-white border-gray-300'} flex items-center justify-center transition-colors shadow-inner`}>
-                        {formData.optInNatalChart && <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>}
-                      </div>
-                      <input type="checkbox" checked={formData.optInNatalChart} onChange={(e) => setFormData({ ...formData, optInNatalChart: e.target.checked })} className="hidden" />
-                      <span className={`text-sm font-bold ${formData.optInNatalChart ? currentTheme.text : 'text-gray-600'} transition-colors`}>Add Natal Chart Information</span>
-                    </label>
-
-                    {formData.optInNatalChart && (
-                      <div className="mt-4 grid grid-cols-3 gap-3 animate-in fade-in slide-in-from-top-2">
-                       <InputField 
-        theme={currentTheme} 
-        label='Birth Time' 
-        name='birthTime' 
-        value={formData.birthTime} 
-        onChange={handleChange} 
-        placeholder="21:20"
-      />
-      <InputField 
-        theme={currentTheme} 
-        label='Birth Place' 
-        name='cityName' 
-        value={formData.cityName} 
-        onChange={handleChange} 
-        placeholder="London"
-      />
-                      </div>
-                    )}
-                  </div>
+                  
                 </div>
               )}
 
